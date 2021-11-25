@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CompanyResponse {
     #[serde(rename = "company")]
     pub company: Box<crate::models::CompanyResponseCompany>,

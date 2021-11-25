@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PaymentRequestResponse {
     #[serde(rename = "payment_request")]
     pub payment_request: Box<crate::models::PaymentRequestResponsePaymentRequest>,

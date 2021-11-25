@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PaymentRequestsIndexResponsePaymentRequests {
     /// 支払依頼ID
     #[serde(rename = "id")]

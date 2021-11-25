@@ -12,7 +12,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ManualJournalCreateParamsDetails {
     /// 貸借（貸方: credit, 借方: debit）
     #[serde(rename = "entry_side")]

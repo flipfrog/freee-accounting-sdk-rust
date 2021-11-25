@@ -11,16 +11,16 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct InlineResponse20010 {
     #[serde(rename = "walletable")]
-    pub walletable: crate::models::Walletable,
+    pub walletable: crate::models::WalletableResponse,
     #[serde(rename = "meta", skip_serializing_if = "Option::is_none")]
     pub meta: Option<Box<crate::models::InlineResponse2009Meta>>,
 }
 
 impl InlineResponse20010 {
-    pub fn new(walletable: crate::models::Walletable) -> InlineResponse20010 {
+    pub fn new(walletable: crate::models::WalletableResponse) -> InlineResponse20010 {
         InlineResponse20010 {
             walletable,
             meta: None,
