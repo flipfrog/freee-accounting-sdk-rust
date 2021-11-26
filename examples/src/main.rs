@@ -42,6 +42,6 @@ async fn main() {
     let p = create_partner(&config, params).await;
     match p {
         Ok(p) => println!("name={}", p.partner.name), // 成功
-        Err(e) => { println!("error={:?}", e) } // 失敗
+        Err(e) => println!("error={:?}", e) // 失敗
     }
 }
