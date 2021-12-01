@@ -6,7 +6,7 @@ use openapi_sdk::models::PartnerCreateParams;
 #[tokio::main]
 async fn main() {
     let config = Configuration {
-        base_path: "http://localhost:3000".to_string(),
+        base_path: "http://API ENDPOINT".to_string(),
         user_agent: None,
         client: reqwest::Client::new(),
         basic_auth: None,
