@@ -13,46 +13,45 @@
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ManualJournalResponseManualJournalDetails {
-    /// 貸借行ID
-    #[serde(rename = "id")]
-    pub id: i64,
-    /// 貸借(貸方: credit, 借方: debit)
-    #[serde(rename = "entry_side")]
-    pub entry_side: EntrySide,
     /// 勘定科目ID
     #[serde(rename = "account_item_id")]
     pub account_item_id: i32,
-    /// 税区分コード
-    #[serde(rename = "tax_code")]
-    pub tax_code: i32,
-    /// 取引先ID
-    #[serde(rename = "partner_id")]
-    pub partner_id: Option<i32>,
-    /// 取引先名
-    #[serde(rename = "partner_name")]
-    pub partner_name: Option<String>,
-    /// 取引先コード
-    #[serde(rename = "partner_code", skip_serializing_if = "Option::is_none")]
-    pub partner_code: Option<String>,
-    /// 正式名称（255文字以内）
-    #[serde(rename = "partner_long_name")]
-    pub partner_long_name: Option<String>,
+    /// 金額（税込で指定してください）
+    #[serde(rename = "amount")]
+    pub amount: i32,
+    /// 備考
+    #[serde(rename = "description")]
+    pub description: String,
+    /// 貸借(貸方: credit, 借方: debit)
+    #[serde(rename = "entry_side")]
+    pub entry_side: EntrySide,
+    /// 貸借行ID
+    #[serde(rename = "id")]
+    pub id: i64,
     /// 品目ID
     #[serde(rename = "item_id")]
     pub item_id: Option<i32>,
     /// 品目
     #[serde(rename = "item_name")]
     pub item_name: Option<String>,
+    /// 取引先コード
+    #[serde(rename = "partner_code", skip_serializing_if = "Option::is_none")]
+    pub partner_code: Option<String>,
+    /// 取引先ID
+    #[serde(rename = "partner_id")]
+    pub partner_id: Option<i32>,
+    /// 正式名称（255文字以内）
+    #[serde(rename = "partner_long_name")]
+    pub partner_long_name: Option<String>,
+    /// 取引先名
+    #[serde(rename = "partner_name")]
+    pub partner_name: Option<String>,
     /// 部門ID
     #[serde(rename = "section_id")]
     pub section_id: Option<i32>,
     /// 部門
     #[serde(rename = "section_name")]
     pub section_name: Option<String>,
-    #[serde(rename = "tag_ids")]
-    pub tag_ids: Vec<i32>,
-    #[serde(rename = "tag_names")]
-    pub tag_names: Vec<String>,
     /// セグメント１ID
     #[serde(rename = "segment_1_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_1_tag_id: Option<i64>,
@@ -71,43 +70,44 @@ pub struct ManualJournalResponseManualJournalDetails {
     /// セグメント３
     #[serde(rename = "segment_3_tag_name", skip_serializing_if = "Option::is_none")]
     pub segment_3_tag_name: Option<i32>,
-    /// 金額（税込で指定してください）
-    #[serde(rename = "amount")]
-    pub amount: i32,
+    #[serde(rename = "tag_ids")]
+    pub tag_ids: Vec<i32>,
+    #[serde(rename = "tag_names")]
+    pub tag_names: Vec<String>,
+    /// 税区分コード
+    #[serde(rename = "tax_code")]
+    pub tax_code: i32,
     /// 消費税額（指定しない場合は自動で計算されます）
     #[serde(rename = "vat")]
     pub vat: i32,
-    /// 備考
-    #[serde(rename = "description")]
-    pub description: String,
 }
 
 impl ManualJournalResponseManualJournalDetails {
-    pub fn new(id: i64, entry_side: EntrySide, account_item_id: i32, tax_code: i32, partner_id: Option<i32>, partner_name: Option<String>, partner_long_name: Option<String>, item_id: Option<i32>, item_name: Option<String>, section_id: Option<i32>, section_name: Option<String>, tag_ids: Vec<i32>, tag_names: Vec<String>, amount: i32, vat: i32, description: String) -> ManualJournalResponseManualJournalDetails {
+    pub fn new(account_item_id: i32, amount: i32, description: String, entry_side: EntrySide, id: i64, item_id: Option<i32>, item_name: Option<String>, partner_id: Option<i32>, partner_long_name: Option<String>, partner_name: Option<String>, section_id: Option<i32>, section_name: Option<String>, tag_ids: Vec<i32>, tag_names: Vec<String>, tax_code: i32, vat: i32) -> ManualJournalResponseManualJournalDetails {
         ManualJournalResponseManualJournalDetails {
-            id,
-            entry_side,
             account_item_id,
-            tax_code,
-            partner_id,
-            partner_name,
-            partner_code: None,
-            partner_long_name,
+            amount,
+            description,
+            entry_side,
+            id,
             item_id,
             item_name,
+            partner_code: None,
+            partner_id,
+            partner_long_name,
+            partner_name,
             section_id,
             section_name,
-            tag_ids,
-            tag_names,
             segment_1_tag_id: None,
             segment_1_tag_name: None,
             segment_2_tag_id: None,
             segment_2_tag_name: None,
             segment_3_tag_id: None,
             segment_3_tag_name: None,
-            amount,
+            tag_ids,
+            tag_names,
+            tax_code,
             vat,
-            description,
         }
     }
 }

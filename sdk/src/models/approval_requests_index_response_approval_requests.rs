@@ -13,71 +13,79 @@
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ApprovalRequestsIndexResponseApprovalRequests {
-    /// 各種申請ID
-    #[serde(rename = "id")]
-    pub id: i32,
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
-    /// 申請日 (yyyy-mm-dd)
-    #[serde(rename = "application_date")]
-    pub application_date: String,
-    /// 申請タイトル
-    #[serde(rename = "title")]
-    pub title: String,
     /// 申請者のユーザーID
     #[serde(rename = "applicant_id")]
     pub applicant_id: i32,
+    /// 申請日 (yyyy-mm-dd)
+    #[serde(rename = "application_date")]
+    pub application_date: String,
     /// 申請No.
     #[serde(rename = "application_number")]
     pub application_number: String,
-    /// 申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下, feedback:差戻し)
-    #[serde(rename = "status")]
-    pub status: Status,
-    /// 各種申請の項目一覧（配列）
-    #[serde(rename = "request_items")]
-    pub request_items: Vec<crate::models::ApprovalRequestsIndexResponseRequestItems>,
-    /// 申請フォームID
-    #[serde(rename = "form_id")]
-    pub form_id: i32,
-    /// 現在承認ステップID
-    #[serde(rename = "current_step_id")]
-    pub current_step_id: Option<i32>,
+    /// 事業所ID
+    #[serde(rename = "company_id")]
+    pub company_id: i32,
     /// 現在のround。差し戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。
     #[serde(rename = "current_round")]
     pub current_round: i32,
+    /// 現在承認ステップID
+    #[serde(rename = "current_step_id")]
+    pub current_step_id: Option<i32>,
     /// 取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)
     #[serde(rename = "deal_id")]
     pub deal_id: Option<i32>,
-    /// 振替伝票のID (申請ステータス:statusがapprovedで、関連する振替伝票が存在する時のみmanual_journal_idが表示されます)  <a href=\"https://support.freee.co.jp/hc/ja/articles/115003827683-#5\" target=\"_blank\">承認された各種申請から支払依頼等を作成する</a> 
-    #[serde(rename = "manual_journal_id")]
-    pub manual_journal_id: Option<i32>,
     /// 取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます settled:決済済み, unsettled:未決済)
     #[serde(rename = "deal_status")]
     pub deal_status: Option<DealStatus>,
+    /// 申請フォームID
+    #[serde(rename = "form_id")]
+    pub form_id: i32,
+    /// 各種申請ID
+    #[serde(rename = "id")]
+    pub id: i32,
+    /// 振替伝票のID (申請ステータス:statusがapprovedで、関連する振替伝票が存在する時のみmanual_journal_idが表示されます)  <a href=\"https://support.freee.co.jp/hc/ja/articles/115003827683-#5\" target=\"_blank\">承認された各種申請から支払依頼等を作成する</a> 
+    #[serde(rename = "manual_journal_id")]
+    pub manual_journal_id: Option<i32>,
+    /// 各種申請の項目一覧（配列）
+    #[serde(rename = "request_items")]
+    pub request_items: Vec<crate::models::ApprovalRequestResponseApprovalRequestRequestItems>,
+    /// 申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下, feedback:差戻し)
+    #[serde(rename = "status")]
+    pub status: Status,
+    /// 申請タイトル
+    #[serde(rename = "title")]
+    pub title: String,
 }
 
 impl ApprovalRequestsIndexResponseApprovalRequests {
-    pub fn new(id: i32, company_id: i32, application_date: String, title: String, applicant_id: i32, application_number: String, status: Status, request_items: Vec<crate::models::ApprovalRequestsIndexResponseRequestItems>, form_id: i32, current_step_id: Option<i32>, current_round: i32, deal_id: Option<i32>, manual_journal_id: Option<i32>, deal_status: Option<DealStatus>) -> ApprovalRequestsIndexResponseApprovalRequests {
+    pub fn new(applicant_id: i32, application_date: String, application_number: String, company_id: i32, current_round: i32, current_step_id: Option<i32>, deal_id: Option<i32>, deal_status: Option<DealStatus>, form_id: i32, id: i32, manual_journal_id: Option<i32>, request_items: Vec<crate::models::ApprovalRequestResponseApprovalRequestRequestItems>, status: Status, title: String) -> ApprovalRequestsIndexResponseApprovalRequests {
         ApprovalRequestsIndexResponseApprovalRequests {
-            id,
-            company_id,
-            application_date,
-            title,
             applicant_id,
+            application_date,
             application_number,
-            status,
-            request_items,
-            form_id,
-            current_step_id,
+            company_id,
             current_round,
+            current_step_id,
             deal_id,
-            manual_journal_id,
             deal_status,
+            form_id,
+            id,
+            manual_journal_id,
+            request_items,
+            status,
+            title,
         }
     }
 }
 
+/// 取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます settled:決済済み, unsettled:未決済)
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum DealStatus {
+    #[serde(rename = "settled")]
+    Settled,
+    #[serde(rename = "unsettled")]
+    Unsettled,
+}
 /// 申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下, feedback:差戻し)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum Status {
@@ -91,13 +99,5 @@ pub enum Status {
     Rejected,
     #[serde(rename = "feedback")]
     Feedback,
-}
-/// 取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます settled:決済済み, unsettled:未決済)
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum DealStatus {
-    #[serde(rename = "settled")]
-    Settled,
-    #[serde(rename = "unsettled")]
-    Unsettled,
 }
 

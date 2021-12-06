@@ -19,12 +19,12 @@ pub struct BankResponseBank {
     /// 連携サービス名
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
-    /// 連携サービス種別: (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
-    #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
-    pub _type: Option<Type>,
     /// 連携サービス名(カナ)
     #[serde(rename = "name_kana", skip_serializing_if = "Option::is_none")]
     pub name_kana: Option<String>,
+    /// 連携サービス種別: (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
+    #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
+    pub _type: Option<Type>,
 }
 
 impl BankResponseBank {
@@ -32,8 +32,8 @@ impl BankResponseBank {
         BankResponseBank {
             id,
             name: None,
-            _type: None,
             name_kana: None,
+            _type: None,
         }
     }
 }

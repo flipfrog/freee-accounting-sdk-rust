@@ -13,30 +13,24 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct PaymentRequestCreateParamsPaymentRequestLines {
-    /// '行の種類 (deal_line: 支払依頼, withholding_tax: 源泉徴収税)'<br> 'デフォルトは deal_line: 支払依頼 です' 
-    #[serde(rename = "line_type", skip_serializing_if = "Option::is_none")]
-    pub line_type: Option<LineType>,
-    /// 内容
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    /// 金額
-    #[serde(rename = "amount")]
-    pub amount: i32,
     /// 勘定科目ID
     #[serde(rename = "account_item_id", skip_serializing_if = "Option::is_none")]
     pub account_item_id: Option<i32>,
-    /// 税区分コード<br> 勘定科目IDを指定する場合は必須です。 
-    #[serde(rename = "tax_code", skip_serializing_if = "Option::is_none")]
-    pub tax_code: Option<i32>,
+    /// 金額
+    #[serde(rename = "amount")]
+    pub amount: i32,
+    /// 内容
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     /// 品目ID
     #[serde(rename = "item_id", skip_serializing_if = "Option::is_none")]
     pub item_id: Option<i32>,
+    /// '行の種類 (deal_line: 支払依頼, withholding_tax: 源泉徴収税)'<br> 'デフォルトは deal_line: 支払依頼 です' 
+    #[serde(rename = "line_type", skip_serializing_if = "Option::is_none")]
+    pub line_type: Option<LineType>,
     /// 部門ID
     #[serde(rename = "section_id", skip_serializing_if = "Option::is_none")]
     pub section_id: Option<i32>,
-    /// メモタグID
-    #[serde(rename = "tag_ids", skip_serializing_if = "Option::is_none")]
-    pub tag_ids: Option<Vec<i32>>,
     /// セグメント１ID<br> セグメントタグ一覧APIを利用して取得してください。<br> <a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br> 
     #[serde(rename = "segment_1_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_1_tag_id: Option<i64>,
@@ -46,22 +40,28 @@ pub struct PaymentRequestCreateParamsPaymentRequestLines {
     /// セグメント３ID(法人向けエンタープライズプラン)<br> セグメントタグ一覧APIを利用して取得してください。<br> <a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br> 
     #[serde(rename = "segment_3_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_3_tag_id: Option<i64>,
+    /// メモタグID
+    #[serde(rename = "tag_ids", skip_serializing_if = "Option::is_none")]
+    pub tag_ids: Option<Vec<i32>>,
+    /// 税区分コード<br> 勘定科目IDを指定する場合は必須です。 
+    #[serde(rename = "tax_code", skip_serializing_if = "Option::is_none")]
+    pub tax_code: Option<i32>,
 }
 
 impl PaymentRequestCreateParamsPaymentRequestLines {
     pub fn new(amount: i32) -> PaymentRequestCreateParamsPaymentRequestLines {
         PaymentRequestCreateParamsPaymentRequestLines {
-            line_type: None,
-            description: None,
-            amount,
             account_item_id: None,
-            tax_code: None,
+            amount,
+            description: None,
             item_id: None,
+            line_type: None,
             section_id: None,
-            tag_ids: None,
             segment_1_tag_id: None,
             segment_2_tag_id: None,
             segment_3_tag_id: None,
+            tag_ids: None,
+            tax_code: None,
         }
     }
 }

@@ -13,26 +13,26 @@
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct WalletableCreateResponseWalletable {
+    /// サービスID
+    #[serde(rename = "bank_id")]
+    pub bank_id: i32,
     /// 口座ID
     #[serde(rename = "id")]
     pub id: i32,
     /// 口座名, 最大255文字
     #[serde(rename = "name")]
     pub name: String,
-    /// サービスID
-    #[serde(rename = "bank_id")]
-    pub bank_id: i32,
     /// 口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
     #[serde(rename = "type")]
     pub _type: Type,
 }
 
 impl WalletableCreateResponseWalletable {
-    pub fn new(id: i32, name: String, bank_id: i32, _type: Type) -> WalletableCreateResponseWalletable {
+    pub fn new(bank_id: i32, id: i32, name: String, _type: Type) -> WalletableCreateResponseWalletable {
         WalletableCreateResponseWalletable {
+            bank_id,
             id,
             name,
-            bank_id,
             _type,
         }
     }

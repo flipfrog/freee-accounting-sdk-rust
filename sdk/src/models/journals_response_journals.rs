@@ -13,27 +13,23 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct JournalsResponseJournals {
-    /// 受け付けID
-    #[serde(rename = "id")]
-    pub id: i32,
-    #[serde(rename = "messages", skip_serializing_if = "Option::is_none")]
-    pub messages: Option<Vec<String>>,
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
     /// ダウンロード形式
     #[serde(rename = "download_type", skip_serializing_if = "Option::is_none")]
     pub download_type: Option<DownloadType>,
-    /// 取得開始日 (yyyy-mm-dd)
-    #[serde(rename = "start_date", skip_serializing_if = "Option::is_none")]
-    pub start_date: Option<String>,
     /// 取得終了日 (yyyy-mm-dd)
     #[serde(rename = "end_date", skip_serializing_if = "Option::is_none")]
     pub end_date: Option<String>,
-    #[serde(rename = "visible_tags", skip_serializing_if = "Option::is_none")]
-    pub visible_tags: Option<Vec<VisibleTags>>,
-    #[serde(rename = "visible_ids", skip_serializing_if = "Option::is_none")]
-    pub visible_ids: Option<Vec<VisibleIds>>,
+    /// 受け付けID
+    #[serde(rename = "id")]
+    pub id: i32,
+    #[serde(rename = "messages", skip_serializing_if = "Option::is_none")]
+    pub messages: Option<Vec<String>>,
+    /// 取得開始日 (yyyy-mm-dd)
+    #[serde(rename = "start_date", skip_serializing_if = "Option::is_none")]
+    pub start_date: Option<String>,
     /// ステータス確認用URL
     #[serde(rename = "status_url", skip_serializing_if = "Option::is_none")]
     pub status_url: Option<String>,
@@ -43,22 +39,26 @@ pub struct JournalsResponseJournals {
     /// 集計が最新でない場合の要因情報
     #[serde(rename = "up_to_date_reasons", skip_serializing_if = "Option::is_none")]
     pub up_to_date_reasons: Option<Vec<crate::models::JournalsResponseJournalsUpToDateReasons>>,
+    #[serde(rename = "visible_ids", skip_serializing_if = "Option::is_none")]
+    pub visible_ids: Option<Vec<VisibleIds>>,
+    #[serde(rename = "visible_tags", skip_serializing_if = "Option::is_none")]
+    pub visible_tags: Option<Vec<VisibleTags>>,
 }
 
 impl JournalsResponseJournals {
-    pub fn new(id: i32, company_id: i32) -> JournalsResponseJournals {
+    pub fn new(company_id: i32, id: i32) -> JournalsResponseJournals {
         JournalsResponseJournals {
-            id,
-            messages: None,
             company_id,
             download_type: None,
-            start_date: None,
             end_date: None,
-            visible_tags: None,
-            visible_ids: None,
+            id,
+            messages: None,
+            start_date: None,
             status_url: None,
             up_to_date: None,
             up_to_date_reasons: None,
+            visible_ids: None,
+            visible_tags: None,
         }
     }
 }
@@ -72,6 +72,16 @@ pub enum DownloadType {
     Generic,
     #[serde(rename = "pdf")]
     Pdf,
+}
+/// 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum VisibleIds {
+    #[serde(rename = "deal_id")]
+    DealId,
+    #[serde(rename = "transfer_id")]
+    TransferId,
+    #[serde(rename = "manual_journal_id")]
+    ManualJournalId,
 }
 /// 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
@@ -96,15 +106,5 @@ pub enum VisibleTags {
     Segment2Tag,
     #[serde(rename = "segment_3_tag")]
     Segment3Tag,
-}
-/// 
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum VisibleIds {
-    #[serde(rename = "deal_id")]
-    DealId,
-    #[serde(rename = "transfer_id")]
-    TransferId,
-    #[serde(rename = "manual_journal_id")]
-    ManualJournalId,
 }
 

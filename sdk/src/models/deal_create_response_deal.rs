@@ -13,75 +13,67 @@
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct DealCreateResponseDeal {
-    /// 取引ID
-    #[serde(rename = "id")]
-    pub id: i32,
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
-    /// 発生日 (yyyy-mm-dd)
-    #[serde(rename = "issue_date")]
-    pub issue_date: String,
-    /// 支払期日 (yyyy-mm-dd)
-    #[serde(rename = "due_date", skip_serializing_if = "Option::is_none")]
-    pub due_date: Option<String>,
     /// 金額
     #[serde(rename = "amount")]
     pub amount: i64,
+    /// 事業所ID
+    #[serde(rename = "company_id")]
+    pub company_id: i32,
+    /// 取引の明細行
+    #[serde(rename = "details", skip_serializing_if = "Option::is_none")]
+    pub details: Option<Vec<crate::models::DealCreateResponseDealDetails>>,
     /// 支払金額
     #[serde(rename = "due_amount", skip_serializing_if = "Option::is_none")]
     pub due_amount: Option<i32>,
-    /// 収支区分 (収入: income, 支出: expense)
-    #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
-    pub _type: Option<Type>,
-    /// 取引先ID
-    #[serde(rename = "partner_id")]
-    pub partner_id: i32,
+    /// 支払期日 (yyyy-mm-dd)
+    #[serde(rename = "due_date", skip_serializing_if = "Option::is_none")]
+    pub due_date: Option<String>,
+    /// 取引ID
+    #[serde(rename = "id")]
+    pub id: i32,
+    /// 発生日 (yyyy-mm-dd)
+    #[serde(rename = "issue_date")]
+    pub issue_date: String,
     /// 取引先コード
     #[serde(rename = "partner_code", skip_serializing_if = "Option::is_none")]
     pub partner_code: Option<String>,
+    /// 取引先ID
+    #[serde(rename = "partner_id")]
+    pub partner_id: i32,
+    /// 取引の支払行
+    #[serde(rename = "payments", skip_serializing_if = "Option::is_none")]
+    pub payments: Option<Vec<crate::models::DealCreateResponseDealPayments>>,
     /// 管理番号
     #[serde(rename = "ref_number", skip_serializing_if = "Option::is_none")]
     pub ref_number: Option<String>,
     /// 決済状況 (未決済: unsettled, 完了: settled)
     #[serde(rename = "status")]
     pub status: Status,
-    /// 取引の明細行
-    #[serde(rename = "details", skip_serializing_if = "Option::is_none")]
-    pub details: Option<Vec<crate::models::DealCreateResponseDealDetails>>,
-    /// 取引の支払行
-    #[serde(rename = "payments", skip_serializing_if = "Option::is_none")]
-    pub payments: Option<Vec<crate::models::DealCreateResponseDealPayments>>,
+    /// 収支区分 (収入: income, 支出: expense)
+    #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
+    pub _type: Option<Type>,
 }
 
 impl DealCreateResponseDeal {
-    pub fn new(id: i32, company_id: i32, issue_date: String, amount: i64, partner_id: i32, status: Status) -> DealCreateResponseDeal {
+    pub fn new(amount: i64, company_id: i32, id: i32, issue_date: String, partner_id: i32, status: Status) -> DealCreateResponseDeal {
         DealCreateResponseDeal {
-            id,
-            company_id,
-            issue_date,
-            due_date: None,
             amount,
+            company_id,
+            details: None,
             due_amount: None,
-            _type: None,
-            partner_id,
+            due_date: None,
+            id,
+            issue_date,
             partner_code: None,
+            partner_id,
+            payments: None,
             ref_number: None,
             status,
-            details: None,
-            payments: None,
+            _type: None,
         }
     }
 }
 
-/// 収支区分 (収入: income, 支出: expense)
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum Type {
-    #[serde(rename = "income")]
-    Income,
-    #[serde(rename = "expense")]
-    Expense,
-}
 /// 決済状況 (未決済: unsettled, 完了: settled)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum Status {
@@ -89,5 +81,13 @@ pub enum Status {
     Unsettled,
     #[serde(rename = "settled")]
     Settled,
+}
+/// 収支区分 (収入: income, 支出: expense)
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum Type {
+    #[serde(rename = "income")]
+    Income,
+    #[serde(rename = "expense")]
+    Expense,
 }
 

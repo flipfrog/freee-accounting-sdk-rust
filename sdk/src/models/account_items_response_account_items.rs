@@ -13,78 +13,78 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct AccountItemsResponseAccountItems {
-    /// 勘定科目ID
-    #[serde(rename = "id")]
-    pub id: i32,
-    /// 勘定科目名 (30文字以内)
-    #[serde(rename = "name")]
-    pub name: String,
-    /// 税区分コード
-    #[serde(rename = "tax_code")]
-    pub tax_code: i32,
-    /// ショートカット1 (20文字以内)
-    #[serde(rename = "shortcut", skip_serializing_if = "Option::is_none")]
-    pub shortcut: Option<String>,
-    /// ショートカット2(勘定科目コード) (20文字以内)
-    #[serde(rename = "shortcut_num", skip_serializing_if = "Option::is_none")]
-    pub shortcut_num: Option<String>,
-    /// デフォルト設定がされている税区分ID
-    #[serde(rename = "default_tax_id", skip_serializing_if = "Option::is_none")]
-    pub default_tax_id: Option<i32>,
-    /// デフォルト設定がされている税区分コード
-    #[serde(rename = "default_tax_code")]
-    pub default_tax_code: i32,
     /// 勘定科目カテゴリー
     #[serde(rename = "account_category")]
     pub account_category: String,
     /// 勘定科目のカテゴリーID
     #[serde(rename = "account_category_id")]
     pub account_category_id: i32,
-    #[serde(rename = "categories")]
-    pub categories: Vec<String>,
     /// 勘定科目の使用設定（true: 使用する、false: 使用しない）
     #[serde(rename = "available")]
     pub available: bool,
-    /// 口座ID
-    #[serde(rename = "walletable_id")]
-    pub walletable_id: Option<i32>,
-    /// 決算書表示名（小カテゴリー）
-    #[serde(rename = "group_name", skip_serializing_if = "Option::is_none")]
-    pub group_name: Option<String>,
-    /// 収入取引相手勘定科目名
-    #[serde(rename = "corresponding_income_name", skip_serializing_if = "Option::is_none")]
-    pub corresponding_income_name: Option<String>,
-    /// 収入取引相手勘定科目ID
-    #[serde(rename = "corresponding_income_id", skip_serializing_if = "Option::is_none")]
-    pub corresponding_income_id: Option<i32>,
-    /// 支出取引相手勘定科目名
-    #[serde(rename = "corresponding_expense_name", skip_serializing_if = "Option::is_none")]
-    pub corresponding_expense_name: Option<String>,
+    #[serde(rename = "categories")]
+    pub categories: Vec<String>,
     /// 支出取引相手勘定科目ID
     #[serde(rename = "corresponding_expense_id", skip_serializing_if = "Option::is_none")]
     pub corresponding_expense_id: Option<i32>,
+    /// 支出取引相手勘定科目名
+    #[serde(rename = "corresponding_expense_name", skip_serializing_if = "Option::is_none")]
+    pub corresponding_expense_name: Option<String>,
+    /// 収入取引相手勘定科目ID
+    #[serde(rename = "corresponding_income_id", skip_serializing_if = "Option::is_none")]
+    pub corresponding_income_id: Option<i32>,
+    /// 収入取引相手勘定科目名
+    #[serde(rename = "corresponding_income_name", skip_serializing_if = "Option::is_none")]
+    pub corresponding_income_name: Option<String>,
+    /// デフォルト設定がされている税区分コード
+    #[serde(rename = "default_tax_code")]
+    pub default_tax_code: i32,
+    /// デフォルト設定がされている税区分ID
+    #[serde(rename = "default_tax_id", skip_serializing_if = "Option::is_none")]
+    pub default_tax_id: Option<i32>,
+    /// 決算書表示名（小カテゴリー）
+    #[serde(rename = "group_name", skip_serializing_if = "Option::is_none")]
+    pub group_name: Option<String>,
+    /// 勘定科目ID
+    #[serde(rename = "id")]
+    pub id: i32,
+    /// 勘定科目名 (30文字以内)
+    #[serde(rename = "name")]
+    pub name: String,
+    /// ショートカット1 (20文字以内)
+    #[serde(rename = "shortcut", skip_serializing_if = "Option::is_none")]
+    pub shortcut: Option<String>,
+    /// ショートカット2(勘定科目コード) (20文字以内)
+    #[serde(rename = "shortcut_num", skip_serializing_if = "Option::is_none")]
+    pub shortcut_num: Option<String>,
+    /// 税区分コード
+    #[serde(rename = "tax_code")]
+    pub tax_code: i32,
+    /// 口座ID
+    #[serde(rename = "walletable_id")]
+    pub walletable_id: Option<i32>,
 }
 
 impl AccountItemsResponseAccountItems {
-    pub fn new(id: i32, name: String, tax_code: i32, default_tax_code: i32, account_category: String, account_category_id: i32, categories: Vec<String>, available: bool, walletable_id: Option<i32>) -> AccountItemsResponseAccountItems {
+    pub fn new(account_category: String, account_category_id: i32, available: bool, categories: Vec<String>, default_tax_code: i32, id: i32, name: String, tax_code: i32, walletable_id: Option<i32>) -> AccountItemsResponseAccountItems {
         AccountItemsResponseAccountItems {
-            id,
-            name,
-            tax_code,
-            shortcut: None,
-            shortcut_num: None,
-            default_tax_id: None,
-            default_tax_code,
             account_category,
             account_category_id,
-            categories,
             available,
-            walletable_id,
-            group_name: None,
-            corresponding_income_name: None,
-            corresponding_income_id: None,
-            corresponding_expense_name: None,
+            categories,
             corresponding_expense_id: None,
+            corresponding_expense_name: None,
+            corresponding_income_id: None,
+            corresponding_income_name: None,
+            default_tax_code,
+            default_tax_id: None,
+            group_name: None,
+            id,
+            name,
+            shortcut: None,
+            shortcut_num: None,
+            tax_code,
+            walletable_id,
         }
     }
 }

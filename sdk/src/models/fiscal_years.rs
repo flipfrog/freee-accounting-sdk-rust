@@ -13,51 +13,51 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct FiscalYears {
-    /// 製造業向け機能（true: 使用する、false: 使用しない）
-    #[serde(rename = "use_industry_template")]
-    pub use_industry_template: bool,
-    /// 固定資産の控除法（true: 間接控除法、false: 直接控除法）
-    #[serde(rename = "indirect_write_off_method")]
-    pub indirect_write_off_method: bool,
-    /// 期首日
-    #[serde(rename = "start_date", skip_serializing_if = "Option::is_none")]
-    pub start_date: Option<String>,
-    /// 期末日
-    #[serde(rename = "end_date", skip_serializing_if = "Option::is_none")]
-    pub end_date: Option<String>,
     /// 月次償却（0: しない、1: する）
     #[serde(rename = "depreciation_record_method")]
     pub depreciation_record_method: i32,
-    /// 課税区分（0: 免税、1: 簡易課税、2: 本則課税（個別対応方式）、3: 本則課税（一括比例配分方式）、4: 本則課税（全額控除））
-    #[serde(rename = "tax_method")]
-    pub tax_method: i32,
-    /// 簡易課税用事業区分（0: 第一種：卸売業、1: 第二種：小売業、2: 第三種：農林水産業、工業、建設業、製造業など、3: 第四種：飲食店業など、4: 第五種：金融・保険業、運輸通信業、サービス業など、5: 第六種：不動産業など
-    #[serde(rename = "sales_tax_business_code")]
-    pub sales_tax_business_code: i32,
-    /// 消費税端数処理方法（0: 切り捨て、1: 切り上げ、2: 四捨五入）
-    #[serde(rename = "tax_fraction")]
-    pub tax_fraction: i32,
-    /// 消費税経理処理方法（0: 税込経理、1: 旧税抜経理、2: 税抜経理）
-    #[serde(rename = "tax_account_method")]
-    pub tax_account_method: i32,
+    /// 期末日
+    #[serde(rename = "end_date", skip_serializing_if = "Option::is_none")]
+    pub end_date: Option<String>,
+    /// 固定資産の控除法（true: 間接控除法、false: 直接控除法）
+    #[serde(rename = "indirect_write_off_method")]
+    pub indirect_write_off_method: bool,
     /// 不動産所得使用区分（0: 一般、3: 一般/不動産） ※個人事業主のみ設定可能
     #[serde(rename = "return_code")]
     pub return_code: i32,
+    /// 簡易課税用事業区分（0: 第一種：卸売業、1: 第二種：小売業、2: 第三種：農林水産業、工業、建設業、製造業など、3: 第四種：飲食店業など、4: 第五種：金融・保険業、運輸通信業、サービス業など、5: 第六種：不動産業など
+    #[serde(rename = "sales_tax_business_code")]
+    pub sales_tax_business_code: i32,
+    /// 期首日
+    #[serde(rename = "start_date", skip_serializing_if = "Option::is_none")]
+    pub start_date: Option<String>,
+    /// 消費税経理処理方法（0: 税込経理、1: 旧税抜経理、2: 税抜経理）
+    #[serde(rename = "tax_account_method")]
+    pub tax_account_method: i32,
+    /// 消費税端数処理方法（0: 切り捨て、1: 切り上げ、2: 四捨五入）
+    #[serde(rename = "tax_fraction")]
+    pub tax_fraction: i32,
+    /// 課税区分（0: 免税、1: 簡易課税、2: 本則課税（個別対応方式）、3: 本則課税（一括比例配分方式）、4: 本則課税（全額控除））
+    #[serde(rename = "tax_method")]
+    pub tax_method: i32,
+    /// 製造業向け機能（true: 使用する、false: 使用しない）
+    #[serde(rename = "use_industry_template")]
+    pub use_industry_template: bool,
 }
 
 impl FiscalYears {
-    pub fn new(use_industry_template: bool, indirect_write_off_method: bool, depreciation_record_method: i32, tax_method: i32, sales_tax_business_code: i32, tax_fraction: i32, tax_account_method: i32, return_code: i32) -> FiscalYears {
+    pub fn new(depreciation_record_method: i32, indirect_write_off_method: bool, return_code: i32, sales_tax_business_code: i32, tax_account_method: i32, tax_fraction: i32, tax_method: i32, use_industry_template: bool) -> FiscalYears {
         FiscalYears {
-            use_industry_template,
-            indirect_write_off_method,
-            start_date: None,
-            end_date: None,
             depreciation_record_method,
-            tax_method,
-            sales_tax_business_code,
-            tax_fraction,
-            tax_account_method,
+            end_date: None,
+            indirect_write_off_method,
             return_code,
+            sales_tax_business_code,
+            start_date: None,
+            tax_account_method,
+            tax_fraction,
+            tax_method,
+            use_industry_template,
         }
     }
 }

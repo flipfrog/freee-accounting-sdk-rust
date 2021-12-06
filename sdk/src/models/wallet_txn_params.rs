@@ -13,43 +13,43 @@
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct WalletTxnParams {
-    /// 入金／出金 (入金: income, 出金: expense)
-    #[serde(rename = "entry_side")]
-    pub entry_side: EntrySide,
-    /// 取引内容
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
     /// 取引金額
     #[serde(rename = "amount")]
     pub amount: i64,
+    /// 残高 (銀行口座等)
+    #[serde(rename = "balance", skip_serializing_if = "Option::is_none")]
+    pub balance: Option<i64>,
+    /// 事業所ID
+    #[serde(rename = "company_id")]
+    pub company_id: i32,
+    /// 取引日 (yyyy-mm-dd)
+    #[serde(rename = "date")]
+    pub date: String,
+    /// 取引内容
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    /// 入金／出金 (入金: income, 出金: expense)
+    #[serde(rename = "entry_side")]
+    pub entry_side: EntrySide,
     /// 口座ID
     #[serde(rename = "walletable_id")]
     pub walletable_id: i32,
     /// 口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
     #[serde(rename = "walletable_type")]
     pub walletable_type: WalletableType,
-    /// 取引日 (yyyy-mm-dd)
-    #[serde(rename = "date")]
-    pub date: String,
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
-    /// 残高 (銀行口座等)
-    #[serde(rename = "balance", skip_serializing_if = "Option::is_none")]
-    pub balance: Option<i64>,
 }
 
 impl WalletTxnParams {
-    pub fn new(entry_side: EntrySide, amount: i64, walletable_id: i32, walletable_type: WalletableType, date: String, company_id: i32) -> WalletTxnParams {
+    pub fn new(amount: i64, company_id: i32, date: String, entry_side: EntrySide, walletable_id: i32, walletable_type: WalletableType) -> WalletTxnParams {
         WalletTxnParams {
-            entry_side,
-            description: None,
             amount,
+            balance: None,
+            company_id,
+            date,
+            description: None,
+            entry_side,
             walletable_id,
             walletable_type,
-            date,
-            company_id,
-            balance: None,
         }
     }
 }

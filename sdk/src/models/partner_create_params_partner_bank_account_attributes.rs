@@ -13,51 +13,51 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct PartnerCreateParamsPartnerBankAccountAttributes {
+    /// 受取人名（カナ）
+    #[serde(rename = "account_name", skip_serializing_if = "Option::is_none")]
+    pub account_name: Option<String>,
+    /// 口座番号
+    #[serde(rename = "account_number", skip_serializing_if = "Option::is_none")]
+    pub account_number: Option<String>,
+    /// 口座種別(ordinary:普通、checking：当座、earmarked：納税準備預金、savings：貯蓄、other:その他)
+    #[serde(rename = "account_type", skip_serializing_if = "Option::is_none")]
+    pub account_type: Option<String>,
+    /// 銀行コード
+    #[serde(rename = "bank_code", skip_serializing_if = "Option::is_none")]
+    pub bank_code: Option<String>,
     /// 銀行名
     #[serde(rename = "bank_name", skip_serializing_if = "Option::is_none")]
     pub bank_name: Option<String>,
     /// 銀行名（カナ）
     #[serde(rename = "bank_name_kana", skip_serializing_if = "Option::is_none")]
     pub bank_name_kana: Option<String>,
-    /// 銀行コード
-    #[serde(rename = "bank_code", skip_serializing_if = "Option::is_none")]
-    pub bank_code: Option<String>,
-    /// 支店名
-    #[serde(rename = "branch_name", skip_serializing_if = "Option::is_none")]
-    pub branch_name: Option<String>,
-    /// 支店名（カナ）
-    #[serde(rename = "branch_kana", skip_serializing_if = "Option::is_none")]
-    pub branch_kana: Option<String>,
     /// 支店番号
     #[serde(rename = "branch_code", skip_serializing_if = "Option::is_none")]
     pub branch_code: Option<String>,
-    /// 口座種別(ordinary:普通、checking：当座、earmarked：納税準備預金、savings：貯蓄、other:その他)
-    #[serde(rename = "account_type", skip_serializing_if = "Option::is_none")]
-    pub account_type: Option<String>,
-    /// 口座番号
-    #[serde(rename = "account_number", skip_serializing_if = "Option::is_none")]
-    pub account_number: Option<String>,
+    /// 支店名（カナ）
+    #[serde(rename = "branch_kana", skip_serializing_if = "Option::is_none")]
+    pub branch_kana: Option<String>,
+    /// 支店名
+    #[serde(rename = "branch_name", skip_serializing_if = "Option::is_none")]
+    pub branch_name: Option<String>,
     /// 受取人名
     #[serde(rename = "long_account_name", skip_serializing_if = "Option::is_none")]
     pub long_account_name: Option<String>,
-    /// 受取人名（カナ）
-    #[serde(rename = "account_name", skip_serializing_if = "Option::is_none")]
-    pub account_name: Option<String>,
 }
 
 impl PartnerCreateParamsPartnerBankAccountAttributes {
     pub fn new() -> PartnerCreateParamsPartnerBankAccountAttributes {
         PartnerCreateParamsPartnerBankAccountAttributes {
+            account_name: None,
+            account_number: None,
+            account_type: None,
+            bank_code: None,
             bank_name: None,
             bank_name_kana: None,
-            bank_code: None,
-            branch_name: None,
-            branch_kana: None,
             branch_code: None,
-            account_type: None,
-            account_number: None,
+            branch_kana: None,
+            branch_name: None,
             long_account_name: None,
-            account_name: None,
         }
     }
 }

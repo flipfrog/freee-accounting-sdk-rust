@@ -13,108 +13,9 @@
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct InvoiceIndexResponseInvoices {
-    /// 請求書ID
-    #[serde(rename = "id")]
-    pub id: i32,
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
-    /// 請求日 (yyyy-mm-dd)
-    #[serde(rename = "issue_date")]
-    pub issue_date: String,
-    /// 取引先ID
-    #[serde(rename = "partner_id")]
-    pub partner_id: Option<i32>,
-    /// 取引先コード
-    #[serde(rename = "partner_code", skip_serializing_if = "Option::is_none")]
-    pub partner_code: Option<String>,
-    /// 請求書番号
-    #[serde(rename = "invoice_number")]
-    pub invoice_number: String,
-    /// タイトル
-    #[serde(rename = "title", skip_serializing_if = "Option::is_none")]
-    pub title: Option<String>,
-    /// 期日 (yyyy-mm-dd)
-    #[serde(rename = "due_date", skip_serializing_if = "Option::is_none")]
-    pub due_date: Option<String>,
-    /// 合計金額
-    #[serde(rename = "total_amount")]
-    pub total_amount: i32,
-    /// 合計金額
-    #[serde(rename = "total_vat", skip_serializing_if = "Option::is_none")]
-    pub total_vat: Option<i32>,
-    /// 小計
-    #[serde(rename = "sub_total", skip_serializing_if = "Option::is_none")]
-    pub sub_total: Option<i32>,
     /// 売上計上日
     #[serde(rename = "booking_date", skip_serializing_if = "Option::is_none")]
     pub booking_date: Option<String>,
-    /// 概要
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    /// 請求書ステータス  (draft: 下書き, applying: 申請中, remanded: 差し戻し, rejected: 却下, approved: 承認済み, submitted: 送付済み, unsubmitted: 請求書の承認フローが無効の場合のみ、unsubmitted（送付待ち）の値をとります)
-    #[serde(rename = "invoice_status")]
-    pub invoice_status: InvoiceStatus,
-    /// 入金ステータス  (unsettled: 入金待ち, settled: 入金済み)
-    #[serde(rename = "payment_status", skip_serializing_if = "Option::is_none")]
-    pub payment_status: Option<PaymentStatus>,
-    /// 入金日
-    #[serde(rename = "payment_date", skip_serializing_if = "Option::is_none")]
-    pub payment_date: Option<String>,
-    /// Web共有日時(最新)
-    #[serde(rename = "web_published_at", skip_serializing_if = "Option::is_none")]
-    pub web_published_at: Option<String>,
-    /// Web共有ダウンロード日時(最新)
-    #[serde(rename = "web_downloaded_at", skip_serializing_if = "Option::is_none")]
-    pub web_downloaded_at: Option<String>,
-    /// Web共有取引先確認日時(最新)
-    #[serde(rename = "web_confirmed_at", skip_serializing_if = "Option::is_none")]
-    pub web_confirmed_at: Option<String>,
-    /// メール送信日時(最新)
-    #[serde(rename = "mail_sent_at", skip_serializing_if = "Option::is_none")]
-    pub mail_sent_at: Option<String>,
-    /// 郵送ステータス(unrequested: リクエスト前, preview_registered: プレビュー登録, preview_failed: プレビュー登録失敗, ordered: 注文中, order_failed: 注文失敗, printing: 印刷中, canceled: キャンセル, posted: 投函済み)
-    #[serde(rename = "posting_status")]
-    pub posting_status: PostingStatus,
-    /// 取引先名
-    #[serde(rename = "partner_name", skip_serializing_if = "Option::is_none")]
-    pub partner_name: Option<String>,
-    /// 請求書に表示する取引先名
-    #[serde(rename = "partner_display_name", skip_serializing_if = "Option::is_none")]
-    pub partner_display_name: Option<String>,
-    /// 敬称（御中、様、(空白)の3つから選択）
-    #[serde(rename = "partner_title", skip_serializing_if = "Option::is_none")]
-    pub partner_title: Option<String>,
-    /// 郵便番号
-    #[serde(rename = "partner_zipcode", skip_serializing_if = "Option::is_none")]
-    pub partner_zipcode: Option<String>,
-    /// 都道府県コード（-1: 設定しない、0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄
-    #[serde(rename = "partner_prefecture_code", skip_serializing_if = "Option::is_none")]
-    pub partner_prefecture_code: Option<i32>,
-    /// 都道府県
-    #[serde(rename = "partner_prefecture_name", skip_serializing_if = "Option::is_none")]
-    pub partner_prefecture_name: Option<String>,
-    /// 市区町村・番地
-    #[serde(rename = "partner_address1", skip_serializing_if = "Option::is_none")]
-    pub partner_address1: Option<String>,
-    /// 建物名・部屋番号など
-    #[serde(rename = "partner_address2", skip_serializing_if = "Option::is_none")]
-    pub partner_address2: Option<String>,
-    /// 取引先担当者名
-    #[serde(rename = "partner_contact_info", skip_serializing_if = "Option::is_none")]
-    pub partner_contact_info: Option<String>,
-    /// 事業所名
-    #[serde(rename = "company_name")]
-    pub company_name: String,
-    /// 郵便番号
-    #[serde(rename = "company_zipcode", skip_serializing_if = "Option::is_none")]
-    pub company_zipcode: Option<String>,
-    /// 都道府県コード（-1: 設定しない、0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄
-    #[serde(rename = "company_prefecture_code", skip_serializing_if = "Option::is_none")]
-    pub company_prefecture_code: Option<i32>,
-    /// 都道府県
-    #[serde(rename = "company_prefecture_name", skip_serializing_if = "Option::is_none")]
-    pub company_prefecture_name: Option<String>,
     /// 市区町村・番地
     #[serde(rename = "company_address1", skip_serializing_if = "Option::is_none")]
     pub company_address1: Option<String>,
@@ -124,87 +25,206 @@ pub struct InvoiceIndexResponseInvoices {
     /// 事業所担当者名
     #[serde(rename = "company_contact_info", skip_serializing_if = "Option::is_none")]
     pub company_contact_info: Option<String>,
-    /// 支払方法 (振込: transfer, 引き落とし: direct_debit)
-    #[serde(rename = "payment_type")]
-    pub payment_type: PaymentType,
-    /// 支払口座
-    #[serde(rename = "payment_bank_info", skip_serializing_if = "Option::is_none")]
-    pub payment_bank_info: Option<String>,
+    /// 事業所ID
+    #[serde(rename = "company_id")]
+    pub company_id: i32,
+    /// 事業所名
+    #[serde(rename = "company_name")]
+    pub company_name: String,
+    /// 都道府県コード（-1: 設定しない、0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄
+    #[serde(rename = "company_prefecture_code", skip_serializing_if = "Option::is_none")]
+    pub company_prefecture_code: Option<i32>,
+    /// 都道府県
+    #[serde(rename = "company_prefecture_name", skip_serializing_if = "Option::is_none")]
+    pub company_prefecture_name: Option<String>,
+    /// 郵便番号
+    #[serde(rename = "company_zipcode", skip_serializing_if = "Option::is_none")]
+    pub company_zipcode: Option<String>,
+    /// 取引ID (invoice_statusがsubmitted, unsubmittedの時IDが表示されます)
+    #[serde(rename = "deal_id", skip_serializing_if = "Option::is_none")]
+    pub deal_id: Option<i32>,
+    /// 概要
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    /// 期日 (yyyy-mm-dd)
+    #[serde(rename = "due_date", skip_serializing_if = "Option::is_none")]
+    pub due_date: Option<String>,
+    /// 請求書ID
+    #[serde(rename = "id")]
+    pub id: i32,
+    /// 請求内容
+    #[serde(rename = "invoice_contents", skip_serializing_if = "Option::is_none")]
+    pub invoice_contents: Option<Vec<crate::models::InvoiceIndexResponseInvoiceContents>>,
+    /// 請求書レイアウト * `default_classic` - レイアウト１/クラシック (デフォルト)  * `standard_classic` - レイアウト２/クラシック  * `envelope_classic` - 封筒１/クラシック  * `carried_forward_standard_classic` - レイアウト３（繰越金額欄あり）/クラシック  * `carried_forward_envelope_classic` - 封筒２（繰越金額欄あり）/クラシック  * `default_modern` - レイアウト１/モダン  * `standard_modern` - レイアウト２/モダン  * `envelope_modern` - 封筒/モダン
+    #[serde(rename = "invoice_layout")]
+    pub invoice_layout: InvoiceLayout,
+    /// 請求書番号
+    #[serde(rename = "invoice_number")]
+    pub invoice_number: String,
+    /// 請求書ステータス  (draft: 下書き, applying: 申請中, remanded: 差し戻し, rejected: 却下, approved: 承認済み, submitted: 送付済み, unsubmitted: 請求書の承認フローが無効の場合のみ、unsubmitted（送付待ち）の値をとります)
+    #[serde(rename = "invoice_status")]
+    pub invoice_status: InvoiceStatus,
+    /// 請求日 (yyyy-mm-dd)
+    #[serde(rename = "issue_date")]
+    pub issue_date: String,
+    /// メール送信日時(最新)
+    #[serde(rename = "mail_sent_at", skip_serializing_if = "Option::is_none")]
+    pub mail_sent_at: Option<String>,
     /// メッセージ
     #[serde(rename = "message", skip_serializing_if = "Option::is_none")]
     pub message: Option<String>,
     /// 備考
     #[serde(rename = "notes", skip_serializing_if = "Option::is_none")]
     pub notes: Option<String>,
-    /// 請求書レイアウト * `default_classic` - レイアウト１/クラシック (デフォルト)  * `standard_classic` - レイアウト２/クラシック  * `envelope_classic` - 封筒１/クラシック  * `carried_forward_standard_classic` - レイアウト３（繰越金額欄あり）/クラシック  * `carried_forward_envelope_classic` - 封筒２（繰越金額欄あり）/クラシック  * `default_modern` - レイアウト１/モダン  * `standard_modern` - レイアウト２/モダン  * `envelope_modern` - 封筒/モダン
-    #[serde(rename = "invoice_layout")]
-    pub invoice_layout: InvoiceLayout,
+    /// 市区町村・番地
+    #[serde(rename = "partner_address1", skip_serializing_if = "Option::is_none")]
+    pub partner_address1: Option<String>,
+    /// 建物名・部屋番号など
+    #[serde(rename = "partner_address2", skip_serializing_if = "Option::is_none")]
+    pub partner_address2: Option<String>,
+    /// 取引先コード
+    #[serde(rename = "partner_code", skip_serializing_if = "Option::is_none")]
+    pub partner_code: Option<String>,
+    /// 取引先担当者名
+    #[serde(rename = "partner_contact_info", skip_serializing_if = "Option::is_none")]
+    pub partner_contact_info: Option<String>,
+    /// 請求書に表示する取引先名
+    #[serde(rename = "partner_display_name", skip_serializing_if = "Option::is_none")]
+    pub partner_display_name: Option<String>,
+    /// 取引先ID
+    #[serde(rename = "partner_id")]
+    pub partner_id: Option<i32>,
+    /// 取引先名
+    #[serde(rename = "partner_name", skip_serializing_if = "Option::is_none")]
+    pub partner_name: Option<String>,
+    /// 都道府県コード（-1: 設定しない、0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄
+    #[serde(rename = "partner_prefecture_code", skip_serializing_if = "Option::is_none")]
+    pub partner_prefecture_code: Option<i32>,
+    /// 都道府県
+    #[serde(rename = "partner_prefecture_name", skip_serializing_if = "Option::is_none")]
+    pub partner_prefecture_name: Option<String>,
+    /// 敬称（御中、様、(空白)の3つから選択）
+    #[serde(rename = "partner_title", skip_serializing_if = "Option::is_none")]
+    pub partner_title: Option<String>,
+    /// 郵便番号
+    #[serde(rename = "partner_zipcode", skip_serializing_if = "Option::is_none")]
+    pub partner_zipcode: Option<String>,
+    /// 支払口座
+    #[serde(rename = "payment_bank_info", skip_serializing_if = "Option::is_none")]
+    pub payment_bank_info: Option<String>,
+    /// 入金日
+    #[serde(rename = "payment_date", skip_serializing_if = "Option::is_none")]
+    pub payment_date: Option<String>,
+    /// 入金ステータス  (unsettled: 入金待ち, settled: 入金済み)
+    #[serde(rename = "payment_status", skip_serializing_if = "Option::is_none")]
+    pub payment_status: Option<PaymentStatus>,
+    /// 支払方法 (振込: transfer, 引き落とし: direct_debit)
+    #[serde(rename = "payment_type")]
+    pub payment_type: PaymentType,
+    /// 郵送ステータス(unrequested: リクエスト前, preview_registered: プレビュー登録, preview_failed: プレビュー登録失敗, ordered: 注文中, order_failed: 注文失敗, printing: 印刷中, canceled: キャンセル, posted: 投函済み)
+    #[serde(rename = "posting_status")]
+    pub posting_status: PostingStatus,
+    /// 小計
+    #[serde(rename = "sub_total", skip_serializing_if = "Option::is_none")]
+    pub sub_total: Option<i32>,
     /// 請求書の消費税計算方法(inclusive: 内税, exclusive: 外税)
     #[serde(rename = "tax_entry_method")]
     pub tax_entry_method: TaxEntryMethod,
-    /// 取引ID (invoice_statusがsubmitted, unsubmittedの時IDが表示されます)
-    #[serde(rename = "deal_id", skip_serializing_if = "Option::is_none")]
-    pub deal_id: Option<i32>,
-    /// 請求内容
-    #[serde(rename = "invoice_contents", skip_serializing_if = "Option::is_none")]
-    pub invoice_contents: Option<Vec<crate::models::InvoiceIndexResponseInvoiceContents>>,
+    /// タイトル
+    #[serde(rename = "title", skip_serializing_if = "Option::is_none")]
+    pub title: Option<String>,
+    /// 合計金額
+    #[serde(rename = "total_amount")]
+    pub total_amount: i32,
     #[serde(rename = "total_amount_per_vat_rate")]
     pub total_amount_per_vat_rate: Box<crate::models::InvoiceIndexResponseTotalAmountPerVatRate>,
+    /// 合計金額
+    #[serde(rename = "total_vat", skip_serializing_if = "Option::is_none")]
+    pub total_vat: Option<i32>,
+    /// Web共有取引先確認日時(最新)
+    #[serde(rename = "web_confirmed_at", skip_serializing_if = "Option::is_none")]
+    pub web_confirmed_at: Option<String>,
+    /// Web共有ダウンロード日時(最新)
+    #[serde(rename = "web_downloaded_at", skip_serializing_if = "Option::is_none")]
+    pub web_downloaded_at: Option<String>,
+    /// Web共有日時(最新)
+    #[serde(rename = "web_published_at", skip_serializing_if = "Option::is_none")]
+    pub web_published_at: Option<String>,
 }
 
 impl InvoiceIndexResponseInvoices {
-    pub fn new(id: i32, company_id: i32, issue_date: String, partner_id: Option<i32>, invoice_number: String, total_amount: i32, invoice_status: InvoiceStatus, posting_status: PostingStatus, company_name: String, payment_type: PaymentType, invoice_layout: InvoiceLayout, tax_entry_method: TaxEntryMethod, total_amount_per_vat_rate: crate::models::InvoiceIndexResponseTotalAmountPerVatRate) -> InvoiceIndexResponseInvoices {
+    pub fn new(company_id: i32, company_name: String, id: i32, invoice_layout: InvoiceLayout, invoice_number: String, invoice_status: InvoiceStatus, issue_date: String, partner_id: Option<i32>, payment_type: PaymentType, posting_status: PostingStatus, tax_entry_method: TaxEntryMethod, total_amount: i32, total_amount_per_vat_rate: crate::models::InvoiceIndexResponseTotalAmountPerVatRate) -> InvoiceIndexResponseInvoices {
         InvoiceIndexResponseInvoices {
-            id,
-            company_id,
-            issue_date,
-            partner_id,
-            partner_code: None,
-            invoice_number,
-            title: None,
-            due_date: None,
-            total_amount,
-            total_vat: None,
-            sub_total: None,
             booking_date: None,
-            description: None,
-            invoice_status,
-            payment_status: None,
-            payment_date: None,
-            web_published_at: None,
-            web_downloaded_at: None,
-            web_confirmed_at: None,
-            mail_sent_at: None,
-            posting_status,
-            partner_name: None,
-            partner_display_name: None,
-            partner_title: None,
-            partner_zipcode: None,
-            partner_prefecture_code: None,
-            partner_prefecture_name: None,
-            partner_address1: None,
-            partner_address2: None,
-            partner_contact_info: None,
-            company_name,
-            company_zipcode: None,
-            company_prefecture_code: None,
-            company_prefecture_name: None,
             company_address1: None,
             company_address2: None,
             company_contact_info: None,
-            payment_type,
-            payment_bank_info: None,
+            company_id,
+            company_name,
+            company_prefecture_code: None,
+            company_prefecture_name: None,
+            company_zipcode: None,
+            deal_id: None,
+            description: None,
+            due_date: None,
+            id,
+            invoice_contents: None,
+            invoice_layout,
+            invoice_number,
+            invoice_status,
+            issue_date,
+            mail_sent_at: None,
             message: None,
             notes: None,
-            invoice_layout,
+            partner_address1: None,
+            partner_address2: None,
+            partner_code: None,
+            partner_contact_info: None,
+            partner_display_name: None,
+            partner_id,
+            partner_name: None,
+            partner_prefecture_code: None,
+            partner_prefecture_name: None,
+            partner_title: None,
+            partner_zipcode: None,
+            payment_bank_info: None,
+            payment_date: None,
+            payment_status: None,
+            payment_type,
+            posting_status,
+            sub_total: None,
             tax_entry_method,
-            deal_id: None,
-            invoice_contents: None,
+            title: None,
+            total_amount,
             total_amount_per_vat_rate: Box::new(total_amount_per_vat_rate),
+            total_vat: None,
+            web_confirmed_at: None,
+            web_downloaded_at: None,
+            web_published_at: None,
         }
     }
 }
 
+/// 請求書レイアウト * `default_classic` - レイアウト１/クラシック (デフォルト)  * `standard_classic` - レイアウト２/クラシック  * `envelope_classic` - 封筒１/クラシック  * `carried_forward_standard_classic` - レイアウト３（繰越金額欄あり）/クラシック  * `carried_forward_envelope_classic` - 封筒２（繰越金額欄あり）/クラシック  * `default_modern` - レイアウト１/モダン  * `standard_modern` - レイアウト２/モダン  * `envelope_modern` - 封筒/モダン
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum InvoiceLayout {
+    #[serde(rename = "default_classic")]
+    DefaultClassic,
+    #[serde(rename = "standard_classic")]
+    StandardClassic,
+    #[serde(rename = "envelope_classic")]
+    EnvelopeClassic,
+    #[serde(rename = "carried_forward_standard_classic")]
+    CarriedForwardStandardClassic,
+    #[serde(rename = "carried_forward_envelope_classic")]
+    CarriedForwardEnvelopeClassic,
+    #[serde(rename = "default_modern")]
+    DefaultModern,
+    #[serde(rename = "standard_modern")]
+    StandardModern,
+    #[serde(rename = "envelope_modern")]
+    EnvelopeModern,
+}
 /// 請求書ステータス  (draft: 下書き, applying: 申請中, remanded: 差し戻し, rejected: 却下, approved: 承認済み, submitted: 送付済み, unsubmitted: 請求書の承認フローが無効の場合のみ、unsubmitted（送付待ち）の値をとります)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum InvoiceStatus {
@@ -233,6 +253,16 @@ pub enum PaymentStatus {
     #[serde(rename = "settled")]
     Settled,
 }
+/// 支払方法 (振込: transfer, 引き落とし: direct_debit)
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum PaymentType {
+    #[serde(rename = "")]
+    Empty,
+    #[serde(rename = "transfer")]
+    Transfer,
+    #[serde(rename = "direct_debit")]
+    DirectDebit,
+}
 /// 郵送ステータス(unrequested: リクエスト前, preview_registered: プレビュー登録, preview_failed: プレビュー登録失敗, ordered: 注文中, order_failed: 注文失敗, printing: 印刷中, canceled: キャンセル, posted: 投函済み)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum PostingStatus {
@@ -254,36 +284,6 @@ pub enum PostingStatus {
     Canceled,
     #[serde(rename = "posted")]
     Posted,
-}
-/// 支払方法 (振込: transfer, 引き落とし: direct_debit)
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum PaymentType {
-    #[serde(rename = "")]
-    Empty,
-    #[serde(rename = "transfer")]
-    Transfer,
-    #[serde(rename = "direct_debit")]
-    DirectDebit,
-}
-/// 請求書レイアウト * `default_classic` - レイアウト１/クラシック (デフォルト)  * `standard_classic` - レイアウト２/クラシック  * `envelope_classic` - 封筒１/クラシック  * `carried_forward_standard_classic` - レイアウト３（繰越金額欄あり）/クラシック  * `carried_forward_envelope_classic` - 封筒２（繰越金額欄あり）/クラシック  * `default_modern` - レイアウト１/モダン  * `standard_modern` - レイアウト２/モダン  * `envelope_modern` - 封筒/モダン
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum InvoiceLayout {
-    #[serde(rename = "default_classic")]
-    DefaultClassic,
-    #[serde(rename = "standard_classic")]
-    StandardClassic,
-    #[serde(rename = "envelope_classic")]
-    EnvelopeClassic,
-    #[serde(rename = "carried_forward_standard_classic")]
-    CarriedForwardStandardClassic,
-    #[serde(rename = "carried_forward_envelope_classic")]
-    CarriedForwardEnvelopeClassic,
-    #[serde(rename = "default_modern")]
-    DefaultModern,
-    #[serde(rename = "standard_modern")]
-    StandardModern,
-    #[serde(rename = "envelope_modern")]
-    EnvelopeModern,
 }
 /// 請求書の消費税計算方法(inclusive: 内税, exclusive: 外税)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]

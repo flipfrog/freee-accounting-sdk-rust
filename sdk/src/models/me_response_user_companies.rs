@@ -13,31 +13,31 @@
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct MeResponseUserCompanies {
-    /// 事業所ID
-    #[serde(rename = "id")]
-    pub id: i32,
+    /// アドバイザープロファイルID（アドバイザー事業所で無い場合にnullになります）
+    #[serde(rename = "advisor_id", skip_serializing_if = "Option::is_none")]
+    pub advisor_id: Option<i32>,
     /// 表示名
     #[serde(rename = "display_name")]
     pub display_name: String,
+    /// 事業所ID
+    #[serde(rename = "id")]
+    pub id: i32,
     /// ユーザーの権限
     #[serde(rename = "role")]
     pub role: Role,
     /// カスタム権限（true: 使用する、false: 使用しない）
     #[serde(rename = "use_custom_role")]
     pub use_custom_role: bool,
-    /// アドバイザープロファイルID（アドバイザー事業所で無い場合にnullになります）
-    #[serde(rename = "advisor_id", skip_serializing_if = "Option::is_none")]
-    pub advisor_id: Option<i32>,
 }
 
 impl MeResponseUserCompanies {
-    pub fn new(id: i32, display_name: String, role: Role, use_custom_role: bool) -> MeResponseUserCompanies {
+    pub fn new(display_name: String, id: i32, role: Role, use_custom_role: bool) -> MeResponseUserCompanies {
         MeResponseUserCompanies {
-            id,
+            advisor_id: None,
             display_name,
+            id,
             role,
             use_custom_role,
-            advisor_id: None,
         }
     }
 }

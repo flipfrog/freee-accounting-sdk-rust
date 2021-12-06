@@ -13,31 +13,31 @@
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct DealResponseDealRenews {
+    /// +更新の明細行一覧（配列）
+    #[serde(rename = "details")]
+    pub details: Vec<crate::models::DealResponseDealDetails>,
     /// +更新行ID
     #[serde(rename = "id")]
     pub id: i64,
-    /// 更新日 (yyyy-mm-dd)
-    #[serde(rename = "update_date")]
-    pub update_date: String,
     /// +更新の対象行ID
     #[serde(rename = "renew_target_id")]
     pub renew_target_id: i64,
     /// +更新の対象行タイプ
     #[serde(rename = "renew_target_type")]
     pub renew_target_type: RenewTargetType,
-    /// +更新の明細行一覧（配列）
-    #[serde(rename = "details")]
-    pub details: Vec<crate::models::DealResponseDealDetails>,
+    /// 更新日 (yyyy-mm-dd)
+    #[serde(rename = "update_date")]
+    pub update_date: String,
 }
 
 impl DealResponseDealRenews {
-    pub fn new(id: i64, update_date: String, renew_target_id: i64, renew_target_type: RenewTargetType, details: Vec<crate::models::DealResponseDealDetails>) -> DealResponseDealRenews {
+    pub fn new(details: Vec<crate::models::DealResponseDealDetails>, id: i64, renew_target_id: i64, renew_target_type: RenewTargetType, update_date: String) -> DealResponseDealRenews {
         DealResponseDealRenews {
+            details,
             id,
-            update_date,
             renew_target_id,
             renew_target_type,
-            details,
+            update_date,
         }
     }
 }

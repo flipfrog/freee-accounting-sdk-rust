@@ -13,47 +13,47 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct TransferResponseTransfer {
-    /// 取引(振替)ID
-    #[serde(rename = "id")]
-    pub id: i32,
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
     /// 金額
     #[serde(rename = "amount")]
     pub amount: i64,
+    /// 事業所ID
+    #[serde(rename = "company_id")]
+    pub company_id: i32,
     /// 振替日 (yyyy-mm-dd)
     #[serde(rename = "date")]
     pub date: String,
-    /// 振替元口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
-    #[serde(rename = "from_walletable_type")]
-    pub from_walletable_type: Option<FromWalletableType>,
-    /// 振替元口座ID
-    #[serde(rename = "from_walletable_id")]
-    pub from_walletable_id: i32,
-    /// 振替先口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
-    #[serde(rename = "to_walletable_type")]
-    pub to_walletable_type: Option<ToWalletableType>,
-    /// 振替先口座ID
-    #[serde(rename = "to_walletable_id")]
-    pub to_walletable_id: i32,
     /// 備考
     #[serde(rename = "description")]
     pub description: String,
+    /// 振替元口座ID
+    #[serde(rename = "from_walletable_id")]
+    pub from_walletable_id: i32,
+    /// 振替元口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
+    #[serde(rename = "from_walletable_type")]
+    pub from_walletable_type: Option<FromWalletableType>,
+    /// 取引(振替)ID
+    #[serde(rename = "id")]
+    pub id: i32,
+    /// 振替先口座ID
+    #[serde(rename = "to_walletable_id")]
+    pub to_walletable_id: i32,
+    /// 振替先口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
+    #[serde(rename = "to_walletable_type")]
+    pub to_walletable_type: Option<ToWalletableType>,
 }
 
 impl TransferResponseTransfer {
-    pub fn new(id: i32, company_id: i32, amount: i64, date: String, from_walletable_type: Option<FromWalletableType>, from_walletable_id: i32, to_walletable_type: Option<ToWalletableType>, to_walletable_id: i32, description: String) -> TransferResponseTransfer {
+    pub fn new(amount: i64, company_id: i32, date: String, description: String, from_walletable_id: i32, from_walletable_type: Option<FromWalletableType>, id: i32, to_walletable_id: i32, to_walletable_type: Option<ToWalletableType>) -> TransferResponseTransfer {
         TransferResponseTransfer {
-            id,
-            company_id,
             amount,
+            company_id,
             date,
-            from_walletable_type,
-            from_walletable_id,
-            to_walletable_type,
-            to_walletable_id,
             description,
+            from_walletable_id,
+            from_walletable_type,
+            id,
+            to_walletable_id,
+            to_walletable_type,
         }
     }
 }

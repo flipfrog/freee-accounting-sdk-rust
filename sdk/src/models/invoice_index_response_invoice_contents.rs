@@ -13,61 +13,42 @@
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct InvoiceIndexResponseInvoiceContents {
-    /// 請求内容ID
-    #[serde(rename = "id")]
-    pub id: i32,
-    /// 順序
-    #[serde(rename = "order")]
-    pub order: Option<i32>,
-    /// 行の種類
-    #[serde(rename = "type")]
-    pub _type: Type,
-    /// 数量
-    #[serde(rename = "qty")]
-    pub qty: f32,
-    /// 単位
-    #[serde(rename = "unit")]
-    pub unit: Option<String>,
-    /// 単価
-    #[serde(rename = "unit_price")]
-    pub unit_price: f32,
-    /// 金額
-    #[serde(rename = "amount")]
-    pub amount: i64,
-    /// 消費税額
-    #[serde(rename = "vat")]
-    pub vat: i32,
-    /// 軽減税率税区分（true: 対象、false: 対象外）
-    #[serde(rename = "reduced_vat")]
-    pub reduced_vat: bool,
-    /// 備考
-    #[serde(rename = "description")]
-    pub description: Option<String>,
     /// 勘定科目ID
     #[serde(rename = "account_item_id")]
     pub account_item_id: Option<i32>,
     /// 勘定科目名
     #[serde(rename = "account_item_name")]
     pub account_item_name: Option<String>,
-    /// 税区分コード
-    #[serde(rename = "tax_code")]
-    pub tax_code: Option<i32>,
+    /// 内税/外税の判別とamountの税込み、税抜きについて <ul> <li>tax_entry_methodがexclusive (外税)の場合</li> <ul> <li>amount: 消費税抜きの金額</li> <li>vat: 消費税の金額</li> </ul> <li>tax_entry_methodがinclusive (内税)の場合</li> <ul> <li>amount: 消費税込みの金額</li> <li>vat: 消費税の金額</li> </ul> </ul> 
+    #[serde(rename = "amount")]
+    pub amount: i64,
+    /// 備考
+    #[serde(rename = "description")]
+    pub description: Option<String>,
+    /// 請求内容ID
+    #[serde(rename = "id")]
+    pub id: i32,
     /// 品目ID
     #[serde(rename = "item_id")]
     pub item_id: Option<i32>,
     /// 品目
     #[serde(rename = "item_name")]
     pub item_name: Option<String>,
+    /// 順序
+    #[serde(rename = "order")]
+    pub order: Option<i32>,
+    /// 数量
+    #[serde(rename = "qty")]
+    pub qty: f32,
+    /// 軽減税率税区分（true: 対象、false: 対象外）
+    #[serde(rename = "reduced_vat")]
+    pub reduced_vat: bool,
     /// 部門ID
     #[serde(rename = "section_id")]
     pub section_id: Option<i32>,
     /// 部門
     #[serde(rename = "section_name")]
     pub section_name: Option<String>,
-    #[serde(rename = "tag_ids")]
-    pub tag_ids: Vec<i32>,
-    #[serde(rename = "tag_names")]
-    pub tag_names: Vec<String>,
     /// セグメント１ID
     #[serde(rename = "segment_1_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_1_tag_id: Option<i64>,
@@ -86,36 +67,55 @@ pub struct InvoiceIndexResponseInvoiceContents {
     /// セグメント３
     #[serde(rename = "segment_3_tag_name", skip_serializing_if = "Option::is_none")]
     pub segment_3_tag_name: Option<String>,
+    #[serde(rename = "tag_ids")]
+    pub tag_ids: Vec<i32>,
+    #[serde(rename = "tag_names")]
+    pub tag_names: Vec<String>,
+    /// 税区分コード
+    #[serde(rename = "tax_code")]
+    pub tax_code: Option<i32>,
+    /// 行の種類
+    #[serde(rename = "type")]
+    pub _type: Type,
+    /// 単位
+    #[serde(rename = "unit")]
+    pub unit: Option<String>,
+    /// 単価
+    #[serde(rename = "unit_price")]
+    pub unit_price: f32,
+    /// 消費税額
+    #[serde(rename = "vat")]
+    pub vat: i32,
 }
 
 impl InvoiceIndexResponseInvoiceContents {
-    pub fn new(id: i32, order: Option<i32>, _type: Type, qty: f32, unit: Option<String>, unit_price: f32, amount: i64, vat: i32, reduced_vat: bool, description: Option<String>, account_item_id: Option<i32>, account_item_name: Option<String>, tax_code: Option<i32>, item_id: Option<i32>, item_name: Option<String>, section_id: Option<i32>, section_name: Option<String>, tag_ids: Vec<i32>, tag_names: Vec<String>) -> InvoiceIndexResponseInvoiceContents {
+    pub fn new(account_item_id: Option<i32>, account_item_name: Option<String>, amount: i64, description: Option<String>, id: i32, item_id: Option<i32>, item_name: Option<String>, order: Option<i32>, qty: f32, reduced_vat: bool, section_id: Option<i32>, section_name: Option<String>, tag_ids: Vec<i32>, tag_names: Vec<String>, tax_code: Option<i32>, _type: Type, unit: Option<String>, unit_price: f32, vat: i32) -> InvoiceIndexResponseInvoiceContents {
         InvoiceIndexResponseInvoiceContents {
-            id,
-            order,
-            _type,
-            qty,
-            unit,
-            unit_price,
-            amount,
-            vat,
-            reduced_vat,
-            description,
             account_item_id,
             account_item_name,
-            tax_code,
+            amount,
+            description,
+            id,
             item_id,
             item_name,
+            order,
+            qty,
+            reduced_vat,
             section_id,
             section_name,
-            tag_ids,
-            tag_names,
             segment_1_tag_id: None,
             segment_1_tag_name: None,
             segment_2_tag_id: None,
             segment_2_tag_name: None,
             segment_3_tag_id: None,
             segment_3_tag_name: None,
+            tag_ids,
+            tag_names,
+            tax_code,
+            _type,
+            unit,
+            unit_price,
+            vat,
         }
     }
 }

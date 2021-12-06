@@ -13,42 +13,42 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct MeResponseUser {
-    /// ユーザーID
-    #[serde(rename = "id")]
-    pub id: i32,
-    /// メールアドレス
-    #[serde(rename = "email")]
-    pub email: String,
+    #[serde(rename = "companies", skip_serializing_if = "Option::is_none")]
+    pub companies: Option<Vec<crate::models::MeResponseUserCompanies>>,
     /// 表示ユーザー名
     #[serde(rename = "display_name", skip_serializing_if = "Option::is_none")]
     pub display_name: Option<String>,
+    /// メールアドレス
+    #[serde(rename = "email")]
+    pub email: String,
     /// 名
     #[serde(rename = "first_name", skip_serializing_if = "Option::is_none")]
     pub first_name: Option<String>,
-    /// 姓
-    #[serde(rename = "last_name", skip_serializing_if = "Option::is_none")]
-    pub last_name: Option<String>,
     /// 名（カナ）
     #[serde(rename = "first_name_kana", skip_serializing_if = "Option::is_none")]
     pub first_name_kana: Option<String>,
+    /// ユーザーID
+    #[serde(rename = "id")]
+    pub id: i32,
+    /// 姓
+    #[serde(rename = "last_name", skip_serializing_if = "Option::is_none")]
+    pub last_name: Option<String>,
     /// 姓（カナ）
     #[serde(rename = "last_name_kana", skip_serializing_if = "Option::is_none")]
     pub last_name_kana: Option<String>,
-    #[serde(rename = "companies", skip_serializing_if = "Option::is_none")]
-    pub companies: Option<Vec<crate::models::MeResponseUserCompanies>>,
 }
 
 impl MeResponseUser {
-    pub fn new(id: i32, email: String) -> MeResponseUser {
+    pub fn new(email: String, id: i32) -> MeResponseUser {
         MeResponseUser {
-            id,
-            email,
-            display_name: None,
-            first_name: None,
-            last_name: None,
-            first_name_kana: None,
-            last_name_kana: None,
             companies: None,
+            display_name: None,
+            email,
+            first_name: None,
+            first_name_kana: None,
+            id,
+            last_name: None,
+            last_name_kana: None,
         }
     }
 }

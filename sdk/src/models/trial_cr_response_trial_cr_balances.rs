@@ -13,21 +13,45 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct TrialCrResponseTrialCrBalances {
+    /// 勘定科目カテゴリー名
+    #[serde(rename = "account_category_name", skip_serializing_if = "Option::is_none")]
+    pub account_category_name: Option<String>,
+    /// 決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)
+    #[serde(rename = "account_group_name", skip_serializing_if = "Option::is_none")]
+    pub account_group_name: Option<String>,
     /// 勘定科目ID(勘定科目の時のみ含まれる)
     #[serde(rename = "account_item_id", skip_serializing_if = "Option::is_none")]
     pub account_item_id: Option<i32>,
     /// 勘定科目名(勘定科目の時のみ含まれる)
     #[serde(rename = "account_item_name", skip_serializing_if = "Option::is_none")]
     pub account_item_name: Option<String>,
-    /// 決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)
-    #[serde(rename = "account_group_name", skip_serializing_if = "Option::is_none")]
-    pub account_group_name: Option<String>,
-    /// breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる
-    #[serde(rename = "partners", skip_serializing_if = "Option::is_none")]
-    pub partners: Option<Vec<crate::models::TrialCrResponseTrialCrPartners>>,
+    /// 期末残高
+    #[serde(rename = "closing_balance", skip_serializing_if = "Option::is_none")]
+    pub closing_balance: Option<i32>,
+    /// 構成比
+    #[serde(rename = "composition_ratio", skip_serializing_if = "Option::is_none")]
+    pub composition_ratio: Option<f32>,
+    /// 貸方金額
+    #[serde(rename = "credit_amount", skip_serializing_if = "Option::is_none")]
+    pub credit_amount: Option<i32>,
+    /// 借方金額
+    #[serde(rename = "debit_amount", skip_serializing_if = "Option::is_none")]
+    pub debit_amount: Option<i32>,
+    /// 階層レベル
+    #[serde(rename = "hierarchy_level", skip_serializing_if = "Option::is_none")]
+    pub hierarchy_level: Option<i32>,
     /// breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる
     #[serde(rename = "items", skip_serializing_if = "Option::is_none")]
     pub items: Option<Vec<crate::models::TrialCrResponseTrialCrItems>>,
+    /// 期首残高
+    #[serde(rename = "opening_balance", skip_serializing_if = "Option::is_none")]
+    pub opening_balance: Option<i32>,
+    /// 上位勘定科目カテゴリー名(勘定科目カテゴリーの時のみ、上層が存在する場合含まれる)
+    #[serde(rename = "parent_account_category_name", skip_serializing_if = "Option::is_none")]
+    pub parent_account_category_name: Option<String>,
+    /// breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる
+    #[serde(rename = "partners", skip_serializing_if = "Option::is_none")]
+    pub partners: Option<Vec<crate::models::TrialCrResponseTrialCrPartners>>,
     /// breakdown_display_type:section, account_item_display_type:account_item指定時のみ含まれる
     #[serde(rename = "sections", skip_serializing_if = "Option::is_none")]
     pub sections: Option<Vec<crate::models::TrialBsResponseTrialBsSections>>,
@@ -40,56 +64,32 @@ pub struct TrialCrResponseTrialCrBalances {
     /// breakdown_display_type:segment_3_tag, account_item_display_type:account_item指定時のみ含まれる
     #[serde(rename = "segment_3_tags", skip_serializing_if = "Option::is_none")]
     pub segment_3_tags: Option<Vec<crate::models::TrialCrResponseTrialCrSegment3Tags>>,
-    /// 勘定科目カテゴリー名
-    #[serde(rename = "account_category_name", skip_serializing_if = "Option::is_none")]
-    pub account_category_name: Option<String>,
     /// 合計行(勘定科目カテゴリーの時のみ含まれる)
     #[serde(rename = "total_line", skip_serializing_if = "Option::is_none")]
     pub total_line: Option<bool>,
-    /// 階層レベル
-    #[serde(rename = "hierarchy_level", skip_serializing_if = "Option::is_none")]
-    pub hierarchy_level: Option<i32>,
-    /// 上位勘定科目カテゴリー名(勘定科目カテゴリーの時のみ、上層が存在する場合含まれる)
-    #[serde(rename = "parent_account_category_name", skip_serializing_if = "Option::is_none")]
-    pub parent_account_category_name: Option<String>,
-    /// 期首残高
-    #[serde(rename = "opening_balance", skip_serializing_if = "Option::is_none")]
-    pub opening_balance: Option<i32>,
-    /// 借方金額
-    #[serde(rename = "debit_amount", skip_serializing_if = "Option::is_none")]
-    pub debit_amount: Option<i32>,
-    /// 貸方金額
-    #[serde(rename = "credit_amount", skip_serializing_if = "Option::is_none")]
-    pub credit_amount: Option<i32>,
-    /// 期末残高
-    #[serde(rename = "closing_balance", skip_serializing_if = "Option::is_none")]
-    pub closing_balance: Option<i32>,
-    /// 構成比
-    #[serde(rename = "composition_ratio", skip_serializing_if = "Option::is_none")]
-    pub composition_ratio: Option<f32>,
 }
 
 impl TrialCrResponseTrialCrBalances {
     pub fn new() -> TrialCrResponseTrialCrBalances {
         TrialCrResponseTrialCrBalances {
+            account_category_name: None,
+            account_group_name: None,
             account_item_id: None,
             account_item_name: None,
-            account_group_name: None,
-            partners: None,
+            closing_balance: None,
+            composition_ratio: None,
+            credit_amount: None,
+            debit_amount: None,
+            hierarchy_level: None,
             items: None,
+            opening_balance: None,
+            parent_account_category_name: None,
+            partners: None,
             sections: None,
             segment_1_tags: None,
             segment_2_tags: None,
             segment_3_tags: None,
-            account_category_name: None,
             total_line: None,
-            hierarchy_level: None,
-            parent_account_category_name: None,
-            opening_balance: None,
-            debit_amount: None,
-            credit_amount: None,
-            closing_balance: None,
-            composition_ratio: None,
         }
     }
 }

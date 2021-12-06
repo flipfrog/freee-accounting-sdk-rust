@@ -16,24 +16,18 @@ pub struct RenewCreateParamsDetails {
     /// 勘定科目ID
     #[serde(rename = "account_item_id")]
     pub account_item_id: i32,
-    /// 税区分コード
-    #[serde(rename = "tax_code")]
-    pub tax_code: i32,
     /// 取引金額（税込で指定してください）
     #[serde(rename = "amount")]
     pub amount: i64,
-    /// 消費税額（指定しない場合は自動で計算されます）
-    #[serde(rename = "vat", skip_serializing_if = "Option::is_none")]
-    pub vat: Option<i64>,
+    /// 備考
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     /// 品目ID
     #[serde(rename = "item_id", skip_serializing_if = "Option::is_none")]
     pub item_id: Option<i32>,
     /// 部門ID
     #[serde(rename = "section_id", skip_serializing_if = "Option::is_none")]
     pub section_id: Option<i32>,
-    /// メモタグID
-    #[serde(rename = "tag_ids", skip_serializing_if = "Option::is_none")]
-    pub tag_ids: Option<Vec<i32>>,
     /// セグメント１ID
     #[serde(rename = "segment_1_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_1_tag_id: Option<i64>,
@@ -43,25 +37,31 @@ pub struct RenewCreateParamsDetails {
     /// セグメント３ID
     #[serde(rename = "segment_3_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_3_tag_id: Option<i64>,
-    /// 備考
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
+    /// メモタグID
+    #[serde(rename = "tag_ids", skip_serializing_if = "Option::is_none")]
+    pub tag_ids: Option<Vec<i32>>,
+    /// 税区分コード
+    #[serde(rename = "tax_code")]
+    pub tax_code: i32,
+    /// 消費税額（指定しない場合は自動で計算されます）
+    #[serde(rename = "vat", skip_serializing_if = "Option::is_none")]
+    pub vat: Option<i64>,
 }
 
 impl RenewCreateParamsDetails {
-    pub fn new(account_item_id: i32, tax_code: i32, amount: i64) -> RenewCreateParamsDetails {
+    pub fn new(account_item_id: i32, amount: i64, tax_code: i32) -> RenewCreateParamsDetails {
         RenewCreateParamsDetails {
             account_item_id,
-            tax_code,
             amount,
-            vat: None,
+            description: None,
             item_id: None,
             section_id: None,
-            tag_ids: None,
             segment_1_tag_id: None,
             segment_2_tag_id: None,
             segment_3_tag_id: None,
-            description: None,
+            tag_ids: None,
+            tax_code,
+            vat: None,
         }
     }
 }

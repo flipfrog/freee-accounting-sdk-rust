@@ -66,7 +66,6 @@ pub mod approval_flow_routes_api;
 pub mod approval_requests_api;
 pub mod banks_api;
 pub mod companies_api;
-pub mod companies_plan_api;
 pub mod deals_api;
 pub mod expense_application_line_templates_api;
 pub mod expense_applications_api;

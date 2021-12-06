@@ -13,41 +13,24 @@
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct InvoiceCreateParamsInvoiceContents {
-    /// 順序
-    #[serde(rename = "order")]
-    pub order: i32,
-    /// 行の種類 <ul> <li>normal、discountを指定する場合、account_item_id,tax_codeとunit_priceが必須となります。</li> <li>normalを指定した場合、qtyが必須となります。</li> </ul>
-    #[serde(rename = "type")]
-    pub _type: Type,
-    /// 数量
-    #[serde(rename = "qty", skip_serializing_if = "Option::is_none")]
-    pub qty: Option<f32>,
-    /// 単位
-    #[serde(rename = "unit", skip_serializing_if = "Option::is_none")]
-    pub unit: Option<String>,
-    /// 単価 (tax_entry_method: inclusiveの場合は税込価格、tax_entry_method: exclusiveの場合は税抜価格となります)
-    #[serde(rename = "unit_price", skip_serializing_if = "Option::is_none")]
-    pub unit_price: Option<f32>,
-    /// 消費税額
-    #[serde(rename = "vat", skip_serializing_if = "Option::is_none")]
-    pub vat: Option<i32>,
-    /// 備考
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
     /// 勘定科目ID
     #[serde(rename = "account_item_id", skip_serializing_if = "Option::is_none")]
     pub account_item_id: Option<i32>,
-    /// 税区分コード
-    #[serde(rename = "tax_code", skip_serializing_if = "Option::is_none")]
-    pub tax_code: Option<i32>,
+    /// 備考
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     /// 品目ID
     #[serde(rename = "item_id", skip_serializing_if = "Option::is_none")]
     pub item_id: Option<i32>,
+    /// 順序
+    #[serde(rename = "order")]
+    pub order: i32,
+    /// 数量
+    #[serde(rename = "qty", skip_serializing_if = "Option::is_none")]
+    pub qty: Option<f32>,
     /// 部門ID
     #[serde(rename = "section_id", skip_serializing_if = "Option::is_none")]
     pub section_id: Option<i32>,
-    #[serde(rename = "tag_ids", skip_serializing_if = "Option::is_none")]
-    pub tag_ids: Option<Vec<i32>>,
     /// セグメント１ID
     #[serde(rename = "segment_1_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_1_tag_id: Option<i64>,
@@ -57,26 +40,43 @@ pub struct InvoiceCreateParamsInvoiceContents {
     /// セグメント３ID
     #[serde(rename = "segment_3_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_3_tag_id: Option<i64>,
+    #[serde(rename = "tag_ids", skip_serializing_if = "Option::is_none")]
+    pub tag_ids: Option<Vec<i32>>,
+    /// 税区分コード
+    #[serde(rename = "tax_code", skip_serializing_if = "Option::is_none")]
+    pub tax_code: Option<i32>,
+    /// 行の種類 <ul> <li>normal、discountを指定する場合、account_item_id,tax_codeとunit_priceが必須となります。</li> <li>normalを指定した場合、qtyが必須となります。</li> </ul>
+    #[serde(rename = "type")]
+    pub _type: Type,
+    /// 単位
+    #[serde(rename = "unit", skip_serializing_if = "Option::is_none")]
+    pub unit: Option<String>,
+    /// 単価 (tax_entry_method: inclusiveの場合は税込価格、tax_entry_method: exclusiveの場合は税抜価格となります)
+    #[serde(rename = "unit_price", skip_serializing_if = "Option::is_none")]
+    pub unit_price: Option<f32>,
+    /// 消費税額
+    #[serde(rename = "vat", skip_serializing_if = "Option::is_none")]
+    pub vat: Option<i32>,
 }
 
 impl InvoiceCreateParamsInvoiceContents {
     pub fn new(order: i32, _type: Type) -> InvoiceCreateParamsInvoiceContents {
         InvoiceCreateParamsInvoiceContents {
-            order,
-            _type,
-            qty: None,
-            unit: None,
-            unit_price: None,
-            vat: None,
-            description: None,
             account_item_id: None,
-            tax_code: None,
+            description: None,
             item_id: None,
+            order,
+            qty: None,
             section_id: None,
-            tag_ids: None,
             segment_1_tag_id: None,
             segment_2_tag_id: None,
             segment_3_tag_id: None,
+            tag_ids: None,
+            tax_code: None,
+            _type,
+            unit: None,
+            unit_price: None,
+            vat: None,
         }
     }
 }

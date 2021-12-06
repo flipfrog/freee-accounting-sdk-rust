@@ -13,19 +13,19 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct WalletableUpdateParams {
-    /// 口座名 (255文字以内)
-    #[serde(rename = "name")]
-    pub name: String,
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
+    /// 口座名 (255文字以内)
+    #[serde(rename = "name")]
+    pub name: String,
 }
 
 impl WalletableUpdateParams {
-    pub fn new(name: String, company_id: i32) -> WalletableUpdateParams {
+    pub fn new(company_id: i32, name: String) -> WalletableUpdateParams {
         WalletableUpdateParams {
-            name,
             company_id,
+            name,
         }
     }
 }

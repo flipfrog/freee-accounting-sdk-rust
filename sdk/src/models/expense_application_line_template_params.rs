@@ -13,43 +13,43 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ExpenseApplicationLineTemplateParams {
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
-    /// 経費科目名 (100文字以内)
-    #[serde(rename = "name")]
-    pub name: String,
     /// 勘定科目ID
     #[serde(rename = "account_item_id")]
     pub account_item_id: i32,
-    /// 品目ID
-    #[serde(rename = "item_id", skip_serializing_if = "Option::is_none")]
-    pub item_id: Option<i32>,
-    /// 税区分コード（税区分のdisplay_categoryがtax_5: 5%表示の税区分, tax_r8: 軽減税率8%表示の税区分に該当するtax_codeのみ利用可能です。税区分のdisplay_categoryは /taxes/companies/{:company_id}のAPIから取得可能です。）
-    #[serde(rename = "tax_code")]
-    pub tax_code: i32,
+    /// 事業所ID
+    #[serde(rename = "company_id")]
+    pub company_id: i32,
     /// 経費科目の説明 (1000文字以内)
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
+    /// 品目ID
+    #[serde(rename = "item_id", skip_serializing_if = "Option::is_none")]
+    pub item_id: Option<i32>,
     /// 内容の補足 (1000文字以内)
     #[serde(rename = "line_description", skip_serializing_if = "Option::is_none")]
     pub line_description: Option<String>,
+    /// 経費科目名 (100文字以内)
+    #[serde(rename = "name")]
+    pub name: String,
     /// 添付ファイルの必須/任意
     #[serde(rename = "required_receipt", skip_serializing_if = "Option::is_none")]
     pub required_receipt: Option<bool>,
+    /// 税区分コード（税区分のdisplay_categoryがtax_5: 5%表示の税区分, tax_r8: 軽減税率8%表示の税区分に該当するtax_codeのみ利用可能です。税区分のdisplay_categoryは /taxes/companies/{:company_id}のAPIから取得可能です。）
+    #[serde(rename = "tax_code")]
+    pub tax_code: i32,
 }
 
 impl ExpenseApplicationLineTemplateParams {
-    pub fn new(company_id: i32, name: String, account_item_id: i32, tax_code: i32) -> ExpenseApplicationLineTemplateParams {
+    pub fn new(account_item_id: i32, company_id: i32, name: String, tax_code: i32) -> ExpenseApplicationLineTemplateParams {
         ExpenseApplicationLineTemplateParams {
-            company_id,
-            name,
             account_item_id,
-            item_id: None,
-            tax_code,
+            company_id,
             description: None,
+            item_id: None,
             line_description: None,
+            name,
             required_receipt: None,
+            tax_code,
         }
     }
 }

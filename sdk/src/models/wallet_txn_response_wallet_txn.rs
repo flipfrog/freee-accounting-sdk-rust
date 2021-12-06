@@ -13,55 +13,55 @@
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct WalletTxnResponseWalletTxn {
-    /// 明細ID
-    #[serde(rename = "id")]
-    pub id: i32,
+    /// 取引金額
+    #[serde(rename = "amount")]
+    pub amount: i64,
+    /// 残高(銀行口座等)
+    #[serde(rename = "balance")]
+    pub balance: i32,
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
     /// 取引日(yyyy-mm-dd)
     #[serde(rename = "date")]
     pub date: String,
-    /// 取引金額
-    #[serde(rename = "amount")]
-    pub amount: i64,
-    /// 未決済金額
-    #[serde(rename = "due_amount")]
-    pub due_amount: i32,
-    /// 残高(銀行口座等)
-    #[serde(rename = "balance")]
-    pub balance: i32,
-    /// 入金／出金 (入金: income, 出金: expense)
-    #[serde(rename = "entry_side")]
-    pub entry_side: EntrySide,
-    /// 口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
-    #[serde(rename = "walletable_type")]
-    pub walletable_type: WalletableType,
-    /// 口座ID
-    #[serde(rename = "walletable_id")]
-    pub walletable_id: i32,
     /// 取引内容
     #[serde(rename = "description")]
     pub description: String,
+    /// 未決済金額
+    #[serde(rename = "due_amount")]
+    pub due_amount: i32,
+    /// 入金／出金 (入金: income, 出金: expense)
+    #[serde(rename = "entry_side")]
+    pub entry_side: EntrySide,
+    /// 明細ID
+    #[serde(rename = "id")]
+    pub id: i32,
     /// 明細のステータス（消込待ち: 1, 消込済み: 2, 無視: 3, 消込中: 4）
     #[serde(rename = "status")]
     pub status: i32,
+    /// 口座ID
+    #[serde(rename = "walletable_id")]
+    pub walletable_id: i32,
+    /// 口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
+    #[serde(rename = "walletable_type")]
+    pub walletable_type: WalletableType,
 }
 
 impl WalletTxnResponseWalletTxn {
-    pub fn new(id: i32, company_id: i32, date: String, amount: i64, due_amount: i32, balance: i32, entry_side: EntrySide, walletable_type: WalletableType, walletable_id: i32, description: String, status: i32) -> WalletTxnResponseWalletTxn {
+    pub fn new(amount: i64, balance: i32, company_id: i32, date: String, description: String, due_amount: i32, entry_side: EntrySide, id: i32, status: i32, walletable_id: i32, walletable_type: WalletableType) -> WalletTxnResponseWalletTxn {
         WalletTxnResponseWalletTxn {
-            id,
+            amount,
+            balance,
             company_id,
             date,
-            amount,
-            due_amount,
-            balance,
-            entry_side,
-            walletable_type,
-            walletable_id,
             description,
+            due_amount,
+            entry_side,
+            id,
             status,
+            walletable_id,
+            walletable_type,
         }
     }
 }

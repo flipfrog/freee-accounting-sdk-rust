@@ -13,31 +13,31 @@
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ExpenseApplicationActionCreateParams {
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
     /// 操作(approve: 承認する、force_approve: 代理承認する、cancel: 申請を取り消す、reject: 却下する、feedback: 申請者へ差し戻す、force_feedback: 承認済み・却下済みを取り消す)
     #[serde(rename = "approval_action")]
     pub approval_action: ApprovalAction,
-    /// 対象承認ステップID 経費申請の取得APIレスポンス.current_step_idを送信してください。
-    #[serde(rename = "target_step_id")]
-    pub target_step_id: i32,
-    /// 対象round。差し戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。経費申請の取得APIレスポンス.current_roundを送信してください。
-    #[serde(rename = "target_round")]
-    pub target_round: i32,
+    /// 事業所ID
+    #[serde(rename = "company_id")]
+    pub company_id: i32,
     /// 次ステップの承認者のユーザーID
     #[serde(rename = "next_approver_id", skip_serializing_if = "Option::is_none")]
     pub next_approver_id: Option<i32>,
+    /// 対象round。差し戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。経費申請の取得APIレスポンス.current_roundを送信してください。
+    #[serde(rename = "target_round")]
+    pub target_round: i32,
+    /// 対象承認ステップID 経費申請の取得APIレスポンス.current_step_idを送信してください。
+    #[serde(rename = "target_step_id")]
+    pub target_step_id: i32,
 }
 
 impl ExpenseApplicationActionCreateParams {
-    pub fn new(company_id: i32, approval_action: ApprovalAction, target_step_id: i32, target_round: i32) -> ExpenseApplicationActionCreateParams {
+    pub fn new(approval_action: ApprovalAction, company_id: i32, target_round: i32, target_step_id: i32) -> ExpenseApplicationActionCreateParams {
         ExpenseApplicationActionCreateParams {
-            company_id,
             approval_action,
-            target_step_id,
-            target_round,
+            company_id,
             next_approver_id: None,
+            target_round,
+            target_step_id,
         }
     }
 }

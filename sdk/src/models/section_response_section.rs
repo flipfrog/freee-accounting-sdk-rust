@@ -13,47 +13,47 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct SectionResponseSection {
-    /// 部門ID
-    #[serde(rename = "id")]
-    pub id: i32,
-    /// 部門名 (30文字以内)
-    #[serde(rename = "name")]
-    pub name: String,
     /// 部門の使用設定（true: 使用する、false: 使用しない） <br> <ul>   <li>     本APIでsectionを作成した場合はtrueになります。   </li>   <li>     falseにする場合はWeb画面から変更できます。   </li>   <li>     trueの場合、Web画面での取引登録時などに入力候補として表示されます。   </li>   <li>     falseの場合、部門自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの部門をパラメータに指定すれば、取引などにfalseの部門を設定できます。   </li> </ul>
     #[serde(rename = "available")]
     pub available: bool,
-    /// 正式名称（255文字以内）
-    #[serde(rename = "long_name", skip_serializing_if = "Option::is_none")]
-    pub long_name: Option<String>,
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
+    /// 部門ID
+    #[serde(rename = "id")]
+    pub id: i32,
+    /// <a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/209093566\">部門階層</a> <br> ※ indent_count が 0 のときは第一階層の親部門です。 
+    #[serde(rename = "indent_count", skip_serializing_if = "Option::is_none")]
+    pub indent_count: Option<i32>,
+    /// 正式名称（255文字以内）
+    #[serde(rename = "long_name", skip_serializing_if = "Option::is_none")]
+    pub long_name: Option<String>,
+    /// 部門名 (30文字以内)
+    #[serde(rename = "name")]
+    pub name: String,
+    /// <a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/209093566\">親部門ID</a> <br> ※ parent_id が null のときは第一階層の親部門です。 
+    #[serde(rename = "parent_id", skip_serializing_if = "Option::is_none")]
+    pub parent_id: Option<i32>,
     /// ショートカット１ (20文字以内)
     #[serde(rename = "shortcut1", skip_serializing_if = "Option::is_none")]
     pub shortcut1: Option<String>,
     /// ショートカット２ (20文字以内)
     #[serde(rename = "shortcut2", skip_serializing_if = "Option::is_none")]
     pub shortcut2: Option<String>,
-    /// <a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/209093566\">部門階層</a> <br> ※ indent_count が 0 のときは第一階層の親部門です。 
-    #[serde(rename = "indent_count", skip_serializing_if = "Option::is_none")]
-    pub indent_count: Option<i32>,
-    /// <a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/209093566\">親部門ID</a> <br> ※ parent_id が null のときは第一階層の親部門です。 
-    #[serde(rename = "parent_id", skip_serializing_if = "Option::is_none")]
-    pub parent_id: Option<i32>,
 }
 
 impl SectionResponseSection {
-    pub fn new(id: i32, name: String, available: bool, company_id: i32) -> SectionResponseSection {
+    pub fn new(available: bool, company_id: i32, id: i32, name: String) -> SectionResponseSection {
         SectionResponseSection {
-            id,
-            name,
             available,
-            long_name: None,
             company_id,
+            id,
+            indent_count: None,
+            long_name: None,
+            name,
+            parent_id: None,
             shortcut1: None,
             shortcut2: None,
-            indent_count: None,
-            parent_id: None,
         }
     }
 }

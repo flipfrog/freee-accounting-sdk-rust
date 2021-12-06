@@ -13,15 +13,15 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct SegmentTagResponseSegmentTag {
+    /// 備考
+    #[serde(rename = "description")]
+    pub description: Option<String>,
     /// セグメントタグID
     #[serde(rename = "id")]
     pub id: i32,
     /// セグメントタグ名
     #[serde(rename = "name")]
     pub name: String,
-    /// 備考
-    #[serde(rename = "description")]
-    pub description: Option<String>,
     /// ショートカット１ (20文字以内)
     #[serde(rename = "shortcut1")]
     pub shortcut1: Option<String>,
@@ -31,11 +31,11 @@ pub struct SegmentTagResponseSegmentTag {
 }
 
 impl SegmentTagResponseSegmentTag {
-    pub fn new(id: i32, name: String, description: Option<String>, shortcut1: Option<String>, shortcut2: Option<String>) -> SegmentTagResponseSegmentTag {
+    pub fn new(description: Option<String>, id: i32, name: String, shortcut1: Option<String>, shortcut2: Option<String>) -> SegmentTagResponseSegmentTag {
         SegmentTagResponseSegmentTag {
+            description,
             id,
             name,
-            description,
             shortcut1,
             shortcut2,
         }

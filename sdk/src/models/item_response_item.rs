@@ -13,39 +13,39 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ItemResponseItem {
-    /// 品目ID
-    #[serde(rename = "id")]
-    pub id: i32,
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
-    /// 品目名 (30文字以内)
-    #[serde(rename = "name")]
-    pub name: String,
-    /// 更新日(yyyy-mm-dd)
-    #[serde(rename = "update_date")]
-    pub update_date: String,
     /// 品目の使用設定（true: 使用する、false: 使用しない） <br> <ul>   <li>     本APIでitemを作成した場合はtrueになります。   </li>   <li>     falseにする場合はWeb画面から変更できます。   </li>   <li>     trueの場合、Web画面での取引登録時などに入力候補として表示されます。   </li>   <li>     falseの場合、品目自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの品目をパラメータに指定すれば、取引などにfalseの品目を設定できます。   </li> </ul>
     #[serde(rename = "available")]
     pub available: bool,
+    /// 事業所ID
+    #[serde(rename = "company_id")]
+    pub company_id: i32,
+    /// 品目ID
+    #[serde(rename = "id")]
+    pub id: i32,
+    /// 品目名 (30文字以内)
+    #[serde(rename = "name")]
+    pub name: String,
     /// ショートカット１ (20文字以内)
     #[serde(rename = "shortcut1", skip_serializing_if = "Option::is_none")]
     pub shortcut1: Option<String>,
     /// ショートカット２ (20文字以内)
     #[serde(rename = "shortcut2", skip_serializing_if = "Option::is_none")]
     pub shortcut2: Option<String>,
+    /// 更新日(yyyy-mm-dd)
+    #[serde(rename = "update_date")]
+    pub update_date: String,
 }
 
 impl ItemResponseItem {
-    pub fn new(id: i32, company_id: i32, name: String, update_date: String, available: bool) -> ItemResponseItem {
+    pub fn new(available: bool, company_id: i32, id: i32, name: String, update_date: String) -> ItemResponseItem {
         ItemResponseItem {
-            id,
-            company_id,
-            name,
-            update_date,
             available,
+            company_id,
+            id,
+            name,
             shortcut1: None,
             shortcut2: None,
+            update_date,
         }
     }
 }

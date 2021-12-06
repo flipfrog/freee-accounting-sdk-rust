@@ -13,34 +13,34 @@
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct WalletableResponseWalletable {
-    /// 口座ID
-    #[serde(rename = "id")]
-    pub id: i32,
-    /// 口座名 (255文字以内)
-    #[serde(rename = "name")]
-    pub name: String,
     /// サービスID
     #[serde(rename = "bank_id")]
     pub bank_id: Option<i32>,
-    /// 口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
-    #[serde(rename = "type")]
-    pub _type: Type,
+    /// 口座ID
+    #[serde(rename = "id")]
+    pub id: i32,
     /// 同期残高
     #[serde(rename = "last_balance", skip_serializing_if = "Option::is_none")]
     pub last_balance: Option<i32>,
+    /// 口座名 (255文字以内)
+    #[serde(rename = "name")]
+    pub name: String,
+    /// 口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
+    #[serde(rename = "type")]
+    pub _type: Type,
     /// 登録残高
     #[serde(rename = "walletable_balance", skip_serializing_if = "Option::is_none")]
     pub walletable_balance: Option<i32>,
 }
 
 impl WalletableResponseWalletable {
-    pub fn new(id: i32, name: String, bank_id: Option<i32>, _type: Type) -> WalletableResponseWalletable {
+    pub fn new(bank_id: Option<i32>, id: i32, name: String, _type: Type) -> WalletableResponseWalletable {
         WalletableResponseWalletable {
-            id,
-            name,
             bank_id,
-            _type,
+            id,
             last_balance: None,
+            name,
+            _type,
             walletable_balance: None,
         }
     }

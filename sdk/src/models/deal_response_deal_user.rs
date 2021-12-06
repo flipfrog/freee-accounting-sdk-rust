@@ -13,23 +13,23 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct DealResponseDealUser {
-    /// ユーザーID
-    #[serde(rename = "id")]
-    pub id: i32,
-    /// メールアドレス
-    #[serde(rename = "email")]
-    pub email: String,
     /// 表示名
     #[serde(rename = "display_name", skip_serializing_if = "Option::is_none")]
     pub display_name: Option<String>,
+    /// メールアドレス
+    #[serde(rename = "email")]
+    pub email: String,
+    /// ユーザーID
+    #[serde(rename = "id")]
+    pub id: i32,
 }
 
 impl DealResponseDealUser {
-    pub fn new(id: i32, email: String) -> DealResponseDealUser {
+    pub fn new(email: String, id: i32) -> DealResponseDealUser {
         DealResponseDealUser {
-            id,
-            email,
             display_name: None,
+            email,
+            id,
         }
     }
 }

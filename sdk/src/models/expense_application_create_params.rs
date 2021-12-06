@@ -13,38 +13,32 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ExpenseApplicationCreateParams {
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
-    /// 申請タイトル (250文字以内)
-    #[serde(rename = "title")]
-    pub title: String,
-    /// 申請日 (yyyy-mm-dd)
-    #[serde(rename = "issue_date")]
-    pub issue_date: String,
-    /// 備考 (10000文字以内)
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    /// 部門ID
-    #[serde(rename = "section_id", skip_serializing_if = "Option::is_none")]
-    pub section_id: Option<i32>,
-    /// メモタグID
-    #[serde(rename = "tag_ids", skip_serializing_if = "Option::is_none")]
-    pub tag_ids: Option<Vec<i32>>,
-    #[serde(rename = "expense_application_lines")]
-    pub expense_application_lines: Vec<crate::models::ExpenseApplicationCreateParamsExpenseApplicationLines>,
     /// 申請経路ID<br> <ul>     <li>経費申請のステータスを申請中として作成する場合は、必ず指定してください。</li>     <li>指定する申請経路IDは、申請経路APIを利用して取得してください。</li>     <li>         未指定の場合は、基本経路を設定している事業所では基本経路が、基本経路を設定していない事業所では利用可能な申請経路の中から最初の申請経路が自動的に使用されます。         <ul>            <li>意図しない申請経路を持った経費申請の作成を防ぐために、使用する申請経路IDを指定することを推奨します。</li>         </ul>     </li>     <li>         ベーシックプランの事業所では以下のデフォルトで用意された申請経路のみ指定できます         <ul>         <li>指定なし</li>         <li>承認者を指定</li>         </ul>     </li> </ul> 
     #[serde(rename = "approval_flow_route_id", skip_serializing_if = "Option::is_none")]
     pub approval_flow_route_id: Option<i32>,
     /// 承認者のユーザーID<br> 「承認者を指定」の経路を申請経路として使用する場合に指定してください。<br> 指定する承認者のユーザーIDは、申請経路APIを利用して取得してください。 
     #[serde(rename = "approver_id", skip_serializing_if = "Option::is_none")]
     pub approver_id: Option<i32>,
+    /// 事業所ID
+    #[serde(rename = "company_id")]
+    pub company_id: i32,
+    /// 備考 (10000文字以内)
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     /// 経費申請のステータス<br> falseを指定した時は申請中（in_progress）で経費申請を作成します。<br> trueを指定した時は下書き（draft）で経費申請を作成します。<br> 未指定の時は下書きとみなして経費申請を作成します。 
     #[serde(rename = "draft", skip_serializing_if = "Option::is_none")]
     pub draft: Option<bool>,
+    #[serde(rename = "expense_application_lines")]
+    pub expense_application_lines: Vec<crate::models::ExpenseApplicationCreateParamsExpenseApplicationLines>,
+    /// 申請日 (yyyy-mm-dd)
+    #[serde(rename = "issue_date")]
+    pub issue_date: String,
     /// 親申請ID(法人向けプロフェッショナル, 法人向け エンタープライズプラン)<br> <ul>   <li>承認済みの既存各種申請IDのみ指定可能です。</li>   <li>各種申請一覧APIを利用して取得してください。</li> </ul> 
     #[serde(rename = "parent_id", skip_serializing_if = "Option::is_none")]
     pub parent_id: Option<i32>,
+    /// 部門ID
+    #[serde(rename = "section_id", skip_serializing_if = "Option::is_none")]
+    pub section_id: Option<i32>,
     /// セグメント１ID(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br> セグメントタグ一覧APIを利用して取得してください。<br> <a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br> 
     #[serde(rename = "segment_1_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_1_tag_id: Option<i64>,
@@ -54,25 +48,31 @@ pub struct ExpenseApplicationCreateParams {
     /// セグメント３ID(法人向け エンタープライズプラン)<br> セグメントタグ一覧APIを利用して取得してください。<br> <a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br> 
     #[serde(rename = "segment_3_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_3_tag_id: Option<i64>,
+    /// メモタグID
+    #[serde(rename = "tag_ids", skip_serializing_if = "Option::is_none")]
+    pub tag_ids: Option<Vec<i32>>,
+    /// 申請タイトル (250文字以内)
+    #[serde(rename = "title")]
+    pub title: String,
 }
 
 impl ExpenseApplicationCreateParams {
-    pub fn new(company_id: i32, title: String, issue_date: String, expense_application_lines: Vec<crate::models::ExpenseApplicationCreateParamsExpenseApplicationLines>) -> ExpenseApplicationCreateParams {
+    pub fn new(company_id: i32, expense_application_lines: Vec<crate::models::ExpenseApplicationCreateParamsExpenseApplicationLines>, issue_date: String, title: String) -> ExpenseApplicationCreateParams {
         ExpenseApplicationCreateParams {
-            company_id,
-            title,
-            issue_date,
-            description: None,
-            section_id: None,
-            tag_ids: None,
-            expense_application_lines,
             approval_flow_route_id: None,
             approver_id: None,
+            company_id,
+            description: None,
             draft: None,
+            expense_application_lines,
+            issue_date,
             parent_id: None,
+            section_id: None,
             segment_1_tag_id: None,
             segment_2_tag_id: None,
             segment_3_tag_id: None,
+            tag_ids: None,
+            title,
         }
     }
 }

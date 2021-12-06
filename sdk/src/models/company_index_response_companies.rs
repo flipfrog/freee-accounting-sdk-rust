@@ -13,6 +13,9 @@
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CompanyIndexResponseCompanies {
+    /// 事業所名
+    #[serde(rename = "display_name")]
+    pub display_name: Option<String>,
     /// 事業所ID
     #[serde(rename = "id")]
     pub id: i32,
@@ -22,21 +25,18 @@ pub struct CompanyIndexResponseCompanies {
     /// 事業所名（カナ）
     #[serde(rename = "name_kana")]
     pub name_kana: Option<String>,
-    /// 事業所名
-    #[serde(rename = "display_name")]
-    pub display_name: Option<String>,
     /// ユーザーの権限
     #[serde(rename = "role")]
     pub role: Role,
 }
 
 impl CompanyIndexResponseCompanies {
-    pub fn new(id: i32, name: Option<String>, name_kana: Option<String>, display_name: Option<String>, role: Role) -> CompanyIndexResponseCompanies {
+    pub fn new(display_name: Option<String>, id: i32, name: Option<String>, name_kana: Option<String>, role: Role) -> CompanyIndexResponseCompanies {
         CompanyIndexResponseCompanies {
+            display_name,
             id,
             name,
             name_kana,
-            display_name,
             role,
         }
     }

@@ -13,35 +13,35 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ManualJournalResponseManualJournal {
-    /// 振替伝票ID
-    #[serde(rename = "id")]
-    pub id: i32,
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
-    /// 発生日 (yyyy-mm-dd)
-    #[serde(rename = "issue_date")]
-    pub issue_date: String,
     /// 決算整理仕訳フラグ（falseまたは未指定の場合: 日常仕訳）
     #[serde(rename = "adjustment")]
     pub adjustment: bool,
-    /// 仕訳番号
-    #[serde(rename = "txn_number")]
-    pub txn_number: Option<String>,
+    /// 事業所ID
+    #[serde(rename = "company_id")]
+    pub company_id: i32,
     /// 貸借行一覧（配列）: 貸借合わせて100行まで登録できます。
     #[serde(rename = "details")]
     pub details: Vec<crate::models::ManualJournalResponseManualJournalDetails>,
+    /// 振替伝票ID
+    #[serde(rename = "id")]
+    pub id: i32,
+    /// 発生日 (yyyy-mm-dd)
+    #[serde(rename = "issue_date")]
+    pub issue_date: String,
+    /// 仕訳番号
+    #[serde(rename = "txn_number")]
+    pub txn_number: Option<String>,
 }
 
 impl ManualJournalResponseManualJournal {
-    pub fn new(id: i32, company_id: i32, issue_date: String, adjustment: bool, txn_number: Option<String>, details: Vec<crate::models::ManualJournalResponseManualJournalDetails>) -> ManualJournalResponseManualJournal {
+    pub fn new(adjustment: bool, company_id: i32, details: Vec<crate::models::ManualJournalResponseManualJournalDetails>, id: i32, issue_date: String, txn_number: Option<String>) -> ManualJournalResponseManualJournal {
         ManualJournalResponseManualJournal {
-            id,
-            company_id,
-            issue_date,
             adjustment,
-            txn_number,
+            company_id,
             details,
+            id,
+            issue_date,
+            txn_number,
         }
     }
 }

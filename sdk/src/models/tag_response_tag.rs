@@ -13,35 +13,35 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct TagResponseTag {
-    /// タグID
-    #[serde(rename = "id")]
-    pub id: i32,
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
+    /// タグID
+    #[serde(rename = "id")]
+    pub id: i32,
     /// 名前(30文字以内)
     #[serde(rename = "name")]
     pub name: String,
-    /// 更新日(yyyy-mm-dd)
-    #[serde(rename = "update_date")]
-    pub update_date: String,
     /// ショートカット1 (255文字以内)
     #[serde(rename = "shortcut1", skip_serializing_if = "Option::is_none")]
     pub shortcut1: Option<String>,
     /// ショートカット2 (255文字以内)
     #[serde(rename = "shortcut2", skip_serializing_if = "Option::is_none")]
     pub shortcut2: Option<String>,
+    /// 更新日(yyyy-mm-dd)
+    #[serde(rename = "update_date")]
+    pub update_date: String,
 }
 
 impl TagResponseTag {
-    pub fn new(id: i32, company_id: i32, name: String, update_date: String) -> TagResponseTag {
+    pub fn new(company_id: i32, id: i32, name: String, update_date: String) -> TagResponseTag {
         TagResponseTag {
-            id,
             company_id,
+            id,
             name,
-            update_date,
             shortcut1: None,
             shortcut2: None,
+            update_date,
         }
     }
 }

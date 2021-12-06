@@ -13,35 +13,35 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ExpenseApplicationUpdateParamsExpenseApplicationLines {
-    /// 経費申請の項目行ID: 既存項目行を更新する場合に指定します。IDを指定しない項目行は、新規行として扱われ追加されます。また、expense_application_linesに含まれない既存の項目行は削除されます。更新後も残したい行は、必ず経費申請の項目行IDを指定してexpense_application_linesに含めてください。
-    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
-    pub id: Option<i64>,
-    /// 日付 (yyyy-mm-dd)
-    #[serde(rename = "transaction_date", skip_serializing_if = "Option::is_none")]
-    pub transaction_date: Option<String>,
-    /// 内容 (250文字以内)
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
     /// 金額
     #[serde(rename = "amount", skip_serializing_if = "Option::is_none")]
     pub amount: Option<i32>,
+    /// 内容 (250文字以内)
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     /// 経費科目ID
     #[serde(rename = "expense_application_line_template_id", skip_serializing_if = "Option::is_none")]
     pub expense_application_line_template_id: Option<i32>,
+    /// 経費申請の項目行ID: 既存項目行を更新する場合に指定します。IDを指定しない項目行は、新規行として扱われ追加されます。また、expense_application_linesに含まれない既存の項目行は削除されます。更新後も残したい行は、必ず経費申請の項目行IDを指定してexpense_application_linesに含めてください。
+    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
+    pub id: Option<i64>,
     /// 証憑ファイルID（ファイルボックスのファイルID）
     #[serde(rename = "receipt_id", skip_serializing_if = "Option::is_none")]
     pub receipt_id: Option<i32>,
+    /// 日付 (yyyy-mm-dd)
+    #[serde(rename = "transaction_date", skip_serializing_if = "Option::is_none")]
+    pub transaction_date: Option<String>,
 }
 
 impl ExpenseApplicationUpdateParamsExpenseApplicationLines {
     pub fn new() -> ExpenseApplicationUpdateParamsExpenseApplicationLines {
         ExpenseApplicationUpdateParamsExpenseApplicationLines {
-            id: None,
-            transaction_date: None,
-            description: None,
             amount: None,
+            description: None,
             expense_application_line_template_id: None,
+            id: None,
             receipt_id: None,
+            transaction_date: None,
         }
     }
 }

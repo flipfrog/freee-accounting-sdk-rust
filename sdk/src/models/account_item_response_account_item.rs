@@ -13,89 +13,89 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct AccountItemResponseAccountItem {
-    /// 勘定科目ID
-    #[serde(rename = "id")]
-    pub id: i32,
-    /// 勘定科目名 (30文字以内)
-    #[serde(rename = "name")]
-    pub name: String,
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
-    /// 税区分コード
-    #[serde(rename = "tax_code")]
-    pub tax_code: i32,
     /// 勘定科目カテゴリー
     #[serde(rename = "account_category")]
     pub account_category: String,
     /// 勘定科目のカテゴリーID
     #[serde(rename = "account_category_id")]
     pub account_category_id: i32,
+    /// 減価償却累計額勘定科目ID（法人のみ利用可能）
+    #[serde(rename = "accumulated_dep_account_item_id", skip_serializing_if = "Option::is_none")]
+    pub accumulated_dep_account_item_id: Option<i32>,
+    /// 減価償却累計額勘定科目（法人のみ利用可能）
+    #[serde(rename = "accumulated_dep_account_item_name", skip_serializing_if = "Option::is_none")]
+    pub accumulated_dep_account_item_name: Option<String>,
+    /// 勘定科目の使用設定（true: 使用する、false: 使用しない）
+    #[serde(rename = "available")]
+    pub available: bool,
+    /// 事業所ID
+    #[serde(rename = "company_id")]
+    pub company_id: i32,
+    /// 支出取引相手勘定科目ID
+    #[serde(rename = "corresponding_expense_id", skip_serializing_if = "Option::is_none")]
+    pub corresponding_expense_id: Option<i32>,
+    /// 支出取引相手勘定科目名
+    #[serde(rename = "corresponding_expense_name", skip_serializing_if = "Option::is_none")]
+    pub corresponding_expense_name: Option<String>,
+    /// 収入取引相手勘定科目ID
+    #[serde(rename = "corresponding_income_id", skip_serializing_if = "Option::is_none")]
+    pub corresponding_income_id: Option<i32>,
+    /// 収入取引相手勘定科目名
+    #[serde(rename = "corresponding_income_name", skip_serializing_if = "Option::is_none")]
+    pub corresponding_income_name: Option<String>,
+    /// 決算書表示名（小カテゴリー）
+    #[serde(rename = "group_name", skip_serializing_if = "Option::is_none")]
+    pub group_name: Option<String>,
+    /// 勘定科目ID
+    #[serde(rename = "id")]
+    pub id: i32,
+    #[serde(rename = "items", skip_serializing_if = "Option::is_none")]
+    pub items: Option<Vec<crate::models::AccountItemResponseAccountItemItems>>,
+    /// 勘定科目名 (30文字以内)
+    #[serde(rename = "name")]
+    pub name: String,
+    #[serde(rename = "partners", skip_serializing_if = "Option::is_none")]
+    pub partners: Option<Vec<crate::models::AccountItemResponseAccountItemPartners>>,
+    /// 検索可能:2, 検索不可：3
+    #[serde(rename = "searchable")]
+    pub searchable: i32,
     /// ショートカット1 (20文字以内)
     #[serde(rename = "shortcut", skip_serializing_if = "Option::is_none")]
     pub shortcut: Option<String>,
     /// ショートカット2(勘定科目コード) (20文字以内)
     #[serde(rename = "shortcut_num", skip_serializing_if = "Option::is_none")]
     pub shortcut_num: Option<String>,
-    /// 検索可能:2, 検索不可：3
-    #[serde(rename = "searchable")]
-    pub searchable: i32,
-    /// 減価償却累計額勘定科目（法人のみ利用可能）
-    #[serde(rename = "accumulated_dep_account_item_name", skip_serializing_if = "Option::is_none")]
-    pub accumulated_dep_account_item_name: Option<String>,
-    /// 減価償却累計額勘定科目ID（法人のみ利用可能）
-    #[serde(rename = "accumulated_dep_account_item_id", skip_serializing_if = "Option::is_none")]
-    pub accumulated_dep_account_item_id: Option<i32>,
-    #[serde(rename = "items", skip_serializing_if = "Option::is_none")]
-    pub items: Option<Vec<crate::models::AccountItemResponseAccountItemItems>>,
-    #[serde(rename = "partners", skip_serializing_if = "Option::is_none")]
-    pub partners: Option<Vec<crate::models::AccountItemResponseAccountItemPartners>>,
-    /// 勘定科目の使用設定（true: 使用する、false: 使用しない）
-    #[serde(rename = "available")]
-    pub available: bool,
+    /// 税区分コード
+    #[serde(rename = "tax_code")]
+    pub tax_code: i32,
     /// 口座ID
     #[serde(rename = "walletable_id")]
     pub walletable_id: Option<i32>,
-    /// 決算書表示名（小カテゴリー）
-    #[serde(rename = "group_name", skip_serializing_if = "Option::is_none")]
-    pub group_name: Option<String>,
-    /// 収入取引相手勘定科目名
-    #[serde(rename = "corresponding_income_name", skip_serializing_if = "Option::is_none")]
-    pub corresponding_income_name: Option<String>,
-    /// 収入取引相手勘定科目ID
-    #[serde(rename = "corresponding_income_id", skip_serializing_if = "Option::is_none")]
-    pub corresponding_income_id: Option<i32>,
-    /// 支出取引相手勘定科目名
-    #[serde(rename = "corresponding_expense_name", skip_serializing_if = "Option::is_none")]
-    pub corresponding_expense_name: Option<String>,
-    /// 支出取引相手勘定科目ID
-    #[serde(rename = "corresponding_expense_id", skip_serializing_if = "Option::is_none")]
-    pub corresponding_expense_id: Option<i32>,
 }
 
 impl AccountItemResponseAccountItem {
-    pub fn new(id: i32, name: String, company_id: i32, tax_code: i32, account_category: String, account_category_id: i32, searchable: i32, available: bool, walletable_id: Option<i32>) -> AccountItemResponseAccountItem {
+    pub fn new(account_category: String, account_category_id: i32, available: bool, company_id: i32, id: i32, name: String, searchable: i32, tax_code: i32, walletable_id: Option<i32>) -> AccountItemResponseAccountItem {
         AccountItemResponseAccountItem {
-            id,
-            name,
-            company_id,
-            tax_code,
             account_category,
             account_category_id,
+            accumulated_dep_account_item_id: None,
+            accumulated_dep_account_item_name: None,
+            available,
+            company_id,
+            corresponding_expense_id: None,
+            corresponding_expense_name: None,
+            corresponding_income_id: None,
+            corresponding_income_name: None,
+            group_name: None,
+            id,
+            items: None,
+            name,
+            partners: None,
+            searchable,
             shortcut: None,
             shortcut_num: None,
-            searchable,
-            accumulated_dep_account_item_name: None,
-            accumulated_dep_account_item_id: None,
-            items: None,
-            partners: None,
-            available,
+            tax_code,
             walletable_id,
-            group_name: None,
-            corresponding_income_name: None,
-            corresponding_income_id: None,
-            corresponding_expense_name: None,
-            corresponding_expense_id: None,
         }
     }
 }

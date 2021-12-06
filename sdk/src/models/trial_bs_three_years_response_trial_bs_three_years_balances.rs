@@ -13,21 +13,36 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct TrialBsThreeYearsResponseTrialBsThreeYearsBalances {
+    /// 勘定科目カテゴリー名
+    #[serde(rename = "account_category_name", skip_serializing_if = "Option::is_none")]
+    pub account_category_name: Option<String>,
+    /// 決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)
+    #[serde(rename = "account_group_name", skip_serializing_if = "Option::is_none")]
+    pub account_group_name: Option<String>,
     /// 勘定科目ID(勘定科目の時のみ含まれる)
     #[serde(rename = "account_item_id", skip_serializing_if = "Option::is_none")]
     pub account_item_id: Option<i32>,
     /// 勘定科目名(勘定科目の時のみ含まれる)
     #[serde(rename = "account_item_name", skip_serializing_if = "Option::is_none")]
     pub account_item_name: Option<String>,
-    /// 決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)
-    #[serde(rename = "account_group_name", skip_serializing_if = "Option::is_none")]
-    pub account_group_name: Option<String>,
-    /// breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる
-    #[serde(rename = "partners", skip_serializing_if = "Option::is_none")]
-    pub partners: Option<Vec<crate::models::TrialBsThreeYearsResponseTrialBsThreeYearsPartners>>,
+    /// 期末残高
+    #[serde(rename = "closing_balance", skip_serializing_if = "Option::is_none")]
+    pub closing_balance: Option<i32>,
+    /// 階層レベル
+    #[serde(rename = "hierarchy_level", skip_serializing_if = "Option::is_none")]
+    pub hierarchy_level: Option<i32>,
     /// breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる
     #[serde(rename = "items", skip_serializing_if = "Option::is_none")]
     pub items: Option<Vec<crate::models::TrialBsThreeYearsResponseTrialBsThreeYearsItems>>,
+    /// 前年度期末残高
+    #[serde(rename = "last_year_closing_balance", skip_serializing_if = "Option::is_none")]
+    pub last_year_closing_balance: Option<i32>,
+    /// 上位勘定科目カテゴリー名(勘定科目カテゴリーの時のみ、上層が存在する場合含まれる)
+    #[serde(rename = "parent_account_category_name", skip_serializing_if = "Option::is_none")]
+    pub parent_account_category_name: Option<String>,
+    /// breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる
+    #[serde(rename = "partners", skip_serializing_if = "Option::is_none")]
+    pub partners: Option<Vec<crate::models::TrialBsThreeYearsResponseTrialBsThreeYearsPartners>>,
     /// breakdown_display_type:section, account_item_display_type:account_item指定時のみ含まれる
     #[serde(rename = "sections", skip_serializing_if = "Option::is_none")]
     pub sections: Option<Vec<crate::models::TrialBsThreeYearsResponseTrialBsThreeYearsSections>>,
@@ -40,27 +55,12 @@ pub struct TrialBsThreeYearsResponseTrialBsThreeYearsBalances {
     /// breakdown_display_type:segment_3_tag, account_item_display_type:account_item指定時のみ含まれる
     #[serde(rename = "segment_3_tags", skip_serializing_if = "Option::is_none")]
     pub segment_3_tags: Option<Vec<crate::models::TrialBsThreeYearsResponseTrialBsThreeYearsSegment3Tags>>,
-    /// 勘定科目カテゴリー名
-    #[serde(rename = "account_category_name", skip_serializing_if = "Option::is_none")]
-    pub account_category_name: Option<String>,
     /// 合計行(勘定科目カテゴリーの時のみ含まれる)
     #[serde(rename = "total_line", skip_serializing_if = "Option::is_none")]
     pub total_line: Option<bool>,
-    /// 階層レベル
-    #[serde(rename = "hierarchy_level", skip_serializing_if = "Option::is_none")]
-    pub hierarchy_level: Option<i32>,
-    /// 上位勘定科目カテゴリー名(勘定科目カテゴリーの時のみ、上層が存在する場合含まれる)
-    #[serde(rename = "parent_account_category_name", skip_serializing_if = "Option::is_none")]
-    pub parent_account_category_name: Option<String>,
     /// 前々年度期末残高
     #[serde(rename = "two_years_before_closing_balance", skip_serializing_if = "Option::is_none")]
     pub two_years_before_closing_balance: Option<i32>,
-    /// 前年度期末残高
-    #[serde(rename = "last_year_closing_balance", skip_serializing_if = "Option::is_none")]
-    pub last_year_closing_balance: Option<i32>,
-    /// 期末残高
-    #[serde(rename = "closing_balance", skip_serializing_if = "Option::is_none")]
-    pub closing_balance: Option<i32>,
     /// 前年比
     #[serde(rename = "year_on_year", skip_serializing_if = "Option::is_none")]
     pub year_on_year: Option<f32>,
@@ -69,22 +69,22 @@ pub struct TrialBsThreeYearsResponseTrialBsThreeYearsBalances {
 impl TrialBsThreeYearsResponseTrialBsThreeYearsBalances {
     pub fn new() -> TrialBsThreeYearsResponseTrialBsThreeYearsBalances {
         TrialBsThreeYearsResponseTrialBsThreeYearsBalances {
+            account_category_name: None,
+            account_group_name: None,
             account_item_id: None,
             account_item_name: None,
-            account_group_name: None,
-            partners: None,
+            closing_balance: None,
+            hierarchy_level: None,
             items: None,
+            last_year_closing_balance: None,
+            parent_account_category_name: None,
+            partners: None,
             sections: None,
             segment_1_tags: None,
             segment_2_tags: None,
             segment_3_tags: None,
-            account_category_name: None,
             total_line: None,
-            hierarchy_level: None,
-            parent_account_category_name: None,
             two_years_before_closing_balance: None,
-            last_year_closing_balance: None,
-            closing_balance: None,
             year_on_year: None,
         }
     }

@@ -13,62 +13,50 @@
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ReceiptResponseReceipt {
-    /// 証憑ファイルID
-    #[serde(rename = "id")]
-    pub id: i32,
-    /// ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)
-    #[serde(rename = "status")]
-    pub status: Status,
-    /// メモ
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    /// MIMEタイプ
-    #[serde(rename = "mime_type")]
-    pub mime_type: String,
-    /// 発生日
-    #[serde(rename = "issue_date", skip_serializing_if = "Option::is_none")]
-    pub issue_date: Option<String>,
-    /// アップロード元種別
-    #[serde(rename = "origin")]
-    pub origin: Origin,
     /// 作成日時（ISO8601形式）
     #[serde(rename = "created_at")]
     pub created_at: String,
+    /// メモ
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     /// ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。） <br> <br> file_srcは廃止予定の属性になります。<br> file_srcに替わり、証憑ファイルのダウンロード APIをご利用ください。<br> 証憑ファイルのダウンロードAPIを利用することで、以下のようになります。 <ul>   <li>アプリケーション利用者はfreee APIアプリケーションにログインしていれば、証憑ダウンロード毎にfreeeに改めてログインすることなくファイルが参照できるようになります。</li> </ul>
     #[serde(rename = "file_src")]
     pub file_src: String,
+    /// 証憑ファイルID
+    #[serde(rename = "id")]
+    pub id: i32,
+    /// 発生日
+    #[serde(rename = "issue_date", skip_serializing_if = "Option::is_none")]
+    pub issue_date: Option<String>,
+    /// MIMEタイプ
+    #[serde(rename = "mime_type")]
+    pub mime_type: String,
+    /// アップロード元種別
+    #[serde(rename = "origin")]
+    pub origin: Origin,
+    /// ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)
+    #[serde(rename = "status")]
+    pub status: Status,
     #[serde(rename = "user")]
     pub user: Box<crate::models::DealResponseDealUser>,
 }
 
 impl ReceiptResponseReceipt {
-    pub fn new(id: i32, status: Status, mime_type: String, origin: Origin, created_at: String, file_src: String, user: crate::models::DealResponseDealUser) -> ReceiptResponseReceipt {
+    pub fn new(created_at: String, file_src: String, id: i32, mime_type: String, origin: Origin, status: Status, user: crate::models::DealResponseDealUser) -> ReceiptResponseReceipt {
         ReceiptResponseReceipt {
-            id,
-            status,
-            description: None,
-            mime_type,
-            issue_date: None,
-            origin,
             created_at,
+            description: None,
             file_src,
+            id,
+            issue_date: None,
+            mime_type,
+            origin,
+            status,
             user: Box::new(user),
         }
     }
 }
 
-/// ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum Status {
-    #[serde(rename = "unconfirmed")]
-    Unconfirmed,
-    #[serde(rename = "confirmed")]
-    Confirmed,
-    #[serde(rename = "deleted")]
-    Deleted,
-    #[serde(rename = "ignored")]
-    Ignored,
-}
 /// アップロード元種別
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum Origin {
@@ -92,5 +80,17 @@ pub enum Origin {
     SafetyContactFile,
     #[serde(rename = "public_api")]
     PublicApi,
+}
+/// ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum Status {
+    #[serde(rename = "unconfirmed")]
+    Unconfirmed,
+    #[serde(rename = "confirmed")]
+    Confirmed,
+    #[serde(rename = "deleted")]
+    Deleted,
+    #[serde(rename = "ignored")]
+    Ignored,
 }
 

@@ -13,26 +13,27 @@
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct DealResponseDealDetails {
-    /// +更新の明細行ID
-    #[serde(rename = "id")]
-    pub id: i64,
-    /// 貸借(貸方: credit, 借方: debit)
-    #[serde(rename = "entry_side")]
-    pub entry_side: EntrySide,
     /// 勘定科目ID
     #[serde(rename = "account_item_id")]
     pub account_item_id: i32,
-    /// 税区分コード
-    #[serde(rename = "tax_code")]
-    pub tax_code: i32,
+    /// 金額（税込で指定してください）
+    #[serde(rename = "amount")]
+    pub amount: i64,
+    /// 備考
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    /// 貸借(貸方: credit, 借方: debit)
+    #[serde(rename = "entry_side")]
+    pub entry_side: EntrySide,
+    /// +更新の明細行ID
+    #[serde(rename = "id")]
+    pub id: i64,
     /// 品目ID
     #[serde(rename = "item_id", skip_serializing_if = "Option::is_none")]
     pub item_id: Option<i32>,
     /// 部門ID
     #[serde(rename = "section_id", skip_serializing_if = "Option::is_none")]
     pub section_id: Option<i32>,
-    #[serde(rename = "tag_ids")]
-    pub tag_ids: Vec<i32>,
     /// セグメント１ID
     #[serde(rename = "segment_1_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_1_tag_id: Option<i64>,
@@ -42,33 +43,32 @@ pub struct DealResponseDealDetails {
     /// セグメント３ID
     #[serde(rename = "segment_3_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_3_tag_id: Option<i64>,
-    /// 金額（税込で指定してください）
-    #[serde(rename = "amount")]
-    pub amount: i64,
+    #[serde(rename = "tag_ids")]
+    pub tag_ids: Vec<i32>,
+    /// 税区分コード
+    #[serde(rename = "tax_code")]
+    pub tax_code: i32,
     /// 消費税額（指定しない場合は自動で計算されます）
     #[serde(rename = "vat")]
     pub vat: i32,
-    /// 備考
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
 }
 
 impl DealResponseDealDetails {
-    pub fn new(id: i64, entry_side: EntrySide, account_item_id: i32, tax_code: i32, tag_ids: Vec<i32>, amount: i64, vat: i32) -> DealResponseDealDetails {
+    pub fn new(account_item_id: i32, amount: i64, entry_side: EntrySide, id: i64, tag_ids: Vec<i32>, tax_code: i32, vat: i32) -> DealResponseDealDetails {
         DealResponseDealDetails {
-            id,
-            entry_side,
             account_item_id,
-            tax_code,
+            amount,
+            description: None,
+            entry_side,
+            id,
             item_id: None,
             section_id: None,
-            tag_ids,
             segment_1_tag_id: None,
             segment_2_tag_id: None,
             segment_3_tag_id: None,
-            amount,
+            tag_ids,
+            tax_code,
             vat,
-            description: None,
         }
     }
 }

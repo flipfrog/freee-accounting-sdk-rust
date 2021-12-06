@@ -13,46 +13,46 @@
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct DealUpdateParams {
-    /// 発生日 (yyyy-mm-dd)
-    #[serde(rename = "issue_date")]
-    pub issue_date: String,
-    /// 収支区分 (収入: income, 支出: expense)
-    #[serde(rename = "type")]
-    pub _type: Type,
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
+    #[serde(rename = "details")]
+    pub details: Vec<crate::models::DealUpdateParamsDetails>,
     /// 支払期日(yyyy-mm-dd)
     #[serde(rename = "due_date", skip_serializing_if = "Option::is_none")]
     pub due_date: Option<String>,
-    /// 取引先ID
-    #[serde(rename = "partner_id", skip_serializing_if = "Option::is_none")]
-    pub partner_id: Option<i32>,
+    /// 発生日 (yyyy-mm-dd)
+    #[serde(rename = "issue_date")]
+    pub issue_date: String,
     /// 取引先コード
     #[serde(rename = "partner_code", skip_serializing_if = "Option::is_none")]
     pub partner_code: Option<String>,
-    /// 管理番号
-    #[serde(rename = "ref_number", skip_serializing_if = "Option::is_none")]
-    pub ref_number: Option<String>,
-    #[serde(rename = "details")]
-    pub details: Vec<crate::models::DealUpdateParamsDetails>,
+    /// 取引先ID
+    #[serde(rename = "partner_id", skip_serializing_if = "Option::is_none")]
+    pub partner_id: Option<i32>,
     /// 証憑ファイルID（ファイルボックスのファイルID）（配列）
     #[serde(rename = "receipt_ids", skip_serializing_if = "Option::is_none")]
     pub receipt_ids: Option<Vec<i32>>,
+    /// 管理番号
+    #[serde(rename = "ref_number", skip_serializing_if = "Option::is_none")]
+    pub ref_number: Option<String>,
+    /// 収支区分 (収入: income, 支出: expense)
+    #[serde(rename = "type")]
+    pub _type: Type,
 }
 
 impl DealUpdateParams {
-    pub fn new(issue_date: String, _type: Type, company_id: i32, details: Vec<crate::models::DealUpdateParamsDetails>) -> DealUpdateParams {
+    pub fn new(company_id: i32, details: Vec<crate::models::DealUpdateParamsDetails>, issue_date: String, _type: Type) -> DealUpdateParams {
         DealUpdateParams {
-            issue_date,
-            _type,
             company_id,
-            due_date: None,
-            partner_id: None,
-            partner_code: None,
-            ref_number: None,
             details,
+            due_date: None,
+            issue_date,
+            partner_code: None,
+            partner_id: None,
             receipt_ids: None,
+            ref_number: None,
+            _type,
         }
     }
 }

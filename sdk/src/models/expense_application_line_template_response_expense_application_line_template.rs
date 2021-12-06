@@ -13,47 +13,47 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ExpenseApplicationLineTemplateResponseExpenseApplicationLineTemplate {
-    /// 経費科目ID
-    #[serde(rename = "id")]
-    pub id: i32,
-    /// 経費科目名
-    #[serde(rename = "name")]
-    pub name: String,
     /// 勘定科目ID
     #[serde(rename = "account_item_id", skip_serializing_if = "Option::is_none")]
     pub account_item_id: Option<i32>,
     /// 勘定科目名
     #[serde(rename = "account_item_name")]
     pub account_item_name: String,
+    /// 経費科目の説明
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    /// 経費科目ID
+    #[serde(rename = "id")]
+    pub id: i32,
+    /// 内容の補足
+    #[serde(rename = "line_description", skip_serializing_if = "Option::is_none")]
+    pub line_description: Option<String>,
+    /// 経費科目名
+    #[serde(rename = "name")]
+    pub name: String,
+    /// 添付ファイルの必須/任意
+    #[serde(rename = "required_receipt", skip_serializing_if = "Option::is_none")]
+    pub required_receipt: Option<bool>,
     /// 税区分コード
     #[serde(rename = "tax_code", skip_serializing_if = "Option::is_none")]
     pub tax_code: Option<i32>,
     /// 税区分名
     #[serde(rename = "tax_name")]
     pub tax_name: String,
-    /// 経費科目の説明
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    /// 内容の補足
-    #[serde(rename = "line_description", skip_serializing_if = "Option::is_none")]
-    pub line_description: Option<String>,
-    /// 添付ファイルの必須/任意
-    #[serde(rename = "required_receipt", skip_serializing_if = "Option::is_none")]
-    pub required_receipt: Option<bool>,
 }
 
 impl ExpenseApplicationLineTemplateResponseExpenseApplicationLineTemplate {
-    pub fn new(id: i32, name: String, account_item_name: String, tax_name: String) -> ExpenseApplicationLineTemplateResponseExpenseApplicationLineTemplate {
+    pub fn new(account_item_name: String, id: i32, name: String, tax_name: String) -> ExpenseApplicationLineTemplateResponseExpenseApplicationLineTemplate {
         ExpenseApplicationLineTemplateResponseExpenseApplicationLineTemplate {
-            id,
-            name,
             account_item_id: None,
             account_item_name,
+            description: None,
+            id,
+            line_description: None,
+            name,
+            required_receipt: None,
             tax_code: None,
             tax_name,
-            description: None,
-            line_description: None,
-            required_receipt: None,
         }
     }
 }
