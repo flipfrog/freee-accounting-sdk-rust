@@ -1,13 +1,17 @@
-# accounting-sdk-rust
+# freee-accounting-sdk-rust
 
-To run example code on your macOS environment.
+### サンプルを実行するまでの手順
+- 以下の環境変数に値をセットします
+   - `RUST_API_SAMPLE_COMPANY_ID` 事業所ID（分からない場合は、examples/src/main.rsで最初にcompaniesエンドポイントをcallするのでその結果から選択して下さい）
+   - `RUST_API_SAMPLE_BASE_PATH` APIエンドポイントのベースURL（通常は、`https://api.freee.co.jp`）
+   - `RUST_API_SAMPLE_OAUTH_ACCESS_TOKEN` freeeアプリストアで得られるアクセストークン
+- このREADME.mdがあるディレクトリで、`cargo run` を実行します。
+- コンパイル後に、以下のような実行結果が出力されれば成功です。
 
-1. $ brew install rust (if you have not installed rust)
-2. clone this repository.
-3. $ cd accounting-sdk-rust
-4. edit access token for your app store application.
-   (edit this line: https://github.com/flipfrog/accounting-sdk-rust/blob/056cafa507c4a48c05f70a2421ea28231dafdc9f/examples/src/main.rs#L13)
-5. edit company_id for your test company_id.
-   (edit this line: https://github.com/flipfrog/accounting-sdk-rust/blob/4cd672f4f178192a9cd5227aeb8ef9e29c5f7f72/examples/src/main.rs#L19)
-6. $ cargo run 🚀
-7. You will see a new partner records you added in database and web screen.
+    ```
+    - company.id: <事業所ID>, company.display_name: <事業所の表示名>
+    created: partner.id=<追加された取引先情報のID>, partner.name=Rust API SDKテスト
+    got: partner.id=<追加された取引先情報のID>, partner.name=Rust API SDKテスト
+    destroy: deleted the partner.
+    ```
+  
