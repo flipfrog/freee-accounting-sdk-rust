@@ -1,23 +1,40 @@
 extern crate reqwest;
-use openapi_sdk::apis::partners_api::create_partner;
+use std::env;
+use openapi_sdk::apis::partners_api;
+use openapi_sdk::apis::companies_api;
 use openapi_sdk::apis::configuration::Configuration;
 use openapi_sdk::models::PartnerCreateParams;
 
 #[tokio::main]
 async fn main() {
+    let base_path = env::var("RUST_API_SAMPLE_BASE_PATH").expect("ベースURLの取得に失敗しました");
+    let oauth_access_token = env::var("RUST_API_SAMPLE_OAUTH_ACCESS_TOKEN").expect("アクセストークンの取得に失敗しました");
+
     let config = Configuration {
-        base_path: "http://API ENDPOINT".to_string(),
+        base_path,
         user_agent: None,
         client: reqwest::Client::new(),
         basic_auth: None,
-        oauth_access_token: Some("YOUR ACCESS TOKEN HERE".to_string()),
+        oauth_access_token: Some(oauth_access_token),
         bearer_access_token: None,
         api_key: None
     };
 
+    // 事業所一覧を取得
+    let companies = companies_api::get_companies(&config).await.expect("事業所一覧の取得に失敗しました");
+    for company in &companies.companies {
+        println!("- company.id: {}, company.display_name: {}",
+                 company.id,
+                 company.display_name.as_ref().unwrap_or(&"".to_string())
+        );
+    }
+
+    let company_id: String = env::var("RUST_API_SAMPLE_COMPANY_ID").expect("事業所IDの取得に失敗しました");
+    let company_id: i32 = company_id.trim().parse().expect("事業所IDのパースに失敗しました");
+
     let params = PartnerCreateParams {
-        company_id: 2,
-        name: "rust apiテスト".to_string(),
+        company_id,
+        name: "Rust API SDKテスト".to_string(),
         code: None,
         shortcut1: None,
         shortcut2: None,
@@ -39,9 +56,14 @@ async fn main() {
     };
 
     // 取引先を作成する
-    let p = create_partner(&config, params).await;
-    match p {
-        Ok(p) => println!("name={}", p.partner.name), // 成功
-        Err(e) => println!("error={:?}", e) // 失敗
-    }
+    let new_partner = partners_api::create_partner(&config, params).await.expect("取引先の作成に失敗しました");
+    println!("created: partner.id={}, partner.name={}", new_partner.partner.id, new_partner.partner.name);
+
+    // 取引先を取得する
+    let partner = partners_api::get_partner(&config, new_partner.partner.id, company_id).await.expect("取引先の取得に失敗しました");
+    println!("got: partner.id={}, partner.name={}", partner.partner.id, partner.partner.name);
+
+    // 取引先を削除する
+    partners_api::destroy_partner(&config, new_partner.partner.id, company_id).await.expect("取引先の削除に失敗しました");
+    println!("destroy: deleted the partner.");
 }
