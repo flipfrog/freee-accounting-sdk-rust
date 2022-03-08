@@ -14,11 +14,11 @@
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct SegmentTagResponse {
     #[serde(rename = "segment_tag")]
-    pub segment_tag: Box<crate::models::SegmentTagResponseSegmentTag>,
+    pub segment_tag: Box<crate::models::SegmentTag>,
 }
 
 impl SegmentTagResponse {
-    pub fn new(segment_tag: crate::models::SegmentTagResponseSegmentTag) -> SegmentTagResponse {
+    pub fn new(segment_tag: crate::models::SegmentTag) -> SegmentTagResponse {
         SegmentTagResponse {
             segment_tag: Box::new(segment_tag),
         }

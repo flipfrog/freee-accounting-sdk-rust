@@ -11,49 +11,65 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct TransferParams {
-    /// 金額
-    #[serde(rename = "amount")]
-    pub amount: i64,
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
-    /// 振替日 (yyyy-mm-dd)
-    #[serde(rename = "date")]
-    pub date: String,
-    /// 備考
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    /// 振替元口座ID
-    #[serde(rename = "from_walletable_id")]
-    pub from_walletable_id: i32,
-    /// 振替元口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
-    #[serde(rename = "from_walletable_type")]
-    pub from_walletable_type: FromWalletableType,
     /// 振替先口座ID
     #[serde(rename = "to_walletable_id")]
     pub to_walletable_id: i32,
     /// 振替先口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
     #[serde(rename = "to_walletable_type")]
     pub to_walletable_type: ToWalletableType,
+    /// 振替元口座ID
+    #[serde(rename = "from_walletable_id")]
+    pub from_walletable_id: i32,
+    /// 振替元口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
+    #[serde(rename = "from_walletable_type")]
+    pub from_walletable_type: FromWalletableType,
+    /// 金額
+    #[serde(rename = "amount")]
+    pub amount: i64,
+    /// 振替日 (yyyy-mm-dd)
+    #[serde(rename = "date")]
+    pub date: String,
+    /// 事業所ID
+    #[serde(rename = "company_id")]
+    pub company_id: i32,
+    /// 備考
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
 }
 
 impl TransferParams {
-    pub fn new(amount: i64, company_id: i32, date: String, from_walletable_id: i32, from_walletable_type: FromWalletableType, to_walletable_id: i32, to_walletable_type: ToWalletableType) -> TransferParams {
+    pub fn new(to_walletable_id: i32, to_walletable_type: ToWalletableType, from_walletable_id: i32, from_walletable_type: FromWalletableType, amount: i64, date: String, company_id: i32) -> TransferParams {
         TransferParams {
-            amount,
-            company_id,
-            date,
-            description: None,
-            from_walletable_id,
-            from_walletable_type,
             to_walletable_id,
             to_walletable_type,
+            from_walletable_id,
+            from_walletable_type,
+            amount,
+            date,
+            company_id,
+            description: None,
         }
     }
 }
 
+/// 振替先口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum ToWalletableType {
+    #[serde(rename = "bank_account")]
+    BankAccount,
+    #[serde(rename = "credit_card")]
+    CreditCard,
+    #[serde(rename = "wallet")]
+    Wallet,
+}
+
+impl Default for ToWalletableType {
+    fn default() -> ToWalletableType {
+        Self::BankAccount
+    }
+}
 /// 振替元口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum FromWalletableType {
@@ -64,14 +80,10 @@ pub enum FromWalletableType {
     #[serde(rename = "wallet")]
     Wallet,
 }
-/// 振替先口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum ToWalletableType {
-    #[serde(rename = "bank_account")]
-    BankAccount,
-    #[serde(rename = "credit_card")]
-    CreditCard,
-    #[serde(rename = "wallet")]
-    Wallet,
+
+impl Default for FromWalletableType {
+    fn default() -> FromWalletableType {
+        Self::BankAccount
+    }
 }
 

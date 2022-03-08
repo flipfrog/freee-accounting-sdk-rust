@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **qty** | **f32** | 数量 | 
 **unit** | Option<**String**> | 単位 | 
 **unit_price** | **f32** | 単価 | 
-**amount** | **i32** | 金額 | 
+**amount** | **i32** | 内税/外税の判別とamountの税込み、税抜きについて <ul> <li>tax_entry_methodがexclusive (外税)の場合</li> <ul> <li>amount: 消費税抜きの金額</li> <li>vat: 消費税の金額</li> </ul> <li>tax_entry_methodがinclusive (内税)の場合</li> <ul> <li>amount: 消費税込みの金額</li> <li>vat: 消費税の金額</li> </ul> </ul>  | 
 **vat** | **i32** | 消費税額 | 
 **reduced_vat** | **bool** | 軽減税率税区分（true: 対象、false: 対象外） | 
 **description** | Option<**String**> | 備考 | 

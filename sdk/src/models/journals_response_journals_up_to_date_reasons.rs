@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct JournalsResponseJournalsUpToDateReasons {
     /// コード
     #[serde(rename = "code")]
@@ -37,5 +37,11 @@ pub enum Code {
     Creating,
     #[serde(rename = "depreciation_create_error")]
     CreateError,
+}
+
+impl Default for Code {
+    fn default() -> Code {
+        Self::Creating
+    }
 }
 

@@ -11,43 +11,17 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct InvoiceCreateParamsInvoiceContents {
-    /// 勘定科目ID
-    #[serde(rename = "account_item_id", skip_serializing_if = "Option::is_none")]
-    pub account_item_id: Option<i32>,
-    /// 備考
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    /// 品目ID
-    #[serde(rename = "item_id", skip_serializing_if = "Option::is_none")]
-    pub item_id: Option<i32>,
     /// 順序
     #[serde(rename = "order")]
     pub order: i32,
-    /// 数量
-    #[serde(rename = "qty", skip_serializing_if = "Option::is_none")]
-    pub qty: Option<f32>,
-    /// 部門ID
-    #[serde(rename = "section_id", skip_serializing_if = "Option::is_none")]
-    pub section_id: Option<i32>,
-    /// セグメント１ID
-    #[serde(rename = "segment_1_tag_id", skip_serializing_if = "Option::is_none")]
-    pub segment_1_tag_id: Option<i64>,
-    /// セグメント２ID
-    #[serde(rename = "segment_2_tag_id", skip_serializing_if = "Option::is_none")]
-    pub segment_2_tag_id: Option<i64>,
-    /// セグメント３ID
-    #[serde(rename = "segment_3_tag_id", skip_serializing_if = "Option::is_none")]
-    pub segment_3_tag_id: Option<i64>,
-    #[serde(rename = "tag_ids", skip_serializing_if = "Option::is_none")]
-    pub tag_ids: Option<Vec<i32>>,
-    /// 税区分コード
-    #[serde(rename = "tax_code", skip_serializing_if = "Option::is_none")]
-    pub tax_code: Option<i32>,
     /// 行の種類 <ul> <li>normal、discountを指定する場合、account_item_id,tax_codeとunit_priceが必須となります。</li> <li>normalを指定した場合、qtyが必須となります。</li> </ul>
     #[serde(rename = "type")]
     pub _type: Type,
+    /// 数量
+    #[serde(rename = "qty", skip_serializing_if = "Option::is_none")]
+    pub qty: Option<f32>,
     /// 単位
     #[serde(rename = "unit", skip_serializing_if = "Option::is_none")]
     pub unit: Option<String>,
@@ -57,26 +31,52 @@ pub struct InvoiceCreateParamsInvoiceContents {
     /// 消費税額
     #[serde(rename = "vat", skip_serializing_if = "Option::is_none")]
     pub vat: Option<i32>,
+    /// 備考
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    /// 勘定科目ID
+    #[serde(rename = "account_item_id", skip_serializing_if = "Option::is_none")]
+    pub account_item_id: Option<i32>,
+    /// 税区分コード
+    #[serde(rename = "tax_code", skip_serializing_if = "Option::is_none")]
+    pub tax_code: Option<i32>,
+    /// 品目ID
+    #[serde(rename = "item_id", skip_serializing_if = "Option::is_none")]
+    pub item_id: Option<i32>,
+    /// 部門ID
+    #[serde(rename = "section_id", skip_serializing_if = "Option::is_none")]
+    pub section_id: Option<i32>,
+    #[serde(rename = "tag_ids", skip_serializing_if = "Option::is_none")]
+    pub tag_ids: Option<Vec<i32>>,
+    /// セグメント１ID
+    #[serde(rename = "segment_1_tag_id", skip_serializing_if = "Option::is_none")]
+    pub segment_1_tag_id: Option<i64>,
+    /// セグメント２ID
+    #[serde(rename = "segment_2_tag_id", skip_serializing_if = "Option::is_none")]
+    pub segment_2_tag_id: Option<i64>,
+    /// セグメント３ID
+    #[serde(rename = "segment_3_tag_id", skip_serializing_if = "Option::is_none")]
+    pub segment_3_tag_id: Option<i64>,
 }
 
 impl InvoiceCreateParamsInvoiceContents {
     pub fn new(order: i32, _type: Type) -> InvoiceCreateParamsInvoiceContents {
         InvoiceCreateParamsInvoiceContents {
-            account_item_id: None,
-            description: None,
-            item_id: None,
             order,
-            qty: None,
-            section_id: None,
-            segment_1_tag_id: None,
-            segment_2_tag_id: None,
-            segment_3_tag_id: None,
-            tag_ids: None,
-            tax_code: None,
             _type,
+            qty: None,
             unit: None,
             unit_price: None,
             vat: None,
+            description: None,
+            account_item_id: None,
+            tax_code: None,
+            item_id: None,
+            section_id: None,
+            tag_ids: None,
+            segment_1_tag_id: None,
+            segment_2_tag_id: None,
+            segment_3_tag_id: None,
         }
     }
 }
@@ -90,5 +90,11 @@ pub enum Type {
     Discount,
     #[serde(rename = "text")]
     Text,
+}
+
+impl Default for Type {
+    fn default() -> Type {
+        Self::Normal
+    }
 }
 

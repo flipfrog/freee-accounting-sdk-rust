@@ -55,3 +55,9 @@ pub enum DisplayCategory {
     _10,
 }
 
+impl Default for DisplayCategory {
+    fn default() -> DisplayCategory {
+        Self::_5
+    }
+}
+

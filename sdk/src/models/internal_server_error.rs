@@ -13,17 +13,17 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct InternalServerError {
-    #[serde(rename = "errors", skip_serializing_if = "Option::is_none")]
-    pub errors: Option<Vec<crate::models::InternalServerErrorErrors>>,
     #[serde(rename = "status_code", skip_serializing_if = "Option::is_none")]
     pub status_code: Option<i32>,
+    #[serde(rename = "errors", skip_serializing_if = "Option::is_none")]
+    pub errors: Option<Vec<crate::models::InternalServerErrorErrors>>,
 }
 
 impl InternalServerError {
     pub fn new() -> InternalServerError {
         InternalServerError {
-            errors: None,
             status_code: None,
+            errors: None,
         }
     }
 }

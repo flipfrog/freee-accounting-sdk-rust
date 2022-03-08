@@ -13,14 +13,17 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct InlineResponse20010 {
-    #[serde(rename = "taxes")]
-    pub taxes: Vec<crate::models::InlineResponse20010Taxes>,
+    #[serde(rename = "walletable")]
+    pub walletable: Box<crate::models::Walletable>,
+    #[serde(rename = "meta", skip_serializing_if = "Option::is_none")]
+    pub meta: Option<Box<crate::models::InlineResponse2009Meta>>,
 }
 
 impl InlineResponse20010 {
-    pub fn new(taxes: Vec<crate::models::InlineResponse20010Taxes>) -> InlineResponse20010 {
+    pub fn new(walletable: crate::models::Walletable) -> InlineResponse20010 {
         InlineResponse20010 {
-            taxes,
+            walletable: Box::new(walletable),
+            meta: None,
         }
     }
 }

@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ApprovalRequestsIndexResponseRequestItems {
     /// 項目ID
     #[serde(rename = "id")]
@@ -57,5 +57,11 @@ pub enum Type {
     Partner,
     #[serde(rename = "ninja_sign_document")]
     NinjaSignDocument,
+}
+
+impl Default for Type {
+    fn default() -> Type {
+        Self::Title
+    }
 }
 

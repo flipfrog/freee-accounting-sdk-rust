@@ -77,3 +77,9 @@ pub enum AccountType {
     Other,
 }
 
+impl Default for AccountType {
+    fn default() -> AccountType {
+        Self::Ordinary
+    }
+}
+

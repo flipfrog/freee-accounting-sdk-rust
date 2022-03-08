@@ -16,24 +16,24 @@ pub struct RenewCreateParams {
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
-    /// +更新の明細行
-    #[serde(rename = "details")]
-    pub details: Vec<crate::models::RenewCreateParamsDetails>,
-    /// +更新対象行ID (details(取引の明細行), accruals(債権債務行), renewsのdetails(+更新の明細行)のIDを指定) 
-    #[serde(rename = "renew_target_id")]
-    pub renew_target_id: i64,
     /// 更新日 (yyyy-mm-dd)
     #[serde(rename = "update_date")]
     pub update_date: String,
+    /// +更新対象行ID (details(取引の明細行), accruals(債権債務行), renewsのdetails(+更新の明細行)のIDを指定) 
+    #[serde(rename = "renew_target_id")]
+    pub renew_target_id: i64,
+    /// +更新の明細行
+    #[serde(rename = "details")]
+    pub details: Vec<crate::models::RenewCreateParamsDetails>,
 }
 
 impl RenewCreateParams {
-    pub fn new(company_id: i32, details: Vec<crate::models::RenewCreateParamsDetails>, renew_target_id: i64, update_date: String) -> RenewCreateParams {
+    pub fn new(company_id: i32, update_date: String, renew_target_id: i64, details: Vec<crate::models::RenewCreateParamsDetails>) -> RenewCreateParams {
         RenewCreateParams {
             company_id,
-            details,
-            renew_target_id,
             update_date,
+            renew_target_id,
+            details,
         }
     }
 }

@@ -13,24 +13,27 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct DealUpdateParamsDetails {
+    /// 取引行ID: 既存取引行を更新する場合に指定します。IDを指定しない取引行は、新規行として扱われ追加されます。また、detailsに含まれない既存の取引行は削除されます。更新後も残したい行は、必ず取引行IDを指定してdetailsに含めてください。
+    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
+    pub id: Option<i64>,
+    /// 税区分コード
+    #[serde(rename = "tax_code")]
+    pub tax_code: i32,
     /// 勘定科目ID
     #[serde(rename = "account_item_id")]
     pub account_item_id: i32,
     /// 取引金額（税込で指定してください）
     #[serde(rename = "amount")]
     pub amount: i64,
-    /// 備考
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    /// 取引行ID: 既存取引行を更新する場合に指定します。IDを指定しない取引行は、新規行として扱われ追加されます。また、detailsに含まれない既存の取引行は削除されます。更新後も残したい行は、必ず取引行IDを指定してdetailsに含めてください。
-    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
-    pub id: Option<i64>,
     /// 品目ID
     #[serde(rename = "item_id", skip_serializing_if = "Option::is_none")]
     pub item_id: Option<i32>,
     /// 部門ID
     #[serde(rename = "section_id", skip_serializing_if = "Option::is_none")]
     pub section_id: Option<i32>,
+    /// メモタグID
+    #[serde(rename = "tag_ids", skip_serializing_if = "Option::is_none")]
+    pub tag_ids: Option<Vec<i32>>,
     /// セグメント１ID
     #[serde(rename = "segment_1_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_1_tag_id: Option<i64>,
@@ -40,31 +43,28 @@ pub struct DealUpdateParamsDetails {
     /// セグメント３ID
     #[serde(rename = "segment_3_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_3_tag_id: Option<i64>,
-    /// メモタグID
-    #[serde(rename = "tag_ids", skip_serializing_if = "Option::is_none")]
-    pub tag_ids: Option<Vec<i32>>,
-    /// 税区分コード
-    #[serde(rename = "tax_code")]
-    pub tax_code: i32,
+    /// 備考
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     /// 消費税額（指定しない場合は自動で計算されます）
     #[serde(rename = "vat", skip_serializing_if = "Option::is_none")]
     pub vat: Option<i32>,
 }
 
 impl DealUpdateParamsDetails {
-    pub fn new(account_item_id: i32, amount: i64, tax_code: i32) -> DealUpdateParamsDetails {
+    pub fn new(tax_code: i32, account_item_id: i32, amount: i64) -> DealUpdateParamsDetails {
         DealUpdateParamsDetails {
+            id: None,
+            tax_code,
             account_item_id,
             amount,
-            description: None,
-            id: None,
             item_id: None,
             section_id: None,
+            tag_ids: None,
             segment_1_tag_id: None,
             segment_2_tag_id: None,
             segment_3_tag_id: None,
-            tag_ids: None,
-            tax_code,
+            description: None,
             vat: None,
         }
     }

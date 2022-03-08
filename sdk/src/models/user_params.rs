@@ -19,12 +19,12 @@ pub struct UserParams {
     /// 氏名（名） (20文字以内)
     #[serde(rename = "first_name", skip_serializing_if = "Option::is_none")]
     pub first_name: Option<String>,
-    /// 氏名（カナ・名） (20文字以内)
-    #[serde(rename = "first_name_kana", skip_serializing_if = "Option::is_none")]
-    pub first_name_kana: Option<String>,
     /// 氏名（姓） (20文字以内)
     #[serde(rename = "last_name", skip_serializing_if = "Option::is_none")]
     pub last_name: Option<String>,
+    /// 氏名（カナ・名） (20文字以内)
+    #[serde(rename = "first_name_kana", skip_serializing_if = "Option::is_none")]
+    pub first_name_kana: Option<String>,
     /// 氏名（カナ・姓） (20文字以内)
     #[serde(rename = "last_name_kana", skip_serializing_if = "Option::is_none")]
     pub last_name_kana: Option<String>,
@@ -35,8 +35,8 @@ impl UserParams {
         UserParams {
             display_name: None,
             first_name: None,
-            first_name_kana: None,
             last_name: None,
+            first_name_kana: None,
             last_name_kana: None,
         }
     }

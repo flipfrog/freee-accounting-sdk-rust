@@ -14,11 +14,11 @@
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct BankResponse {
     #[serde(rename = "bank")]
-    pub bank: Box<crate::models::BankResponseBank>,
+    pub bank: Box<crate::models::Bank>,
 }
 
 impl BankResponse {
-    pub fn new(bank: crate::models::BankResponseBank) -> BankResponse {
+    pub fn new(bank: crate::models::Bank) -> BankResponse {
         BankResponse {
             bank: Box::new(bank),
         }

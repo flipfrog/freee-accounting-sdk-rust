@@ -13,21 +13,21 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct TrialBsThreeYearsResponseTrialBsThreeYearsItems {
-    /// 期末残高
-    #[serde(rename = "closing_balance", skip_serializing_if = "Option::is_none")]
-    pub closing_balance: Option<i32>,
     /// 品目ID
     #[serde(rename = "id")]
     pub id: i32,
-    /// 前年度期末残高
-    #[serde(rename = "last_year_closing_balance", skip_serializing_if = "Option::is_none")]
-    pub last_year_closing_balance: Option<i32>,
     /// 品目
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
     /// 前々年度期末残高
     #[serde(rename = "two_years_before_closing_balance", skip_serializing_if = "Option::is_none")]
     pub two_years_before_closing_balance: Option<i32>,
+    /// 前年度期末残高
+    #[serde(rename = "last_year_closing_balance", skip_serializing_if = "Option::is_none")]
+    pub last_year_closing_balance: Option<i32>,
+    /// 期末残高
+    #[serde(rename = "closing_balance", skip_serializing_if = "Option::is_none")]
+    pub closing_balance: Option<i32>,
     /// 前年比
     #[serde(rename = "year_on_year", skip_serializing_if = "Option::is_none")]
     pub year_on_year: Option<f32>,
@@ -36,11 +36,11 @@ pub struct TrialBsThreeYearsResponseTrialBsThreeYearsItems {
 impl TrialBsThreeYearsResponseTrialBsThreeYearsItems {
     pub fn new(id: i32) -> TrialBsThreeYearsResponseTrialBsThreeYearsItems {
         TrialBsThreeYearsResponseTrialBsThreeYearsItems {
-            closing_balance: None,
             id,
-            last_year_closing_balance: None,
             name: None,
             two_years_before_closing_balance: None,
+            last_year_closing_balance: None,
+            closing_balance: None,
             year_on_year: None,
         }
     }

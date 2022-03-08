@@ -13,27 +13,27 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct UserCapability {
-    /// 作成
-    #[serde(rename = "create", skip_serializing_if = "Option::is_none")]
-    pub create: Option<bool>,
-    /// 削除
-    #[serde(rename = "destroy", skip_serializing_if = "Option::is_none")]
-    pub destroy: Option<bool>,
     /// 閲覧
     #[serde(rename = "read", skip_serializing_if = "Option::is_none")]
     pub read: Option<bool>,
+    /// 作成
+    #[serde(rename = "create", skip_serializing_if = "Option::is_none")]
+    pub create: Option<bool>,
     /// 更新
     #[serde(rename = "update", skip_serializing_if = "Option::is_none")]
     pub update: Option<bool>,
+    /// 削除
+    #[serde(rename = "destroy", skip_serializing_if = "Option::is_none")]
+    pub destroy: Option<bool>,
 }
 
 impl UserCapability {
     pub fn new() -> UserCapability {
         UserCapability {
-            create: None,
-            destroy: None,
             read: None,
+            create: None,
             update: None,
+            destroy: None,
         }
     }
 }

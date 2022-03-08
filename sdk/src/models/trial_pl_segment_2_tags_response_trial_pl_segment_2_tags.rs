@@ -13,82 +13,82 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct TrialPlSegment2TagsResponseTrialPlSegment2Tags {
-    /// 勘定科目の表示（勘定科目: account_item, 決算書表示:group）(条件に指定した時のみ含まれる）
-    #[serde(rename = "account_item_display_type", skip_serializing_if = "Option::is_none")]
-    pub account_item_display_type: Option<AccountItemDisplayType>,
-    /// 決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）
-    #[serde(rename = "adjustment", skip_serializing_if = "Option::is_none")]
-    pub adjustment: Option<Adjustment>,
-    /// 未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）
-    #[serde(rename = "approval_flow_status", skip_serializing_if = "Option::is_none")]
-    pub approval_flow_status: Option<ApprovalFlowStatus>,
-    #[serde(rename = "balances")]
-    pub balances: Vec<crate::models::TrialPlSegment2TagsResponseTrialPlSegment2TagsBalances>,
-    /// 内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）(条件に指定した時のみ含まれる）
-    #[serde(rename = "breakdown_display_type", skip_serializing_if = "Option::is_none")]
-    pub breakdown_display_type: Option<BreakdownDisplayType>,
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
-    /// 配賦仕訳のみ：only,配賦仕訳以外：without(条件に指定した時のみ含まれる）
-    #[serde(rename = "cost_allocation", skip_serializing_if = "Option::is_none")]
-    pub cost_allocation: Option<CostAllocation>,
-    /// 作成日時
-    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
-    pub created_at: Option<String>,
-    /// 発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
-    #[serde(rename = "end_date", skip_serializing_if = "Option::is_none")]
-    pub end_date: Option<String>,
-    /// 発生月で絞込：終了会計月(1-12)(条件に指定した時のみ含まれる）
-    #[serde(rename = "end_month", skip_serializing_if = "Option::is_none")]
-    pub end_month: Option<i32>,
-    /// 会計年度(条件に指定した時、または条件に月、日条件がない時のみ含まれる）
-    #[serde(rename = "fiscal_year", skip_serializing_if = "Option::is_none")]
-    pub fiscal_year: Option<i32>,
-    /// 品目ID(条件に指定した時のみ含まれる）
-    #[serde(rename = "item_id", skip_serializing_if = "Option::is_none")]
-    pub item_id: Option<i32>,
-    /// 取引先コード(条件に指定した時のみ含まれる）
-    #[serde(rename = "partner_code", skip_serializing_if = "Option::is_none")]
-    pub partner_code: Option<String>,
-    /// 取引先ID(条件に指定した時のみ含まれる）
-    #[serde(rename = "partner_id", skip_serializing_if = "Option::is_none")]
-    pub partner_id: Option<i32>,
-    /// 部門ID(条件に指定した時のみ含まれる）
-    #[serde(rename = "section_id", skip_serializing_if = "Option::is_none")]
-    pub section_id: Option<i32>,
     /// 出力するセグメント2の指定
     #[serde(rename = "segment_2_tag_ids")]
     pub segment_2_tag_ids: String,
-    /// 発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
-    #[serde(rename = "start_date", skip_serializing_if = "Option::is_none")]
-    pub start_date: Option<String>,
+    /// 会計年度(条件に指定した時、または条件に月、日条件がない時のみ含まれる）
+    #[serde(rename = "fiscal_year", skip_serializing_if = "Option::is_none")]
+    pub fiscal_year: Option<i32>,
     /// 発生月で絞込：開始会計月(1-12)(条件に指定した時のみ含まれる）
     #[serde(rename = "start_month", skip_serializing_if = "Option::is_none")]
     pub start_month: Option<i32>,
+    /// 発生月で絞込：終了会計月(1-12)(条件に指定した時のみ含まれる）
+    #[serde(rename = "end_month", skip_serializing_if = "Option::is_none")]
+    pub end_month: Option<i32>,
+    /// 発生日で絞込：開始日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
+    #[serde(rename = "start_date", skip_serializing_if = "Option::is_none")]
+    pub start_date: Option<String>,
+    /// 発生日で絞込：終了日(yyyy-mm-dd)(条件に指定した時のみ含まれる）
+    #[serde(rename = "end_date", skip_serializing_if = "Option::is_none")]
+    pub end_date: Option<String>,
+    /// 勘定科目の表示（勘定科目: account_item, 決算書表示:group）(条件に指定した時のみ含まれる）
+    #[serde(rename = "account_item_display_type", skip_serializing_if = "Option::is_none")]
+    pub account_item_display_type: Option<AccountItemDisplayType>,
+    /// 内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）(条件に指定した時のみ含まれる）
+    #[serde(rename = "breakdown_display_type", skip_serializing_if = "Option::is_none")]
+    pub breakdown_display_type: Option<BreakdownDisplayType>,
+    /// 取引先ID(条件に指定した時のみ含まれる）
+    #[serde(rename = "partner_id", skip_serializing_if = "Option::is_none")]
+    pub partner_id: Option<i32>,
+    /// 取引先コード(条件に指定した時のみ含まれる）
+    #[serde(rename = "partner_code", skip_serializing_if = "Option::is_none")]
+    pub partner_code: Option<String>,
+    /// 品目ID(条件に指定した時のみ含まれる）
+    #[serde(rename = "item_id", skip_serializing_if = "Option::is_none")]
+    pub item_id: Option<i32>,
+    /// 部門ID(条件に指定した時のみ含まれる）
+    #[serde(rename = "section_id", skip_serializing_if = "Option::is_none")]
+    pub section_id: Option<i32>,
+    /// 決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）
+    #[serde(rename = "adjustment", skip_serializing_if = "Option::is_none")]
+    pub adjustment: Option<Adjustment>,
+    /// 配賦仕訳のみ：only,配賦仕訳以外：without(条件に指定した時のみ含まれる）
+    #[serde(rename = "cost_allocation", skip_serializing_if = "Option::is_none")]
+    pub cost_allocation: Option<CostAllocation>,
+    /// 未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）
+    #[serde(rename = "approval_flow_status", skip_serializing_if = "Option::is_none")]
+    pub approval_flow_status: Option<ApprovalFlowStatus>,
+    /// 作成日時
+    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
+    pub created_at: Option<String>,
+    #[serde(rename = "balances")]
+    pub balances: Vec<crate::models::TrialPlSegment2TagsResponseTrialPlSegment2TagsBalances>,
 }
 
 impl TrialPlSegment2TagsResponseTrialPlSegment2Tags {
-    pub fn new(balances: Vec<crate::models::TrialPlSegment2TagsResponseTrialPlSegment2TagsBalances>, company_id: i32, segment_2_tag_ids: String) -> TrialPlSegment2TagsResponseTrialPlSegment2Tags {
+    pub fn new(company_id: i32, segment_2_tag_ids: String, balances: Vec<crate::models::TrialPlSegment2TagsResponseTrialPlSegment2TagsBalances>) -> TrialPlSegment2TagsResponseTrialPlSegment2Tags {
         TrialPlSegment2TagsResponseTrialPlSegment2Tags {
-            account_item_display_type: None,
-            adjustment: None,
-            approval_flow_status: None,
-            balances,
-            breakdown_display_type: None,
             company_id,
-            cost_allocation: None,
-            created_at: None,
-            end_date: None,
-            end_month: None,
-            fiscal_year: None,
-            item_id: None,
-            partner_code: None,
-            partner_id: None,
-            section_id: None,
             segment_2_tag_ids,
-            start_date: None,
+            fiscal_year: None,
             start_month: None,
+            end_month: None,
+            start_date: None,
+            end_date: None,
+            account_item_display_type: None,
+            breakdown_display_type: None,
+            partner_id: None,
+            partner_code: None,
+            item_id: None,
+            section_id: None,
+            adjustment: None,
+            cost_allocation: None,
+            approval_flow_status: None,
+            created_at: None,
+            balances,
         }
     }
 }
@@ -101,21 +101,11 @@ pub enum AccountItemDisplayType {
     #[serde(rename = "group")]
     Group,
 }
-/// 決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum Adjustment {
-    #[serde(rename = "only")]
-    Only,
-    #[serde(rename = "without")]
-    Without,
-}
-/// 未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum ApprovalFlowStatus {
-    #[serde(rename = "without_in_progress")]
-    WithoutInProgress,
-    #[serde(rename = "all")]
-    All,
+
+impl Default for AccountItemDisplayType {
+    fn default() -> AccountItemDisplayType {
+        Self::AccountItem
+    }
 }
 /// 内訳の表示（取引先: partner, 品目: item, 部門: section, 勘定科目: account_item）(条件に指定した時のみ含まれる）
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
@@ -129,6 +119,26 @@ pub enum BreakdownDisplayType {
     #[serde(rename = "account_item")]
     AccountItem,
 }
+
+impl Default for BreakdownDisplayType {
+    fn default() -> BreakdownDisplayType {
+        Self::Partner
+    }
+}
+/// 決算整理仕訳のみ: only, 決算整理仕訳以外: without(条件に指定した時のみ含まれる）
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum Adjustment {
+    #[serde(rename = "only")]
+    Only,
+    #[serde(rename = "without")]
+    Without,
+}
+
+impl Default for Adjustment {
+    fn default() -> Adjustment {
+        Self::Only
+    }
+}
 /// 配賦仕訳のみ：only,配賦仕訳以外：without(条件に指定した時のみ含まれる）
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum CostAllocation {
@@ -136,5 +146,25 @@ pub enum CostAllocation {
     Only,
     #[serde(rename = "without")]
     Without,
+}
+
+impl Default for CostAllocation {
+    fn default() -> CostAllocation {
+        Self::Only
+    }
+}
+/// 未承認を除く: without_in_progress (デフォルト), 全てのステータス: all(条件に指定した時のみ含まれる）
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum ApprovalFlowStatus {
+    #[serde(rename = "without_in_progress")]
+    WithoutInProgress,
+    #[serde(rename = "all")]
+    All,
+}
+
+impl Default for ApprovalFlowStatus {
+    fn default() -> ApprovalFlowStatus {
+        Self::WithoutInProgress
+    }
 }
 

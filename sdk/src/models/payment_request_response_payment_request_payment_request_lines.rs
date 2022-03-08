@@ -11,29 +11,35 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct PaymentRequestResponsePaymentRequestPaymentRequestLines {
-    /// 勘定科目ID
-    #[serde(rename = "account_item_id")]
-    pub account_item_id: Option<i32>,
-    /// 金額
-    #[serde(rename = "amount")]
-    pub amount: i32,
-    /// 内容
-    #[serde(rename = "description")]
-    pub description: String,
     /// 支払依頼の項目行ID
     #[serde(rename = "id")]
     pub id: i64,
-    /// 品目ID
-    #[serde(rename = "item_id")]
-    pub item_id: Option<i32>,
     /// 行の種類 (deal_line: 支払依頼, withholding_tax: 源泉徴収税)
     #[serde(rename = "line_type")]
     pub line_type: LineType,
+    /// 内容
+    #[serde(rename = "description")]
+    pub description: String,
+    /// 金額
+    #[serde(rename = "amount")]
+    pub amount: i32,
+    /// 勘定科目ID
+    #[serde(rename = "account_item_id")]
+    pub account_item_id: Option<i32>,
+    /// 税区分コード
+    #[serde(rename = "tax_code")]
+    pub tax_code: Option<i32>,
+    /// 品目ID
+    #[serde(rename = "item_id")]
+    pub item_id: Option<i32>,
     /// 部門ID
     #[serde(rename = "section_id")]
     pub section_id: Option<i32>,
+    /// メモタグID
+    #[serde(rename = "tag_ids")]
+    pub tag_ids: Vec<i32>,
     /// セグメント１ID。セグメント１が使用可能なプランの時のみレスポンスに含まれます。
     #[serde(rename = "segment_1_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_1_tag_id: Option<i64>,
@@ -43,29 +49,23 @@ pub struct PaymentRequestResponsePaymentRequestPaymentRequestLines {
     /// セグメント３ID。セグメント３が使用可能なプランの時のみレスポンスに含まれます。
     #[serde(rename = "segment_3_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_3_tag_id: Option<i64>,
-    /// メモタグID
-    #[serde(rename = "tag_ids")]
-    pub tag_ids: Vec<i32>,
-    /// 税区分コード
-    #[serde(rename = "tax_code")]
-    pub tax_code: Option<i32>,
 }
 
 impl PaymentRequestResponsePaymentRequestPaymentRequestLines {
-    pub fn new(account_item_id: Option<i32>, amount: i32, description: String, id: i64, item_id: Option<i32>, line_type: LineType, section_id: Option<i32>, tag_ids: Vec<i32>, tax_code: Option<i32>) -> PaymentRequestResponsePaymentRequestPaymentRequestLines {
+    pub fn new(id: i64, line_type: LineType, description: String, amount: i32, account_item_id: Option<i32>, tax_code: Option<i32>, item_id: Option<i32>, section_id: Option<i32>, tag_ids: Vec<i32>) -> PaymentRequestResponsePaymentRequestPaymentRequestLines {
         PaymentRequestResponsePaymentRequestPaymentRequestLines {
-            account_item_id,
-            amount,
-            description,
             id,
-            item_id,
             line_type,
+            description,
+            amount,
+            account_item_id,
+            tax_code,
+            item_id,
             section_id,
+            tag_ids,
             segment_1_tag_id: None,
             segment_2_tag_id: None,
             segment_3_tag_id: None,
-            tag_ids,
-            tax_code,
         }
     }
 }
@@ -77,5 +77,11 @@ pub enum LineType {
     DealLine,
     #[serde(rename = "withholding_tax")]
     WithholdingTax,
+}
+
+impl Default for LineType {
+    fn default() -> LineType {
+        Self::DealLine
+    }
 }
 

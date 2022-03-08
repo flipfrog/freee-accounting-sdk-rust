@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ApprovalFlowRouteResponseApprovalFlowRouteSteps {
     /// 承認ステップID
     #[serde(rename = "id")]
@@ -55,5 +55,11 @@ pub enum ResourceType {
     AndPosition,
     #[serde(rename = "or_position")]
     OrPosition,
+}
+
+impl Default for ResourceType {
+    fn default() -> ResourceType {
+        Self::PredefinedUser
+    }
 }
 

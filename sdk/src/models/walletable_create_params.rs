@@ -11,33 +11,33 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct WalletableCreateParams {
-    /// サービスID
-    #[serde(rename = "bank_id", skip_serializing_if = "Option::is_none")]
-    pub bank_id: Option<i32>,
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
-    /// 決算書表示名（小カテゴリー）　例：売掛金, 受取手形, 未収入金（法人のみ）, 買掛金, 支払手形, 未払金, 預り金, 前受金
-    #[serde(rename = "group_name", skip_serializing_if = "Option::is_none")]
-    pub group_name: Option<String>,
     /// 口座名 (255文字以内)
     #[serde(rename = "name")]
     pub name: String,
     /// 口座種別（bank_account : 銀行口座, credit_card : クレジットカード, wallet : その他の決済口座）
     #[serde(rename = "type")]
     pub _type: Type,
+    /// 事業所ID
+    #[serde(rename = "company_id")]
+    pub company_id: i32,
+    /// サービスID
+    #[serde(rename = "bank_id", skip_serializing_if = "Option::is_none")]
+    pub bank_id: Option<i32>,
+    /// 決算書表示名（小カテゴリー）　例：売掛金, 受取手形, 未収入金（法人のみ）, 買掛金, 支払手形, 未払金, 預り金, 前受金
+    #[serde(rename = "group_name", skip_serializing_if = "Option::is_none")]
+    pub group_name: Option<String>,
 }
 
 impl WalletableCreateParams {
-    pub fn new(company_id: i32, name: String, _type: Type) -> WalletableCreateParams {
+    pub fn new(name: String, _type: Type, company_id: i32) -> WalletableCreateParams {
         WalletableCreateParams {
-            bank_id: None,
-            company_id,
-            group_name: None,
             name,
             _type,
+            company_id,
+            bank_id: None,
+            group_name: None,
         }
     }
 }
@@ -51,5 +51,11 @@ pub enum Type {
     CreditCard,
     #[serde(rename = "wallet")]
     Wallet,
+}
+
+impl Default for Type {
+    fn default() -> Type {
+        Self::BankAccount
+    }
 }
 

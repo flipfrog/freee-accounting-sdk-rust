@@ -14,11 +14,11 @@
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ItemResponse {
     #[serde(rename = "item")]
-    pub item: Box<crate::models::ItemResponseItem>,
+    pub item: Box<crate::models::Item>,
 }
 
 impl ItemResponse {
-    pub fn new(item: crate::models::ItemResponseItem) -> ItemResponse {
+    pub fn new(item: crate::models::Item) -> ItemResponse {
         ItemResponse {
             item: Box::new(item),
         }

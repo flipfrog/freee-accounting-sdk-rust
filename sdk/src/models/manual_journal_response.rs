@@ -14,11 +14,11 @@
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ManualJournalResponse {
     #[serde(rename = "manual_journal")]
-    pub manual_journal: Box<crate::models::ManualJournalResponseManualJournal>,
+    pub manual_journal: Box<crate::models::ManualJournal>,
 }
 
 impl ManualJournalResponse {
-    pub fn new(manual_journal: crate::models::ManualJournalResponseManualJournal) -> ManualJournalResponse {
+    pub fn new(manual_journal: crate::models::ManualJournal) -> ManualJournalResponse {
         ManualJournalResponse {
             manual_journal: Box::new(manual_journal),
         }

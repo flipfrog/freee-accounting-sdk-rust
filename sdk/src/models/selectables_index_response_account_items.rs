@@ -13,34 +13,34 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct SelectablesIndexResponseAccountItems {
-    #[serde(rename = "default_tax", skip_serializing_if = "Option::is_none")]
-    pub default_tax: Option<Box<crate::models::SelectablesIndexResponseDefaultTax>>,
-    /// 勘定科目の説明
-    #[serde(rename = "desc", skip_serializing_if = "Option::is_none")]
-    pub desc: Option<String>,
-    /// 勘定科目の説明（詳細）
-    #[serde(rename = "help", skip_serializing_if = "Option::is_none")]
-    pub help: Option<String>,
     /// 勘定科目ID
     #[serde(rename = "id")]
     pub id: i32,
     /// 勘定科目
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// 勘定科目の説明
+    #[serde(rename = "desc", skip_serializing_if = "Option::is_none")]
+    pub desc: Option<String>,
+    /// 勘定科目の説明（詳細）
+    #[serde(rename = "help", skip_serializing_if = "Option::is_none")]
+    pub help: Option<String>,
     /// ショートカット
     #[serde(rename = "shortcut", skip_serializing_if = "Option::is_none")]
     pub shortcut: Option<String>,
+    #[serde(rename = "default_tax", skip_serializing_if = "Option::is_none")]
+    pub default_tax: Option<Box<crate::models::SelectablesIndexResponseDefaultTax>>,
 }
 
 impl SelectablesIndexResponseAccountItems {
     pub fn new(id: i32) -> SelectablesIndexResponseAccountItems {
         SelectablesIndexResponseAccountItems {
-            default_tax: None,
-            desc: None,
-            help: None,
             id,
             name: None,
+            desc: None,
+            help: None,
             shortcut: None,
+            default_tax: None,
         }
     }
 }

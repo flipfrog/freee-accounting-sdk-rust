@@ -57,3 +57,9 @@ pub enum Type {
     Partner,
 }
 
+impl Default for Type {
+    fn default() -> Type {
+        Self::Title
+    }
+}
+

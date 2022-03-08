@@ -13,31 +13,31 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct DealCreateResponseDealPayments {
-    /// 支払金額
-    #[serde(rename = "amount")]
-    pub amount: i64,
-    /// 支払日
-    #[serde(rename = "date")]
-    pub date: String,
-    /// 口座ID（from_walletable_typeがprivate_account_itemの場合は勘定科目ID）
-    #[serde(rename = "from_walletable_id", skip_serializing_if = "Option::is_none")]
-    pub from_walletable_id: Option<i32>,
-    /// 口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet, プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）: private_account_item)
-    #[serde(rename = "from_walletable_type", skip_serializing_if = "Option::is_none")]
-    pub from_walletable_type: Option<FromWalletableType>,
     /// 取引行ID
     #[serde(rename = "id")]
     pub id: i64,
+    /// 支払日
+    #[serde(rename = "date")]
+    pub date: String,
+    /// 口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet, プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）: private_account_item)
+    #[serde(rename = "from_walletable_type", skip_serializing_if = "Option::is_none")]
+    pub from_walletable_type: Option<FromWalletableType>,
+    /// 口座ID（from_walletable_typeがprivate_account_itemの場合は勘定科目ID）
+    #[serde(rename = "from_walletable_id", skip_serializing_if = "Option::is_none")]
+    pub from_walletable_id: Option<i32>,
+    /// 支払金額
+    #[serde(rename = "amount")]
+    pub amount: i64,
 }
 
 impl DealCreateResponseDealPayments {
-    pub fn new(amount: i64, date: String, id: i64) -> DealCreateResponseDealPayments {
+    pub fn new(id: i64, date: String, amount: i64) -> DealCreateResponseDealPayments {
         DealCreateResponseDealPayments {
-            amount,
-            date,
-            from_walletable_id: None,
-            from_walletable_type: None,
             id,
+            date,
+            from_walletable_type: None,
+            from_walletable_id: None,
+            amount,
         }
     }
 }
@@ -53,5 +53,11 @@ pub enum FromWalletableType {
     Wallet,
     #[serde(rename = "private_account_item")]
     PrivateAccountItem,
+}
+
+impl Default for FromWalletableType {
+    fn default() -> FromWalletableType {
+        Self::BankAccount
+    }
 }
 

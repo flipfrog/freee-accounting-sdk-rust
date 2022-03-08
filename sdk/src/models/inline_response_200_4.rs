@@ -13,14 +13,14 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct InlineResponse2004 {
-    #[serde(rename = "manual_journals")]
-    pub manual_journals: Vec<crate::models::ManualJournalResponse>,
+    #[serde(rename = "users")]
+    pub users: Vec<crate::models::User>,
 }
 
 impl InlineResponse2004 {
-    pub fn new(manual_journals: Vec<crate::models::ManualJournalResponse>) -> InlineResponse2004 {
+    pub fn new(users: Vec<crate::models::User>) -> InlineResponse2004 {
         InlineResponse2004 {
-            manual_journals,
+            users,
         }
     }
 }

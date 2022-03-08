@@ -13,17 +13,17 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct TooManyRequestsError {
-    #[serde(rename = "meta")]
-    pub meta: Box<crate::models::TooManyRequestsErrorMeta>,
     #[serde(rename = "status_code")]
     pub status_code: i32,
+    #[serde(rename = "meta")]
+    pub meta: Box<crate::models::TooManyRequestsErrorMeta>,
 }
 
 impl TooManyRequestsError {
-    pub fn new(meta: crate::models::TooManyRequestsErrorMeta, status_code: i32) -> TooManyRequestsError {
+    pub fn new(status_code: i32, meta: crate::models::TooManyRequestsErrorMeta) -> TooManyRequestsError {
         TooManyRequestsError {
-            meta: Box::new(meta),
             status_code,
+            meta: Box::new(meta),
         }
     }
 }

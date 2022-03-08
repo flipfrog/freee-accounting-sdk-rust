@@ -52,7 +52,7 @@ pub enum GetJournalsError {
 
 
 ///  <h2 id=\"\">概要</h2>  <p>ダウンロードを実行する</p>  <p>＊このAPIは無料プランのアカウントではご利用になれません</p>  <h2 id=\"_2\">定義</h2>  <ul> <li>id : 受け付けID</li> </ul>
-pub async fn download_journal(configuration: &configuration::Configuration, id: i32, company_id: i32) -> Result<std::path::PathBuf, Error<DownloadJournalError>> {
+pub async fn download_journal(configuration: &configuration::Configuration, id: i32, company_id: i32) -> Result<String, Error<DownloadJournalError>> {
     let local_var_configuration = configuration;
 
     let local_var_client = &local_var_configuration.client;
@@ -127,10 +127,16 @@ pub async fn get_journals(configuration: &configuration::Configuration, download
     local_var_req_builder = local_var_req_builder.query(&[("download_type", &download_type.to_string())]);
     local_var_req_builder = local_var_req_builder.query(&[("company_id", &company_id.to_string())]);
     if let Some(ref local_var_str) = visible_tags {
-        local_var_req_builder = local_var_req_builder.query(&[("visible_tags[]", &local_var_str.into_iter().map(|p| p.to_string()).collect::<Vec<String>>().join(",").to_string())]);
+        local_var_req_builder = match "multi" {
+            "multi" => local_var_req_builder.query(&local_var_str.into_iter().map(|p| ("visible_tags[]".to_owned(), p.to_string())).collect::<Vec<(std::string::String, std::string::String)>>()),
+            _ => local_var_req_builder.query(&[("visible_tags[]", &local_var_str.into_iter().map(|p| p.to_string()).collect::<Vec<String>>().join(",").to_string())]),
+        };
     }
     if let Some(ref local_var_str) = visible_ids {
-        local_var_req_builder = local_var_req_builder.query(&[("visible_ids[]", &local_var_str.into_iter().map(|p| p.to_string()).collect::<Vec<String>>().join(",").to_string())]);
+        local_var_req_builder = match "multi" {
+            "multi" => local_var_req_builder.query(&local_var_str.into_iter().map(|p| ("visible_ids[]".to_owned(), p.to_string())).collect::<Vec<(std::string::String, std::string::String)>>()),
+            _ => local_var_req_builder.query(&[("visible_ids[]", &local_var_str.into_iter().map(|p| p.to_string()).collect::<Vec<String>>().join(",").to_string())]),
+        };
     }
     if let Some(ref local_var_str) = start_date {
         local_var_req_builder = local_var_req_builder.query(&[("start_date", &local_var_str.to_string())]);

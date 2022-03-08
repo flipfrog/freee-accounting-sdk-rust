@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ApprovalRequestResponse {
     #[serde(rename = "approval_request")]
     pub approval_request: Box<crate::models::ApprovalRequestResponseApprovalRequest>,

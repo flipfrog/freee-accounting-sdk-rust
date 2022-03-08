@@ -13,42 +13,42 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct SelectablesIndexResponseAccountGroups {
-    /// 勘定科目カテゴリーID
-    #[serde(rename = "account_category_id")]
-    pub account_category_id: i32,
-    /// 年度ID
-    #[serde(rename = "account_structure_id")]
-    pub account_structure_id: i32,
-    /// 作成日時
-    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
-    pub created_at: Option<String>,
-    /// 詳細パラメータの種類
-    #[serde(rename = "detail_type", skip_serializing_if = "Option::is_none")]
-    pub detail_type: Option<i32>,
     /// 決算書表示名（小カテゴリー）ID
     #[serde(rename = "id")]
     pub id: i32,
-    /// 並び順
-    #[serde(rename = "index")]
-    pub index: i32,
     /// 決算書表示名
     #[serde(rename = "name")]
     pub name: String,
+    /// 年度ID
+    #[serde(rename = "account_structure_id")]
+    pub account_structure_id: i32,
+    /// 勘定科目カテゴリーID
+    #[serde(rename = "account_category_id")]
+    pub account_category_id: i32,
+    /// 詳細パラメータの種類
+    #[serde(rename = "detail_type", skip_serializing_if = "Option::is_none")]
+    pub detail_type: Option<i32>,
+    /// 並び順
+    #[serde(rename = "index")]
+    pub index: i32,
+    /// 作成日時
+    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
+    pub created_at: Option<String>,
     /// 更新日時
     #[serde(rename = "updated_at", skip_serializing_if = "Option::is_none")]
     pub updated_at: Option<String>,
 }
 
 impl SelectablesIndexResponseAccountGroups {
-    pub fn new(account_category_id: i32, account_structure_id: i32, id: i32, index: i32, name: String) -> SelectablesIndexResponseAccountGroups {
+    pub fn new(id: i32, name: String, account_structure_id: i32, account_category_id: i32, index: i32) -> SelectablesIndexResponseAccountGroups {
         SelectablesIndexResponseAccountGroups {
-            account_category_id,
-            account_structure_id,
-            created_at: None,
-            detail_type: None,
             id,
-            index,
             name,
+            account_structure_id,
+            account_category_id,
+            detail_type: None,
+            index,
+            created_at: None,
             updated_at: None,
         }
     }

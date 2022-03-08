@@ -11,170 +11,176 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct PaymentRequestResponsePaymentRequest {
-    /// 受取人名（カナ）
-    #[serde(rename = "account_name")]
-    pub account_name: String,
-    /// 口座番号
-    #[serde(rename = "account_number")]
-    pub account_number: String,
-    /// 口座種別(ordinary:普通、checking:当座、earmarked:納税準備預金、savings:貯蓄、other:その他)
-    #[serde(rename = "account_type")]
-    pub account_type: AccountType,
-    /// 申請者のユーザーID
-    #[serde(rename = "applicant_id")]
-    pub applicant_id: i32,
-    /// 申請日 (yyyy-mm-dd)
-    #[serde(rename = "application_date")]
-    pub application_date: String,
-    /// 申請No.
-    #[serde(rename = "application_number")]
-    pub application_number: String,
-    /// 支払依頼の承認履歴（配列）
-    #[serde(rename = "approval_flow_logs")]
-    pub approval_flow_logs: Vec<crate::models::ApprovalRequestResponseApprovalRequestApprovalFlowLogs>,
-    /// 申請経路ID
-    #[serde(rename = "approval_flow_route_id")]
-    pub approval_flow_route_id: i32,
-    /// 承認者（配列）   承認ステップのresource_typeがunspecified (指定なし)の場合はapproversはレスポンスに含まれません。   しかし、resource_typeがunspecifiedの承認ステップにおいて誰かが承認・却下・差し戻しのいずれかのアクションを取った後は、   approversはレスポンスに含まれるようになります。   その場合approversにはアクションを行ったステップのIDとアクションを行ったユーザーのIDが含まれます。
-    #[serde(rename = "approvers")]
-    pub approvers: Vec<crate::models::ApprovalRequestResponseApprovalRequestApprovers>,
-    /// 銀行コード
-    #[serde(rename = "bank_code")]
-    pub bank_code: String,
-    /// 銀行名
-    #[serde(rename = "bank_name")]
-    pub bank_name: String,
-    /// 銀行名（カナ）
-    #[serde(rename = "bank_name_kana")]
-    pub bank_name_kana: String,
-    /// 支店番号
-    #[serde(rename = "branch_code")]
-    pub branch_code: String,
-    /// 支店名（カナ）
-    #[serde(rename = "branch_kana")]
-    pub branch_kana: String,
-    /// 支店名
-    #[serde(rename = "branch_name")]
-    pub branch_name: String,
-    /// 支払依頼のコメント一覧（配列）
-    #[serde(rename = "comments")]
-    pub comments: Vec<crate::models::ApprovalRequestResponseApprovalRequestComments>,
+    /// 支払依頼ID
+    #[serde(rename = "id")]
+    pub id: i32,
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
-    /// 現在のround。差し戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。
-    #[serde(rename = "current_round")]
-    pub current_round: i32,
-    /// 現在承認ステップID
-    #[serde(rename = "current_step_id")]
-    pub current_step_id: Option<i32>,
+    /// 申請タイトル
+    #[serde(rename = "title")]
+    pub title: String,
+    /// 申請日 (yyyy-mm-dd)
+    #[serde(rename = "application_date")]
+    pub application_date: String,
+    /// 備考
+    #[serde(rename = "description")]
+    pub description: String,
+    /// 合計金額
+    #[serde(rename = "total_amount")]
+    pub total_amount: i32,
+    /// 申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下, feedback:差戻し)
+    #[serde(rename = "status")]
+    pub status: Status,
+    /// 支払依頼の項目行一覧（配列）
+    #[serde(rename = "payment_request_lines")]
+    pub payment_request_lines: Vec<crate::models::PaymentRequestResponsePaymentRequestPaymentRequestLines>,
     /// 取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)
     #[serde(rename = "deal_id")]
     pub deal_id: Option<i32>,
     /// 取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます settled:支払済み, unsettled:支払待ち)
     #[serde(rename = "deal_status")]
     pub deal_status: Option<DealStatus>,
-    /// 備考
-    #[serde(rename = "description")]
-    pub description: String,
+    /// 申請者のユーザーID
+    #[serde(rename = "applicant_id")]
+    pub applicant_id: i32,
+    /// 承認者（配列）   承認ステップのresource_typeがunspecified (指定なし)の場合はapproversはレスポンスに含まれません。   しかし、resource_typeがunspecifiedの承認ステップにおいて誰かが承認・却下・差し戻しのいずれかのアクションを取った後は、   approversはレスポンスに含まれるようになります。   その場合approversにはアクションを行ったステップのIDとアクションを行ったユーザーのIDが含まれます。
+    #[serde(rename = "approvers")]
+    pub approvers: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApprovers>,
+    /// 申請No.
+    #[serde(rename = "application_number")]
+    pub application_number: String,
+    /// 申請経路ID
+    #[serde(rename = "approval_flow_route_id")]
+    pub approval_flow_route_id: i32,
+    /// 支払依頼のコメント一覧（配列）
+    #[serde(rename = "comments")]
+    pub comments: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationComments>,
+    /// 支払依頼の承認履歴（配列）
+    #[serde(rename = "approval_flow_logs")]
+    pub approval_flow_logs: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApprovalFlowLogs>,
+    /// 現在承認ステップID
+    #[serde(rename = "current_step_id")]
+    pub current_step_id: Option<i32>,
+    /// 現在のround。差し戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。
+    #[serde(rename = "current_round")]
+    pub current_round: i32,
     /// 請求書番号
     #[serde(rename = "document_code")]
     pub document_code: String,
-    /// 支払依頼ID
-    #[serde(rename = "id")]
-    pub id: i32,
+    /// 証憑ファイルID（ファイルボックスのファイルID）
+    #[serde(rename = "receipt_ids")]
+    pub receipt_ids: Vec<i32>,
     /// 発生日 (yyyy-mm-dd)
     #[serde(rename = "issue_date")]
     pub issue_date: String,
-    /// 取引先コード
-    #[serde(rename = "partner_code", skip_serializing_if = "Option::is_none")]
-    pub partner_code: Option<String>,
-    /// 取引先ID
-    #[serde(rename = "partner_id")]
-    pub partner_id: Option<i32>,
-    /// 取引先名
-    #[serde(rename = "partner_name")]
-    pub partner_name: Option<String>,
     /// 支払期限 (yyyy-mm-dd)
     #[serde(rename = "payment_date")]
     pub payment_date: Option<String>,
     /// 支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)
     #[serde(rename = "payment_method")]
     pub payment_method: PaymentMethod,
-    /// 支払依頼の項目行一覧（配列）
-    #[serde(rename = "payment_request_lines")]
-    pub payment_request_lines: Vec<crate::models::PaymentRequestResponsePaymentRequestPaymentRequestLines>,
-    /// 証憑ファイルID（ファイルボックスのファイルID）
-    #[serde(rename = "receipt_ids")]
-    pub receipt_ids: Vec<i32>,
-    /// 申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下, feedback:差戻し)
-    #[serde(rename = "status")]
-    pub status: Status,
-    /// 申請タイトル
-    #[serde(rename = "title")]
-    pub title: String,
-    /// 合計金額
-    #[serde(rename = "total_amount")]
-    pub total_amount: i32,
+    /// 取引先ID
+    #[serde(rename = "partner_id")]
+    pub partner_id: Option<i32>,
+    /// 取引先コード
+    #[serde(rename = "partner_code", skip_serializing_if = "Option::is_none")]
+    pub partner_code: Option<String>,
+    /// 取引先名
+    #[serde(rename = "partner_name")]
+    pub partner_name: Option<String>,
+    /// 銀行名
+    #[serde(rename = "bank_name")]
+    pub bank_name: String,
+    /// 銀行名（カナ）
+    #[serde(rename = "bank_name_kana")]
+    pub bank_name_kana: String,
+    /// 銀行コード
+    #[serde(rename = "bank_code")]
+    pub bank_code: String,
+    /// 支店名
+    #[serde(rename = "branch_name")]
+    pub branch_name: String,
+    /// 支店名（カナ）
+    #[serde(rename = "branch_kana")]
+    pub branch_kana: String,
+    /// 支店番号
+    #[serde(rename = "branch_code")]
+    pub branch_code: String,
+    /// 口座種別(ordinary:普通、checking:当座、earmarked:納税準備預金、savings:貯蓄、other:その他)
+    #[serde(rename = "account_type")]
+    pub account_type: AccountType,
+    /// 口座番号
+    #[serde(rename = "account_number")]
+    pub account_number: String,
+    /// 受取人名（カナ）
+    #[serde(rename = "account_name")]
+    pub account_name: String,
 }
 
 impl PaymentRequestResponsePaymentRequest {
-    pub fn new(account_name: String, account_number: String, account_type: AccountType, applicant_id: i32, application_date: String, application_number: String, approval_flow_logs: Vec<crate::models::ApprovalRequestResponseApprovalRequestApprovalFlowLogs>, approval_flow_route_id: i32, approvers: Vec<crate::models::ApprovalRequestResponseApprovalRequestApprovers>, bank_code: String, bank_name: String, bank_name_kana: String, branch_code: String, branch_kana: String, branch_name: String, comments: Vec<crate::models::ApprovalRequestResponseApprovalRequestComments>, company_id: i32, current_round: i32, current_step_id: Option<i32>, deal_id: Option<i32>, deal_status: Option<DealStatus>, description: String, document_code: String, id: i32, issue_date: String, partner_id: Option<i32>, partner_name: Option<String>, payment_date: Option<String>, payment_method: PaymentMethod, payment_request_lines: Vec<crate::models::PaymentRequestResponsePaymentRequestPaymentRequestLines>, receipt_ids: Vec<i32>, status: Status, title: String, total_amount: i32) -> PaymentRequestResponsePaymentRequest {
+    pub fn new(id: i32, company_id: i32, title: String, application_date: String, description: String, total_amount: i32, status: Status, payment_request_lines: Vec<crate::models::PaymentRequestResponsePaymentRequestPaymentRequestLines>, deal_id: Option<i32>, deal_status: Option<DealStatus>, applicant_id: i32, approvers: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApprovers>, application_number: String, approval_flow_route_id: i32, comments: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationComments>, approval_flow_logs: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApprovalFlowLogs>, current_step_id: Option<i32>, current_round: i32, document_code: String, receipt_ids: Vec<i32>, issue_date: String, payment_date: Option<String>, payment_method: PaymentMethod, partner_id: Option<i32>, partner_name: Option<String>, bank_name: String, bank_name_kana: String, bank_code: String, branch_name: String, branch_kana: String, branch_code: String, account_type: AccountType, account_number: String, account_name: String) -> PaymentRequestResponsePaymentRequest {
         PaymentRequestResponsePaymentRequest {
-            account_name,
-            account_number,
-            account_type,
-            applicant_id,
-            application_date,
-            application_number,
-            approval_flow_logs,
-            approval_flow_route_id,
-            approvers,
-            bank_code,
-            bank_name,
-            bank_name_kana,
-            branch_code,
-            branch_kana,
-            branch_name,
-            comments,
+            id,
             company_id,
-            current_round,
-            current_step_id,
+            title,
+            application_date,
+            description,
+            total_amount,
+            status,
+            payment_request_lines,
             deal_id,
             deal_status,
-            description,
+            applicant_id,
+            approvers,
+            application_number,
+            approval_flow_route_id,
+            comments,
+            approval_flow_logs,
+            current_step_id,
+            current_round,
             document_code,
-            id,
+            receipt_ids,
             issue_date,
-            partner_code: None,
-            partner_id,
-            partner_name,
             payment_date,
             payment_method,
-            payment_request_lines,
-            receipt_ids,
-            status,
-            title,
-            total_amount,
+            partner_id,
+            partner_code: None,
+            partner_name,
+            bank_name,
+            bank_name_kana,
+            bank_code,
+            branch_name,
+            branch_kana,
+            branch_code,
+            account_type,
+            account_number,
+            account_name,
         }
     }
 }
 
-/// 口座種別(ordinary:普通、checking:当座、earmarked:納税準備預金、savings:貯蓄、other:その他)
+/// 申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下, feedback:差戻し)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum AccountType {
-    #[serde(rename = "ordinary")]
-    Ordinary,
-    #[serde(rename = "checking")]
-    Checking,
-    #[serde(rename = "earmarked")]
-    Earmarked,
-    #[serde(rename = "savings")]
-    Savings,
-    #[serde(rename = "other")]
-    Other,
+pub enum Status {
+    #[serde(rename = "draft")]
+    Draft,
+    #[serde(rename = "in_progress")]
+    InProgress,
+    #[serde(rename = "approved")]
+    Approved,
+    #[serde(rename = "rejected")]
+    Rejected,
+    #[serde(rename = "feedback")]
+    Feedback,
+}
+
+impl Default for Status {
+    fn default() -> Status {
+        Self::Draft
+    }
 }
 /// 取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます settled:支払済み, unsettled:支払待ち)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
@@ -183,6 +189,12 @@ pub enum DealStatus {
     Settled,
     #[serde(rename = "unsettled")]
     Unsettled,
+}
+
+impl Default for DealStatus {
+    fn default() -> DealStatus {
+        Self::Settled
+    }
 }
 /// 支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
@@ -198,18 +210,30 @@ pub enum PaymentMethod {
     #[serde(rename = "credit_card")]
     CreditCard,
 }
-/// 申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下, feedback:差戻し)
+
+impl Default for PaymentMethod {
+    fn default() -> PaymentMethod {
+        Self::None
+    }
+}
+/// 口座種別(ordinary:普通、checking:当座、earmarked:納税準備預金、savings:貯蓄、other:その他)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum Status {
-    #[serde(rename = "draft")]
-    Draft,
-    #[serde(rename = "in_progress")]
-    InProgress,
-    #[serde(rename = "approved")]
-    Approved,
-    #[serde(rename = "rejected")]
-    Rejected,
-    #[serde(rename = "feedback")]
-    Feedback,
+pub enum AccountType {
+    #[serde(rename = "ordinary")]
+    Ordinary,
+    #[serde(rename = "checking")]
+    Checking,
+    #[serde(rename = "earmarked")]
+    Earmarked,
+    #[serde(rename = "savings")]
+    Savings,
+    #[serde(rename = "other")]
+    Other,
+}
+
+impl Default for AccountType {
+    fn default() -> AccountType {
+        Self::Ordinary
+    }
 }
 

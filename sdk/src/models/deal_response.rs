@@ -11,14 +11,14 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct DealResponse {
     #[serde(rename = "deal")]
-    pub deal: Box<crate::models::DealResponseDeal>,
+    pub deal: Box<crate::models::Deal>,
 }
 
 impl DealResponse {
-    pub fn new(deal: crate::models::DealResponseDeal) -> DealResponse {
+    pub fn new(deal: crate::models::Deal) -> DealResponse {
         DealResponse {
             deal: Box::new(deal),
         }

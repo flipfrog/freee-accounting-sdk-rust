@@ -14,11 +14,11 @@
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct TransferResponse {
     #[serde(rename = "transfer")]
-    pub transfer: Box<crate::models::TransferResponseTransfer>,
+    pub transfer: Box<crate::models::Transfer>,
 }
 
 impl TransferResponse {
-    pub fn new(transfer: crate::models::TransferResponseTransfer) -> TransferResponse {
+    pub fn new(transfer: crate::models::Transfer) -> TransferResponse {
         TransferResponse {
             transfer: Box::new(transfer),
         }

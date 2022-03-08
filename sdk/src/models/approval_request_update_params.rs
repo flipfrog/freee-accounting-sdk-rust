@@ -13,6 +13,9 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ApprovalRequestUpdateParams {
+    /// 事業所ID
+    #[serde(rename = "company_id")]
+    pub company_id: i32,
     /// 申請日 (yyyy-mm-dd)
     #[serde(rename = "application_date")]
     pub application_date: String,
@@ -22,9 +25,6 @@ pub struct ApprovalRequestUpdateParams {
     /// 承認者のユーザーID
     #[serde(rename = "approver_id", skip_serializing_if = "Option::is_none")]
     pub approver_id: Option<i32>,
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
     /// falseの時、in_progress:申請中で更新する。それ以外の時はdraft:下書きで更新する
     #[serde(rename = "draft")]
     pub draft: bool,
@@ -33,12 +33,12 @@ pub struct ApprovalRequestUpdateParams {
 }
 
 impl ApprovalRequestUpdateParams {
-    pub fn new(application_date: String, approval_flow_route_id: i32, company_id: i32, draft: bool, request_items: Vec<crate::models::ApprovalRequestCreateParamsRequestItems>) -> ApprovalRequestUpdateParams {
+    pub fn new(company_id: i32, application_date: String, approval_flow_route_id: i32, draft: bool, request_items: Vec<crate::models::ApprovalRequestCreateParamsRequestItems>) -> ApprovalRequestUpdateParams {
         ApprovalRequestUpdateParams {
+            company_id,
             application_date,
             approval_flow_route_id,
             approver_id: None,
-            company_id,
             draft,
             request_items,
         }

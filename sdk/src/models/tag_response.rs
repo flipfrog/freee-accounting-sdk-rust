@@ -14,11 +14,11 @@
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct TagResponse {
     #[serde(rename = "tag")]
-    pub tag: Box<crate::models::TagResponseTag>,
+    pub tag: Box<crate::models::Tag>,
 }
 
 impl TagResponse {
-    pub fn new(tag: crate::models::TagResponseTag) -> TagResponse {
+    pub fn new(tag: crate::models::Tag) -> TagResponse {
         TagResponse {
             tag: Box::new(tag),
         }

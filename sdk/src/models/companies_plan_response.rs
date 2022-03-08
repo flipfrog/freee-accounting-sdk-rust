@@ -11,37 +11,29 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct CompaniesPlanResponse {
     /// 事業所ID
     #[serde(rename = "id")]
     pub id: i32,
-    /// 事業形態（個人事業主: personal、法人: corporate）
-    #[serde(rename = "org_code")]
-    pub org_code: OrgCode,
     /// 会計プラン 個人用(non_charged: 無料プラン、starter: スターター、standard: スタンダード、premium: プレミアム) 法人用(non_charged: 無料プラン、minimum: ミニマム、basic: ベーシック、professional: プロフェッショナル、enterprise: エンタープライズ)
     #[serde(rename = "plan")]
     pub plan: Plan,
+    /// 事業形態（個人事業主: personal、法人: corporate）
+    #[serde(rename = "org_code")]
+    pub org_code: OrgCode,
 }
 
 impl CompaniesPlanResponse {
-    pub fn new(id: i32, org_code: OrgCode, plan: Plan) -> CompaniesPlanResponse {
+    pub fn new(id: i32, plan: Plan, org_code: OrgCode) -> CompaniesPlanResponse {
         CompaniesPlanResponse {
             id,
-            org_code,
             plan,
+            org_code,
         }
     }
 }
 
-/// 事業形態（個人事業主: personal、法人: corporate）
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum OrgCode {
-    #[serde(rename = "personal")]
-    Personal,
-    #[serde(rename = "corporate")]
-    Corporate,
-}
 /// 会計プラン 個人用(non_charged: 無料プラン、starter: スターター、standard: スタンダード、premium: プレミアム) 法人用(non_charged: 無料プラン、minimum: ミニマム、basic: ベーシック、professional: プロフェッショナル、enterprise: エンタープライズ)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum Plan {
@@ -61,5 +53,25 @@ pub enum Plan {
     Professional,
     #[serde(rename = "enterprise")]
     Enterprise,
+}
+
+impl Default for Plan {
+    fn default() -> Plan {
+        Self::NonCharged
+    }
+}
+/// 事業形態（個人事業主: personal、法人: corporate）
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum OrgCode {
+    #[serde(rename = "personal")]
+    Personal,
+    #[serde(rename = "corporate")]
+    Corporate,
+}
+
+impl Default for OrgCode {
+    fn default() -> OrgCode {
+        Self::Personal
+    }
 }
 

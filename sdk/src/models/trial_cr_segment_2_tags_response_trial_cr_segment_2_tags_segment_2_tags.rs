@@ -13,21 +13,21 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct TrialCrSegment2TagsResponseTrialCrSegment2TagsSegment2Tags {
-    /// 期末残高
-    #[serde(rename = "closing_balance", skip_serializing_if = "Option::is_none")]
-    pub closing_balance: Option<i32>,
     /// セグメント2タグID
     #[serde(rename = "id")]
     pub id: i32,
-    /// breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる
-    #[serde(rename = "items", skip_serializing_if = "Option::is_none")]
-    pub items: Option<Vec<crate::models::TrialCrSectionsResponseTrialCrSectionsItems>>,
     /// セグメント2タグ名
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// 期末残高
+    #[serde(rename = "closing_balance", skip_serializing_if = "Option::is_none")]
+    pub closing_balance: Option<i32>,
     /// breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる
     #[serde(rename = "partners", skip_serializing_if = "Option::is_none")]
     pub partners: Option<Vec<crate::models::TrialCrSectionsResponseTrialCrSectionsPartners>>,
+    /// breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる
+    #[serde(rename = "items", skip_serializing_if = "Option::is_none")]
+    pub items: Option<Vec<crate::models::TrialCrSectionsResponseTrialCrSectionsItems>>,
     /// breakdown_display_type:section, account_item_display_type:account_item指定時のみ含まれる
     #[serde(rename = "sections", skip_serializing_if = "Option::is_none")]
     pub sections: Option<Vec<crate::models::TrialCrSegment1TagsResponseTrialCrSegment1TagsSections>>,
@@ -36,11 +36,11 @@ pub struct TrialCrSegment2TagsResponseTrialCrSegment2TagsSegment2Tags {
 impl TrialCrSegment2TagsResponseTrialCrSegment2TagsSegment2Tags {
     pub fn new(id: i32) -> TrialCrSegment2TagsResponseTrialCrSegment2TagsSegment2Tags {
         TrialCrSegment2TagsResponseTrialCrSegment2TagsSegment2Tags {
-            closing_balance: None,
             id,
-            items: None,
             name: None,
+            closing_balance: None,
             partners: None,
+            items: None,
             sections: None,
         }
     }

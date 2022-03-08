@@ -13,18 +13,6 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct TrialCrResponseTrialCrSegment1Tags {
-    /// 期末残高
-    #[serde(rename = "closing_balance", skip_serializing_if = "Option::is_none")]
-    pub closing_balance: Option<i32>,
-    /// 構成比
-    #[serde(rename = "composition_ratio", skip_serializing_if = "Option::is_none")]
-    pub composition_ratio: Option<f32>,
-    /// 貸方金額
-    #[serde(rename = "credit_amount", skip_serializing_if = "Option::is_none")]
-    pub credit_amount: Option<i32>,
-    /// 借方金額
-    #[serde(rename = "debit_amount", skip_serializing_if = "Option::is_none")]
-    pub debit_amount: Option<i32>,
     /// セグメント1タグID
     #[serde(rename = "id")]
     pub id: i32,
@@ -34,18 +22,30 @@ pub struct TrialCrResponseTrialCrSegment1Tags {
     /// 期首残高
     #[serde(rename = "opening_balance", skip_serializing_if = "Option::is_none")]
     pub opening_balance: Option<i32>,
+    /// 借方金額
+    #[serde(rename = "debit_amount", skip_serializing_if = "Option::is_none")]
+    pub debit_amount: Option<i32>,
+    /// 貸方金額
+    #[serde(rename = "credit_amount", skip_serializing_if = "Option::is_none")]
+    pub credit_amount: Option<i32>,
+    /// 期末残高
+    #[serde(rename = "closing_balance", skip_serializing_if = "Option::is_none")]
+    pub closing_balance: Option<i32>,
+    /// 構成比
+    #[serde(rename = "composition_ratio", skip_serializing_if = "Option::is_none")]
+    pub composition_ratio: Option<f32>,
 }
 
 impl TrialCrResponseTrialCrSegment1Tags {
     pub fn new(id: i32) -> TrialCrResponseTrialCrSegment1Tags {
         TrialCrResponseTrialCrSegment1Tags {
-            closing_balance: None,
-            composition_ratio: None,
-            credit_amount: None,
-            debit_amount: None,
             id,
             name: None,
             opening_balance: None,
+            debit_amount: None,
+            credit_amount: None,
+            closing_balance: None,
+            composition_ratio: None,
         }
     }
 }

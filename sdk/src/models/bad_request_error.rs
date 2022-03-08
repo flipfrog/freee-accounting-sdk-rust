@@ -13,17 +13,17 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct BadRequestError {
-    #[serde(rename = "errors", skip_serializing_if = "Option::is_none")]
-    pub errors: Option<Vec<crate::models::BadRequestErrorErrors>>,
     #[serde(rename = "status_code", skip_serializing_if = "Option::is_none")]
     pub status_code: Option<i32>,
+    #[serde(rename = "errors", skip_serializing_if = "Option::is_none")]
+    pub errors: Option<Vec<crate::models::BadRequestErrorErrors>>,
 }
 
 impl BadRequestError {
     pub fn new() -> BadRequestError {
         BadRequestError {
-            errors: None,
             status_code: None,
+            errors: None,
         }
     }
 }

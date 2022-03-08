@@ -13,24 +13,51 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct PaymentRequestUpdateParams {
-    /// 受取人名（カナ）（48文字以内）<br> 支払先指定時には無効 
-    #[serde(rename = "account_name", skip_serializing_if = "Option::is_none")]
-    pub account_name: Option<String>,
-    /// 口座番号（半角数字1桁〜7桁）<br> 支払先指定時には無効 
-    #[serde(rename = "account_number", skip_serializing_if = "Option::is_none")]
-    pub account_number: Option<String>,
-    /// '口座種別(ordinary: 普通、checking: 当座、earmarked: 納税準備預金、savings: 貯蓄、other: その他)'<br> '支払先指定時には無効'<br> 'デフォルトは ordinary: 普通 です' 
-    #[serde(rename = "account_type", skip_serializing_if = "Option::is_none")]
-    pub account_type: Option<AccountType>,
+    /// 事業所ID
+    #[serde(rename = "company_id")]
+    pub company_id: i32,
+    /// 申請タイトル<br> 申請者が、下書き状態もしくは差戻し状態の支払依頼に対して指定する場合のみ有効 
+    #[serde(rename = "title")]
+    pub title: String,
     /// 申請日 (yyyy-mm-dd)<br> 申請者が、下書き状態もしくは差戻し状態の支払依頼に対して指定する場合のみ有効 
     #[serde(rename = "application_date")]
     pub application_date: String,
-    /// 申請経路ID<br> 指定する申請経路IDは、申請経路APIを利用して取得してください。 
-    #[serde(rename = "approval_flow_route_id")]
-    pub approval_flow_route_id: i32,
+    /// 備考
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    /// 支払依頼の項目行一覧（配列）
+    #[serde(rename = "payment_request_lines")]
+    pub payment_request_lines: Vec<crate::models::PaymentRequestUpdateParamsPaymentRequestLines>,
     /// 承認者のユーザーID<br> 「承認者を指定」の経路を申請経路として使用する場合に指定してください。<br> 指定する承認者のユーザーIDは、申請経路APIを利用して取得してください。 
     #[serde(rename = "approver_id", skip_serializing_if = "Option::is_none")]
     pub approver_id: Option<i32>,
+    /// 申請経路ID<br> 指定する申請経路IDは、申請経路APIを利用して取得してください。 
+    #[serde(rename = "approval_flow_route_id")]
+    pub approval_flow_route_id: i32,
+    /// 支払依頼のステータス<br> falseを指定した時は申請中（in_progress）で支払依頼を更新します。<br> trueを指定した時は下書き（draft）で支払依頼を更新します。<br> 未指定の時は下書きとみなして支払依頼を更新します。 
+    #[serde(rename = "draft")]
+    pub draft: bool,
+    /// 請求書番号（255文字以内）
+    #[serde(rename = "document_code", skip_serializing_if = "Option::is_none")]
+    pub document_code: Option<String>,
+    /// 証憑ファイルID（ファイルボックスのファイルID）（配列）
+    #[serde(rename = "receipt_ids", skip_serializing_if = "Option::is_none")]
+    pub receipt_ids: Option<Vec<i32>>,
+    /// 発生日 (yyyy-mm-dd)
+    #[serde(rename = "issue_date")]
+    pub issue_date: String,
+    /// 支払期限 (yyyy-mm-dd)
+    #[serde(rename = "payment_date", skip_serializing_if = "Option::is_none")]
+    pub payment_date: Option<String>,
+    /// '支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)'<br> 'デフォルトは none: 指定なし です。' 
+    #[serde(rename = "payment_method", skip_serializing_if = "Option::is_none")]
+    pub payment_method: Option<PaymentMethod>,
+    /// 支払先の取引先ID
+    #[serde(rename = "partner_id", skip_serializing_if = "Option::is_none")]
+    pub partner_id: Option<i32>,
+    /// 支払先の取引先コード<br> 支払先の取引先ID指定時には無効 
+    #[serde(rename = "partner_code", skip_serializing_if = "Option::is_none")]
+    pub partner_code: Option<String>,
     /// 銀行コード（半角数字1桁〜4桁）<br> 支払先指定時には無効 
     #[serde(rename = "bank_code", skip_serializing_if = "Option::is_none")]
     pub bank_code: Option<String>,
@@ -43,81 +70,74 @@ pub struct PaymentRequestUpdateParams {
     /// 支店番号（半角数字1桁〜3桁）<br> 支払先指定時には無効 
     #[serde(rename = "branch_code", skip_serializing_if = "Option::is_none")]
     pub branch_code: Option<String>,
-    /// 支店名（カナ）（15文字以内）<br> 指定可能な文字は、英数・カナ・丸括弧・ハイフン・スペースのみです。<br> 支払先指定時には無効 
-    #[serde(rename = "branch_kana", skip_serializing_if = "Option::is_none")]
-    pub branch_kana: Option<String>,
     /// 支店名（255文字以内）<br> 支払先指定時には無効 
     #[serde(rename = "branch_name", skip_serializing_if = "Option::is_none")]
     pub branch_name: Option<String>,
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
-    /// 備考
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    /// 請求書番号（255文字以内）
-    #[serde(rename = "document_code", skip_serializing_if = "Option::is_none")]
-    pub document_code: Option<String>,
-    /// 支払依頼のステータス<br> falseを指定した時は申請中（in_progress）で支払依頼を更新します。<br> trueを指定した時は下書き（draft）で支払依頼を更新します。<br> 未指定の時は下書きとみなして支払依頼を更新します。 
-    #[serde(rename = "draft")]
-    pub draft: bool,
-    /// 発生日 (yyyy-mm-dd)
-    #[serde(rename = "issue_date")]
-    pub issue_date: String,
-    /// 支払先の取引先コード<br> 支払先の取引先ID指定時には無効 
-    #[serde(rename = "partner_code", skip_serializing_if = "Option::is_none")]
-    pub partner_code: Option<String>,
-    /// 支払先の取引先ID
-    #[serde(rename = "partner_id", skip_serializing_if = "Option::is_none")]
-    pub partner_id: Option<i32>,
-    /// 支払期限 (yyyy-mm-dd)
-    #[serde(rename = "payment_date", skip_serializing_if = "Option::is_none")]
-    pub payment_date: Option<String>,
-    /// '支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)'<br> 'デフォルトは none: 指定なし です。' 
-    #[serde(rename = "payment_method", skip_serializing_if = "Option::is_none")]
-    pub payment_method: Option<PaymentMethod>,
-    /// 支払依頼の項目行一覧（配列）
-    #[serde(rename = "payment_request_lines")]
-    pub payment_request_lines: Vec<crate::models::PaymentRequestUpdateParamsPaymentRequestLines>,
-    /// 証憑ファイルID（ファイルボックスのファイルID）（配列）
-    #[serde(rename = "receipt_ids", skip_serializing_if = "Option::is_none")]
-    pub receipt_ids: Option<Vec<i32>>,
-    /// 申請タイトル<br> 申請者が、下書き状態もしくは差戻し状態の支払依頼に対して指定する場合のみ有効 
-    #[serde(rename = "title")]
-    pub title: String,
+    /// 支店名（カナ）（15文字以内）<br> 指定可能な文字は、英数・カナ・丸括弧・ハイフン・スペースのみです。<br> 支払先指定時には無効 
+    #[serde(rename = "branch_kana", skip_serializing_if = "Option::is_none")]
+    pub branch_kana: Option<String>,
+    /// 受取人名（カナ）（48文字以内）<br> 支払先指定時には無効 
+    #[serde(rename = "account_name", skip_serializing_if = "Option::is_none")]
+    pub account_name: Option<String>,
+    /// 口座番号（半角数字1桁〜7桁）<br> 支払先指定時には無効 
+    #[serde(rename = "account_number", skip_serializing_if = "Option::is_none")]
+    pub account_number: Option<String>,
+    /// '口座種別(ordinary: 普通、checking: 当座、earmarked: 納税準備預金、savings: 貯蓄、other: その他)'<br> '支払先指定時には無効'<br> 'デフォルトは ordinary: 普通 です' 
+    #[serde(rename = "account_type", skip_serializing_if = "Option::is_none")]
+    pub account_type: Option<AccountType>,
 }
 
 impl PaymentRequestUpdateParams {
-    pub fn new(application_date: String, approval_flow_route_id: i32, company_id: i32, draft: bool, issue_date: String, payment_request_lines: Vec<crate::models::PaymentRequestUpdateParamsPaymentRequestLines>, title: String) -> PaymentRequestUpdateParams {
+    pub fn new(company_id: i32, title: String, application_date: String, payment_request_lines: Vec<crate::models::PaymentRequestUpdateParamsPaymentRequestLines>, approval_flow_route_id: i32, draft: bool, issue_date: String) -> PaymentRequestUpdateParams {
         PaymentRequestUpdateParams {
-            account_name: None,
-            account_number: None,
-            account_type: None,
+            company_id,
+            title,
             application_date,
-            approval_flow_route_id,
+            description: None,
+            payment_request_lines,
             approver_id: None,
+            approval_flow_route_id,
+            draft,
+            document_code: None,
+            receipt_ids: None,
+            issue_date,
+            payment_date: None,
+            payment_method: None,
+            partner_id: None,
+            partner_code: None,
             bank_code: None,
             bank_name: None,
             bank_name_kana: None,
             branch_code: None,
-            branch_kana: None,
             branch_name: None,
-            company_id,
-            description: None,
-            document_code: None,
-            draft,
-            issue_date,
-            partner_code: None,
-            partner_id: None,
-            payment_date: None,
-            payment_method: None,
-            payment_request_lines,
-            receipt_ids: None,
-            title,
+            branch_kana: None,
+            account_name: None,
+            account_number: None,
+            account_type: None,
         }
     }
 }
 
+/// '支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)'<br> 'デフォルトは none: 指定なし です。' 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum PaymentMethod {
+    #[serde(rename = "none")]
+    None,
+    #[serde(rename = "domestic_bank_transfer")]
+    DomesticBankTransfer,
+    #[serde(rename = "abroad_bank_transfer")]
+    AbroadBankTransfer,
+    #[serde(rename = "account_transfer")]
+    AccountTransfer,
+    #[serde(rename = "credit_card")]
+    CreditCard,
+}
+
+impl Default for PaymentMethod {
+    fn default() -> PaymentMethod {
+        Self::None
+    }
+}
 /// '口座種別(ordinary: 普通、checking: 当座、earmarked: 納税準備預金、savings: 貯蓄、other: その他)'<br> '支払先指定時には無効'<br> 'デフォルトは ordinary: 普通 です' 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum AccountType {
@@ -132,18 +152,10 @@ pub enum AccountType {
     #[serde(rename = "other")]
     Other,
 }
-/// '支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)'<br> 'デフォルトは none: 指定なし です。' 
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum PaymentMethod {
-    #[serde(rename = "none")]
-    None,
-    #[serde(rename = "domestic_bank_transfer")]
-    DomesticBankTransfer,
-    #[serde(rename = "abroad_bank_transfer")]
-    AbroadBankTransfer,
-    #[serde(rename = "account_transfer")]
-    AccountTransfer,
-    #[serde(rename = "credit_card")]
-    CreditCard,
+
+impl Default for AccountType {
+    fn default() -> AccountType {
+        Self::Ordinary
+    }
 }
 

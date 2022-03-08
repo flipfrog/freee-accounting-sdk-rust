@@ -12,35 +12,41 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ManualJournalUpdateParamsDetails {
+    /// 貸借行ID: 既存貸借行を更新または削除する場合に指定します。IDを指定しない貸借行は、新規行として扱われ追加されます。
+    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
+    pub id: Option<i64>,
+    /// 貸借（貸方: credit, 借方: debit）
+    #[serde(rename = "entry_side")]
+    pub entry_side: EntrySide,
+    /// 税区分コード
+    #[serde(rename = "tax_code")]
+    pub tax_code: i32,
     /// 勘定科目ID
     #[serde(rename = "account_item_id")]
     pub account_item_id: i32,
     /// 取引金額（税込で指定してください）
     #[serde(rename = "amount")]
     pub amount: i64,
-    /// 備考
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    /// 貸借（貸方: credit, 借方: debit）
-    #[serde(rename = "entry_side")]
-    pub entry_side: EntrySide,
-    /// 貸借行ID: 既存貸借行を更新または削除する場合に指定します。IDを指定しない貸借行は、新規行として扱われ追加されます。
-    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
-    pub id: Option<i64>,
-    /// 品目ID
-    #[serde(rename = "item_id", skip_serializing_if = "Option::is_none")]
-    pub item_id: Option<i32>,
-    /// 取引先コード
-    #[serde(rename = "partner_code", skip_serializing_if = "Option::is_none")]
-    pub partner_code: Option<String>,
+    /// 消費税額（指定しない場合は自動で計算されます）
+    #[serde(rename = "vat", skip_serializing_if = "Option::is_none")]
+    pub vat: Option<i32>,
     /// 取引先ID
     #[serde(rename = "partner_id", skip_serializing_if = "Option::is_none")]
     pub partner_id: Option<i32>,
+    /// 取引先コード
+    #[serde(rename = "partner_code", skip_serializing_if = "Option::is_none")]
+    pub partner_code: Option<String>,
+    /// 品目ID
+    #[serde(rename = "item_id", skip_serializing_if = "Option::is_none")]
+    pub item_id: Option<i32>,
     /// 部門ID
     #[serde(rename = "section_id", skip_serializing_if = "Option::is_none")]
     pub section_id: Option<i32>,
+    /// メモタグID
+    #[serde(rename = "tag_ids", skip_serializing_if = "Option::is_none")]
+    pub tag_ids: Option<Vec<i32>>,
     /// セグメント１ID
     #[serde(rename = "segment_1_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_1_tag_id: Option<i64>,
@@ -50,36 +56,30 @@ pub struct ManualJournalUpdateParamsDetails {
     /// セグメント３ID
     #[serde(rename = "segment_3_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_3_tag_id: Option<i64>,
-    /// メモタグID
-    #[serde(rename = "tag_ids", skip_serializing_if = "Option::is_none")]
-    pub tag_ids: Option<Vec<i32>>,
-    /// 税区分コード
-    #[serde(rename = "tax_code")]
-    pub tax_code: i32,
-    /// 消費税額（指定しない場合は自動で計算されます）
-    #[serde(rename = "vat", skip_serializing_if = "Option::is_none")]
-    pub vat: Option<i32>,
+    /// 備考
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
 }
 
 impl ManualJournalUpdateParamsDetails {
     /// 貸借行一覧（配列）: 貸借合わせて100行まで登録できます。
-    pub fn new(account_item_id: i32, amount: i64, entry_side: EntrySide, tax_code: i32) -> ManualJournalUpdateParamsDetails {
+    pub fn new(entry_side: EntrySide, tax_code: i32, account_item_id: i32, amount: i64) -> ManualJournalUpdateParamsDetails {
         ManualJournalUpdateParamsDetails {
+            id: None,
+            entry_side,
+            tax_code,
             account_item_id,
             amount,
-            description: None,
-            entry_side,
-            id: None,
-            item_id: None,
-            partner_code: None,
+            vat: None,
             partner_id: None,
+            partner_code: None,
+            item_id: None,
             section_id: None,
+            tag_ids: None,
             segment_1_tag_id: None,
             segment_2_tag_id: None,
             segment_3_tag_id: None,
-            tag_ids: None,
-            tax_code,
-            vat: None,
+            description: None,
         }
     }
 }
@@ -91,5 +91,11 @@ pub enum EntrySide {
     Debit,
     #[serde(rename = "credit")]
     Credit,
+}
+
+impl Default for EntrySide {
+    fn default() -> EntrySide {
+        Self::Debit
+    }
 }
 

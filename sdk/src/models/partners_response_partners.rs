@@ -13,92 +13,92 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct PartnersResponsePartners {
-    #[serde(rename = "address_attributes", skip_serializing_if = "Option::is_none")]
-    pub address_attributes: Option<Box<crate::models::PartnersResponseAddressAttributes>>,
-    /// 取引先の使用設定（true: 使用する、false: 使用しない） <br> <ul>   <li>     本APIでpartnerを作成した場合はtrueになります。   </li>   <li>     falseにする場合はWeb画面から変更できます。   </li>   <li>     trueの場合、Web画面での取引登録時などに入力候補として表示されます。   </li>   <li>     falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。   </li> </ul>
-    #[serde(rename = "available")]
-    pub available: bool,
+    /// 取引先ID
+    #[serde(rename = "id")]
+    pub id: i32,
     /// 取引先コード
     #[serde(rename = "code")]
     pub code: Option<String>,
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
-    /// 担当者 氏名
-    #[serde(rename = "contact_name", skip_serializing_if = "Option::is_none")]
-    pub contact_name: Option<String>,
-    /// 地域（JP: 国内、ZZ:国外）
-    #[serde(rename = "country_code", skip_serializing_if = "Option::is_none")]
-    pub country_code: Option<String>,
-    /// 敬称（御中、様、(空白)の3つから選択）
-    #[serde(rename = "default_title", skip_serializing_if = "Option::is_none")]
-    pub default_title: Option<String>,
-    /// 担当者 メールアドレス
-    #[serde(rename = "email", skip_serializing_if = "Option::is_none")]
-    pub email: Option<String>,
-    /// 取引先ID
-    #[serde(rename = "id")]
-    pub id: i32,
-    /// 正式名称（255文字以内）
-    #[serde(rename = "long_name", skip_serializing_if = "Option::is_none")]
-    pub long_name: Option<String>,
     /// 取引先名
     #[serde(rename = "name")]
     pub name: String,
-    /// カナ名称（255文字以内）
-    #[serde(rename = "name_kana", skip_serializing_if = "Option::is_none")]
-    pub name_kana: Option<String>,
-    /// 事業所種別（null: 未設定、1: 法人、2: 個人）
-    #[serde(rename = "org_code", skip_serializing_if = "Option::is_none")]
-    pub org_code: Option<i32>,
-    #[serde(rename = "partner_bank_account_attributes", skip_serializing_if = "Option::is_none")]
-    pub partner_bank_account_attributes: Option<Box<crate::models::PartnerResponsePartnerPartnerBankAccountAttributes>>,
-    #[serde(rename = "partner_doc_setting_attributes", skip_serializing_if = "Option::is_none")]
-    pub partner_doc_setting_attributes: Option<Box<crate::models::PartnerResponsePartnerPartnerDocSettingAttributes>>,
-    /// 振込元口座ID（一括振込ファイル用）:（未設定の場合は、nullです。）
-    #[serde(rename = "payer_walletable_id", skip_serializing_if = "Option::is_none")]
-    pub payer_walletable_id: Option<i32>,
-    /// 電話番号
-    #[serde(rename = "phone", skip_serializing_if = "Option::is_none")]
-    pub phone: Option<String>,
+    /// 更新日 (yyyy-mm-dd)
+    #[serde(rename = "update_date")]
+    pub update_date: String,
+    /// 取引先の使用設定（true: 使用する、false: 使用しない） <br> <ul>   <li>     本APIでpartnerを作成した場合はtrueになります。   </li>   <li>     falseにする場合はWeb画面から変更できます。   </li>   <li>     trueの場合、Web画面での取引登録時などに入力候補として表示されます。   </li>   <li>     falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。   </li> </ul>
+    #[serde(rename = "available")]
+    pub available: bool,
     /// ショートカット1 (20文字以内)
     #[serde(rename = "shortcut1", skip_serializing_if = "Option::is_none")]
     pub shortcut1: Option<String>,
     /// ショートカット2 (20文字以内)
     #[serde(rename = "shortcut2", skip_serializing_if = "Option::is_none")]
     pub shortcut2: Option<String>,
+    /// 事業所種別（null: 未設定、1: 法人、2: 個人）
+    #[serde(rename = "org_code", skip_serializing_if = "Option::is_none")]
+    pub org_code: Option<i32>,
+    /// 地域（JP: 国内、ZZ:国外）
+    #[serde(rename = "country_code", skip_serializing_if = "Option::is_none")]
+    pub country_code: Option<String>,
+    /// 正式名称（255文字以内）
+    #[serde(rename = "long_name", skip_serializing_if = "Option::is_none")]
+    pub long_name: Option<String>,
+    /// カナ名称（255文字以内）
+    #[serde(rename = "name_kana", skip_serializing_if = "Option::is_none")]
+    pub name_kana: Option<String>,
+    /// 敬称（御中、様、(空白)の3つから選択）
+    #[serde(rename = "default_title", skip_serializing_if = "Option::is_none")]
+    pub default_title: Option<String>,
+    /// 電話番号
+    #[serde(rename = "phone", skip_serializing_if = "Option::is_none")]
+    pub phone: Option<String>,
+    /// 担当者 氏名
+    #[serde(rename = "contact_name", skip_serializing_if = "Option::is_none")]
+    pub contact_name: Option<String>,
+    /// 担当者 メールアドレス
+    #[serde(rename = "email", skip_serializing_if = "Option::is_none")]
+    pub email: Option<String>,
+    /// 振込元口座ID（一括振込ファイル用）:（未設定の場合は、nullです。）
+    #[serde(rename = "payer_walletable_id", skip_serializing_if = "Option::is_none")]
+    pub payer_walletable_id: Option<i32>,
     /// 振込手数料負担（一括振込ファイル用）: (振込元(当方): payer, 振込先(先方): payee)
     #[serde(rename = "transfer_fee_handling_side", skip_serializing_if = "Option::is_none")]
     pub transfer_fee_handling_side: Option<TransferFeeHandlingSide>,
-    /// 更新日 (yyyy-mm-dd)
-    #[serde(rename = "update_date")]
-    pub update_date: String,
+    #[serde(rename = "address_attributes", skip_serializing_if = "Option::is_none")]
+    pub address_attributes: Option<Box<crate::models::PartnersResponseAddressAttributes>>,
+    #[serde(rename = "partner_doc_setting_attributes", skip_serializing_if = "Option::is_none")]
+    pub partner_doc_setting_attributes: Option<Box<crate::models::PartnersResponsePartnerDocSettingAttributes>>,
+    #[serde(rename = "partner_bank_account_attributes", skip_serializing_if = "Option::is_none")]
+    pub partner_bank_account_attributes: Option<Box<crate::models::PartnersResponsePartnerBankAccountAttributes>>,
 }
 
 impl PartnersResponsePartners {
-    pub fn new(available: bool, code: Option<String>, company_id: i32, id: i32, name: String, update_date: String) -> PartnersResponsePartners {
+    pub fn new(id: i32, code: Option<String>, company_id: i32, name: String, update_date: String, available: bool) -> PartnersResponsePartners {
         PartnersResponsePartners {
-            address_attributes: None,
-            available,
+            id,
             code,
             company_id,
-            contact_name: None,
-            country_code: None,
-            default_title: None,
-            email: None,
-            id,
-            long_name: None,
             name,
-            name_kana: None,
-            org_code: None,
-            partner_bank_account_attributes: None,
-            partner_doc_setting_attributes: None,
-            payer_walletable_id: None,
-            phone: None,
+            update_date,
+            available,
             shortcut1: None,
             shortcut2: None,
+            org_code: None,
+            country_code: None,
+            long_name: None,
+            name_kana: None,
+            default_title: None,
+            phone: None,
+            contact_name: None,
+            email: None,
+            payer_walletable_id: None,
             transfer_fee_handling_side: None,
-            update_date,
+            address_attributes: None,
+            partner_doc_setting_attributes: None,
+            partner_bank_account_attributes: None,
         }
     }
 }
@@ -110,5 +110,11 @@ pub enum TransferFeeHandlingSide {
     Payer,
     #[serde(rename = "payee")]
     Payee,
+}
+
+impl Default for TransferFeeHandlingSide {
+    fn default() -> TransferFeeHandlingSide {
+        Self::Payer
+    }
 }
 

@@ -11,52 +11,52 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct DealCreateParams {
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
-    #[serde(rename = "details")]
-    pub details: Vec<crate::models::DealCreateParamsDetails>,
-    /// 支払期日(yyyy-mm-dd)
-    #[serde(rename = "due_date", skip_serializing_if = "Option::is_none")]
-    pub due_date: Option<String>,
     /// 発生日 (yyyy-mm-dd)
     #[serde(rename = "issue_date")]
     pub issue_date: String,
-    /// 取引先コード
-    #[serde(rename = "partner_code", skip_serializing_if = "Option::is_none")]
-    pub partner_code: Option<String>,
+    /// 収支区分 (収入: income, 支出: expense)
+    #[serde(rename = "type")]
+    pub _type: Type,
+    /// 事業所ID
+    #[serde(rename = "company_id")]
+    pub company_id: i32,
+    /// 支払期日(yyyy-mm-dd)
+    #[serde(rename = "due_date", skip_serializing_if = "Option::is_none")]
+    pub due_date: Option<String>,
     /// 取引先ID
     #[serde(rename = "partner_id", skip_serializing_if = "Option::is_none")]
     pub partner_id: Option<i32>,
+    /// 取引先コード
+    #[serde(rename = "partner_code", skip_serializing_if = "Option::is_none")]
+    pub partner_code: Option<String>,
+    /// 管理番号
+    #[serde(rename = "ref_number", skip_serializing_if = "Option::is_none")]
+    pub ref_number: Option<String>,
+    #[serde(rename = "details")]
+    pub details: Vec<crate::models::DealCreateParamsDetails>,
     /// 支払行一覧（配列）：未指定の場合、未決済の取引を作成します。
     #[serde(rename = "payments", skip_serializing_if = "Option::is_none")]
     pub payments: Option<Vec<crate::models::DealCreateParamsPayments>>,
     /// 証憑ファイルID（ファイルボックスのファイルID）（配列）
     #[serde(rename = "receipt_ids", skip_serializing_if = "Option::is_none")]
     pub receipt_ids: Option<Vec<i32>>,
-    /// 管理番号
-    #[serde(rename = "ref_number", skip_serializing_if = "Option::is_none")]
-    pub ref_number: Option<String>,
-    /// 収支区分 (収入: income, 支出: expense)
-    #[serde(rename = "type")]
-    pub _type: Type,
 }
 
 impl DealCreateParams {
-    pub fn new(company_id: i32, details: Vec<crate::models::DealCreateParamsDetails>, issue_date: String, _type: Type) -> DealCreateParams {
+    pub fn new(issue_date: String, _type: Type, company_id: i32, details: Vec<crate::models::DealCreateParamsDetails>) -> DealCreateParams {
         DealCreateParams {
-            company_id,
-            details,
-            due_date: None,
             issue_date,
-            partner_code: None,
+            _type,
+            company_id,
+            due_date: None,
             partner_id: None,
+            partner_code: None,
+            ref_number: None,
+            details,
             payments: None,
             receipt_ids: None,
-            ref_number: None,
-            _type,
         }
     }
 }
@@ -68,5 +68,11 @@ pub enum Type {
     Income,
     #[serde(rename = "expense")]
     Expense,
+}
+
+impl Default for Type {
+    fn default() -> Type {
+        Self::Income
+    }
 }
 

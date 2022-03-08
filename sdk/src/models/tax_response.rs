@@ -14,11 +14,11 @@
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct TaxResponse {
     #[serde(rename = "tax")]
-    pub tax: Box<crate::models::TaxResponseTax>,
+    pub tax: Box<crate::models::Tax>,
 }
 
 impl TaxResponse {
-    pub fn new(tax: crate::models::TaxResponseTax) -> TaxResponse {
+    pub fn new(tax: crate::models::Tax) -> TaxResponse {
         TaxResponse {
             tax: Box::new(tax),
         }

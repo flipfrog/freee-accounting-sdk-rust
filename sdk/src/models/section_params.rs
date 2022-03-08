@@ -16,32 +16,32 @@ pub struct SectionParams {
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
-    /// 正式名称 (255文字以内)
-    #[serde(rename = "long_name", skip_serializing_if = "Option::is_none")]
-    pub long_name: Option<String>,
     /// 部門名 (30文字以内)
     #[serde(rename = "name")]
     pub name: String,
-    /// 親部門ID (個人:プレミアムプラン、法人:ベーシックプラン以上)
-    #[serde(rename = "parent_id", skip_serializing_if = "Option::is_none")]
-    pub parent_id: Option<i32>,
+    /// 正式名称 (255文字以内)
+    #[serde(rename = "long_name", skip_serializing_if = "Option::is_none")]
+    pub long_name: Option<String>,
     /// ショートカット１ (20文字以内)
     #[serde(rename = "shortcut1", skip_serializing_if = "Option::is_none")]
     pub shortcut1: Option<String>,
     /// ショートカット２ (20文字以内)
     #[serde(rename = "shortcut2", skip_serializing_if = "Option::is_none")]
     pub shortcut2: Option<String>,
+    /// 親部門ID (個人:プレミアムプラン、法人:ベーシックプラン以上)
+    #[serde(rename = "parent_id", skip_serializing_if = "Option::is_none")]
+    pub parent_id: Option<i32>,
 }
 
 impl SectionParams {
     pub fn new(company_id: i32, name: String) -> SectionParams {
         SectionParams {
             company_id,
-            long_name: None,
             name,
-            parent_id: None,
+            long_name: None,
             shortcut1: None,
             shortcut2: None,
+            parent_id: None,
         }
     }
 }

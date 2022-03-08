@@ -13,21 +13,21 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct TrialCrSectionsResponseTrialCrSectionsSections {
-    /// 期末残高
-    #[serde(rename = "closing_balance", skip_serializing_if = "Option::is_none")]
-    pub closing_balance: Option<i32>,
     /// 部門ID
     #[serde(rename = "id")]
     pub id: i32,
-    /// breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる
-    #[serde(rename = "items", skip_serializing_if = "Option::is_none")]
-    pub items: Option<Vec<crate::models::TrialCrSectionsResponseTrialCrSectionsItems>>,
     /// 部門名
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// 期末残高
+    #[serde(rename = "closing_balance", skip_serializing_if = "Option::is_none")]
+    pub closing_balance: Option<i32>,
     /// breakdown_display_type:partner, account_item_display_type:account_item指定時のみ含まれる
     #[serde(rename = "partners", skip_serializing_if = "Option::is_none")]
     pub partners: Option<Vec<crate::models::TrialCrSectionsResponseTrialCrSectionsPartners>>,
+    /// breakdown_display_type:item, account_item_display_type:account_item指定時のみ含まれる
+    #[serde(rename = "items", skip_serializing_if = "Option::is_none")]
+    pub items: Option<Vec<crate::models::TrialCrSectionsResponseTrialCrSectionsItems>>,
     /// breakdown_display_type:segment_1_tag, account_item_display_type:account_item指定時のみ含まれる
     #[serde(rename = "segment_1_tags", skip_serializing_if = "Option::is_none")]
     pub segment_1_tags: Option<Vec<crate::models::TrialCrSectionsResponseTrialCrSectionsSegment1Tags>>,
@@ -42,11 +42,11 @@ pub struct TrialCrSectionsResponseTrialCrSectionsSections {
 impl TrialCrSectionsResponseTrialCrSectionsSections {
     pub fn new(id: i32) -> TrialCrSectionsResponseTrialCrSectionsSections {
         TrialCrSectionsResponseTrialCrSectionsSections {
-            closing_balance: None,
             id,
-            items: None,
             name: None,
+            closing_balance: None,
             partners: None,
+            items: None,
             segment_1_tags: None,
             segment_2_tags: None,
             segment_3_tags: None,

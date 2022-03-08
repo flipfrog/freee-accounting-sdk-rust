@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct QuotationResponse {
     #[serde(rename = "quotation")]
     pub quotation: Box<crate::models::QuotationResponseQuotation>,

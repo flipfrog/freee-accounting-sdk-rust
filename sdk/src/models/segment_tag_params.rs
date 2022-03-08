@@ -16,12 +16,12 @@ pub struct SegmentTagParams {
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
-    /// 備考 (30文字以内)
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
     /// セグメントタグ名 (30文字以内)
     #[serde(rename = "name")]
     pub name: String,
+    /// 備考 (30文字以内)
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     /// ショートカット１ (20文字以内)
     #[serde(rename = "shortcut1", skip_serializing_if = "Option::is_none")]
     pub shortcut1: Option<String>,
@@ -34,8 +34,8 @@ impl SegmentTagParams {
     pub fn new(company_id: i32, name: String) -> SegmentTagParams {
         SegmentTagParams {
             company_id,
-            description: None,
             name,
+            description: None,
             shortcut1: None,
             shortcut2: None,
         }

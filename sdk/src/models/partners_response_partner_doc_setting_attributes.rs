@@ -37,3 +37,9 @@ pub enum SendingMethod {
     EmailAndPosting,
 }
 
+impl Default for SendingMethod {
+    fn default() -> SendingMethod {
+        Self::Email
+    }
+}
+

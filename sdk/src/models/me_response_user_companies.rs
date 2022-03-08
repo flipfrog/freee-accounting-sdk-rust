@@ -11,33 +11,33 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct MeResponseUserCompanies {
-    /// アドバイザープロファイルID（アドバイザー事業所で無い場合にnullになります）
-    #[serde(rename = "advisor_id", skip_serializing_if = "Option::is_none")]
-    pub advisor_id: Option<i32>,
-    /// 表示名
-    #[serde(rename = "display_name")]
-    pub display_name: String,
     /// 事業所ID
     #[serde(rename = "id")]
     pub id: i32,
+    /// 表示名
+    #[serde(rename = "display_name")]
+    pub display_name: String,
     /// ユーザーの権限
     #[serde(rename = "role")]
     pub role: Role,
     /// カスタム権限（true: 使用する、false: 使用しない）
     #[serde(rename = "use_custom_role")]
     pub use_custom_role: bool,
+    /// アドバイザープロファイルID（アドバイザー事業所で無い場合にnullになります）
+    #[serde(rename = "advisor_id", skip_serializing_if = "Option::is_none")]
+    pub advisor_id: Option<i32>,
 }
 
 impl MeResponseUserCompanies {
-    pub fn new(display_name: String, id: i32, role: Role, use_custom_role: bool) -> MeResponseUserCompanies {
+    pub fn new(id: i32, display_name: String, role: Role, use_custom_role: bool) -> MeResponseUserCompanies {
         MeResponseUserCompanies {
-            advisor_id: None,
-            display_name,
             id,
+            display_name,
             role,
             use_custom_role,
+            advisor_id: None,
         }
     }
 }
@@ -53,5 +53,11 @@ pub enum Role {
     SelfOnly,
     #[serde(rename = "read_only")]
     ReadOnly,
+}
+
+impl Default for Role {
+    fn default() -> Role {
+        Self::Admin
+    }
 }
 

@@ -13,26 +13,26 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ManualJournalCreateParams {
-    /// 決算整理仕訳フラグ（falseまたは未指定の場合: 日常仕訳）
-    #[serde(rename = "adjustment", skip_serializing_if = "Option::is_none")]
-    pub adjustment: Option<bool>,
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
-    #[serde(rename = "details")]
-    pub details: Vec<crate::models::ManualJournalCreateParamsDetails>,
     /// 発生日 (yyyy-mm-dd)
     #[serde(rename = "issue_date")]
     pub issue_date: String,
+    /// 決算整理仕訳フラグ（falseまたは未指定の場合: 日常仕訳）
+    #[serde(rename = "adjustment", skip_serializing_if = "Option::is_none")]
+    pub adjustment: Option<bool>,
+    #[serde(rename = "details")]
+    pub details: Vec<crate::models::ManualJournalCreateParamsDetails>,
 }
 
 impl ManualJournalCreateParams {
-    pub fn new(company_id: i32, details: Vec<crate::models::ManualJournalCreateParamsDetails>, issue_date: String) -> ManualJournalCreateParams {
+    pub fn new(company_id: i32, issue_date: String, details: Vec<crate::models::ManualJournalCreateParamsDetails>) -> ManualJournalCreateParams {
         ManualJournalCreateParams {
-            adjustment: None,
             company_id,
-            details,
             issue_date,
+            adjustment: None,
+            details,
         }
     }
 }

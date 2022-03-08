@@ -13,27 +13,27 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct InvoiceIndexResponseTotalAmountPerVatRate {
-    /// 軽減税率8%の税込み金額合計
-    #[serde(rename = "reduced_vat_8")]
-    pub reduced_vat_8: i64,
-    /// 税率10%の税込み金額合計
-    #[serde(rename = "vat_10")]
-    pub vat_10: i64,
     /// 税率5%の税込み金額合計
     #[serde(rename = "vat_5")]
     pub vat_5: i64,
     /// 税率8%の税込み金額合計
     #[serde(rename = "vat_8")]
     pub vat_8: i64,
+    /// 軽減税率8%の税込み金額合計
+    #[serde(rename = "reduced_vat_8")]
+    pub reduced_vat_8: i64,
+    /// 税率10%の税込み金額合計
+    #[serde(rename = "vat_10")]
+    pub vat_10: i64,
 }
 
 impl InvoiceIndexResponseTotalAmountPerVatRate {
-    pub fn new(reduced_vat_8: i64, vat_10: i64, vat_5: i64, vat_8: i64) -> InvoiceIndexResponseTotalAmountPerVatRate {
+    pub fn new(vat_5: i64, vat_8: i64, reduced_vat_8: i64, vat_10: i64) -> InvoiceIndexResponseTotalAmountPerVatRate {
         InvoiceIndexResponseTotalAmountPerVatRate {
-            reduced_vat_8,
-            vat_10,
             vat_5,
             vat_8,
+            reduced_vat_8,
+            vat_10,
         }
     }
 }

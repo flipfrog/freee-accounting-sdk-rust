@@ -83,3 +83,9 @@ pub enum Type {
     NinjaSignDocument,
 }
 
+impl Default for Type {
+    fn default() -> Type {
+        Self::Title
+    }
+}
+

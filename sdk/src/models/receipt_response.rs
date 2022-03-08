@@ -11,14 +11,14 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ReceiptResponse {
     #[serde(rename = "receipt")]
-    pub receipt: Box<crate::models::ReceiptResponseReceipt>,
+    pub receipt: Box<crate::models::Receipt>,
 }
 
 impl ReceiptResponse {
-    pub fn new(receipt: crate::models::ReceiptResponseReceipt) -> ReceiptResponse {
+    pub fn new(receipt: crate::models::Receipt) -> ReceiptResponse {
         ReceiptResponse {
             receipt: Box::new(receipt),
         }

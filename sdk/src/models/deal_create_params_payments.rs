@@ -11,29 +11,29 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct DealCreateParamsPayments {
     /// 支払金額：payments指定時は必須
     #[serde(rename = "amount")]
     pub amount: i64,
-    /// 支払日：payments指定時は必須
-    #[serde(rename = "date")]
-    pub date: String,
     /// 口座ID（from_walletable_typeがprivate_account_itemの場合は勘定科目ID）：payments指定時は必須
     #[serde(rename = "from_walletable_id")]
     pub from_walletable_id: i32,
     /// 口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet, プライベート資金（法人の場合は役員借入金もしくは役員借入金、個人の場合は事業主貸もしくは事業主借）: private_account_item)：payments指定時は必須
     #[serde(rename = "from_walletable_type")]
     pub from_walletable_type: FromWalletableType,
+    /// 支払日：payments指定時は必須
+    #[serde(rename = "date")]
+    pub date: String,
 }
 
 impl DealCreateParamsPayments {
-    pub fn new(amount: i64, date: String, from_walletable_id: i32, from_walletable_type: FromWalletableType) -> DealCreateParamsPayments {
+    pub fn new(amount: i64, from_walletable_id: i32, from_walletable_type: FromWalletableType, date: String) -> DealCreateParamsPayments {
         DealCreateParamsPayments {
             amount,
-            date,
             from_walletable_id,
             from_walletable_type,
+            date,
         }
     }
 }
@@ -49,5 +49,11 @@ pub enum FromWalletableType {
     Wallet,
     #[serde(rename = "private_account_item")]
     PrivateAccountItem,
+}
+
+impl Default for FromWalletableType {
+    fn default() -> FromWalletableType {
+        Self::BankAccount
+    }
 }
 

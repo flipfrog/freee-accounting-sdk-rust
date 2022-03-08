@@ -13,47 +13,47 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ApprovalFlowRouteResponseApprovalFlowRoute {
-    /// システム作成の申請経路かどうか
-    #[serde(rename = "definition_system", skip_serializing_if = "Option::is_none")]
-    pub definition_system: Option<bool>,
-    /// 申請経路の説明
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    /// 最初の承認ステップのID
-    #[serde(rename = "first_step_id", skip_serializing_if = "Option::is_none")]
-    pub first_step_id: Option<i32>,
     /// 申請経路ID
     #[serde(rename = "id")]
     pub id: i32,
     /// 申請経路名
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// 申請経路の説明
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    /// 更新したユーザーのユーザーID
+    #[serde(rename = "user_id", skip_serializing_if = "Option::is_none")]
+    pub user_id: Option<i32>,
+    /// システム作成の申請経路かどうか
+    #[serde(rename = "definition_system", skip_serializing_if = "Option::is_none")]
+    pub definition_system: Option<bool>,
+    /// 最初の承認ステップのID
+    #[serde(rename = "first_step_id", skip_serializing_if = "Option::is_none")]
+    pub first_step_id: Option<i32>,
+    /// 申請種別（申請経路を使用できる申請種別を示します。例えば、ApprovalRequest の場合は、各種申請で使用できる申請経路です。） * `TxnApproval` - 仕訳承認 * `ExpenseApplication` - 経費精算 * `PaymentRequest` - 支払依頼 * `ApprovalRequest` - 各種申請 * `DocApproval` - 請求書等 (見積書・納品書・請求書・発注書)
+    #[serde(rename = "usages", skip_serializing_if = "Option::is_none")]
+    pub usages: Option<Vec<Usages>>,
     /// 申請経路で利用できる申請フォームID配列
     #[serde(rename = "request_form_ids")]
     pub request_form_ids: Vec<i32>,
     /// 承認ステップ（配列）
     #[serde(rename = "steps", skip_serializing_if = "Option::is_none")]
     pub steps: Option<Vec<crate::models::ApprovalFlowRouteResponseApprovalFlowRouteSteps>>,
-    /// 申請種別（申請経路を使用できる申請種別を示します。例えば、ApprovalRequest の場合は、各種申請で使用できる申請経路です。） * `TxnApproval` - 仕訳承認 * `ExpenseApplication` - 経費精算 * `PaymentRequest` - 支払依頼 * `ApprovalRequest` - 各種申請 * `DocApproval` - 請求書等 (見積書・納品書・請求書・発注書)
-    #[serde(rename = "usages", skip_serializing_if = "Option::is_none")]
-    pub usages: Option<Vec<Usages>>,
-    /// 更新したユーザーのユーザーID
-    #[serde(rename = "user_id", skip_serializing_if = "Option::is_none")]
-    pub user_id: Option<i32>,
 }
 
 impl ApprovalFlowRouteResponseApprovalFlowRoute {
     pub fn new(id: i32, request_form_ids: Vec<i32>) -> ApprovalFlowRouteResponseApprovalFlowRoute {
         ApprovalFlowRouteResponseApprovalFlowRoute {
-            definition_system: None,
-            description: None,
-            first_step_id: None,
             id,
             name: None,
+            description: None,
+            user_id: None,
+            definition_system: None,
+            first_step_id: None,
+            usages: None,
             request_form_ids,
             steps: None,
-            usages: None,
-            user_id: None,
         }
     }
 }
@@ -71,5 +71,11 @@ pub enum Usages {
     ApprovalRequest,
     #[serde(rename = "DocApproval")]
     DocApproval,
+}
+
+impl Default for Usages {
+    fn default() -> Usages {
+        Self::TxnApproval
+    }
 }
 

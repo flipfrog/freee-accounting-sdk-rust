@@ -11,47 +11,47 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct JournalStatusResponseJournals {
+    /// 受け付けID
+    #[serde(rename = "id")]
+    pub id: i32,
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
     /// ダウンロード形式
     #[serde(rename = "download_type")]
     pub download_type: DownloadType,
-    /// ダウンロードURL
-    #[serde(rename = "download_url", skip_serializing_if = "Option::is_none")]
-    pub download_url: Option<String>,
-    /// 取得終了日 (yyyy-mm-dd)
-    #[serde(rename = "end_date")]
-    pub end_date: String,
-    /// 受け付けID
-    #[serde(rename = "id")]
-    pub id: i32,
-    /// 取得開始日 (yyyy-mm-dd)
-    #[serde(rename = "start_date")]
-    pub start_date: String,
     /// ダウンロードリクエストのステータス
     #[serde(rename = "status")]
     pub status: Status,
-    #[serde(rename = "visible_ids", skip_serializing_if = "Option::is_none")]
-    pub visible_ids: Option<Vec<VisibleIds>>,
+    /// 取得開始日 (yyyy-mm-dd)
+    #[serde(rename = "start_date")]
+    pub start_date: String,
+    /// 取得終了日 (yyyy-mm-dd)
+    #[serde(rename = "end_date")]
+    pub end_date: String,
     #[serde(rename = "visible_tags", skip_serializing_if = "Option::is_none")]
     pub visible_tags: Option<Vec<VisibleTags>>,
+    #[serde(rename = "visible_ids", skip_serializing_if = "Option::is_none")]
+    pub visible_ids: Option<Vec<VisibleIds>>,
+    /// ダウンロードURL
+    #[serde(rename = "download_url", skip_serializing_if = "Option::is_none")]
+    pub download_url: Option<String>,
 }
 
 impl JournalStatusResponseJournals {
-    pub fn new(company_id: i32, download_type: DownloadType, end_date: String, id: i32, start_date: String, status: Status) -> JournalStatusResponseJournals {
+    pub fn new(id: i32, company_id: i32, download_type: DownloadType, status: Status, start_date: String, end_date: String) -> JournalStatusResponseJournals {
         JournalStatusResponseJournals {
+            id,
             company_id,
             download_type,
-            download_url: None,
-            end_date,
-            id,
-            start_date,
             status,
-            visible_ids: None,
+            start_date,
+            end_date,
             visible_tags: None,
+            visible_ids: None,
+            download_url: None,
         }
     }
 }
@@ -66,6 +66,12 @@ pub enum DownloadType {
     #[serde(rename = "pdf")]
     Pdf,
 }
+
+impl Default for DownloadType {
+    fn default() -> DownloadType {
+        Self::Csv
+    }
+}
 /// ダウンロードリクエストのステータス
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum Status {
@@ -78,15 +84,11 @@ pub enum Status {
     #[serde(rename = "failed")]
     Failed,
 }
-/// 
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum VisibleIds {
-    #[serde(rename = "deal_id")]
-    DealId,
-    #[serde(rename = "transfer_id")]
-    TransferId,
-    #[serde(rename = "manual_journal_id")]
-    ManualJournalId,
+
+impl Default for Status {
+    fn default() -> Status {
+        Self::Enqueued
+    }
 }
 /// 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
@@ -111,5 +113,27 @@ pub enum VisibleTags {
     Segment2Tag,
     #[serde(rename = "segment_3_tag")]
     Segment3Tag,
+}
+
+impl Default for VisibleTags {
+    fn default() -> VisibleTags {
+        Self::Partner
+    }
+}
+/// 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum VisibleIds {
+    #[serde(rename = "deal_id")]
+    DealId,
+    #[serde(rename = "transfer_id")]
+    TransferId,
+    #[serde(rename = "manual_journal_id")]
+    ManualJournalId,
+}
+
+impl Default for VisibleIds {
+    fn default() -> VisibleIds {
+        Self::DealId
+    }
 }
 

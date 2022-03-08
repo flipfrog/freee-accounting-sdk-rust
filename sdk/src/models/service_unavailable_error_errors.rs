@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ServiceUnavailableErrorErrors {
     #[serde(rename = "messages")]
     pub messages: Vec<String>,
@@ -35,5 +35,11 @@ pub enum Type {
     Status,
     #[serde(rename = "error")]
     Error,
+}
+
+impl Default for Type {
+    fn default() -> Type {
+        Self::Status
+    }
 }
 

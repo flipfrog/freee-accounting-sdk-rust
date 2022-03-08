@@ -13,18 +13,18 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct AccountItemParams {
-    #[serde(rename = "account_item")]
-    pub account_item: Box<crate::models::AccountItemParamsAccountItem>,
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
+    #[serde(rename = "account_item")]
+    pub account_item: Box<crate::models::AccountItemParamsAccountItem>,
 }
 
 impl AccountItemParams {
-    pub fn new(account_item: crate::models::AccountItemParamsAccountItem, company_id: i32) -> AccountItemParams {
+    pub fn new(company_id: i32, account_item: crate::models::AccountItemParamsAccountItem) -> AccountItemParams {
         AccountItemParams {
-            account_item: Box::new(account_item),
             company_id,
+            account_item: Box::new(account_item),
         }
     }
 }

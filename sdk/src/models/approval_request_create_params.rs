@@ -13,24 +13,24 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ApprovalRequestCreateParams {
+    /// 事業所ID
+    #[serde(rename = "company_id")]
+    pub company_id: i32,
     /// 申請日 (yyyy-mm-dd)
     #[serde(rename = "application_date")]
     pub application_date: String,
     /// 申請経路ID
     #[serde(rename = "approval_flow_route_id")]
     pub approval_flow_route_id: i32,
-    /// 承認者のユーザーID
-    #[serde(rename = "approver_id", skip_serializing_if = "Option::is_none")]
-    pub approver_id: Option<i32>,
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
-    /// falseの時、in_progress:申請中で作成する。それ以外の時はdraft:下書きで作成する
-    #[serde(rename = "draft")]
-    pub draft: bool,
     /// 申請フォームID
     #[serde(rename = "form_id")]
     pub form_id: i32,
+    /// 承認者のユーザーID
+    #[serde(rename = "approver_id", skip_serializing_if = "Option::is_none")]
+    pub approver_id: Option<i32>,
+    /// falseの時、in_progress:申請中で作成する。それ以外の時はdraft:下書きで作成する
+    #[serde(rename = "draft")]
+    pub draft: bool,
     /// 親申請ID(既存各種申請IDのみ指定可能です。)
     #[serde(rename = "parent_id", skip_serializing_if = "Option::is_none")]
     pub parent_id: Option<i32>,
@@ -39,14 +39,14 @@ pub struct ApprovalRequestCreateParams {
 }
 
 impl ApprovalRequestCreateParams {
-    pub fn new(application_date: String, approval_flow_route_id: i32, company_id: i32, draft: bool, form_id: i32, request_items: Vec<crate::models::ApprovalRequestCreateParamsRequestItems>) -> ApprovalRequestCreateParams {
+    pub fn new(company_id: i32, application_date: String, approval_flow_route_id: i32, form_id: i32, draft: bool, request_items: Vec<crate::models::ApprovalRequestCreateParamsRequestItems>) -> ApprovalRequestCreateParams {
         ApprovalRequestCreateParams {
+            company_id,
             application_date,
             approval_flow_route_id,
-            approver_id: None,
-            company_id,
-            draft,
             form_id,
+            approver_id: None,
+            draft,
             parent_id: None,
             request_items,
         }

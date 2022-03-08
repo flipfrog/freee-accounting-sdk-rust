@@ -11,17 +11,11 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct SelectablesIndexResponseAccountCategories {
-    /// 勘定科目の一覧
-    #[serde(rename = "account_items")]
-    pub account_items: Vec<crate::models::SelectablesIndexResponseAccountItems>,
     /// 収支
     #[serde(rename = "balance")]
     pub balance: Balance,
-    /// カテゴリーの説明
-    #[serde(rename = "desc", skip_serializing_if = "Option::is_none")]
-    pub desc: Option<String>,
     /// 事業形態（個人事業主: personal、法人: corporate）
     #[serde(rename = "org_code")]
     pub org_code: OrgCode,
@@ -31,17 +25,23 @@ pub struct SelectablesIndexResponseAccountCategories {
     /// カテゴリー名
     #[serde(rename = "title")]
     pub title: String,
+    /// カテゴリーの説明
+    #[serde(rename = "desc", skip_serializing_if = "Option::is_none")]
+    pub desc: Option<String>,
+    /// 勘定科目の一覧
+    #[serde(rename = "account_items")]
+    pub account_items: Vec<crate::models::SelectablesIndexResponseAccountItems>,
 }
 
 impl SelectablesIndexResponseAccountCategories {
-    pub fn new(account_items: Vec<crate::models::SelectablesIndexResponseAccountItems>, balance: Balance, org_code: OrgCode, role: String, title: String) -> SelectablesIndexResponseAccountCategories {
+    pub fn new(balance: Balance, org_code: OrgCode, role: String, title: String, account_items: Vec<crate::models::SelectablesIndexResponseAccountItems>) -> SelectablesIndexResponseAccountCategories {
         SelectablesIndexResponseAccountCategories {
-            account_items,
             balance,
-            desc: None,
             org_code,
             role,
             title,
+            desc: None,
+            account_items,
         }
     }
 }
@@ -54,6 +54,12 @@ pub enum Balance {
     #[serde(rename = "income")]
     Income,
 }
+
+impl Default for Balance {
+    fn default() -> Balance {
+        Self::Expense
+    }
+}
 /// 事業形態（個人事業主: personal、法人: corporate）
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum OrgCode {
@@ -61,5 +67,11 @@ pub enum OrgCode {
     Personal,
     #[serde(rename = "corporate")]
     Corporate,
+}
+
+impl Default for OrgCode {
+    fn default() -> OrgCode {
+        Self::Personal
+    }
 }
 

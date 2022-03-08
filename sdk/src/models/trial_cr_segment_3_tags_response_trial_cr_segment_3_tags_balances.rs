@@ -13,47 +13,47 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct TrialCrSegment3TagsResponseTrialCrSegment3TagsBalances {
-    /// 勘定科目カテゴリー名
-    #[serde(rename = "account_category_name", skip_serializing_if = "Option::is_none")]
-    pub account_category_name: Option<String>,
-    /// 決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)
-    #[serde(rename = "account_group_name", skip_serializing_if = "Option::is_none")]
-    pub account_group_name: Option<String>,
     /// 勘定科目ID(勘定科目の時のみ含まれる)
     #[serde(rename = "account_item_id", skip_serializing_if = "Option::is_none")]
     pub account_item_id: Option<i32>,
     /// 勘定科目名(勘定科目の時のみ含まれる)
     #[serde(rename = "account_item_name", skip_serializing_if = "Option::is_none")]
     pub account_item_name: Option<String>,
-    /// 期末残高
-    #[serde(rename = "closing_balance", skip_serializing_if = "Option::is_none")]
-    pub closing_balance: Option<i32>,
+    /// 決算書表示名(account_item_display_type:group指定時に決算書表示名の時のみ含まれる)
+    #[serde(rename = "account_group_name", skip_serializing_if = "Option::is_none")]
+    pub account_group_name: Option<String>,
+    /// セグメント3タグ
+    #[serde(rename = "segment_3_tags", skip_serializing_if = "Option::is_none")]
+    pub segment_3_tags: Option<Vec<crate::models::TrialCrSegment3TagsResponseTrialCrSegment3TagsSegment3Tags>>,
+    /// 勘定科目カテゴリー名
+    #[serde(rename = "account_category_name", skip_serializing_if = "Option::is_none")]
+    pub account_category_name: Option<String>,
+    /// 合計行(勘定科目カテゴリーの時のみ含まれる)
+    #[serde(rename = "total_line", skip_serializing_if = "Option::is_none")]
+    pub total_line: Option<bool>,
     /// 階層レベル
     #[serde(rename = "hierarchy_level", skip_serializing_if = "Option::is_none")]
     pub hierarchy_level: Option<i32>,
     /// 上位勘定科目カテゴリー名(勘定科目カテゴリーの時のみ、上層が存在する場合含まれる)
     #[serde(rename = "parent_account_category_name", skip_serializing_if = "Option::is_none")]
     pub parent_account_category_name: Option<String>,
-    /// セグメント3タグ
-    #[serde(rename = "segment_3_tags", skip_serializing_if = "Option::is_none")]
-    pub segment_3_tags: Option<Vec<crate::models::TrialCrSegment3TagsResponseTrialCrSegment3TagsSegment3Tags>>,
-    /// 合計行(勘定科目カテゴリーの時のみ含まれる)
-    #[serde(rename = "total_line", skip_serializing_if = "Option::is_none")]
-    pub total_line: Option<bool>,
+    /// 期末残高
+    #[serde(rename = "closing_balance", skip_serializing_if = "Option::is_none")]
+    pub closing_balance: Option<i32>,
 }
 
 impl TrialCrSegment3TagsResponseTrialCrSegment3TagsBalances {
     pub fn new() -> TrialCrSegment3TagsResponseTrialCrSegment3TagsBalances {
         TrialCrSegment3TagsResponseTrialCrSegment3TagsBalances {
-            account_category_name: None,
-            account_group_name: None,
             account_item_id: None,
             account_item_name: None,
-            closing_balance: None,
+            account_group_name: None,
+            segment_3_tags: None,
+            account_category_name: None,
+            total_line: None,
             hierarchy_level: None,
             parent_account_category_name: None,
-            segment_3_tags: None,
-            total_line: None,
+            closing_balance: None,
         }
     }
 }

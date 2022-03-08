@@ -14,11 +14,11 @@
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ExpenseApplicationLineTemplateResponse {
     #[serde(rename = "expense_application_line_template")]
-    pub expense_application_line_template: Box<crate::models::ExpenseApplicationLineTemplateResponseExpenseApplicationLineTemplate>,
+    pub expense_application_line_template: Box<crate::models::ExpenseApplicationLineTemplate>,
 }
 
 impl ExpenseApplicationLineTemplateResponse {
-    pub fn new(expense_application_line_template: crate::models::ExpenseApplicationLineTemplateResponseExpenseApplicationLineTemplate) -> ExpenseApplicationLineTemplateResponse {
+    pub fn new(expense_application_line_template: crate::models::ExpenseApplicationLineTemplate) -> ExpenseApplicationLineTemplateResponse {
         ExpenseApplicationLineTemplateResponse {
             expense_application_line_template: Box::new(expense_application_line_template),
         }

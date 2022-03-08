@@ -11,14 +11,14 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct WalletTxnResponse {
     #[serde(rename = "wallet_txn")]
-    pub wallet_txn: Box<crate::models::WalletTxnResponseWalletTxn>,
+    pub wallet_txn: Box<crate::models::WalletTxn>,
 }
 
 impl WalletTxnResponse {
-    pub fn new(wallet_txn: crate::models::WalletTxnResponseWalletTxn) -> WalletTxnResponse {
+    pub fn new(wallet_txn: crate::models::WalletTxn) -> WalletTxnResponse {
         WalletTxnResponse {
             wallet_txn: Box::new(wallet_txn),
         }

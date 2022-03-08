@@ -13,35 +13,35 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct ExpenseApplicationsIndexResponseExpenseApplicationLines {
-    /// 金額
-    #[serde(rename = "amount", skip_serializing_if = "Option::is_none")]
-    pub amount: Option<i32>,
-    /// 内容
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    /// 経費科目ID
-    #[serde(rename = "expense_application_line_template_id", skip_serializing_if = "Option::is_none")]
-    pub expense_application_line_template_id: Option<i32>,
     /// 経費申請の項目行ID
     #[serde(rename = "id")]
     pub id: i64,
-    /// 証憑ファイルID（ファイルボックスのファイルID）
-    #[serde(rename = "receipt_id", skip_serializing_if = "Option::is_none")]
-    pub receipt_id: Option<i32>,
     /// 日付 (yyyy-mm-dd)
     #[serde(rename = "transaction_date", skip_serializing_if = "Option::is_none")]
     pub transaction_date: Option<String>,
+    /// 内容
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    /// 金額
+    #[serde(rename = "amount", skip_serializing_if = "Option::is_none")]
+    pub amount: Option<i32>,
+    /// 経費科目ID
+    #[serde(rename = "expense_application_line_template_id", skip_serializing_if = "Option::is_none")]
+    pub expense_application_line_template_id: Option<i32>,
+    /// 証憑ファイルID（ファイルボックスのファイルID）
+    #[serde(rename = "receipt_id", skip_serializing_if = "Option::is_none")]
+    pub receipt_id: Option<i32>,
 }
 
 impl ExpenseApplicationsIndexResponseExpenseApplicationLines {
     pub fn new(id: i64) -> ExpenseApplicationsIndexResponseExpenseApplicationLines {
         ExpenseApplicationsIndexResponseExpenseApplicationLines {
-            amount: None,
-            description: None,
-            expense_application_line_template_id: None,
             id,
-            receipt_id: None,
             transaction_date: None,
+            description: None,
+            amount: None,
+            expense_application_line_template_id: None,
+            receipt_id: None,
         }
     }
 }

@@ -15,11 +15,11 @@
 pub struct ApprovalRequestResponseApprovalRequestApprovalRequestForm {
     /// 申請フォームの項目
     #[serde(rename = "parts")]
-    pub parts: Vec<crate::models::ApprovalRequestFormResponseApprovalRequestFormParts>,
+    pub parts: Vec<crate::models::ApprovalRequestResponseApprovalRequestApprovalRequestFormParts>,
 }
 
 impl ApprovalRequestResponseApprovalRequestApprovalRequestForm {
-    pub fn new(parts: Vec<crate::models::ApprovalRequestFormResponseApprovalRequestFormParts>) -> ApprovalRequestResponseApprovalRequestApprovalRequestForm {
+    pub fn new(parts: Vec<crate::models::ApprovalRequestResponseApprovalRequestApprovalRequestFormParts>) -> ApprovalRequestResponseApprovalRequestApprovalRequestForm {
         ApprovalRequestResponseApprovalRequestApprovalRequestForm {
             parts,
         }

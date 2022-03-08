@@ -13,23 +13,23 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct TrialCrSectionsResponseTrialCrSectionsSegment1Tags {
-    /// 期末残高
-    #[serde(rename = "closing_balance", skip_serializing_if = "Option::is_none")]
-    pub closing_balance: Option<i32>,
     /// セグメント1タグID
     #[serde(rename = "id")]
     pub id: i32,
     /// セグメント1タグ名
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// 期末残高
+    #[serde(rename = "closing_balance", skip_serializing_if = "Option::is_none")]
+    pub closing_balance: Option<i32>,
 }
 
 impl TrialCrSectionsResponseTrialCrSectionsSegment1Tags {
     pub fn new(id: i32) -> TrialCrSectionsResponseTrialCrSectionsSegment1Tags {
         TrialCrSectionsResponseTrialCrSectionsSegment1Tags {
-            closing_balance: None,
             id,
             name: None,
+            closing_balance: None,
         }
     }
 }
