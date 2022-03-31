@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-openapi-sdk = { path = "../sdk" }
+openapi-sdk = { path = "../../sdk" }
 tokio = { version = "1.14.0", features = ["full"] }
 
 [dependencies.reqwest]
