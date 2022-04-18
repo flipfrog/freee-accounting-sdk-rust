@@ -2,9 +2,7 @@
 extern crate serde_derive;
 extern crate reqwest;
 
-use std::any::Any;
 use std::env;
-use std::collections::HashMap;
 use actix_web::{middleware, web, App, Error as AWError, HttpResponse, HttpServer, Result};
 use actix_web::http::header;
 use askama::Template;
@@ -21,7 +19,6 @@ use openapi_sdk::apis::configuration::Configuration;
 use openapi_sdk::apis::companies_api;
 use openapi_sdk::apis::users_api;
 use openapi_sdk::models::{CompanyIndexResponseCompanies};
-use openapi_sdk::models::{MeResponse};
 
 struct AppState {
     oauth: BasicClient,
