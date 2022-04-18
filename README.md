@@ -15,6 +15,9 @@
     destroy: deleted the partner.
     ```
 ### webサーバとして実行
+- freeeアプリストアでの設定
+  - コールバックURLを、`http://localhost:8080/auth_callback` に設定保存します。
+  - コールバックURLのホスト名は、サンプルのwebサーバーが動くホスト名にします。
 - 以下の環境変数に値をセットします
   - `RUST_API_EXAMPLE_CLIENT_ID` アプリストアの開発者画面から、アプリのCLIENT IDをコピーしてセットします。
   - `RUST_API_EXAMPLE_CLIENT_SECRET` アプリストアの開発者画面から、アプリのCLIENT SECRETをコピーしてセットします。
