@@ -69,6 +69,7 @@ pub enum UpdateManualJournalError {
     Status400(crate::models::BadRequestError),
     Status401(crate::models::UnauthorizedError),
     Status403(crate::models::ForbiddenError),
+    Status404(crate::models::BadRequestNotFoundError),
     Status500(crate::models::InternalServerError),
     UnknownValue(serde_json::Value),
 }

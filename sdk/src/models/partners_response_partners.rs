@@ -31,10 +31,10 @@ pub struct PartnersResponsePartners {
     /// 取引先の使用設定（true: 使用する、false: 使用しない） <br> <ul>   <li>     本APIでpartnerを作成した場合はtrueになります。   </li>   <li>     falseにする場合はWeb画面から変更できます。   </li>   <li>     trueの場合、Web画面での取引登録時などに入力候補として表示されます。   </li>   <li>     falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。   </li> </ul>
     #[serde(rename = "available")]
     pub available: bool,
-    /// ショートカット1 (20文字以内)
+    /// ショートカット1 (255文字以内)
     #[serde(rename = "shortcut1", skip_serializing_if = "Option::is_none")]
     pub shortcut1: Option<String>,
-    /// ショートカット2 (20文字以内)
+    /// ショートカット2 (255文字以内)
     #[serde(rename = "shortcut2", skip_serializing_if = "Option::is_none")]
     pub shortcut2: Option<String>,
     /// 事業所種別（null: 未設定、1: 法人、2: 個人）

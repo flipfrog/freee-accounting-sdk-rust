@@ -19,9 +19,9 @@ pub struct PaymentRequestCreateParams {
     /// 申請タイトル
     #[serde(rename = "title")]
     pub title: String,
-    /// 申請日 (yyyy-mm-dd)
-    #[serde(rename = "application_date")]
-    pub application_date: String,
+    /// 申請日 (yyyy-mm-dd)<br> 指定しない場合は当日の日付が登録されます。 
+    #[serde(rename = "application_date", skip_serializing_if = "Option::is_none")]
+    pub application_date: Option<String>,
     /// 備考
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
@@ -91,11 +91,11 @@ pub struct PaymentRequestCreateParams {
 }
 
 impl PaymentRequestCreateParams {
-    pub fn new(company_id: i32, title: String, application_date: String, payment_request_lines: Vec<crate::models::PaymentRequestCreateParamsPaymentRequestLines>, approval_flow_route_id: i32, draft: bool, issue_date: String) -> PaymentRequestCreateParams {
+    pub fn new(company_id: i32, title: String, payment_request_lines: Vec<crate::models::PaymentRequestCreateParamsPaymentRequestLines>, approval_flow_route_id: i32, draft: bool, issue_date: String) -> PaymentRequestCreateParams {
         PaymentRequestCreateParams {
             company_id,
             title,
-            application_date,
+            application_date: None,
             description: None,
             payment_request_lines,
             approver_id: None,

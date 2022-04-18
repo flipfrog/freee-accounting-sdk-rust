@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Example web</title>
+</head>
+<body>
+<h1>ログインしました</h1>
+<h3>ユーザー情報</h3>
+<p>
+    <span>{{ last_name }}</span>
+    <span>{{ first_name }}</span>
+</p>
+<h3>所属事業所一覧</h3>
+<p>
+<table>
+    <thead>
+    <th>事業所ID</th>
+    <th>表示名</th>
+    <th>権限</th>
+    </thead>
+    <tbody>
+    {% for company in companies %}
+    <tr>
+        <td>{{ company.id }}</td>
+        <td>{{ company.display_name.as_ref().unwrap() }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</p>
+</body>
+</html>
