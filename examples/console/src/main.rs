@@ -7,11 +7,10 @@ use openapi_sdk::models::PartnerCreateParams;
 
 #[tokio::main]
 async fn main() {
-    let base_path = env::var("RUST_API_SAMPLE_BASE_PATH").expect("ベースURLの取得に失敗しました");
-    let oauth_access_token = env::var("RUST_API_SAMPLE_OAUTH_ACCESS_TOKEN").expect("アクセストークンの取得に失敗しました");
+    let oauth_access_token = env::var("RUST_API_EXAMPLE_OAUTH_ACCESS_TOKEN").expect("アクセストークンの取得に失敗しました");
 
     let config = Configuration {
-        base_path,
+        base_path: "https://api.freee.co.jp".to_string(),
         user_agent: None,
         client: reqwest::Client::new(),
         basic_auth: None,
@@ -29,7 +28,7 @@ async fn main() {
         );
     }
 
-    let company_id: String = env::var("RUST_API_SAMPLE_COMPANY_ID").expect("事業所IDの取得に失敗しました");
+    let company_id: String = env::var("RUST_API_EXAMPLE_COMPANY_ID").expect("事業所IDの取得に失敗しました");
     let company_id: i32 = company_id.trim().parse().expect("事業所IDのパースに失敗しました");
 
     let params = PartnerCreateParams {
