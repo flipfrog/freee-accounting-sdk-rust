@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **name** | **String** | 取引先名 | 
 **update_date** | **String** | 更新日 (yyyy-mm-dd) | 
 **available** | **bool** | 取引先の使用設定（true: 使用する、false: 使用しない） <br> <ul>   <li>     本APIでpartnerを作成した場合はtrueになります。   </li>   <li>     falseにする場合はWeb画面から変更できます。   </li>   <li>     trueの場合、Web画面での取引登録時などに入力候補として表示されます。   </li>   <li>     falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。   </li> </ul> | 
-**shortcut1** | Option<**String**> | ショートカット1 (20文字以内) | [optional]
-**shortcut2** | Option<**String**> | ショートカット2 (20文字以内) | [optional]
+**shortcut1** | Option<**String**> | ショートカット1 (255文字以内) | [optional]
+**shortcut2** | Option<**String**> | ショートカット2 (255文字以内) | [optional]
 **org_code** | Option<**i32**> | 事業所種別（null: 未設定、1: 法人、2: 個人） | [optional]
 **country_code** | Option<**String**> | 地域（JP: 国内、ZZ:国外） | [optional]
 **long_name** | Option<**String**> | 正式名称（255文字以内） | [optional]

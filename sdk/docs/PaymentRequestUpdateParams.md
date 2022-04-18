@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **company_id** | **i32** | 事業所ID | 
 **title** | **String** | 申請タイトル<br> 申請者が、下書き状態もしくは差戻し状態の支払依頼に対して指定する場合のみ有効  | 
-**application_date** | **String** | 申請日 (yyyy-mm-dd)<br> 申請者が、下書き状態もしくは差戻し状態の支払依頼に対して指定する場合のみ有効  | 
+**application_date** | Option<**String**> | 申請日 (yyyy-mm-dd)<br> 指定しない場合は当日の日付が登録されます。<br> 申請者が、下書き状態もしくは差戻し状態の支払依頼に対して指定する場合のみ有効  | [optional]
 **description** | Option<**String**> | 備考 | [optional]
 **payment_request_lines** | [**Vec<crate::models::PaymentRequestUpdateParamsPaymentRequestLines>**](paymentRequestUpdateParams_payment_request_lines.md) | 支払依頼の項目行一覧（配列） | 
 **approver_id** | Option<**i32**> | 承認者のユーザーID<br> 「承認者を指定」の経路を申請経路として使用する場合に指定してください。<br> 指定する承認者のユーザーIDは、申請経路APIを利用して取得してください。  | [optional]

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **company_id** | **i32** | 事業所ID | 
-**application_date** | **String** | 申請日 (yyyy-mm-dd) | 
+**application_date** | Option<**String**> | 申請日 (yyyy-mm-dd)<br> 指定しない場合は当日の日付が登録されます。  | [optional]
 **approval_flow_route_id** | **i32** | 申請経路ID | 
 **form_id** | **i32** | 申請フォームID | 
 **approver_id** | Option<**i32**> | 承認者のユーザーID | [optional]

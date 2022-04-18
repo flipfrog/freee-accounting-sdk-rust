@@ -53,6 +53,8 @@ pub enum Role {
     SelfOnly,
     #[serde(rename = "read_only")]
     ReadOnly,
+    #[serde(rename = "workflow")]
+    Workflow,
 }
 
 impl Default for Role {

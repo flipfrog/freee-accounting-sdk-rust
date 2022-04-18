@@ -16,9 +16,9 @@ pub struct ApprovalRequestCreateParams {
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
-    /// 申請日 (yyyy-mm-dd)
-    #[serde(rename = "application_date")]
-    pub application_date: String,
+    /// 申請日 (yyyy-mm-dd)<br> 指定しない場合は当日の日付が登録されます。 
+    #[serde(rename = "application_date", skip_serializing_if = "Option::is_none")]
+    pub application_date: Option<String>,
     /// 申請経路ID
     #[serde(rename = "approval_flow_route_id")]
     pub approval_flow_route_id: i32,
@@ -39,10 +39,10 @@ pub struct ApprovalRequestCreateParams {
 }
 
 impl ApprovalRequestCreateParams {
-    pub fn new(company_id: i32, application_date: String, approval_flow_route_id: i32, form_id: i32, draft: bool, request_items: Vec<crate::models::ApprovalRequestCreateParamsRequestItems>) -> ApprovalRequestCreateParams {
+    pub fn new(company_id: i32, approval_flow_route_id: i32, form_id: i32, draft: bool, request_items: Vec<crate::models::ApprovalRequestCreateParamsRequestItems>) -> ApprovalRequestCreateParams {
         ApprovalRequestCreateParams {
             company_id,
-            application_date,
+            application_date: None,
             approval_flow_route_id,
             form_id,
             approver_id: None,
