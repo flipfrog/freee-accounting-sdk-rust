@@ -3,4 +3,5 @@
 members = [
     "sdk",
     "examples/console",
+    "examples/web",
 ]

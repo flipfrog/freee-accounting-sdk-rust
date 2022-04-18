@@ -19,9 +19,9 @@ pub struct ExpenseApplicationCreateParams {
     /// 申請タイトル (250文字以内)
     #[serde(rename = "title")]
     pub title: String,
-    /// 申請日 (yyyy-mm-dd)
-    #[serde(rename = "issue_date")]
-    pub issue_date: String,
+    /// 申請日 (yyyy-mm-dd)<br> 指定しない場合は当日の日付が登録されます。 
+    #[serde(rename = "issue_date", skip_serializing_if = "Option::is_none")]
+    pub issue_date: Option<String>,
     /// 備考 (10000文字以内)
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
@@ -57,11 +57,11 @@ pub struct ExpenseApplicationCreateParams {
 }
 
 impl ExpenseApplicationCreateParams {
-    pub fn new(company_id: i32, title: String, issue_date: String, expense_application_lines: Vec<crate::models::ExpenseApplicationCreateParamsExpenseApplicationLines>) -> ExpenseApplicationCreateParams {
+    pub fn new(company_id: i32, title: String, expense_application_lines: Vec<crate::models::ExpenseApplicationCreateParamsExpenseApplicationLines>) -> ExpenseApplicationCreateParams {
         ExpenseApplicationCreateParams {
             company_id,
             title,
-            issue_date,
+            issue_date: None,
             description: None,
             section_id: None,
             tag_ids: None,

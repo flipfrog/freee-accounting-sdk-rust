@@ -14,7 +14,7 @@ Method | HTTP request | Description
 > crate::models::CompanyIndexResponse get_companies()
 事業所一覧の取得
 
- <h2 id=\"\">概要</h2>  <p>ユーザーが所属する事業所の一覧を取得する</p>  <h2 id=\"_2\">定義</h2>  <ul> <li>role <ul> <li>admin : 管理者</li>  <li>simple_accounting : 一般</li>  <li>self_only : 取引登録のみ</li>  <li>read_only : 閲覧のみ</li> </ul> </li> </ul>
+ <h2 id=\"\">概要</h2>  <p>ユーザーが所属する事業所の一覧を取得する</p>  <h2 id=\"_2\">定義</h2>  <ul> <li>role <ul> <li>admin : 管理者</li> <li>simple_accounting : 一般</li> <li>self_only : 取引登録のみ</li> <li>read_only : 閲覧のみ</li> <li>workflow : 申請・承認</li> </ul> </li> </ul>
 
 ### Parameters
 
@@ -41,7 +41,7 @@ This endpoint does not need any parameter.
 > crate::models::CompanyResponse get_company(id, details, account_items, taxes, items, partners, sections, tags, walletables)
 事業所の詳細情報の取得
 
- <h2 id=\"\">概要</h2>  <p>ユーザーが所属する事業所の詳細を取得する</p>  <h2 id=\"_2\">定義</h2>  <ul> <li>role <ul> <li>admin : 管理者</li>  <li>simple_accounting : 一般</li>  <li>self_only : 取引登録のみ</li>  <li>read_only : 閲覧のみ</li> </ul> </li> </ul>  <h2 id=\"_3\">
+ <h2 id=\"\">概要</h2>  <p>ユーザーが所属する事業所の詳細を取得する</p>  <h2 id=\"_2\">定義</h2>  <ul> <li>role <ul> <li>admin : 管理者</li> <li>simple_accounting : 一般</li> <li>self_only : 取引登録のみ</li> <li>read_only : 閲覧のみ</li> <li>workflow : 申請・承認</li> </ul> </li> </ul>  <h2 id=\"_3\">
 
 ### Parameters
 

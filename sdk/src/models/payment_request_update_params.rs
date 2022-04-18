@@ -19,9 +19,9 @@ pub struct PaymentRequestUpdateParams {
     /// 申請タイトル<br> 申請者が、下書き状態もしくは差戻し状態の支払依頼に対して指定する場合のみ有効 
     #[serde(rename = "title")]
     pub title: String,
-    /// 申請日 (yyyy-mm-dd)<br> 申請者が、下書き状態もしくは差戻し状態の支払依頼に対して指定する場合のみ有効 
-    #[serde(rename = "application_date")]
-    pub application_date: String,
+    /// 申請日 (yyyy-mm-dd)<br> 指定しない場合は当日の日付が登録されます。<br> 申請者が、下書き状態もしくは差戻し状態の支払依頼に対して指定する場合のみ有効 
+    #[serde(rename = "application_date", skip_serializing_if = "Option::is_none")]
+    pub application_date: Option<String>,
     /// 備考
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
@@ -88,11 +88,11 @@ pub struct PaymentRequestUpdateParams {
 }
 
 impl PaymentRequestUpdateParams {
-    pub fn new(company_id: i32, title: String, application_date: String, payment_request_lines: Vec<crate::models::PaymentRequestUpdateParamsPaymentRequestLines>, approval_flow_route_id: i32, draft: bool, issue_date: String) -> PaymentRequestUpdateParams {
+    pub fn new(company_id: i32, title: String, payment_request_lines: Vec<crate::models::PaymentRequestUpdateParamsPaymentRequestLines>, approval_flow_route_id: i32, draft: bool, issue_date: String) -> PaymentRequestUpdateParams {
         PaymentRequestUpdateParams {
             company_id,
             title,
-            application_date,
+            application_date: None,
             description: None,
             payment_request_lines,
             approver_id: None,
