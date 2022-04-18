@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **company_id** | **i32** | 事業所ID | 
 **title** | **String** | 申請タイトル | 
-**application_date** | **String** | 申請日 (yyyy-mm-dd) | 
+**application_date** | Option<**String**> | 申請日 (yyyy-mm-dd)<br> 指定しない場合は当日の日付が登録されます。  | [optional]
 **description** | Option<**String**> | 備考 | [optional]
 **payment_request_lines** | [**Vec<crate::models::PaymentRequestCreateParamsPaymentRequestLines>**](paymentRequestCreateParams_payment_request_lines.md) | 支払依頼の項目行一覧（配列） | 
 **approver_id** | Option<**i32**> | 承認者のユーザーID<br> 「承認者を指定」の経路を申請経路として使用する場合に指定してください。<br> 指定する承認者のユーザーIDは、申請経路APIを利用して取得してください。  | [optional]

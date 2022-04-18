@@ -19,7 +19,7 @@ pub struct MeResponseUserCompanies {
     /// 表示名
     #[serde(rename = "display_name")]
     pub display_name: String,
-    /// ユーザーの権限
+    /// ユーザーの権限 <ul> <li>admin: 管理者</li> <li>simple_accounting: 一般</li> <li>self_only: 取引登録のみ</li> <li>read_only: 閲覧のみ</li> <li>workflow: 申請・承認</li> </ul>
     #[serde(rename = "role")]
     pub role: Role,
     /// カスタム権限（true: 使用する、false: 使用しない）
@@ -42,7 +42,7 @@ impl MeResponseUserCompanies {
     }
 }
 
-/// ユーザーの権限
+/// ユーザーの権限 <ul> <li>admin: 管理者</li> <li>simple_accounting: 一般</li> <li>self_only: 取引登録のみ</li> <li>read_only: 閲覧のみ</li> <li>workflow: 申請・承認</li> </ul>
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum Role {
     #[serde(rename = "admin")]
@@ -53,6 +53,8 @@ pub enum Role {
     SelfOnly,
     #[serde(rename = "read_only")]
     ReadOnly,
+    #[serde(rename = "workflow")]
+    Workflow,
 }
 
 impl Default for Role {

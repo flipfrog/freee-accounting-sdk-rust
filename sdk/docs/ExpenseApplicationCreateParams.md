@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **company_id** | **i32** | 事業所ID | 
 **title** | **String** | 申請タイトル (250文字以内) | 
-**issue_date** | **String** | 申請日 (yyyy-mm-dd) | 
+**issue_date** | Option<**String**> | 申請日 (yyyy-mm-dd)<br> 指定しない場合は当日の日付が登録されます。  | [optional]
 **description** | Option<**String**> | 備考 (10000文字以内) | [optional]
 **section_id** | Option<**i32**> | 部門ID | [optional]
 **tag_ids** | Option<**Vec<i32>**> | メモタグID | [optional]
