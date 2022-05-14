@@ -12,102 +12,48 @@
 
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
-pub struct Deal {
-    /// 取引ID
-    #[serde(rename = "id")]
-    pub id: i32,
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
-    /// 発生日 (yyyy-mm-dd)
-    #[serde(rename = "issue_date")]
-    pub issue_date: String,
-    /// 支払期日 (yyyy-mm-dd)
-    #[serde(rename = "due_date", skip_serializing_if = "Option::is_none")]
-    pub due_date: Option<String>,
-    /// 金額
-    #[serde(rename = "amount")]
-    pub amount: i64,
-    /// 支払残額
-    #[serde(rename = "due_amount", skip_serializing_if = "Option::is_none")]
-    pub due_amount: Option<i32>,
-    /// 収支区分 (収入: income, 支出: expense)
-    #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
-    pub _type: Option<Type>,
-    /// 取引先ID
-    #[serde(rename = "partner_id")]
-    pub partner_id: i32,
-    /// 取引先コード
-    #[serde(rename = "partner_code", skip_serializing_if = "Option::is_none")]
-    pub partner_code: Option<String>,
-    /// 管理番号
-    #[serde(rename = "ref_number", skip_serializing_if = "Option::is_none")]
-    pub ref_number: Option<String>,
-    /// 決済状況 (未決済: unsettled, 完了: settled)
-    #[serde(rename = "status")]
-    pub status: Status,
-    /// 取引の明細行
-    #[serde(rename = "details", skip_serializing_if = "Option::is_none")]
-    pub details: Option<Vec<crate::models::DealCreateResponseDealDetails>>,
-    /// 取引の+更新行
-    #[serde(rename = "renews", skip_serializing_if = "Option::is_none")]
-    pub renews: Option<Vec<crate::models::DealRenews>>,
-    /// 取引の支払行
-    #[serde(rename = "payments", skip_serializing_if = "Option::is_none")]
-    pub payments: Option<Vec<crate::models::DealCreateResponseDealPayments>>,
-    /// 証憑ファイル（ファイルボックスのファイル）
-    #[serde(rename = "receipts", skip_serializing_if = "Option::is_none")]
-    pub receipts: Option<Vec<crate::models::DealReceipts>>,
+pub struct UserCapabilityWithSelfOnly {
+    /// 閲覧
+    #[serde(rename = "read", skip_serializing_if = "Option::is_none")]
+    pub read: Option<bool>,
+    /// 作成
+    #[serde(rename = "create", skip_serializing_if = "Option::is_none")]
+    pub create: Option<bool>,
+    /// 更新
+    #[serde(rename = "update", skip_serializing_if = "Option::is_none")]
+    pub update: Option<bool>,
+    /// 削除
+    #[serde(rename = "destroy", skip_serializing_if = "Option::is_none")]
+    pub destroy: Option<bool>,
+    /// 「自分のみ」がonになっている場合はself_only、offになっている場合はallになります。
+    #[serde(rename = "allowed_target", skip_serializing_if = "Option::is_none")]
+    pub allowed_target: Option<AllowedTarget>,
 }
 
-impl Deal {
-    pub fn new(id: i32, company_id: i32, issue_date: String, amount: i64, partner_id: i32, status: Status) -> Deal {
-        Deal {
-            id,
-            company_id,
-            issue_date,
-            due_date: None,
-            amount,
-            due_amount: None,
-            _type: None,
-            partner_id,
-            partner_code: None,
-            ref_number: None,
-            status,
-            details: None,
-            renews: None,
-            payments: None,
-            receipts: None,
+impl UserCapabilityWithSelfOnly {
+    pub fn new() -> UserCapabilityWithSelfOnly {
+        UserCapabilityWithSelfOnly {
+            read: None,
+            create: None,
+            update: None,
+            destroy: None,
+            allowed_target: None,
         }
     }
 }
 
-/// 収支区分 (収入: income, 支出: expense)
+/// 「自分のみ」がonになっている場合はself_only、offになっている場合はallになります。
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum Type {
-    #[serde(rename = "income")]
-    Income,
-    #[serde(rename = "expense")]
-    Expense,
+pub enum AllowedTarget {
+    #[serde(rename = "self_only")]
+    SelfOnly,
+    #[serde(rename = "all")]
+    All,
 }
 
-impl Default for Type {
-    fn default() -> Type {
-        Self::Income
-    }
-}
-/// 決済状況 (未決済: unsettled, 完了: settled)
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum Status {
-    #[serde(rename = "unsettled")]
-    Unsettled,
-    #[serde(rename = "settled")]
-    Settled,
-}
-
-impl Default for Status {
-    fn default() -> Status {
-        Self::Unsettled
+impl Default for AllowedTarget {
+    fn default() -> AllowedTarget {
+        Self::SelfOnly
     }
 }
 
