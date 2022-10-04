@@ -94,21 +94,21 @@ pub struct CompanyResponseCompany {
     #[serde(rename = "fiscal_years")]
     pub fiscal_years: Vec<crate::models::FiscalYears>,
     #[serde(rename = "account_items", skip_serializing_if = "Option::is_none")]
-    pub account_items: Option<Vec<crate::models::CompanyResponseCompanyAccountItems>>,
+    pub account_items: Option<Vec<crate::models::CompanyResponseCompanyAccountItemsInner>>,
     #[serde(rename = "tax_codes", skip_serializing_if = "Option::is_none")]
-    pub tax_codes: Option<Vec<crate::models::CompanyResponseCompanyTaxCodes>>,
+    pub tax_codes: Option<Vec<crate::models::CompanyResponseCompanyTaxCodesInner>>,
     #[serde(rename = "taxes", skip_serializing_if = "Option::is_none")]
-    pub taxes: Option<Vec<crate::models::CompanyResponseCompanyTaxes>>,
+    pub taxes: Option<Vec<crate::models::CompanyResponseCompanyTaxesInner>>,
     #[serde(rename = "items", skip_serializing_if = "Option::is_none")]
-    pub items: Option<Vec<crate::models::CompanyResponseCompanyItems>>,
+    pub items: Option<Vec<crate::models::CompanyResponseCompanyItemsInner>>,
     #[serde(rename = "partners", skip_serializing_if = "Option::is_none")]
-    pub partners: Option<Vec<crate::models::CompanyResponseCompanyPartners>>,
+    pub partners: Option<Vec<crate::models::CompanyResponseCompanyPartnersInner>>,
     #[serde(rename = "sections", skip_serializing_if = "Option::is_none")]
-    pub sections: Option<Vec<crate::models::CompanyResponseCompanySections>>,
+    pub sections: Option<Vec<crate::models::CompanyResponseCompanySectionsInner>>,
     #[serde(rename = "tags", skip_serializing_if = "Option::is_none")]
-    pub tags: Option<Vec<crate::models::CompanyResponseCompanyTags>>,
+    pub tags: Option<Vec<crate::models::CompanyResponseCompanyTagsInner>>,
     #[serde(rename = "walletables", skip_serializing_if = "Option::is_none")]
-    pub walletables: Option<Vec<crate::models::CompanyResponseCompanyWalletables>>,
+    pub walletables: Option<Vec<crate::models::CompanyResponseCompanyWalletablesInner>>,
 }
 
 impl CompanyResponseCompany {

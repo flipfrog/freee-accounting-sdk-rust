@@ -87,7 +87,7 @@ pub enum UpdateReceiptError {
 
 
 ///  <h2 id=\"\">概要</h2>  <p>ファイルボックスに証憑ファイルをアップロードする</p> <h2 id=\"_2\">注意点</h2> <ul>   <li>リクエストヘッダーの Content-Type は、multipart/form-dataにのみ対応しています。</li> </ul>
-pub async fn create_receipt(configuration: &configuration::Configuration, company_id: i32, receipt: std::path::PathBuf, description: Option<&str>, issue_date: Option<&str>) -> Result<crate::models::ReceiptResponse, Error<CreateReceiptError>> {
+pub async fn create_receipt(configuration: &configuration::Configuration, company_id: i32, receipt: std::path::PathBuf, description: Option<&str>, issue_date: Option<&str>, receipt_metadatum_partner_name: Option<&str>, receipt_metadatum_issue_date: Option<&str>, receipt_metadatum_amount: Option<i64>) -> Result<crate::models::ReceiptResponse, Error<CreateReceiptError>> {
     let local_var_configuration = configuration;
 
     let local_var_client = &local_var_configuration.client;
@@ -110,6 +110,15 @@ pub async fn create_receipt(configuration: &configuration::Configuration, compan
         local_var_form = local_var_form.text("issue_date", local_var_param_value.to_string());
     }
     // TODO: support file upload for 'receipt' parameter
+    if let Some(local_var_param_value) = receipt_metadatum_partner_name {
+        local_var_form = local_var_form.text("receipt_metadatum_partner_name", local_var_param_value.to_string());
+    }
+    if let Some(local_var_param_value) = receipt_metadatum_issue_date {
+        local_var_form = local_var_form.text("receipt_metadatum_issue_date", local_var_param_value.to_string());
+    }
+    if let Some(local_var_param_value) = receipt_metadatum_amount {
+        local_var_form = local_var_form.text("receipt_metadatum_amount", local_var_param_value.to_string());
+    }
     local_var_req_builder = local_var_req_builder.multipart(local_var_form);
 
     let local_var_req = local_var_req_builder.build()?;
@@ -224,7 +233,7 @@ pub async fn get_receipt(configuration: &configuration::Configuration, id: i32, 
 }
 
 ///  <h2 id=\"\">概要</h2>  <p>指定した事業所のファイルボックス 証憑ファイル一覧を取得する</p>
-pub async fn get_receipts(configuration: &configuration::Configuration, company_id: i32, start_date: &str, end_date: &str, user_name: Option<&str>, number: Option<i32>, comment_type: Option<&str>, comment_important: Option<bool>, category: Option<&str>, offset: Option<i64>, limit: Option<i32>) -> Result<crate::models::InlineResponse20014, Error<GetReceiptsError>> {
+pub async fn get_receipts(configuration: &configuration::Configuration, company_id: i32, start_date: &str, end_date: &str, user_name: Option<&str>, number: Option<i32>, comment_type: Option<&str>, comment_important: Option<bool>, category: Option<&str>, offset: Option<i64>, limit: Option<i32>) -> Result<crate::models::GetReceipts200Response, Error<GetReceiptsError>> {
     let local_var_configuration = configuration;
 
     let local_var_client = &local_var_configuration.client;

@@ -28,18 +28,18 @@ pub struct ApprovalRequestCreateParams {
     /// 承認者のユーザーID
     #[serde(rename = "approver_id", skip_serializing_if = "Option::is_none")]
     pub approver_id: Option<i32>,
-    /// falseの時、in_progress:申請中で作成する。それ以外の時はdraft:下書きで作成する
+    /// 各種申請のステータス<br> falseを指定した時は申請中（in_progress）で各種申請を作成します。<br> trueを指定した時は下書き（draft）で各種申請を作成します。 
     #[serde(rename = "draft")]
     pub draft: bool,
     /// 親申請ID(既存各種申請IDのみ指定可能です。)
     #[serde(rename = "parent_id", skip_serializing_if = "Option::is_none")]
     pub parent_id: Option<i32>,
     #[serde(rename = "request_items")]
-    pub request_items: Vec<crate::models::ApprovalRequestCreateParamsRequestItems>,
+    pub request_items: Vec<crate::models::ApprovalRequestCreateParamsRequestItemsInner>,
 }
 
 impl ApprovalRequestCreateParams {
-    pub fn new(company_id: i32, approval_flow_route_id: i32, form_id: i32, draft: bool, request_items: Vec<crate::models::ApprovalRequestCreateParamsRequestItems>) -> ApprovalRequestCreateParams {
+    pub fn new(company_id: i32, approval_flow_route_id: i32, form_id: i32, draft: bool, request_items: Vec<crate::models::ApprovalRequestCreateParamsRequestItemsInner>) -> ApprovalRequestCreateParams {
         ApprovalRequestCreateParams {
             company_id,
             application_date: None,

@@ -27,14 +27,14 @@ pub struct PaymentRequestUpdateParams {
     pub description: Option<String>,
     /// 支払依頼の項目行一覧（配列）
     #[serde(rename = "payment_request_lines")]
-    pub payment_request_lines: Vec<crate::models::PaymentRequestUpdateParamsPaymentRequestLines>,
+    pub payment_request_lines: Vec<crate::models::PaymentRequestUpdateParamsPaymentRequestLinesInner>,
     /// 承認者のユーザーID<br> 「承認者を指定」の経路を申請経路として使用する場合に指定してください。<br> 指定する承認者のユーザーIDは、申請経路APIを利用して取得してください。 
     #[serde(rename = "approver_id", skip_serializing_if = "Option::is_none")]
     pub approver_id: Option<i32>,
     /// 申請経路ID<br> 指定する申請経路IDは、申請経路APIを利用して取得してください。 
     #[serde(rename = "approval_flow_route_id")]
     pub approval_flow_route_id: i32,
-    /// 支払依頼のステータス<br> falseを指定した時は申請中（in_progress）で支払依頼を更新します。<br> trueを指定した時は下書き（draft）で支払依頼を更新します。<br> 未指定の時は下書きとみなして支払依頼を更新します。 
+    /// 支払依頼のステータス<br> falseを指定した時は申請中（in_progress）で支払依頼を更新します。<br> trueを指定した時は下書き（draft）で支払依頼を更新します。 
     #[serde(rename = "draft")]
     pub draft: bool,
     /// 請求書番号（255文字以内）
@@ -88,7 +88,7 @@ pub struct PaymentRequestUpdateParams {
 }
 
 impl PaymentRequestUpdateParams {
-    pub fn new(company_id: i32, title: String, payment_request_lines: Vec<crate::models::PaymentRequestUpdateParamsPaymentRequestLines>, approval_flow_route_id: i32, draft: bool, issue_date: String) -> PaymentRequestUpdateParams {
+    pub fn new(company_id: i32, title: String, payment_request_lines: Vec<crate::models::PaymentRequestUpdateParamsPaymentRequestLinesInner>, approval_flow_route_id: i32, draft: bool, issue_date: String) -> PaymentRequestUpdateParams {
         PaymentRequestUpdateParams {
             company_id,
             title,
