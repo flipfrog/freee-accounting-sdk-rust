@@ -18,7 +18,7 @@ use rusqlite::{params};
 use openapi_sdk::apis::configuration::Configuration;
 use openapi_sdk::apis::companies_api;
 use openapi_sdk::apis::users_api;
-use openapi_sdk::models::{CompanyIndexResponseCompanies};
+use openapi_sdk::models::{CompanyIndexResponseCompaniesInner};
 
 struct AppState {
     oauth: BasicClient,
@@ -40,7 +40,7 @@ async fn index() -> Result<HttpResponse> {
 struct HomeTemplate<'a> {
     first_name: &'a String,
     last_name: &'a String,
-    companies: &'a Vec<CompanyIndexResponseCompanies>,
+    companies: &'a Vec<CompanyIndexResponseCompaniesInner>,
 }
 
 // 認可後の画面を表示する

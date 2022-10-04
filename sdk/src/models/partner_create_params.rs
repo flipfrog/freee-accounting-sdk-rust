@@ -31,7 +31,7 @@ pub struct PartnerCreateParams {
     /// 事業所種別（null: 未設定、1: 法人、2: 個人）
     #[serde(rename = "org_code", skip_serializing_if = "Option::is_none")]
     pub org_code: Option<OrgCode>,
-    /// 地域（JP: 国内、ZZ:国外）
+    /// 地域（JP: 国内、ZZ:国外）、指定しない場合JPになります。
     #[serde(rename = "country_code", skip_serializing_if = "Option::is_none")]
     pub country_code: Option<CountryCode>,
     /// 正式名称（255文字以内）
@@ -55,7 +55,7 @@ pub struct PartnerCreateParams {
     /// 振込元口座ID（一括振込ファイル用）:（walletableのtypeが'bank_account'のidのみ指定できます。また、未設定にする場合は、nullを指定してください。）
     #[serde(rename = "payer_walletable_id", skip_serializing_if = "Option::is_none")]
     pub payer_walletable_id: Option<i32>,
-    /// 振込手数料負担（一括振込ファイル用）: (振込元(当方): payer, 振込先(先方): payee)
+    /// 振込手数料負担（一括振込ファイル用）: (振込元(当方): payer, 振込先(先方): payee)、指定しない場合payerになります。
     #[serde(rename = "transfer_fee_handling_side", skip_serializing_if = "Option::is_none")]
     pub transfer_fee_handling_side: Option<TransferFeeHandlingSide>,
     #[serde(rename = "address_attributes", skip_serializing_if = "Option::is_none")]
@@ -67,7 +67,7 @@ pub struct PartnerCreateParams {
     #[serde(rename = "payment_term_attributes", skip_serializing_if = "Option::is_none")]
     pub payment_term_attributes: Option<Box<crate::models::PartnerCreateParamsPaymentTermAttributes>>,
     #[serde(rename = "invoice_payment_term_attributes", skip_serializing_if = "Option::is_none")]
-    pub invoice_payment_term_attributes: Option<Box<crate::models::PartnerCreateParamsPaymentTermAttributes>>,
+    pub invoice_payment_term_attributes: Option<Box<crate::models::PartnerCreateParamsInvoicePaymentTermAttributes>>,
 }
 
 impl PartnerCreateParams {
@@ -101,31 +101,31 @@ impl PartnerCreateParams {
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum OrgCode {
     #[serde(rename = "1")]
-    _1,
+    Variant1,
     #[serde(rename = "2")]
-    _2,
+    Variant2,
 }
 
 impl Default for OrgCode {
     fn default() -> OrgCode {
-        Self::_1
+        Self::Variant1
     }
 }
-/// 地域（JP: 国内、ZZ:国外）
+/// 地域（JP: 国内、ZZ:国外）、指定しない場合JPになります。
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum CountryCode {
     #[serde(rename = "JP")]
-    JP,
+    Jp,
     #[serde(rename = "ZZ")]
-    ZZ,
+    Zz,
 }
 
 impl Default for CountryCode {
     fn default() -> CountryCode {
-        Self::JP
+        Self::Jp
     }
 }
-/// 振込手数料負担（一括振込ファイル用）: (振込元(当方): payer, 振込先(先方): payee)
+/// 振込手数料負担（一括振込ファイル用）: (振込元(当方): payer, 振込先(先方): payee)、指定しない場合payerになります。
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum TransferFeeHandlingSide {
     #[serde(rename = "payer")]

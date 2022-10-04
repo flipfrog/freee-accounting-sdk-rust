@@ -14,17 +14,17 @@
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct TrialCrSectionsResponse {
     #[serde(rename = "trial_cr_sections")]
-    pub trial_cr_sections: Box<crate::models::TrialCrSectionsResponseTrialCrSections>,
+    pub trial_cr_sections: Box<crate::models::TrialPlSectionsResponseTrialPlSections>,
     /// 集計結果が最新かどうか
     #[serde(rename = "up_to_date")]
     pub up_to_date: bool,
     /// 集計が最新でない場合の要因情報
     #[serde(rename = "up_to_date_reasons", skip_serializing_if = "Option::is_none")]
-    pub up_to_date_reasons: Option<Vec<crate::models::JournalsResponseJournalsUpToDateReasons>>,
+    pub up_to_date_reasons: Option<Vec<crate::models::JournalsResponseJournalsUpToDateReasonsInner>>,
 }
 
 impl TrialCrSectionsResponse {
-    pub fn new(trial_cr_sections: crate::models::TrialCrSectionsResponseTrialCrSections, up_to_date: bool) -> TrialCrSectionsResponse {
+    pub fn new(trial_cr_sections: crate::models::TrialPlSectionsResponseTrialPlSections, up_to_date: bool) -> TrialCrSectionsResponse {
         TrialCrSectionsResponse {
             trial_cr_sections: Box::new(trial_cr_sections),
             up_to_date,

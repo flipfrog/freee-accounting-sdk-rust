@@ -34,7 +34,7 @@ pub struct QuotationCreateParams {
     /// 概要
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
-    /// 見積書ステータス  (unsubmitted: 送付待ち, submitted: 送付済み)
+    /// 見積書ステータス  (unsubmitted: 送付待ち, submitted: 送付済み) (請求書承認ワークフローを利用している場合、unsubmitted を指定すると、下書きの見積書が作成されます)
     #[serde(rename = "quotation_status", skip_serializing_if = "Option::is_none")]
     pub quotation_status: Option<QuotationStatus>,
     /// 見積書に表示する取引先名
@@ -90,7 +90,7 @@ pub struct QuotationCreateParams {
     pub tax_entry_method: Option<TaxEntryMethod>,
     /// 見積内容
     #[serde(rename = "quotation_contents", skip_serializing_if = "Option::is_none")]
-    pub quotation_contents: Option<Vec<crate::models::InvoiceCreateParamsInvoiceContents>>,
+    pub quotation_contents: Option<Vec<crate::models::InvoiceCreateParamsInvoiceContentsInner>>,
 }
 
 impl QuotationCreateParams {
@@ -126,7 +126,7 @@ impl QuotationCreateParams {
     }
 }
 
-/// 見積書ステータス  (unsubmitted: 送付待ち, submitted: 送付済み)
+/// 見積書ステータス  (unsubmitted: 送付待ち, submitted: 送付済み) (請求書承認ワークフローを利用している場合、unsubmitted を指定すると、下書きの見積書が作成されます)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum QuotationStatus {
     #[serde(rename = "unsubmitted")]
