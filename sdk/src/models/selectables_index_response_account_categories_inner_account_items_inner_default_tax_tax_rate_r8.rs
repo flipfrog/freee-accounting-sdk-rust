@@ -12,7 +12,7 @@
 
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
-pub struct SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5 {
+pub struct SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRateR8 {
     /// 税区分コード
     #[serde(rename = "code", skip_serializing_if = "Option::is_none")]
     pub code: Option<i32>,
@@ -24,9 +24,9 @@ pub struct SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaul
     pub name: Option<String>,
 }
 
-impl SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5 {
-    pub fn new() -> SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5 {
-        SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5 {
+impl SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRateR8 {
+    pub fn new() -> SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRateR8 {
+        SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRateR8 {
             code: None,
             id: None,
             name: None,

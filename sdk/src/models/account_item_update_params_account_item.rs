@@ -12,24 +12,60 @@
 
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
-pub struct SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5 {
-    /// 税区分コード
-    #[serde(rename = "code", skip_serializing_if = "Option::is_none")]
-    pub code: Option<i32>,
-    /// 税区分ID
-    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
-    pub id: Option<i32>,
-    /// 税区分
+pub struct AccountItemUpdateParamsAccountItem {
+    /// 勘定科目名 (30文字以内) 口座に紐付かない勘定科目の更新時は必須です。 口座に紐付く勘定科目の更新時は指定することができません。 
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// ショートカット1 (20文字以内)
+    #[serde(rename = "shortcut", skip_serializing_if = "Option::is_none")]
+    pub shortcut: Option<String>,
+    /// ショートカット2(勘定科目コード)(20文字以内)
+    #[serde(rename = "shortcut_num", skip_serializing_if = "Option::is_none")]
+    pub shortcut_num: Option<String>,
+    /// 税区分コード
+    #[serde(rename = "tax_code")]
+    pub tax_code: i32,
+    /// 決算書表示名（小カテゴリー） Selectablesフォーム用選択項目情報エンドポイント(account_groups.name)で取得可能です
+    #[serde(rename = "group_name")]
+    pub group_name: String,
+    /// 勘定科目カテゴリーID Selectablesフォーム用選択項目情報エンドポイント(account_groups.account_category_id)で取得可能です
+    #[serde(rename = "account_category_id")]
+    pub account_category_id: i32,
+    /// 収入取引相手勘定科目ID
+    #[serde(rename = "corresponding_income_id")]
+    pub corresponding_income_id: i32,
+    /// 支出取引相手勘定科目ID
+    #[serde(rename = "corresponding_expense_id")]
+    pub corresponding_expense_id: i32,
+    /// 減価償却累計額勘定科目ID（法人のみ利用可能）
+    #[serde(rename = "accumulated_dep_account_item_id", skip_serializing_if = "Option::is_none")]
+    pub accumulated_dep_account_item_id: Option<i32>,
+    /// 検索可能:2, 検索不可：3(登録時未指定の場合は2で登録されます。更新時未指定の場合はsearchableは変更されません。)
+    #[serde(rename = "searchable", skip_serializing_if = "Option::is_none")]
+    pub searchable: Option<i32>,
+    /// 品目
+    #[serde(rename = "items", skip_serializing_if = "Option::is_none")]
+    pub items: Option<Vec<crate::models::AccountItemCreateParamsAccountItemItemsInner>>,
+    /// 取引先
+    #[serde(rename = "partners", skip_serializing_if = "Option::is_none")]
+    pub partners: Option<Vec<crate::models::AccountItemCreateParamsAccountItemItemsInner>>,
 }
 
-impl SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5 {
-    pub fn new() -> SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5 {
-        SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5 {
-            code: None,
-            id: None,
+impl AccountItemUpdateParamsAccountItem {
+    pub fn new(tax_code: i32, group_name: String, account_category_id: i32, corresponding_income_id: i32, corresponding_expense_id: i32) -> AccountItemUpdateParamsAccountItem {
+        AccountItemUpdateParamsAccountItem {
             name: None,
+            shortcut: None,
+            shortcut_num: None,
+            tax_code,
+            group_name,
+            account_category_id,
+            corresponding_income_id,
+            corresponding_expense_id,
+            accumulated_dep_account_item_id: None,
+            searchable: None,
+            items: None,
+            partners: None,
         }
     }
 }

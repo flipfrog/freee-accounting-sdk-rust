@@ -12,24 +12,19 @@
 
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
-pub struct SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5 {
-    /// 税区分コード
-    #[serde(rename = "code", skip_serializing_if = "Option::is_none")]
-    pub code: Option<i32>,
-    /// 税区分ID
-    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
-    pub id: Option<i32>,
-    /// 税区分
-    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
-    pub name: Option<String>,
+pub struct AccountItemUpdateParams {
+    /// 事業所ID
+    #[serde(rename = "company_id")]
+    pub company_id: i32,
+    #[serde(rename = "account_item")]
+    pub account_item: Box<crate::models::AccountItemUpdateParamsAccountItem>,
 }
 
-impl SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5 {
-    pub fn new() -> SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5 {
-        SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5 {
-            code: None,
-            id: None,
-            name: None,
+impl AccountItemUpdateParams {
+    pub fn new(company_id: i32, account_item: crate::models::AccountItemUpdateParamsAccountItem) -> AccountItemUpdateParams {
+        AccountItemUpdateParams {
+            company_id,
+            account_item: Box::new(account_item),
         }
     }
 }

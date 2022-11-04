@@ -12,24 +12,15 @@
 
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
-pub struct SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5 {
-    /// 税区分コード
-    #[serde(rename = "code", skip_serializing_if = "Option::is_none")]
-    pub code: Option<i32>,
-    /// 税区分ID
+pub struct AccountItemCreateParamsAccountItemItemsInner {
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<i32>,
-    /// 税区分
-    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
-    pub name: Option<String>,
 }
 
-impl SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5 {
-    pub fn new() -> SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5 {
-        SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5 {
-            code: None,
+impl AccountItemCreateParamsAccountItemItemsInner {
+    pub fn new() -> AccountItemCreateParamsAccountItemItemsInner {
+        AccountItemCreateParamsAccountItemItemsInner {
             id: None,
-            name: None,
         }
     }
 }
