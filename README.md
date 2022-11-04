@@ -4,6 +4,7 @@ freee会計の Public APIにアクセスすためのRust版SDKです。
 sdkディレクトリ以下の内容を取り込んで利用します。
 
 利用方法は、後述するサンプルコードを参照してください。
+- はてなブログに本SDKとサンプルアプリについて[記事](https://unknownspace.hatenablog.com/entry/freee-accounting-sdk-rust)を書きました。
 
 ## サンプルを実行するまでの手順
 ### コンソールで実行
