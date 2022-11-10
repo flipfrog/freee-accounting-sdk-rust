@@ -24,7 +24,7 @@ pub struct PaymentRequestResponsePaymentRequestPaymentRequestLines {
     pub description: String,
     /// 金額
     #[serde(rename = "amount")]
-    pub amount: i32,
+    pub amount: i64,
     /// 勘定科目ID
     #[serde(rename = "account_item_id")]
     pub account_item_id: Option<i32>,
@@ -52,7 +52,7 @@ pub struct PaymentRequestResponsePaymentRequestPaymentRequestLines {
 }
 
 impl PaymentRequestResponsePaymentRequestPaymentRequestLines {
-    pub fn new(id: i64, line_type: LineType, description: String, amount: i32, account_item_id: Option<i32>, tax_code: Option<i32>, item_id: Option<i32>, section_id: Option<i32>, tag_ids: Vec<i32>) -> PaymentRequestResponsePaymentRequestPaymentRequestLines {
+    pub fn new(id: i64, line_type: LineType, description: String, amount: i64, account_item_id: Option<i32>, tax_code: Option<i32>, item_id: Option<i32>, section_id: Option<i32>, tag_ids: Vec<i32>) -> PaymentRequestResponsePaymentRequestPaymentRequestLines {
         PaymentRequestResponsePaymentRequestPaymentRequestLines {
             id,
             line_type,

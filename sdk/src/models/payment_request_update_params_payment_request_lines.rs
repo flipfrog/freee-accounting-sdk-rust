@@ -24,7 +24,7 @@ pub struct PaymentRequestUpdateParamsPaymentRequestLines {
     pub description: Option<String>,
     /// 金額
     #[serde(rename = "amount")]
-    pub amount: i32,
+    pub amount: i64,
     /// 勘定科目ID
     #[serde(rename = "account_item_id", skip_serializing_if = "Option::is_none")]
     pub account_item_id: Option<i32>,
@@ -52,7 +52,7 @@ pub struct PaymentRequestUpdateParamsPaymentRequestLines {
 }
 
 impl PaymentRequestUpdateParamsPaymentRequestLines {
-    pub fn new(amount: i32) -> PaymentRequestUpdateParamsPaymentRequestLines {
+    pub fn new(amount: i64) -> PaymentRequestUpdateParamsPaymentRequestLines {
         PaymentRequestUpdateParamsPaymentRequestLines {
             id: None,
             line_type: None,

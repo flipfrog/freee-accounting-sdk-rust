@@ -71,7 +71,7 @@ pub struct QuotationIndexResponseQuotationContents {
     /// セグメント１ID
     #[serde(rename = "segment_1_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_1_tag_id: Option<i64>,
-    /// セグメント１ID
+    /// セグメント１
     #[serde(rename = "segment_1_tag_name", skip_serializing_if = "Option::is_none")]
     pub segment_1_tag_name: Option<String>,
     /// セグメント２ID

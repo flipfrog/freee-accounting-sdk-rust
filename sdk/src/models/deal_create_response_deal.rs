@@ -33,7 +33,7 @@ pub struct DealCreateResponseDeal {
     pub due_amount: Option<i32>,
     /// 収支区分 (収入: income, 支出: expense)
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
-    pub r#type: Option<RHashType>,
+    pub _type: Option<Type>,
     /// 取引先ID
     #[serde(rename = "partner_id")]
     pub partner_id: i32,
@@ -48,13 +48,13 @@ pub struct DealCreateResponseDeal {
     pub status: Status,
     /// 取引の明細行
     #[serde(rename = "details", skip_serializing_if = "Option::is_none")]
-    pub details: Option<Vec<crate::models::DealCreateResponseDealDetailsInner>>,
+    pub details: Option<Vec<crate::models::DealCreateResponseDealDetails>>,
     /// 取引の支払行
     #[serde(rename = "payments", skip_serializing_if = "Option::is_none")]
-    pub payments: Option<Vec<crate::models::DealCreateResponseDealPaymentsInner>>,
+    pub payments: Option<Vec<crate::models::DealCreateResponseDealPayments>>,
     /// 証憑ファイル（ファイルボックスのファイル）
     #[serde(rename = "receipts", skip_serializing_if = "Option::is_none")]
-    pub receipts: Option<Vec<crate::models::DealCreateResponseDealReceiptsInner>>,
+    pub receipts: Option<Vec<crate::models::DealCreateResponseDealReceipts>>,
 }
 
 impl DealCreateResponseDeal {
@@ -66,7 +66,7 @@ impl DealCreateResponseDeal {
             due_date: None,
             amount,
             due_amount: None,
-            r#type: None,
+            _type: None,
             partner_id,
             partner_code: None,
             ref_number: None,
@@ -80,15 +80,15 @@ impl DealCreateResponseDeal {
 
 /// 収支区分 (収入: income, 支出: expense)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum RHashType {
+pub enum Type {
     #[serde(rename = "income")]
     Income,
     #[serde(rename = "expense")]
     Expense,
 }
 
-impl Default for RHashType {
-    fn default() -> RHashType {
+impl Default for Type {
+    fn default() -> Type {
         Self::Income
     }
 }

@@ -45,10 +45,10 @@ pub struct AccountItemCreateParamsAccountItem {
     pub searchable: Option<i32>,
     /// 品目
     #[serde(rename = "items", skip_serializing_if = "Option::is_none")]
-    pub items: Option<Vec<crate::models::AccountItemCreateParamsAccountItemItemsInner>>,
+    pub items: Option<Vec<crate::models::AccountItemCreateParamsAccountItemItems>>,
     /// 取引先
     #[serde(rename = "partners", skip_serializing_if = "Option::is_none")]
-    pub partners: Option<Vec<crate::models::AccountItemCreateParamsAccountItemItemsInner>>,
+    pub partners: Option<Vec<crate::models::AccountItemCreateParamsAccountItemItems>>,
 }
 
 impl AccountItemCreateParamsAccountItem {

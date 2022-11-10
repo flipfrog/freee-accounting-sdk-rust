@@ -94,19 +94,19 @@ pub struct CompanyResponseCompany {
     #[serde(rename = "fiscal_years")]
     pub fiscal_years: Vec<crate::models::FiscalYears>,
     #[serde(rename = "account_items", skip_serializing_if = "Option::is_none")]
-    pub account_items: Option<Vec<crate::models::CompanyResponseCompanyAccountItemsInner>>,
+    pub account_items: Option<Vec<crate::models::CompanyResponseCompanyAccountItems>>,
     #[serde(rename = "tax_codes", skip_serializing_if = "Option::is_none")]
-    pub tax_codes: Option<Vec<crate::models::CompanyResponseCompanyTaxCodesInner>>,
+    pub tax_codes: Option<Vec<crate::models::CompanyResponseCompanyTaxCodes>>,
     #[serde(rename = "items", skip_serializing_if = "Option::is_none")]
-    pub items: Option<Vec<crate::models::CompanyResponseCompanyItemsInner>>,
+    pub items: Option<Vec<crate::models::CompanyResponseCompanyItems>>,
     #[serde(rename = "partners", skip_serializing_if = "Option::is_none")]
-    pub partners: Option<Vec<crate::models::CompanyResponseCompanyPartnersInner>>,
+    pub partners: Option<Vec<crate::models::CompanyResponseCompanyPartners>>,
     #[serde(rename = "sections", skip_serializing_if = "Option::is_none")]
-    pub sections: Option<Vec<crate::models::CompanyResponseCompanySectionsInner>>,
+    pub sections: Option<Vec<crate::models::CompanyResponseCompanySections>>,
     #[serde(rename = "tags", skip_serializing_if = "Option::is_none")]
-    pub tags: Option<Vec<crate::models::CompanyResponseCompanyTagsInner>>,
+    pub tags: Option<Vec<crate::models::CompanyResponseCompanyTags>>,
     #[serde(rename = "walletables", skip_serializing_if = "Option::is_none")]
-    pub walletables: Option<Vec<crate::models::CompanyResponseCompanyWalletablesInner>>,
+    pub walletables: Option<Vec<crate::models::CompanyResponseCompanyWalletables>>,
 }
 
 impl CompanyResponseCompany {

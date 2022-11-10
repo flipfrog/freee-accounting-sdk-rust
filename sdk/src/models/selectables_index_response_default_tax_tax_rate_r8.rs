@@ -12,23 +12,24 @@
 
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
-pub struct TrialBsResponse {
-    #[serde(rename = "trial_bs")]
-    pub trial_bs: Box<crate::models::TrialBsResponseTrialBs>,
-    /// 集計結果が最新かどうか
-    #[serde(rename = "up_to_date")]
-    pub up_to_date: bool,
-    /// 集計が最新でない場合の要因情報
-    #[serde(rename = "up_to_date_reasons", skip_serializing_if = "Option::is_none")]
-    pub up_to_date_reasons: Option<Vec<crate::models::JournalsResponseJournalsUpToDateReasons>>,
+pub struct SelectablesIndexResponseDefaultTaxTaxRateR8 {
+    /// 税区分コード
+    #[serde(rename = "code", skip_serializing_if = "Option::is_none")]
+    pub code: Option<i32>,
+    /// 税区分ID
+    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
+    pub id: Option<i32>,
+    /// 税区分
+    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
 }
 
-impl TrialBsResponse {
-    pub fn new(trial_bs: crate::models::TrialBsResponseTrialBs, up_to_date: bool) -> TrialBsResponse {
-        TrialBsResponse {
-            trial_bs: Box::new(trial_bs),
-            up_to_date,
-            up_to_date_reasons: None,
+impl SelectablesIndexResponseDefaultTaxTaxRateR8 {
+    pub fn new() -> SelectablesIndexResponseDefaultTaxTaxRateR8 {
+        SelectablesIndexResponseDefaultTaxTaxRateR8 {
+            code: None,
+            id: None,
+            name: None,
         }
     }
 }
