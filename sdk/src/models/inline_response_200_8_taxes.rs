@@ -25,7 +25,7 @@ pub struct InlineResponse2008Taxes {
     /// 税区分の表示カテゴリ（tax_5: 5%表示の税区分、tax_8: 8%表示の税区分、tax_r8: 軽減税率8%表示の税区分、tax_10: 10%表示の税区分、null: 税率未設定税区分）
     #[serde(rename = "display_category")]
     pub display_category: Option<DisplayCategory>,
-    /// true: 使用する、false: 使用しない
+    /// 税区分の使用設定。true: 使用する、false: 使用しない
     #[serde(rename = "available")]
     pub available: bool,
 }

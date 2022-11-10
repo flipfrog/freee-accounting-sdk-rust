@@ -18,7 +18,7 @@ pub struct DealUpdateParams {
     pub issue_date: String,
     /// 収支区分 (収入: income, 支出: expense)
     #[serde(rename = "type")]
-    pub r#type: RHashType,
+    pub _type: Type,
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
@@ -35,17 +35,17 @@ pub struct DealUpdateParams {
     #[serde(rename = "ref_number", skip_serializing_if = "Option::is_none")]
     pub ref_number: Option<String>,
     #[serde(rename = "details")]
-    pub details: Vec<crate::models::DealUpdateParamsDetailsInner>,
+    pub details: Vec<crate::models::DealUpdateParamsDetails>,
     /// 証憑ファイルID（ファイルボックスのファイルID）（配列）
     #[serde(rename = "receipt_ids", skip_serializing_if = "Option::is_none")]
     pub receipt_ids: Option<Vec<i32>>,
 }
 
 impl DealUpdateParams {
-    pub fn new(issue_date: String, r#type: RHashType, company_id: i32, details: Vec<crate::models::DealUpdateParamsDetailsInner>) -> DealUpdateParams {
+    pub fn new(issue_date: String, _type: Type, company_id: i32, details: Vec<crate::models::DealUpdateParamsDetails>) -> DealUpdateParams {
         DealUpdateParams {
             issue_date,
-            r#type,
+            _type,
             company_id,
             due_date: None,
             partner_id: None,
@@ -59,15 +59,15 @@ impl DealUpdateParams {
 
 /// 収支区分 (収入: income, 支出: expense)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum RHashType {
+pub enum Type {
     #[serde(rename = "income")]
     Income,
     #[serde(rename = "expense")]
     Expense,
 }
 
-impl Default for RHashType {
-    fn default() -> RHashType {
+impl Default for Type {
+    fn default() -> Type {
         Self::Income
     }
 }

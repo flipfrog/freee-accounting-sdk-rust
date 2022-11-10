@@ -13,6 +13,9 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct SelectablesIndexResponseDefaultTaxTaxRate5 {
+    /// 税区分コード
+    #[serde(rename = "code", skip_serializing_if = "Option::is_none")]
+    pub code: Option<i32>,
     /// 税区分ID
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<i32>,
@@ -24,6 +27,7 @@ pub struct SelectablesIndexResponseDefaultTaxTaxRate5 {
 impl SelectablesIndexResponseDefaultTaxTaxRate5 {
     pub fn new() -> SelectablesIndexResponseDefaultTaxTaxRate5 {
         SelectablesIndexResponseDefaultTaxTaxRate5 {
+            code: None,
             id: None,
             name: None,
         }

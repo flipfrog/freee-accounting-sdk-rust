@@ -24,7 +24,7 @@ pub struct Walletable {
     pub bank_id: Option<i32>,
     /// 口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
     #[serde(rename = "type")]
-    pub r#type: RHashType,
+    pub _type: Type,
     /// 同期残高
     #[serde(rename = "last_balance", skip_serializing_if = "Option::is_none")]
     pub last_balance: Option<i32>,
@@ -34,12 +34,12 @@ pub struct Walletable {
 }
 
 impl Walletable {
-    pub fn new(id: i32, name: String, bank_id: Option<i32>, r#type: RHashType) -> Walletable {
+    pub fn new(id: i32, name: String, bank_id: Option<i32>, _type: Type) -> Walletable {
         Walletable {
             id,
             name,
             bank_id,
-            r#type,
+            _type,
             last_balance: None,
             walletable_balance: None,
         }
@@ -48,7 +48,7 @@ impl Walletable {
 
 /// 口座区分 (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum RHashType {
+pub enum Type {
     #[serde(rename = "bank_account")]
     BankAccount,
     #[serde(rename = "credit_card")]
@@ -57,8 +57,8 @@ pub enum RHashType {
     Wallet,
 }
 
-impl Default for RHashType {
-    fn default() -> RHashType {
+impl Default for Type {
+    fn default() -> Type {
         Self::BankAccount
     }
 }

@@ -12,25 +12,94 @@
 
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
-pub struct TrialBsResponse {
-    #[serde(rename = "trial_bs")]
-    pub trial_bs: Box<crate::models::TrialBsResponseTrialBs>,
-    /// 集計結果が最新かどうか
-    #[serde(rename = "up_to_date")]
-    pub up_to_date: bool,
-    /// 集計が最新でない場合の要因情報
-    #[serde(rename = "up_to_date_reasons", skip_serializing_if = "Option::is_none")]
-    pub up_to_date_reasons: Option<Vec<crate::models::JournalsResponseJournalsUpToDateReasons>>,
+pub struct DealCreateResponseDealReceipts {
+    /// 証憑ファイルID（ファイルボックスのファイルID）
+    #[serde(rename = "id")]
+    pub id: i32,
+    /// ステータス(confirmed:確認済み、deleted:削除済み、ignored:無視)
+    #[serde(rename = "status")]
+    pub status: Status,
+    /// メモ
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    /// MIMEタイプ
+    #[serde(rename = "mime_type")]
+    pub mime_type: String,
+    /// 発生日
+    #[serde(rename = "issue_date", skip_serializing_if = "Option::is_none")]
+    pub issue_date: Option<String>,
+    /// アップロード元種別
+    #[serde(rename = "origin")]
+    pub origin: Origin,
+    /// 作成日時（ISO8601形式）
+    #[serde(rename = "created_at")]
+    pub created_at: String,
+    #[serde(rename = "user")]
+    pub user: Box<crate::models::DealCreateResponseDealUser>,
+    #[serde(rename = "receipt_metadatum", skip_serializing_if = "Option::is_none")]
+    pub receipt_metadatum: Option<Box<crate::models::ReceiptUpdateParamsReceiptMetadatum>>,
 }
 
-impl TrialBsResponse {
-    pub fn new(trial_bs: crate::models::TrialBsResponseTrialBs, up_to_date: bool) -> TrialBsResponse {
-        TrialBsResponse {
-            trial_bs: Box::new(trial_bs),
-            up_to_date,
-            up_to_date_reasons: None,
+impl DealCreateResponseDealReceipts {
+    pub fn new(id: i32, status: Status, mime_type: String, origin: Origin, created_at: String, user: crate::models::DealCreateResponseDealUser) -> DealCreateResponseDealReceipts {
+        DealCreateResponseDealReceipts {
+            id,
+            status,
+            description: None,
+            mime_type,
+            issue_date: None,
+            origin,
+            created_at,
+            user: Box::new(user),
+            receipt_metadatum: None,
         }
     }
 }
 
+/// ステータス(confirmed:確認済み、deleted:削除済み、ignored:無視)
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum Status {
+    #[serde(rename = "confirmed")]
+    Confirmed,
+    #[serde(rename = "deleted")]
+    Deleted,
+    #[serde(rename = "ignored")]
+    Ignored,
+}
+
+impl Default for Status {
+    fn default() -> Status {
+        Self::Confirmed
+    }
+}
+/// アップロード元種別
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum Origin {
+    #[serde(rename = "unknown")]
+    Unknown,
+    #[serde(rename = "web")]
+    Web,
+    #[serde(rename = "mobile_camera")]
+    MobileCamera,
+    #[serde(rename = "mobile_album")]
+    MobileAlbum,
+    #[serde(rename = "scansnap")]
+    Scansnap,
+    #[serde(rename = "scannable")]
+    Scannable,
+    #[serde(rename = "dropbox")]
+    Dropbox,
+    #[serde(rename = "mail")]
+    Mail,
+    #[serde(rename = "safety_contact_file")]
+    SafetyContactFile,
+    #[serde(rename = "public_api")]
+    PublicApi,
+}
+
+impl Default for Origin {
+    fn default() -> Origin {
+        Self::Unknown
+    }
+}
 

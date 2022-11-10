@@ -105,7 +105,7 @@ pub struct InvoiceCreateParams {
     pub tax_entry_method: Option<TaxEntryMethod>,
     /// 請求内容
     #[serde(rename = "invoice_contents", skip_serializing_if = "Option::is_none")]
-    pub invoice_contents: Option<Vec<crate::models::InvoiceCreateParamsInvoiceContentsInner>>,
+    pub invoice_contents: Option<Vec<crate::models::InvoiceCreateParamsInvoiceContents>>,
 }
 
 impl InvoiceCreateParams {
@@ -184,7 +184,7 @@ pub enum UseVirtualTransferAccount {
     #[serde(rename = "not_use")]
     NotUse,
     #[serde(rename = "use")]
-    Use,
+    _Use,
 }
 
 impl Default for UseVirtualTransferAccount {

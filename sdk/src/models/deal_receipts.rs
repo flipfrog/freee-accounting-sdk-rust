@@ -16,7 +16,7 @@ pub struct DealReceipts {
     /// 証憑ファイルID（ファイルボックスのファイルID）
     #[serde(rename = "id")]
     pub id: i32,
-    /// ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)
+    /// ステータス(confirmed:確認済み、deleted:削除済み、ignored:無視)
     #[serde(rename = "status")]
     pub status: Status,
     /// メモ
@@ -38,11 +38,13 @@ pub struct DealReceipts {
     #[serde(rename = "file_src")]
     pub file_src: String,
     #[serde(rename = "user")]
-    pub user: Box<crate::models::DealUser>,
+    pub user: Box<crate::models::DealCreateResponseDealUser>,
+    #[serde(rename = "receipt_metadatum", skip_serializing_if = "Option::is_none")]
+    pub receipt_metadatum: Option<Box<crate::models::ReceiptUpdateParamsReceiptMetadatum>>,
 }
 
 impl DealReceipts {
-    pub fn new(id: i32, status: Status, mime_type: String, origin: Origin, created_at: String, file_src: String, user: crate::models::DealUser) -> DealReceipts {
+    pub fn new(id: i32, status: Status, mime_type: String, origin: Origin, created_at: String, file_src: String, user: crate::models::DealCreateResponseDealUser) -> DealReceipts {
         DealReceipts {
             id,
             status,
@@ -53,15 +55,14 @@ impl DealReceipts {
             created_at,
             file_src,
             user: Box::new(user),
+            receipt_metadatum: None,
         }
     }
 }
 
-/// ステータス(unconfirmed:確認待ち、confirmed:確認済み、deleted:削除済み、ignored:無視)
+/// ステータス(confirmed:確認済み、deleted:削除済み、ignored:無視)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum Status {
-    #[serde(rename = "unconfirmed")]
-    Unconfirmed,
     #[serde(rename = "confirmed")]
     Confirmed,
     #[serde(rename = "deleted")]
@@ -72,7 +73,7 @@ pub enum Status {
 
 impl Default for Status {
     fn default() -> Status {
-        Self::Unconfirmed
+        Self::Confirmed
     }
 }
 /// アップロード元種別
