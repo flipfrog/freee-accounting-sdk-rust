@@ -20,8 +20,8 @@ pub struct CompanyResponseCompanyAccountItemsInner {
     #[serde(rename = "name")]
     pub name: String,
     /// ショートカット1 (20文字以内)
-    #[serde(rename = "shortcut", skip_serializing_if = "Option::is_none")]
-    pub shortcut: Option<String>,
+    #[serde(rename = "shortcut", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub shortcut: Option<Option<String>>,
     #[serde(rename = "categories")]
     pub categories: Vec<String>,
 }

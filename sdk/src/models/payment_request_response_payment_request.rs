@@ -36,19 +36,19 @@ pub struct PaymentRequestResponsePaymentRequest {
     pub status: Status,
     /// 支払依頼の項目行一覧（配列）
     #[serde(rename = "payment_request_lines")]
-    pub payment_request_lines: Vec<crate::models::PaymentRequestResponsePaymentRequestPaymentRequestLines>,
+    pub payment_request_lines: Vec<crate::models::PaymentRequestResponsePaymentRequestPaymentRequestLinesInner>,
     /// 取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)
-    #[serde(rename = "deal_id")]
+    #[serde(rename = "deal_id", deserialize_with = "Option::deserialize")]
     pub deal_id: Option<i32>,
     /// 取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます settled:支払済み, unsettled:支払待ち)
-    #[serde(rename = "deal_status")]
+    #[serde(rename = "deal_status", deserialize_with = "Option::deserialize")]
     pub deal_status: Option<DealStatus>,
     /// 申請者のユーザーID
     #[serde(rename = "applicant_id")]
     pub applicant_id: i32,
     /// 承認者（配列）   承認ステップのresource_typeがunspecified (指定なし)の場合はapproversはレスポンスに含まれません。   しかし、resource_typeがunspecifiedの承認ステップにおいて誰かが承認・却下・差し戻しのいずれかのアクションを取った後は、   approversはレスポンスに含まれるようになります。   その場合approversにはアクションを行ったステップのIDとアクションを行ったユーザーのIDが含まれます。
     #[serde(rename = "approvers")]
-    pub approvers: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApprovers>,
+    pub approvers: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApproversInner>,
     /// 申請No.
     #[serde(rename = "application_number")]
     pub application_number: String,
@@ -57,12 +57,12 @@ pub struct PaymentRequestResponsePaymentRequest {
     pub approval_flow_route_id: i32,
     /// 支払依頼のコメント一覧（配列）
     #[serde(rename = "comments")]
-    pub comments: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationComments>,
+    pub comments: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationCommentsInner>,
     /// 支払依頼の承認履歴（配列）
     #[serde(rename = "approval_flow_logs")]
-    pub approval_flow_logs: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApprovalFlowLogs>,
+    pub approval_flow_logs: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApprovalFlowLogsInner>,
     /// 現在承認ステップID
-    #[serde(rename = "current_step_id")]
+    #[serde(rename = "current_step_id", deserialize_with = "Option::deserialize")]
     pub current_step_id: Option<i32>,
     /// 現在のround。差し戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。
     #[serde(rename = "current_round")]
@@ -77,19 +77,19 @@ pub struct PaymentRequestResponsePaymentRequest {
     #[serde(rename = "issue_date")]
     pub issue_date: String,
     /// 支払期限 (yyyy-mm-dd)
-    #[serde(rename = "payment_date")]
+    #[serde(rename = "payment_date", deserialize_with = "Option::deserialize")]
     pub payment_date: Option<String>,
     /// 支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)
     #[serde(rename = "payment_method")]
     pub payment_method: PaymentMethod,
     /// 取引先ID
-    #[serde(rename = "partner_id")]
+    #[serde(rename = "partner_id", deserialize_with = "Option::deserialize")]
     pub partner_id: Option<i32>,
     /// 取引先コード
-    #[serde(rename = "partner_code", skip_serializing_if = "Option::is_none")]
-    pub partner_code: Option<String>,
+    #[serde(rename = "partner_code", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub partner_code: Option<Option<String>>,
     /// 取引先名
-    #[serde(rename = "partner_name")]
+    #[serde(rename = "partner_name", deserialize_with = "Option::deserialize")]
     pub partner_name: Option<String>,
     /// 銀行名
     #[serde(rename = "bank_name")]
@@ -121,7 +121,7 @@ pub struct PaymentRequestResponsePaymentRequest {
 }
 
 impl PaymentRequestResponsePaymentRequest {
-    pub fn new(id: i32, company_id: i32, title: String, application_date: String, description: String, total_amount: i64, status: Status, payment_request_lines: Vec<crate::models::PaymentRequestResponsePaymentRequestPaymentRequestLines>, deal_id: Option<i32>, deal_status: Option<DealStatus>, applicant_id: i32, approvers: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApprovers>, application_number: String, approval_flow_route_id: i32, comments: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationComments>, approval_flow_logs: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApprovalFlowLogs>, current_step_id: Option<i32>, current_round: i32, document_code: String, receipt_ids: Vec<i32>, issue_date: String, payment_date: Option<String>, payment_method: PaymentMethod, partner_id: Option<i32>, partner_name: Option<String>, bank_name: String, bank_name_kana: String, bank_code: String, branch_name: String, branch_kana: String, branch_code: String, account_type: AccountType, account_number: String, account_name: String) -> PaymentRequestResponsePaymentRequest {
+    pub fn new(id: i32, company_id: i32, title: String, application_date: String, description: String, total_amount: i64, status: Status, payment_request_lines: Vec<crate::models::PaymentRequestResponsePaymentRequestPaymentRequestLinesInner>, deal_id: Option<i32>, deal_status: Option<DealStatus>, applicant_id: i32, approvers: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApproversInner>, application_number: String, approval_flow_route_id: i32, comments: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationCommentsInner>, approval_flow_logs: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApprovalFlowLogsInner>, current_step_id: Option<i32>, current_round: i32, document_code: String, receipt_ids: Vec<i32>, issue_date: String, payment_date: Option<String>, payment_method: PaymentMethod, partner_id: Option<i32>, partner_name: Option<String>, bank_name: String, bank_name_kana: String, bank_code: String, branch_name: String, branch_kana: String, branch_code: String, account_type: AccountType, account_number: String, account_name: String) -> PaymentRequestResponsePaymentRequest {
         PaymentRequestResponsePaymentRequest {
             id,
             company_id,

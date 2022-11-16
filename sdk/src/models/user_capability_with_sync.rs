@@ -12,56 +12,34 @@
 
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
-pub struct ApprovalRequestActionCreateParams {
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
-    /// 操作(approve: 承認する、force_approve: 代理承認する、cancel: 申請を取り消す、reject: 却下する、feedback: 申請者へ差し戻す、force_feedback: 承認済み・却下済みを取り消す)
-    #[serde(rename = "approval_action")]
-    pub approval_action: ApprovalAction,
-    /// 対象承認ステップID 各種申請の取得APIレスポンス.current_step_idを送信してください。
-    #[serde(rename = "target_step_id")]
-    pub target_step_id: i32,
-    /// 対象round。差し戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。各種申請の取得APIレスポンス.current_roundを送信してください。
-    #[serde(rename = "target_round")]
-    pub target_round: i32,
-    /// 次ステップの承認者のユーザーID
-    #[serde(rename = "next_approver_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub next_approver_id: Option<Option<i32>>,
+pub struct UserCapabilityWithSync {
+    /// 「口座」の閲覧
+    #[serde(rename = "read", skip_serializing_if = "Option::is_none")]
+    pub read: Option<bool>,
+    /// 「口座」の作成
+    #[serde(rename = "create", skip_serializing_if = "Option::is_none")]
+    pub create: Option<bool>,
+    /// 「口座」の更新
+    #[serde(rename = "update", skip_serializing_if = "Option::is_none")]
+    pub update: Option<bool>,
+    /// 「口座」の削除
+    #[serde(rename = "destroy", skip_serializing_if = "Option::is_none")]
+    pub destroy: Option<bool>,
+    /// 「口座の同期」の実行（廃止予定）
+    #[serde(rename = "sync", skip_serializing_if = "Option::is_none")]
+    pub sync: Option<bool>,
 }
 
-impl ApprovalRequestActionCreateParams {
-    pub fn new(company_id: i32, approval_action: ApprovalAction, target_step_id: i32, target_round: i32) -> ApprovalRequestActionCreateParams {
-        ApprovalRequestActionCreateParams {
-            company_id,
-            approval_action,
-            target_step_id,
-            target_round,
-            next_approver_id: None,
+impl UserCapabilityWithSync {
+    pub fn new() -> UserCapabilityWithSync {
+        UserCapabilityWithSync {
+            read: None,
+            create: None,
+            update: None,
+            destroy: None,
+            sync: None,
         }
     }
 }
 
-/// 操作(approve: 承認する、force_approve: 代理承認する、cancel: 申請を取り消す、reject: 却下する、feedback: 申請者へ差し戻す、force_feedback: 承認済み・却下済みを取り消す)
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum ApprovalAction {
-    #[serde(rename = "approve")]
-    Approve,
-    #[serde(rename = "force_approve")]
-    ForceApprove,
-    #[serde(rename = "cancel")]
-    Cancel,
-    #[serde(rename = "reject")]
-    Reject,
-    #[serde(rename = "feedback")]
-    Feedback,
-    #[serde(rename = "force_feedback")]
-    ForceFeedback,
-}
-
-impl Default for ApprovalAction {
-    fn default() -> ApprovalAction {
-        Self::Approve
-    }
-}
 

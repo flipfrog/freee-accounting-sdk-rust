@@ -26,8 +26,8 @@ pub struct ExpenseApplicationResponseExpenseApplication {
     #[serde(rename = "issue_date")]
     pub issue_date: String,
     /// 備考
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
+    #[serde(rename = "description", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub description: Option<Option<String>>,
     /// 合計金額
     #[serde(rename = "total_amount", skip_serializing_if = "Option::is_none")]
     pub total_amount: Option<i32>,
@@ -35,26 +35,26 @@ pub struct ExpenseApplicationResponseExpenseApplication {
     #[serde(rename = "status")]
     pub status: Status,
     /// 部門ID
-    #[serde(rename = "section_id", skip_serializing_if = "Option::is_none")]
-    pub section_id: Option<i32>,
+    #[serde(rename = "section_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub section_id: Option<Option<i32>>,
     /// メモタグID
     #[serde(rename = "tag_ids", skip_serializing_if = "Option::is_none")]
     pub tag_ids: Option<Vec<i32>>,
     /// 経費申請の項目行一覧（配列）
     #[serde(rename = "expense_application_lines")]
-    pub expense_application_lines: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationExpenseApplicationLines>,
+    pub expense_application_lines: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationExpenseApplicationLinesInner>,
     /// 取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)
-    #[serde(rename = "deal_id")]
+    #[serde(rename = "deal_id", deserialize_with = "Option::deserialize")]
     pub deal_id: Option<i32>,
     /// 取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます settled:精算済み, unsettled:清算待ち)
-    #[serde(rename = "deal_status")]
+    #[serde(rename = "deal_status", deserialize_with = "Option::deserialize")]
     pub deal_status: Option<DealStatus>,
     /// 申請者のユーザーID
     #[serde(rename = "applicant_id")]
     pub applicant_id: i32,
     /// 承認者（配列）   承認ステップのresource_typeがunspecified (指定なし)の場合はapproversはレスポンスに含まれません。   しかし、resource_typeがunspecifiedの承認ステップにおいて誰かが承認・却下・差し戻しのいずれかのアクションを取った後は、   approversはレスポンスに含まれるようになります。   その場合approversにはアクションを行ったステップのIDとアクションを行ったユーザーのIDが含まれます。
     #[serde(rename = "approvers")]
-    pub approvers: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApprovers>,
+    pub approvers: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApproversInner>,
     /// 申請No.
     #[serde(rename = "application_number")]
     pub application_number: String,
@@ -63,29 +63,29 @@ pub struct ExpenseApplicationResponseExpenseApplication {
     pub approval_flow_route_id: i32,
     /// 経費申請のコメント一覧（配列）
     #[serde(rename = "comments")]
-    pub comments: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationComments>,
+    pub comments: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationCommentsInner>,
     /// 経費申請の承認履歴（配列）
     #[serde(rename = "approval_flow_logs")]
-    pub approval_flow_logs: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApprovalFlowLogs>,
+    pub approval_flow_logs: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApprovalFlowLogsInner>,
     /// 現在承認ステップID
-    #[serde(rename = "current_step_id")]
+    #[serde(rename = "current_step_id", deserialize_with = "Option::deserialize")]
     pub current_step_id: Option<i32>,
     /// 現在のround。差し戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。
     #[serde(rename = "current_round")]
     pub current_round: i32,
     /// セグメント１ID。セグメント１が使用可能なプランの時のみレスポンスに含まれます。
-    #[serde(rename = "segment_1_tag_id", skip_serializing_if = "Option::is_none")]
-    pub segment_1_tag_id: Option<i64>,
+    #[serde(rename = "segment_1_tag_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub segment_1_tag_id: Option<Option<i64>>,
     /// セグメント２ID。セグメント２が使用可能なプランの時のみレスポンスに含まれます。
-    #[serde(rename = "segment_2_tag_id", skip_serializing_if = "Option::is_none")]
-    pub segment_2_tag_id: Option<i64>,
+    #[serde(rename = "segment_2_tag_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub segment_2_tag_id: Option<Option<i64>>,
     /// セグメント３ID。セグメント３が使用可能なプランの時のみレスポンスに含まれます。
-    #[serde(rename = "segment_3_tag_id", skip_serializing_if = "Option::is_none")]
-    pub segment_3_tag_id: Option<i64>,
+    #[serde(rename = "segment_3_tag_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub segment_3_tag_id: Option<Option<i64>>,
 }
 
 impl ExpenseApplicationResponseExpenseApplication {
-    pub fn new(id: i32, company_id: i32, title: String, issue_date: String, status: Status, expense_application_lines: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationExpenseApplicationLines>, deal_id: Option<i32>, deal_status: Option<DealStatus>, applicant_id: i32, approvers: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApprovers>, application_number: String, approval_flow_route_id: i32, comments: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationComments>, approval_flow_logs: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApprovalFlowLogs>, current_step_id: Option<i32>, current_round: i32) -> ExpenseApplicationResponseExpenseApplication {
+    pub fn new(id: i32, company_id: i32, title: String, issue_date: String, status: Status, expense_application_lines: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationExpenseApplicationLinesInner>, deal_id: Option<i32>, deal_status: Option<DealStatus>, applicant_id: i32, approvers: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApproversInner>, application_number: String, approval_flow_route_id: i32, comments: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationCommentsInner>, approval_flow_logs: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApprovalFlowLogsInner>, current_step_id: Option<i32>, current_round: i32) -> ExpenseApplicationResponseExpenseApplication {
         ExpenseApplicationResponseExpenseApplication {
             id,
             company_id,
