@@ -23,8 +23,8 @@ pub struct ApprovalFlowRouteResponseApprovalFlowRoute {
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
     /// 更新したユーザーのユーザーID
-    #[serde(rename = "user_id", skip_serializing_if = "Option::is_none")]
-    pub user_id: Option<i32>,
+    #[serde(rename = "user_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub user_id: Option<Option<i32>>,
     /// システム作成の申請経路かどうか
     #[serde(rename = "definition_system", skip_serializing_if = "Option::is_none")]
     pub definition_system: Option<bool>,
@@ -39,7 +39,7 @@ pub struct ApprovalFlowRouteResponseApprovalFlowRoute {
     pub request_form_ids: Vec<i32>,
     /// 承認ステップ（配列）
     #[serde(rename = "steps", skip_serializing_if = "Option::is_none")]
-    pub steps: Option<Vec<crate::models::ApprovalFlowRouteResponseApprovalFlowRouteSteps>>,
+    pub steps: Option<Vec<crate::models::ApprovalFlowRouteResponseApprovalFlowRouteStepsInner>>,
 }
 
 impl ApprovalFlowRouteResponseApprovalFlowRoute {

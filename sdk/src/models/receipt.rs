@@ -38,13 +38,13 @@ pub struct Receipt {
     #[serde(rename = "file_src")]
     pub file_src: String,
     #[serde(rename = "user")]
-    pub user: Box<crate::models::DealCreateResponseDealUser>,
+    pub user: Box<crate::models::DealCreateResponseDealReceiptsInnerUser>,
     #[serde(rename = "receipt_metadatum", skip_serializing_if = "Option::is_none")]
     pub receipt_metadatum: Option<Box<crate::models::ReceiptUpdateParamsReceiptMetadatum>>,
 }
 
 impl Receipt {
-    pub fn new(id: i32, status: Status, mime_type: String, origin: Origin, created_at: String, file_src: String, user: crate::models::DealCreateResponseDealUser) -> Receipt {
+    pub fn new(id: i32, status: Status, mime_type: String, origin: Origin, created_at: String, file_src: String, user: crate::models::DealCreateResponseDealReceiptsInnerUser) -> Receipt {
         Receipt {
             id,
             status,

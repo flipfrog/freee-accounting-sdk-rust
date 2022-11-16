@@ -18,7 +18,7 @@ pub struct DealUpdateParams {
     pub issue_date: String,
     /// 収支区分 (収入: income, 支出: expense)
     #[serde(rename = "type")]
-    pub _type: Type,
+    pub r#type: RHashType,
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
@@ -35,17 +35,17 @@ pub struct DealUpdateParams {
     #[serde(rename = "ref_number", skip_serializing_if = "Option::is_none")]
     pub ref_number: Option<String>,
     #[serde(rename = "details")]
-    pub details: Vec<crate::models::DealUpdateParamsDetails>,
+    pub details: Vec<crate::models::DealUpdateParamsDetailsInner>,
     /// 証憑ファイルID（ファイルボックスのファイルID）（配列）
-    #[serde(rename = "receipt_ids", skip_serializing_if = "Option::is_none")]
-    pub receipt_ids: Option<Vec<i32>>,
+    #[serde(rename = "receipt_ids", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub receipt_ids: Option<Option<Vec<i32>>>,
 }
 
 impl DealUpdateParams {
-    pub fn new(issue_date: String, _type: Type, company_id: i32, details: Vec<crate::models::DealUpdateParamsDetails>) -> DealUpdateParams {
+    pub fn new(issue_date: String, r#type: RHashType, company_id: i32, details: Vec<crate::models::DealUpdateParamsDetailsInner>) -> DealUpdateParams {
         DealUpdateParams {
             issue_date,
-            _type,
+            r#type,
             company_id,
             due_date: None,
             partner_id: None,
@@ -59,15 +59,15 @@ impl DealUpdateParams {
 
 /// 収支区分 (収入: income, 支出: expense)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum Type {
+pub enum RHashType {
     #[serde(rename = "income")]
     Income,
     #[serde(rename = "expense")]
     Expense,
 }
 
-impl Default for Type {
-    fn default() -> Type {
+impl Default for RHashType {
+    fn default() -> RHashType {
         Self::Income
     }
 }

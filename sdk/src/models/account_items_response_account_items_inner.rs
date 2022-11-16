@@ -23,11 +23,11 @@ pub struct AccountItemsResponseAccountItemsInner {
     #[serde(rename = "tax_code")]
     pub tax_code: i32,
     /// ショートカット1 (20文字以内)
-    #[serde(rename = "shortcut", skip_serializing_if = "Option::is_none")]
-    pub shortcut: Option<String>,
+    #[serde(rename = "shortcut", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub shortcut: Option<Option<String>>,
     /// ショートカット2(勘定科目コード) (20文字以内)
-    #[serde(rename = "shortcut_num", skip_serializing_if = "Option::is_none")]
-    pub shortcut_num: Option<String>,
+    #[serde(rename = "shortcut_num", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub shortcut_num: Option<Option<String>>,
     /// デフォルト設定がされている税区分コード
     #[serde(rename = "default_tax_code")]
     pub default_tax_code: i32,
@@ -43,23 +43,23 @@ pub struct AccountItemsResponseAccountItemsInner {
     #[serde(rename = "available")]
     pub available: bool,
     /// 口座ID
-    #[serde(rename = "walletable_id")]
+    #[serde(rename = "walletable_id", deserialize_with = "Option::deserialize")]
     pub walletable_id: Option<i32>,
     /// 決算書表示名（小カテゴリー）
-    #[serde(rename = "group_name", skip_serializing_if = "Option::is_none")]
-    pub group_name: Option<String>,
+    #[serde(rename = "group_name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub group_name: Option<Option<String>>,
     /// 収入取引相手勘定科目名
-    #[serde(rename = "corresponding_income_name", skip_serializing_if = "Option::is_none")]
-    pub corresponding_income_name: Option<String>,
+    #[serde(rename = "corresponding_income_name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub corresponding_income_name: Option<Option<String>>,
     /// 収入取引相手勘定科目ID
-    #[serde(rename = "corresponding_income_id", skip_serializing_if = "Option::is_none")]
-    pub corresponding_income_id: Option<i32>,
+    #[serde(rename = "corresponding_income_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub corresponding_income_id: Option<Option<i32>>,
     /// 支出取引相手勘定科目名
-    #[serde(rename = "corresponding_expense_name", skip_serializing_if = "Option::is_none")]
-    pub corresponding_expense_name: Option<String>,
+    #[serde(rename = "corresponding_expense_name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub corresponding_expense_name: Option<Option<String>>,
     /// 支出取引相手勘定科目ID
-    #[serde(rename = "corresponding_expense_id", skip_serializing_if = "Option::is_none")]
-    pub corresponding_expense_id: Option<i32>,
+    #[serde(rename = "corresponding_expense_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub corresponding_expense_id: Option<Option<i32>>,
 }
 
 impl AccountItemsResponseAccountItemsInner {
