@@ -14,11 +14,11 @@
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct QuotationIndexResponse {
     #[serde(rename = "quotations")]
-    pub quotations: Vec<crate::models::QuotationIndexResponseQuotationsInner>,
+    pub quotations: Vec<crate::models::QuotationIndexResponseQuotations>,
 }
 
 impl QuotationIndexResponse {
-    pub fn new(quotations: Vec<crate::models::QuotationIndexResponseQuotationsInner>) -> QuotationIndexResponse {
+    pub fn new(quotations: Vec<crate::models::QuotationIndexResponseQuotations>) -> QuotationIndexResponse {
         QuotationIndexResponse {
             quotations,
         }

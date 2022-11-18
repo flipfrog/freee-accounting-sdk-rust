@@ -27,7 +27,7 @@ pub struct PaymentRequestUpdateParams {
     pub description: Option<String>,
     /// 支払依頼の項目行一覧（配列）
     #[serde(rename = "payment_request_lines")]
-    pub payment_request_lines: Vec<crate::models::PaymentRequestUpdateParamsPaymentRequestLinesInner>,
+    pub payment_request_lines: Vec<crate::models::PaymentRequestUpdateParamsPaymentRequestLines>,
     /// 承認者のユーザーID<br> 「承認者を指定」の経路を申請経路として使用する場合に指定してください。<br> 指定する承認者のユーザーIDは、申請経路APIを利用して取得してください。 
     #[serde(rename = "approver_id", skip_serializing_if = "Option::is_none")]
     pub approver_id: Option<i32>,
@@ -47,17 +47,17 @@ pub struct PaymentRequestUpdateParams {
     #[serde(rename = "issue_date")]
     pub issue_date: String,
     /// 支払期限 (yyyy-mm-dd)
-    #[serde(rename = "payment_date", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub payment_date: Option<Option<String>>,
+    #[serde(rename = "payment_date", skip_serializing_if = "Option::is_none")]
+    pub payment_date: Option<String>,
     /// '支払方法(none: 指定なし, domestic_bank_transfer: 国内振込, abroad_bank_transfer: 国外振込, account_transfer: 口座振替, credit_card: クレジットカード)'<br> 'デフォルトは none: 指定なし です。' 
     #[serde(rename = "payment_method", skip_serializing_if = "Option::is_none")]
     pub payment_method: Option<PaymentMethod>,
     /// 支払先の取引先ID
-    #[serde(rename = "partner_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub partner_id: Option<Option<i32>>,
+    #[serde(rename = "partner_id", skip_serializing_if = "Option::is_none")]
+    pub partner_id: Option<i32>,
     /// 支払先の取引先コード<br> 支払先の取引先ID指定時には無効 
-    #[serde(rename = "partner_code", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub partner_code: Option<Option<String>>,
+    #[serde(rename = "partner_code", skip_serializing_if = "Option::is_none")]
+    pub partner_code: Option<String>,
     /// 銀行コード（半角数字1桁〜4桁）<br> 支払先指定時には無効 
     #[serde(rename = "bank_code", skip_serializing_if = "Option::is_none")]
     pub bank_code: Option<String>,
@@ -88,7 +88,7 @@ pub struct PaymentRequestUpdateParams {
 }
 
 impl PaymentRequestUpdateParams {
-    pub fn new(company_id: i32, title: String, payment_request_lines: Vec<crate::models::PaymentRequestUpdateParamsPaymentRequestLinesInner>, approval_flow_route_id: i32, draft: bool, issue_date: String) -> PaymentRequestUpdateParams {
+    pub fn new(company_id: i32, title: String, payment_request_lines: Vec<crate::models::PaymentRequestUpdateParamsPaymentRequestLines>, approval_flow_route_id: i32, draft: bool, issue_date: String) -> PaymentRequestUpdateParams {
         PaymentRequestUpdateParams {
             company_id,
             title,
