@@ -16,11 +16,11 @@ pub struct ServiceUnavailableError {
     #[serde(rename = "status_code")]
     pub status_code: i32,
     #[serde(rename = "errors")]
-    pub errors: Vec<crate::models::ServiceUnavailableErrorErrorsInner>,
+    pub errors: Vec<crate::models::ServiceUnavailableErrorErrors>,
 }
 
 impl ServiceUnavailableError {
-    pub fn new(status_code: i32, errors: Vec<crate::models::ServiceUnavailableErrorErrorsInner>) -> ServiceUnavailableError {
+    pub fn new(status_code: i32, errors: Vec<crate::models::ServiceUnavailableErrorErrors>) -> ServiceUnavailableError {
         ServiceUnavailableError {
             status_code,
             errors,

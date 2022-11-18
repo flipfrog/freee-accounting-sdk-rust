@@ -20,13 +20,13 @@ pub struct SegmentTag {
     #[serde(rename = "name")]
     pub name: String,
     /// 備考
-    #[serde(rename = "description", deserialize_with = "Option::deserialize")]
+    #[serde(rename = "description")]
     pub description: Option<String>,
     /// ショートカット１ (20文字以内)
-    #[serde(rename = "shortcut1", deserialize_with = "Option::deserialize")]
+    #[serde(rename = "shortcut1")]
     pub shortcut1: Option<String>,
     /// ショートカット２ (20文字以内)
-    #[serde(rename = "shortcut2", deserialize_with = "Option::deserialize")]
+    #[serde(rename = "shortcut2")]
     pub shortcut2: Option<String>,
 }
 
