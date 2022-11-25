@@ -284,8 +284,6 @@ pub mod partner_response;
 pub use self::partner_response::PartnerResponse;
 pub mod partner_response_partner;
 pub use self::partner_response_partner::PartnerResponsePartner;
-pub mod partner_response_partner_address_attributes;
-pub use self::partner_response_partner_address_attributes::PartnerResponsePartnerAddressAttributes;
 pub mod partner_response_partner_invoice_payment_term_attributes;
 pub use self::partner_response_partner_invoice_payment_term_attributes::PartnerResponsePartnerInvoicePaymentTermAttributes;
 pub mod partner_response_partner_payment_term_attributes;
