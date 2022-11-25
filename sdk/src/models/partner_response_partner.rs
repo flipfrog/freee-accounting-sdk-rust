@@ -68,7 +68,7 @@ pub struct PartnerResponsePartner {
     #[serde(rename = "transfer_fee_handling_side", skip_serializing_if = "Option::is_none")]
     pub transfer_fee_handling_side: Option<TransferFeeHandlingSide>,
     #[serde(rename = "address_attributes", skip_serializing_if = "Option::is_none")]
-    pub address_attributes: Option<Box<crate::models::PartnerResponsePartnerAddressAttributes>>,
+    pub address_attributes: Option<Box<crate::models::PartnersResponseAddressAttributes>>,
     #[serde(rename = "partner_doc_setting_attributes", skip_serializing_if = "Option::is_none")]
     pub partner_doc_setting_attributes: Option<Box<crate::models::PartnerCreateParamsPartnerDocSettingAttributes>>,
     #[serde(rename = "partner_bank_account_attributes", skip_serializing_if = "Option::is_none")]
