@@ -16,9 +16,6 @@ pub struct SelectablesIndexResponseDefaultTaxTaxRateR8 {
     /// 税区分コード
     #[serde(rename = "code", skip_serializing_if = "Option::is_none")]
     pub code: Option<i32>,
-    /// 税区分ID
-    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
-    pub id: Option<i32>,
     /// 税区分
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
@@ -28,7 +25,6 @@ impl SelectablesIndexResponseDefaultTaxTaxRateR8 {
     pub fn new() -> SelectablesIndexResponseDefaultTaxTaxRateR8 {
         SelectablesIndexResponseDefaultTaxTaxRateR8 {
             code: None,
-            id: None,
             name: None,
         }
     }
