@@ -18,7 +18,7 @@ use rusqlite::{params};
 use openapi_sdk::apis::configuration::Configuration;
 use openapi_sdk::apis::companies_api;
 use openapi_sdk::apis::users_api;
-use openapi_sdk::models::{CompanyIndexResponseCompanies};
+use openapi_sdk::models::{CompanyIndexResponseCompaniesInner};
 
 struct AppState {
     oauth: BasicClient,
@@ -40,7 +40,7 @@ async fn index() -> Result<HttpResponse> {
 struct HomeTemplate<'a> {
     first_name: &'a String,
     last_name: &'a String,
-    companies: &'a Vec<CompanyIndexResponseCompanies>,
+    companies: &'a Vec<CompanyIndexResponseCompaniesInner>,
 }
 
 // 認可後の画面を表示する
@@ -73,12 +73,12 @@ async fn home(app_state: web::Data<AppState>) -> Result<HttpResponse> {
     // APIでユーザー情報を取得する
     let me = users_api::get_users_me(&config, Some(false), Some(false)).await
         .expect("ユーザ情報の取得に失敗しました");
-    let last_name = me.user.last_name.unwrap_or("".to_string());
-    let first_name = me.user.first_name.unwrap_or("".to_string());
+    let last_name = me.user.last_name.unwrap_or(Some("".to_string()));
+    let first_name = me.user.first_name.unwrap_or(Some("".to_string()));
 
     let s = HomeTemplate {
-        first_name: &first_name,
-        last_name: &last_name,
+        first_name: &first_name.unwrap(),
+        last_name: &last_name.unwrap(),
         companies: &Vec::from(companies.companies),
     }
         .render()
