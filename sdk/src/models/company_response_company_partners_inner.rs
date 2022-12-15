@@ -17,8 +17,8 @@ pub struct CompanyResponseCompanyPartnersInner {
     #[serde(rename = "id")]
     pub id: i32,
     /// 取引先コード
-    #[serde(rename = "code", deserialize_with = "Option::deserialize")]
-    pub code: Option<String>,
+    #[serde(rename = "code", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub code: Option<Option<String>>,
     /// 取引先名
     #[serde(rename = "name")]
     pub name: String,
@@ -31,10 +31,10 @@ pub struct CompanyResponseCompanyPartnersInner {
 }
 
 impl CompanyResponseCompanyPartnersInner {
-    pub fn new(id: i32, code: Option<String>, name: String) -> CompanyResponseCompanyPartnersInner {
+    pub fn new(id: i32, name: String) -> CompanyResponseCompanyPartnersInner {
         CompanyResponseCompanyPartnersInner {
             id,
-            code,
+            code: None,
             name,
             shortcut1: None,
             shortcut2: None,
