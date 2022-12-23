@@ -73,7 +73,7 @@ pub enum UpdateAccountItemError {
 }
 
 
-///  <h2 id=\"\">概要</h2>  <p>指定した事業所の勘定科目を作成する</p>  <h2 id=\"_2\">注意点</h2> <p>tax_nameは、api/1/taxes/companies/{company_id} で該当事業所の税区分の一覧を取得して、availableの値がtrue、かつ”name_ja”に”税率%”を含んでいない税区分を確認して、そのnameを指定して勘定科目の作成をしてください</p>
+///  <h2 id=\"\">概要</h2>  <p>指定した事業所の勘定科目を作成する</p>  <h2 id=\"_2\">注意点</h2> <p>tax_codeは、api/1/taxes/companies/{company_id} で該当事業所の税区分の一覧を取得して、availableの値がtrue、かつ”name_ja”に”税率%”を含んでいない税区分を確認して、そのcodeを指定して勘定科目の作成をしてください</p>
 pub async fn create_account_item(configuration: &configuration::Configuration, account_item_create_params: crate::models::AccountItemCreateParams) -> Result<crate::models::AccountItemResponse, Error<CreateAccountItemError>> {
     let local_var_configuration = configuration;
 
