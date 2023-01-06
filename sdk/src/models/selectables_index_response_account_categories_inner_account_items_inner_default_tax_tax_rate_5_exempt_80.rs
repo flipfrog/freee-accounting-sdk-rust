@@ -12,48 +12,20 @@
 
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
-pub struct SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTax {
-    #[serde(rename = "tax_rate_5", skip_serializing_if = "Option::is_none")]
-    pub tax_rate_5: Option<Box<crate::models::SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5>>,
-    #[serde(rename = "tax_rate_8", skip_serializing_if = "Option::is_none")]
-    pub tax_rate_8: Option<Box<crate::models::SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate8>>,
-    #[serde(rename = "tax_rate_10", skip_serializing_if = "Option::is_none")]
-    pub tax_rate_10: Option<Box<crate::models::SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate10>>,
-    #[serde(rename = "tax_rate_r8", skip_serializing_if = "Option::is_none")]
-    pub tax_rate_r8: Option<Box<crate::models::SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRateR8>>,
-    #[serde(rename = "tax_rate_5_exempt_80", skip_serializing_if = "Option::is_none")]
-    pub tax_rate_5_exempt_80: Option<Box<crate::models::SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5Exempt80>>,
-    #[serde(rename = "tax_rate_5_exempt_50", skip_serializing_if = "Option::is_none")]
-    pub tax_rate_5_exempt_50: Option<Box<crate::models::SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5Exempt50>>,
-    #[serde(rename = "tax_rate_8_exempt_80", skip_serializing_if = "Option::is_none")]
-    pub tax_rate_8_exempt_80: Option<Box<crate::models::SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate8Exempt80>>,
-    #[serde(rename = "tax_rate_8_exempt_50", skip_serializing_if = "Option::is_none")]
-    pub tax_rate_8_exempt_50: Option<Box<crate::models::SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate8Exempt50>>,
-    #[serde(rename = "tax_rate_10_exempt_80", skip_serializing_if = "Option::is_none")]
-    pub tax_rate_10_exempt_80: Option<Box<crate::models::SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate10Exempt80>>,
-    #[serde(rename = "tax_rate_10_exempt_50", skip_serializing_if = "Option::is_none")]
-    pub tax_rate_10_exempt_50: Option<Box<crate::models::SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate10Exempt50>>,
-    #[serde(rename = "tax_rate_r8_exempt_80", skip_serializing_if = "Option::is_none")]
-    pub tax_rate_r8_exempt_80: Option<Box<crate::models::SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRateR8Exempt80>>,
-    #[serde(rename = "tax_rate_r8_exempt_50", skip_serializing_if = "Option::is_none")]
-    pub tax_rate_r8_exempt_50: Option<Box<crate::models::SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRateR8Exempt50>>,
+pub struct SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5Exempt80 {
+    /// 税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）
+    #[serde(rename = "code", skip_serializing_if = "Option::is_none")]
+    pub code: Option<i32>,
+    /// 税区分
+    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
 }
 
-impl SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTax {
-    pub fn new() -> SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTax {
-        SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTax {
-            tax_rate_5: None,
-            tax_rate_8: None,
-            tax_rate_10: None,
-            tax_rate_r8: None,
-            tax_rate_5_exempt_80: None,
-            tax_rate_5_exempt_50: None,
-            tax_rate_8_exempt_80: None,
-            tax_rate_8_exempt_50: None,
-            tax_rate_10_exempt_80: None,
-            tax_rate_10_exempt_50: None,
-            tax_rate_r8_exempt_80: None,
-            tax_rate_r8_exempt_50: None,
+impl SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5Exempt80 {
+    pub fn new() -> SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5Exempt80 {
+        SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate5Exempt80 {
+            code: None,
+            name: None,
         }
     }
 }
