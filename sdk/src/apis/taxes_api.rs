@@ -112,7 +112,7 @@ pub async fn get_tax_codes(configuration: &configuration::Configuration, ) -> Re
     }
 }
 
-pub async fn get_taxes_companies(configuration: &configuration::Configuration, company_id: i32) -> Result<crate::models::GetTaxesCompanies200Response, Error<GetTaxesCompaniesError>> {
+pub async fn get_taxes_companies(configuration: &configuration::Configuration, company_id: i32, display_category: Option<&str>, available: Option<bool>) -> Result<crate::models::GetTaxesCompanies200Response, Error<GetTaxesCompaniesError>> {
     let local_var_configuration = configuration;
 
     let local_var_client = &local_var_configuration.client;
@@ -120,6 +120,12 @@ pub async fn get_taxes_companies(configuration: &configuration::Configuration, c
     let local_var_uri_str = format!("{}/api/1/taxes/companies/{company_id}", local_var_configuration.base_path, company_id=company_id);
     let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
 
+    if let Some(ref local_var_str) = display_category {
+        local_var_req_builder = local_var_req_builder.query(&[("display_category", &local_var_str.to_string())]);
+    }
+    if let Some(ref local_var_str) = available {
+        local_var_req_builder = local_var_req_builder.query(&[("available", &local_var_str.to_string())]);
+    }
     if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
         local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
     }
