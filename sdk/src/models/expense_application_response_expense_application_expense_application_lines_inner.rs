@@ -28,7 +28,7 @@ pub struct ExpenseApplicationResponseExpenseApplicationExpenseApplicationLinesIn
     /// 経費科目ID
     #[serde(rename = "expense_application_line_template_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub expense_application_line_template_id: Option<Option<i32>>,
-    /// 証憑ファイルID（ファイルボックスのファイルID）
+    /// ファイルボックス（証憑ファイル）ID
     #[serde(rename = "receipt_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub receipt_id: Option<Option<i32>>,
 }

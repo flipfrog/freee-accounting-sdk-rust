@@ -16,7 +16,7 @@ pub struct PaymentRequestResponsePaymentRequestPaymentRequestLinesInner {
     /// 支払依頼の項目行ID
     #[serde(rename = "id")]
     pub id: i64,
-    /// 行の種類 (deal_line: 支払依頼, withholding_tax: 源泉徴収税)
+    /// 行の種類 (deal_line: 支払依頼の通常取引行, withholding_tax: 源泉所得税行)
     #[serde(rename = "line_type")]
     pub line_type: LineType,
     /// 内容
@@ -70,7 +70,7 @@ impl PaymentRequestResponsePaymentRequestPaymentRequestLinesInner {
     }
 }
 
-/// 行の種類 (deal_line: 支払依頼, withholding_tax: 源泉徴収税)
+/// 行の種類 (deal_line: 支払依頼の通常取引行, withholding_tax: 源泉所得税行)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum LineType {
     #[serde(rename = "deal_line")]

@@ -38,7 +38,7 @@ pub enum GetCompanyError {
 }
 
 
-///  <h2 id=\"\">概要</h2>  <p>ユーザーが所属する事業所の一覧を取得する</p>  <h2 id=\"_2\">定義</h2>  <ul> <li>role <ul> <li>admin : 管理者</li> <li>simple_accounting : 一般</li> <li>self_only : 取引登録のみ</li> <li>read_only : 閲覧のみ</li> <li>workflow : 申請・承認</li> </ul> </li> </ul>
+///  <h2 id=\"\">概要</h2>  <p>ユーザーが所属する事業所一覧を取得する</p>  <h2 id=\"_2\">定義</h2>  <ul> <li>role <ul> <li>admin : 管理者</li> <li>simple_accounting : 一般</li> <li>self_only : 取引登録のみ</li> <li>read_only : 閲覧のみ</li> <li>workflow : 申請・承認</li> </ul> </li> </ul>
 pub async fn get_companies(configuration: &configuration::Configuration, ) -> Result<crate::models::CompanyIndexResponse, Error<GetCompaniesError>> {
     let local_var_configuration = configuration;
 
@@ -69,7 +69,7 @@ pub async fn get_companies(configuration: &configuration::Configuration, ) -> Re
     }
 }
 
-///  <h2 id=\"\">概要</h2>  <p>ユーザーが所属する事業所の詳細を取得する</p>  <h2 id=\"_2\">定義</h2>  <ul> <li>role <ul> <li>admin : 管理者</li> <li>simple_accounting : 一般</li> <li>self_only : 取引登録のみ</li> <li>read_only : 閲覧のみ</li> <li>workflow : 申請・承認</li> </ul> </li> </ul>  <h2 id=\"_3\">
+///  <h2 id=\"\">概要</h2>  <p>ユーザーが所属する事業所を取得する</p>  <h2 id=\"_2\">定義</h2>  <ul> <li>role <ul> <li>admin : 管理者</li> <li>simple_accounting : 一般</li> <li>self_only : 取引登録のみ</li> <li>read_only : 閲覧のみ</li> <li>workflow : 申請・承認</li> </ul> </li> </ul>  <h2 id=\"_3\">
 pub async fn get_company(configuration: &configuration::Configuration, id: i32, details: Option<bool>, account_items: Option<bool>, taxes: Option<bool>, items: Option<bool>, partners: Option<bool>, sections: Option<bool>, tags: Option<bool>, walletables: Option<bool>) -> Result<crate::models::CompanyResponse, Error<GetCompanyError>> {
     let local_var_configuration = configuration;
 

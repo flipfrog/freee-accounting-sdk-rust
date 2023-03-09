@@ -86,8 +86,8 @@ pub enum UpdateReceiptError {
 }
 
 
-///  <h2 id=\"\">概要</h2>  <p>ファイルボックスに証憑ファイルをアップロードする</p> <h2 id=\"_2\">注意点</h2> <ul>   <li>リクエストヘッダーの Content-Type は、multipart/form-dataにのみ対応しています。</li> </ul>
-pub async fn create_receipt(configuration: &configuration::Configuration, company_id: i32, receipt: std::path::PathBuf, description: Option<&str>, issue_date: Option<&str>, receipt_metadatum_partner_name: Option<&str>, receipt_metadatum_issue_date: Option<&str>, receipt_metadatum_amount: Option<i64>) -> Result<crate::models::ReceiptResponse, Error<CreateReceiptError>> {
+///  <h2 id=\"\">概要</h2>  <p>ファイルボックス（証憑ファイル）をアップロードする</p> <h2 id=\"_2\">注意点</h2> <ul>   <li>リクエストヘッダーの Content-Type は、multipart/form-dataにのみ対応しています。</li> </ul>
+pub async fn create_receipt(configuration: &configuration::Configuration, company_id: i32, receipt: std::path::PathBuf, description: Option<&str>, issue_date: Option<&str>, receipt_metadatum_partner_name: Option<&str>, receipt_metadatum_issue_date: Option<&str>, receipt_metadatum_amount: Option<i64>, qualified_invoice: Option<&str>, document_type: Option<&str>) -> Result<crate::models::ReceiptResponse, Error<CreateReceiptError>> {
     let local_var_configuration = configuration;
 
     let local_var_client = &local_var_configuration.client;
@@ -119,6 +119,12 @@ pub async fn create_receipt(configuration: &configuration::Configuration, compan
     if let Some(local_var_param_value) = receipt_metadatum_amount {
         local_var_form = local_var_form.text("receipt_metadatum_amount", local_var_param_value.to_string());
     }
+    if let Some(local_var_param_value) = qualified_invoice {
+        local_var_form = local_var_form.text("qualified_invoice", local_var_param_value.to_string());
+    }
+    if let Some(local_var_param_value) = document_type {
+        local_var_form = local_var_form.text("document_type", local_var_param_value.to_string());
+    }
     local_var_req_builder = local_var_req_builder.multipart(local_var_form);
 
     let local_var_req = local_var_req_builder.build()?;
@@ -136,7 +142,7 @@ pub async fn create_receipt(configuration: &configuration::Configuration, compan
     }
 }
 
-///  <h2 id=\"\">概要</h2>  <p>ファイルボックスの証憑ファイルを削除する</p>
+///  <h2 id=\"\">概要</h2>  <p>ファイルボックス（証憑ファイル）を削除する</p>
 pub async fn destroy_receipt(configuration: &configuration::Configuration, id: i32, company_id: i32) -> Result<(), Error<DestroyReceiptError>> {
     let local_var_configuration = configuration;
 
@@ -168,7 +174,7 @@ pub async fn destroy_receipt(configuration: &configuration::Configuration, id: i
     }
 }
 
-///  <h2 id=\"\">概要</h2>  <p>指定した事業所のファイルボックス 証憑ファイルのダウンロードをする</p>
+///  <h2 id=\"\">概要</h2>  <p>指定した事業所のファイルボックス（証憑ファイル）をダウンロードする</p>
 pub async fn download_receipt(configuration: &configuration::Configuration, id: i32, company_id: i32) -> Result<String, Error<DownloadReceiptError>> {
     let local_var_configuration = configuration;
 
@@ -200,7 +206,7 @@ pub async fn download_receipt(configuration: &configuration::Configuration, id: 
     }
 }
 
-///  <h2 id=\"\">概要</h2>  <p>指定した事業所のファイルボックス 証憑ファイルを取得する</p>
+///  <h2 id=\"\">概要</h2>  <p>指定した事業所のファイルボックス（証憑ファイル）を取得する</p>
 pub async fn get_receipt(configuration: &configuration::Configuration, id: i32, company_id: i32) -> Result<crate::models::ReceiptResponse, Error<GetReceiptError>> {
     let local_var_configuration = configuration;
 
@@ -232,7 +238,7 @@ pub async fn get_receipt(configuration: &configuration::Configuration, id: i32, 
     }
 }
 
-///  <h2 id=\"\">概要</h2>  <p>指定した事業所のファイルボックス 証憑ファイル一覧を取得する</p>
+///  <h2 id=\"\">概要</h2>  <p>指定した事業所のファイルボックス（証憑ファイル）一覧を取得する</p>
 pub async fn get_receipts(configuration: &configuration::Configuration, company_id: i32, start_date: &str, end_date: &str, user_name: Option<&str>, number: Option<i32>, comment_type: Option<&str>, comment_important: Option<bool>, category: Option<&str>, offset: Option<i64>, limit: Option<i32>) -> Result<crate::models::GetReceipts200Response, Error<GetReceiptsError>> {
     let local_var_configuration = configuration;
 
@@ -287,7 +293,7 @@ pub async fn get_receipts(configuration: &configuration::Configuration, company_
     }
 }
 
-///  <h2 id=\"\">概要</h2>  <p>ファイルボックスの証憑ファイル情報を更新する</p> <h2 id=\"_2\">注意点</h2> <ul>   <li>本APIでは、証憑ファイルの再アップロードはできません。</li> </ul>
+///  <h2 id=\"\">概要</h2>  <p>ファイルボックス（証憑ファイル）を更新する</p> <h2 id=\"_2\">注意点</h2> <ul>   <li>本APIでは、証憑ファイルの再アップロードはできません。</li> </ul>
 pub async fn update_receipt(configuration: &configuration::Configuration, id: i32, receipt_update_params: crate::models::ReceiptUpdateParams) -> Result<crate::models::ReceiptResponse, Error<UpdateReceiptError>> {
     let local_var_configuration = configuration;
 

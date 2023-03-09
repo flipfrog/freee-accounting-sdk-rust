@@ -13,7 +13,7 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct DealReceiptsInner {
-    /// 証憑ファイルID（ファイルボックスのファイルID）
+    /// ファイルボックス（証憑ファイル）ID
     #[serde(rename = "id")]
     pub id: i32,
     /// ステータス(confirmed:確認済み、deleted:削除済み、ignored:無視)
@@ -34,7 +34,7 @@ pub struct DealReceiptsInner {
     /// 作成日時（ISO8601形式）
     #[serde(rename = "created_at")]
     pub created_at: String,
-    /// ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。） <br> <br> file_srcは廃止予定の属性になります。<br> file_srcに替わり、証憑ファイル（ファイルボックスのファイル）のダウンロード APIをご利用ください。<br> 証憑ファイル（ファイルボックスのファイル）のダウンロードAPIを利用することで、以下のようになります。 <ul>   <li>アプリケーション利用者はfreee APIアプリケーションにログインしていれば、証憑ダウンロード毎にfreeeに改めてログインすることなくファイルが参照できるようになります。</li> </ul>
+    /// ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。） <br> <br> file_srcは廃止予定の属性になります。<br> file_srcに替わり、ファイルボックス（証憑ファイル）のダウンロード APIをご利用ください。<br> ファイルボックス（証憑ファイル）のダウンロードAPIを利用することで、以下のようになります。 <ul>   <li>アプリケーション利用者はfreee APIアプリケーションにログインしていれば、証憑ダウンロード毎にfreeeに改めてログインすることなくファイルが参照できるようになります。</li> </ul>
     #[serde(rename = "file_src")]
     pub file_src: String,
     #[serde(rename = "user")]

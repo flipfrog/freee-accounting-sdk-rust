@@ -12,71 +12,18 @@
 
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
-pub struct ReceiptUpdateParams {
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
-    /// メモ (255文字以内)
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    /// 取引日 (yyyy-mm-dd)
-    #[serde(rename = "issue_date")]
-    pub issue_date: String,
-    #[serde(rename = "receipt_metadatum", skip_serializing_if = "Option::is_none")]
-    pub receipt_metadatum: Option<Box<crate::models::ReceiptUpdateParamsReceiptMetadatum>>,
-    /// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 適格請求書等（qualified: 該当する、not_qualified: 該当しない） 
-    #[serde(rename = "qualified_invoice", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub qualified_invoice: Option<Option<QualifiedInvoice>>,
-    /// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 インボイス制度適格請求書発行事業者登録番号 - 先頭T数字13桁の固定14桁の文字列 <a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a> 
-    #[serde(rename = "invoice_registration_number", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub invoice_registration_number: Option<Option<String>>,
-    /// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 書類の種類（receipt: 領収書、invoice: 請求書、other: その他） 
-    #[serde(rename = "document_type", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub document_type: Option<Option<DocumentType>>,
+pub struct UserCapabilityJustRead {
+    /// 閲覧
+    #[serde(rename = "read", skip_serializing_if = "Option::is_none")]
+    pub read: Option<bool>,
 }
 
-impl ReceiptUpdateParams {
-    pub fn new(company_id: i32, issue_date: String) -> ReceiptUpdateParams {
-        ReceiptUpdateParams {
-            company_id,
-            description: None,
-            issue_date,
-            receipt_metadatum: None,
-            qualified_invoice: None,
-            invoice_registration_number: None,
-            document_type: None,
+impl UserCapabilityJustRead {
+    pub fn new() -> UserCapabilityJustRead {
+        UserCapabilityJustRead {
+            read: None,
         }
     }
 }
 
-/// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 適格請求書等（qualified: 該当する、not_qualified: 該当しない） 
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum QualifiedInvoice {
-    #[serde(rename = "qualified")]
-    Qualified,
-    #[serde(rename = "not_qualified")]
-    NotQualified,
-}
-
-impl Default for QualifiedInvoice {
-    fn default() -> QualifiedInvoice {
-        Self::Qualified
-    }
-}
-/// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 書類の種類（receipt: 領収書、invoice: 請求書、other: その他） 
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum DocumentType {
-    #[serde(rename = "receipt")]
-    Receipt,
-    #[serde(rename = "invoice")]
-    Invoice,
-    #[serde(rename = "other")]
-    Other,
-}
-
-impl Default for DocumentType {
-    fn default() -> DocumentType {
-        Self::Receipt
-    }
-}
 

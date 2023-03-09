@@ -28,7 +28,7 @@ pub struct ExpenseApplicationUpdateParamsExpenseApplicationLinesInner {
     /// 経費科目ID
     #[serde(rename = "expense_application_line_template_id", skip_serializing_if = "Option::is_none")]
     pub expense_application_line_template_id: Option<i32>,
-    /// 証憑ファイルID（ファイルボックスのファイルID）
+    /// ファイルボックス（証憑ファイル）ID
     #[serde(rename = "receipt_id", skip_serializing_if = "Option::is_none")]
     pub receipt_id: Option<i32>,
 }

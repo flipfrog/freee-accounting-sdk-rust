@@ -28,7 +28,7 @@ pub struct PartnersResponsePartnersInner {
     /// 更新日 (yyyy-mm-dd)
     #[serde(rename = "update_date")]
     pub update_date: String,
-    /// 取引先の使用設定（true: 使用する、false: 使用しない） <br> <ul>   <li>     本APIでpartnerを作成した場合はtrueになります。   </li>   <li>     falseにする場合はWeb画面から変更できます。   </li>   <li>     trueの場合、Web画面での取引登録時などに入力候補として表示されます。   </li>   <li>     falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。   </li> </ul>
+    /// 取引先の使用設定（true: 使用する、false: 使用しない） <br> <ul>   <li>     本APIでpartnerを作成した場合はtrueになります。   </li>   <li>     falseにする場合はWeb画面から変更できます。   </li>   <li>     trueの場合、Web画面での取引登録時などに入力候補として表示されます。   </li>   <li>     falseの場合、取引先自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入・支出）の作成APIなどでfalseの取引先をパラメータに指定すれば、取引などにfalseの取引先を設定できます。   </li> </ul>
     #[serde(rename = "available")]
     pub available: bool,
     /// ショートカット1 (255文字以内)
@@ -67,6 +67,12 @@ pub struct PartnersResponsePartnersInner {
     /// 振込手数料負担（一括振込ファイル用）: (振込元(当方): payer, 振込先(先方): payee)
     #[serde(rename = "transfer_fee_handling_side", skip_serializing_if = "Option::is_none")]
     pub transfer_fee_handling_side: Option<TransferFeeHandlingSide>,
+    /// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 インボイス制度適格請求書発行事業者（true: 対象事業者、false: 非対象事業者） <a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a> 
+    #[serde(rename = "qualified_invoice_issuer", skip_serializing_if = "Option::is_none")]
+    pub qualified_invoice_issuer: Option<bool>,
+    /// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 インボイス制度適格請求書発行事業者登録番号 - 先頭T数字13桁の固定14桁の文字列 <a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a> 
+    #[serde(rename = "invoice_registration_number", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub invoice_registration_number: Option<Option<String>>,
     #[serde(rename = "address_attributes", skip_serializing_if = "Option::is_none")]
     pub address_attributes: Option<Box<crate::models::PartnersResponsePartnersInnerAddressAttributes>>,
     #[serde(rename = "partner_doc_setting_attributes", skip_serializing_if = "Option::is_none")]
@@ -96,6 +102,8 @@ impl PartnersResponsePartnersInner {
             email: None,
             payer_walletable_id: None,
             transfer_fee_handling_side: None,
+            qualified_invoice_issuer: None,
+            invoice_registration_number: None,
             address_attributes: None,
             partner_doc_setting_attributes: None,
             partner_bank_account_attributes: None,

@@ -51,7 +51,9 @@ async fn main() {
         partner_doc_setting_attributes: None,
         partner_bank_account_attributes: None,
         payment_term_attributes: None,
-        invoice_payment_term_attributes: None
+        invoice_payment_term_attributes: None,
+        invoice_registration_number: None,
+        qualified_invoice_issuer: None
     };
 
     // 取引先を作成する

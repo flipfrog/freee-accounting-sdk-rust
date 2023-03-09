@@ -13,7 +13,7 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct DealCreateResponseDealReceiptsInner {
-    /// 証憑ファイルID（ファイルボックスのファイルID）
+    /// ファイルボックス（証憑ファイル）ID
     #[serde(rename = "id")]
     pub id: i32,
     /// ステータス(confirmed:確認済み、deleted:削除済み、ignored:無視)

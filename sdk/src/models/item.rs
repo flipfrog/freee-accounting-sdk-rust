@@ -25,7 +25,7 @@ pub struct Item {
     /// 更新日(yyyy-mm-dd)
     #[serde(rename = "update_date")]
     pub update_date: String,
-    /// 品目の使用設定（true: 使用する、false: 使用しない） <br> <ul>   <li>     本APIでitemを作成した場合はtrueになります。   </li>   <li>     falseにする場合はWeb画面から変更できます。   </li>   <li>     trueの場合、Web画面での取引登録時などに入力候補として表示されます。   </li>   <li>     falseの場合、品目自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入／支出）の作成APIなどでfalseの品目をパラメータに指定すれば、取引などにfalseの品目を設定できます。   </li> </ul>
+    /// 品目の使用設定（true: 使用する、false: 使用しない） <br> <ul>   <li>     本APIでitemを作成した場合はtrueになります。   </li>   <li>     falseにする場合はWeb画面から変更できます。   </li>   <li>     trueの場合、Web画面での取引登録時などに入力候補として表示されます。   </li>   <li>     falseの場合、品目自体は削除せず、Web画面での取引登録時などに入力候補として表示されません。ただし取引（収入・支出）の作成APIなどでfalseの品目をパラメータに指定すれば、取引などにfalseの品目を設定できます。   </li> </ul>
     #[serde(rename = "available")]
     pub available: bool,
     /// ショートカット１ (20文字以内)

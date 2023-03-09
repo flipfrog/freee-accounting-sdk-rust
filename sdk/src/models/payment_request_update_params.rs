@@ -40,7 +40,7 @@ pub struct PaymentRequestUpdateParams {
     /// 請求書番号（255文字以内）
     #[serde(rename = "document_code", skip_serializing_if = "Option::is_none")]
     pub document_code: Option<String>,
-    /// 証憑ファイルID（ファイルボックスのファイルID）（配列）
+    /// ファイルボックス（証憑ファイル）ID（配列）
     #[serde(rename = "receipt_ids", skip_serializing_if = "Option::is_none")]
     pub receipt_ids: Option<Vec<i32>>,
     /// 発生日 (yyyy-mm-dd)

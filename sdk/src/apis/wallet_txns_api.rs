@@ -62,7 +62,7 @@ pub enum GetWalletTxnsError {
 }
 
 
-///  <h2 id=\"\">概要</h2>  <p>指定した事業所の明細を作成する</p>  <h2 id=\"_2\">定義</h2>  <ul> <li> <p>amount : 明細金額</p> </li>  <li> <p>due_amount : 取引登録待ち金額</p> </li>  <li> <p>balance : 残高</p> </li>  <li> <p>entry_side</p>  <ul> <li>income : 入金</li>  <li>expense : 出金</li> </ul> </li>  <li> <p>walletable_type</p>  <ul> <li>bank_account : 銀行口座</li>  <li>credit_card : クレジットカード</li>  <li>wallet : その他の決済口座</li> </ul> </li> </ul>
+///  <h2 id=\"\">概要</h2>  <p>指定した事業所の口座明細を作成する</p>  <h2 id=\"_2\">定義</h2>  <ul> <li> <p>amount : 明細金額</p> </li>  <li> <p>due_amount : 取引登録待ち金額</p> </li>  <li> <p>balance : 残高</p> </li>  <li> <p>entry_side</p>  <ul> <li>income : 入金</li>  <li>expense : 出金</li> </ul> </li>  <li> <p>walletable_type</p>  <ul> <li>bank_account : 銀行口座</li>  <li>credit_card : クレジットカード</li>  <li>wallet : その他の決済口座</li> </ul> </li> </ul>
 pub async fn create_wallet_txn(configuration: &configuration::Configuration, wallet_txn_params: Option<crate::models::WalletTxnParams>) -> Result<crate::models::WalletTxnResponse, Error<CreateWalletTxnError>> {
     let local_var_configuration = configuration;
 
@@ -94,7 +94,7 @@ pub async fn create_wallet_txn(configuration: &configuration::Configuration, wal
     }
 }
 
-///  <h2 id=\"\">概要</h2> <p>指定した事業所の明細を削除する</p>  <h2 id=\"\">注意点</h2> <ul>   <li>同期をして取得したデータが「明細」の場合は、削除および再取得はできません。</li>   <li>詳細は<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/360015892332\">freeeヘルプセンター</a>をご確認ください。</li> </ul>
+///  <h2 id=\"\">概要</h2> <p>指定した事業所の口座明細を削除する</p>  <h2 id=\"\">注意点</h2> <ul>   <li>同期をして取得したデータが「明細」の場合は、削除および再取得はできません。</li>   <li>詳細は<a target=\"_blank\" href=\"https://support.freee.co.jp/hc/ja/articles/360015892332\">freeeヘルプセンター</a>をご確認ください。</li> </ul>
 pub async fn destroy_wallet_txn(configuration: &configuration::Configuration, id: i32, company_id: i32) -> Result<(), Error<DestroyWalletTxnError>> {
     let local_var_configuration = configuration;
 
@@ -126,7 +126,7 @@ pub async fn destroy_wallet_txn(configuration: &configuration::Configuration, id
     }
 }
 
-///  <h2 id=\"\">概要</h2>  <p>指定した事業所の明細を取得する</p>  <h2 id=\"_2\">定義</h2>  <ul> <li> <p>amount : 明細金額</p> </li>  <li> <p>due_amount : 取引登録待ち金額</p> </li>  <li> <p>balance : 残高</p> </li>  <li> <p>entry_side</p>  <ul> <li>income : 入金</li>  <li>expense : 出金</li> </ul> </li>  <li> <p>walletable_type</p>  <ul> <li>bank_account : 銀行口座</li>  <li>credit_card : クレジットカード</li>  <li>wallet : その他の決済口座</li> </ul> </li> </ul>
+///  <h2 id=\"\">概要</h2>  <p>指定した事業所の口座明細を取得する</p>  <h2 id=\"_2\">定義</h2>  <ul> <li> <p>amount : 明細金額</p> </li>  <li> <p>due_amount : 取引登録待ち金額</p> </li>  <li> <p>balance : 残高</p> </li>  <li> <p>entry_side</p>  <ul> <li>income : 入金</li>  <li>expense : 出金</li> </ul> </li>  <li> <p>walletable_type</p>  <ul> <li>bank_account : 銀行口座</li>  <li>credit_card : クレジットカード</li>  <li>wallet : その他の決済口座</li> </ul> </li> </ul>
 pub async fn get_wallet_txn(configuration: &configuration::Configuration, id: i32, company_id: i32) -> Result<crate::models::WalletTxnResponse, Error<GetWalletTxnError>> {
     let local_var_configuration = configuration;
 
@@ -158,7 +158,7 @@ pub async fn get_wallet_txn(configuration: &configuration::Configuration, id: i3
     }
 }
 
-///  <h2 id=\"\">概要</h2>  <p>指定した事業所の明細一覧を取得する</p>  <h2 id=\"_2\">定義</h2>  <ul> <li> <p>amount : 明細金額</p> </li>  <li> <p>due_amount : 取引登録待ち金額</p> </li>  <li> <p>balance : 残高</p> </li>  <li> <p>entry_side</p>  <ul> <li>income : 入金</li>  <li>expense : 出金</li> </ul> </li>  <li> <p>walletable_type</p>  <ul> <li>bank_account : 銀行口座</li>  <li>credit_card : クレジットカード</li>  <li>wallet : その他の決済口座</li> </ul> </li> </ul>
+///  <h2 id=\"\">概要</h2>  <p>指定した事業所の口座明細一覧を取得する</p>  <h2 id=\"_2\">定義</h2>  <ul> <li> <p>amount : 明細金額</p> </li>  <li> <p>due_amount : 取引登録待ち金額</p> </li>  <li> <p>balance : 残高</p> </li>  <li> <p>entry_side</p>  <ul> <li>income : 入金</li>  <li>expense : 出金</li> </ul> </li>  <li> <p>walletable_type</p>  <ul> <li>bank_account : 銀行口座</li>  <li>credit_card : クレジットカード</li>  <li>wallet : その他の決済口座</li> </ul> </li> </ul>
 pub async fn get_wallet_txns(configuration: &configuration::Configuration, company_id: i32, walletable_type: Option<&str>, walletable_id: Option<i32>, start_date: Option<&str>, end_date: Option<&str>, entry_side: Option<&str>, offset: Option<i64>, limit: Option<i32>) -> Result<crate::models::GetWalletTxns200Response, Error<GetWalletTxnsError>> {
     let local_var_configuration = configuration;
 
