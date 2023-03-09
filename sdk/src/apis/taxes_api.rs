@@ -50,7 +50,7 @@ pub enum GetTaxesCompaniesError {
 }
 
 
-///  <h2 id=\"\">概要</h2>  <p>税区分コードを取得する</p>
+///  <h2 id=\"\">概要</h2>  <p>税区分を取得する</p>
 pub async fn get_tax_code(configuration: &configuration::Configuration, code: i32) -> Result<crate::models::TaxResponse, Error<GetTaxCodeError>> {
     let local_var_configuration = configuration;
 
@@ -81,7 +81,7 @@ pub async fn get_tax_code(configuration: &configuration::Configuration, code: i3
     }
 }
 
-///  <h2 id=\"\">概要</h2>  <p>税区分コード一覧を取得する</p>
+///  <h2 id=\"\">概要</h2>  <p>税区分一覧を取得する</p>
 pub async fn get_tax_codes(configuration: &configuration::Configuration, ) -> Result<crate::models::GetTaxCodes200Response, Error<GetTaxCodesError>> {
     let local_var_configuration = configuration;
 
@@ -112,6 +112,7 @@ pub async fn get_tax_codes(configuration: &configuration::Configuration, ) -> Re
     }
 }
 
+///  <h2 id=\"\">概要</h2>  <p>指定した事業所の税区分一覧を取得する</p>
 pub async fn get_taxes_companies(configuration: &configuration::Configuration, company_id: i32, display_category: Option<&str>, available: Option<bool>) -> Result<crate::models::GetTaxesCompanies200Response, Error<GetTaxesCompaniesError>> {
     let local_var_configuration = configuration;
 

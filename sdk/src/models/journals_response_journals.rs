@@ -34,7 +34,7 @@ pub struct JournalsResponseJournals {
     pub visible_tags: Option<Vec<VisibleTags>>,
     #[serde(rename = "visible_ids", skip_serializing_if = "Option::is_none")]
     pub visible_ids: Option<Vec<VisibleIds>>,
-    /// ステータス確認用URL
+    /// 仕訳帳のステータスの取得用URL
     #[serde(rename = "status_url", skip_serializing_if = "Option::is_none")]
     pub status_url: Option<String>,
     /// 集計結果が最新かどうか

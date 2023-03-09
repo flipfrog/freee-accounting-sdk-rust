@@ -22,45 +22,47 @@ pub struct GetUsersCapabilities200Response {
     #[serde(rename = "docs")]
     pub docs: Box<crate::models::UserCapabilityWithSelfOnly>,
     #[serde(rename = "doc_postings")]
-    pub doc_postings: Box<crate::models::UserCapability>,
+    pub doc_postings: Box<crate::models::UserCapabilityJustCreate>,
     #[serde(rename = "receipts")]
     pub receipts: Box<crate::models::UserCapabilityWithSelfOnly>,
     #[serde(rename = "receipt_stream_editor")]
-    pub receipt_stream_editor: Box<crate::models::UserCapability>,
+    pub receipt_stream_editor: Box<crate::models::UserCapabilityJustRead>,
+    #[serde(rename = "spreadsheets")]
+    pub spreadsheets: Box<crate::models::UserCapabilityJustCreateRead>,
     #[serde(rename = "expense_applications")]
     pub expense_applications: Box<crate::models::UserCapabilityWithSelfOnly>,
-    #[serde(rename = "spreadsheets")]
-    pub spreadsheets: Box<crate::models::UserCapability>,
+    #[serde(rename = "expense_application_sync_payroll")]
+    pub expense_application_sync_payroll: Box<crate::models::UserCapabilityJustCreate>,
     #[serde(rename = "payment_requests")]
     pub payment_requests: Box<crate::models::UserCapabilityWithSelfOnly>,
-    #[serde(rename = "request_forms")]
-    pub request_forms: Box<crate::models::UserCapability>,
     #[serde(rename = "approval_requests")]
     pub approval_requests: Box<crate::models::UserCapabilityWithSelfOnly>,
     #[serde(rename = "reports")]
-    pub reports: Box<crate::models::UserCapability>,
+    pub reports: Box<crate::models::UserCapabilityJustRead>,
     #[serde(rename = "reports_income_expense")]
-    pub reports_income_expense: Box<crate::models::UserCapability>,
+    pub reports_income_expense: Box<crate::models::UserCapabilityJustRead>,
     #[serde(rename = "reports_receivables")]
-    pub reports_receivables: Box<crate::models::UserCapability>,
+    pub reports_receivables: Box<crate::models::UserCapabilityJustRead>,
     #[serde(rename = "reports_payables")]
-    pub reports_payables: Box<crate::models::UserCapability>,
+    pub reports_payables: Box<crate::models::UserCapabilityJustReadWrite>,
     #[serde(rename = "reports_cash_balance")]
-    pub reports_cash_balance: Box<crate::models::UserCapability>,
-    #[serde(rename = "reports_crosstabs")]
-    pub reports_crosstabs: Box<crate::models::UserCapability>,
-    #[serde(rename = "reports_general_ledgers")]
-    pub reports_general_ledgers: Box<crate::models::UserCapability>,
-    #[serde(rename = "reports_pl")]
-    pub reports_pl: Box<crate::models::UserCapability>,
-    #[serde(rename = "reports_bs")]
-    pub reports_bs: Box<crate::models::UserCapability>,
-    #[serde(rename = "reports_journals")]
-    pub reports_journals: Box<crate::models::UserCapability>,
+    pub reports_cash_balance: Box<crate::models::UserCapabilityJustRead>,
     #[serde(rename = "reports_managements_planning")]
-    pub reports_managements_planning: Box<crate::models::UserCapability>,
+    pub reports_managements_planning: Box<crate::models::UserCapabilityJustReadWrite>,
     #[serde(rename = "reports_managements_navigation")]
-    pub reports_managements_navigation: Box<crate::models::UserCapability>,
+    pub reports_managements_navigation: Box<crate::models::UserCapabilityJustReadWrite>,
+    #[serde(rename = "reports_crosstabs")]
+    pub reports_crosstabs: Box<crate::models::UserCapabilityJustRead>,
+    #[serde(rename = "reports_custom_reports_aggregate")]
+    pub reports_custom_reports_aggregate: Box<crate::models::UserCapabilityJustRead>,
+    #[serde(rename = "reports_pl")]
+    pub reports_pl: Box<crate::models::UserCapabilityJustRead>,
+    #[serde(rename = "reports_bs")]
+    pub reports_bs: Box<crate::models::UserCapabilityJustRead>,
+    #[serde(rename = "reports_general_ledgers")]
+    pub reports_general_ledgers: Box<crate::models::UserCapabilityJustRead>,
+    #[serde(rename = "reports_journals")]
+    pub reports_journals: Box<crate::models::UserCapabilityJustRead>,
     #[serde(rename = "manual_journals")]
     pub manual_journals: Box<crate::models::UserCapabilityWithSelfOnly>,
     #[serde(rename = "fixed_assets")]
@@ -72,35 +74,43 @@ pub struct GetUsersCapabilities200Response {
     #[serde(rename = "payment_records")]
     pub payment_records: Box<crate::models::UserCapability>,
     #[serde(rename = "annual_reports")]
-    pub annual_reports: Box<crate::models::UserCapability>,
+    pub annual_reports: Box<crate::models::UserCapabilityJustRead>,
     #[serde(rename = "tax_reports")]
-    pub tax_reports: Box<crate::models::UserCapability>,
+    pub tax_reports: Box<crate::models::UserCapabilityJustRead>,
     #[serde(rename = "consumption_entries")]
-    pub consumption_entries: Box<crate::models::UserCapability>,
+    pub consumption_entries: Box<crate::models::UserCapabilityJustRead>,
     #[serde(rename = "tax_return")]
-    pub tax_return: Box<crate::models::UserCapability>,
+    pub tax_return: Box<crate::models::UserCapabilityJustRead>,
     #[serde(rename = "account_item_statements")]
-    pub account_item_statements: Box<crate::models::UserCapability>,
+    pub account_item_statements: Box<crate::models::UserCapabilityJustRead>,
     #[serde(rename = "month_end")]
-    pub month_end: Box<crate::models::UserCapability>,
+    pub month_end: Box<crate::models::UserCapabilityJustRead>,
     #[serde(rename = "year_end")]
-    pub year_end: Box<crate::models::UserCapability>,
+    pub year_end: Box<crate::models::UserCapabilityJustReadUpdate>,
     #[serde(rename = "walletables")]
     pub walletables: Box<crate::models::UserCapabilityWithSync>,
     #[serde(rename = "companies")]
-    pub companies: Box<crate::models::UserCapability>,
+    pub companies: Box<crate::models::UserCapabilityJustReadUpdate>,
     #[serde(rename = "invitations")]
     pub invitations: Box<crate::models::UserCapability>,
+    #[serde(rename = "access_controls")]
+    pub access_controls: Box<crate::models::UserCapabilityWithWrite>,
     #[serde(rename = "sign_in_logs")]
-    pub sign_in_logs: Box<crate::models::UserCapability>,
+    pub sign_in_logs: Box<crate::models::UserCapabilityJustRead>,
+    #[serde(rename = "user_attribute_logs")]
+    pub user_attribute_logs: Box<crate::models::UserCapabilityJustRead>,
+    #[serde(rename = "app_role_logs")]
+    pub app_role_logs: Box<crate::models::UserCapabilityJustRead>,
+    #[serde(rename = "txn_relationship_logs")]
+    pub txn_relationship_logs: Box<crate::models::UserCapabilityJustRead>,
     #[serde(rename = "backups")]
-    pub backups: Box<crate::models::UserCapability>,
+    pub backups: Box<crate::models::UserCapabilityJustRead>,
     #[serde(rename = "opening_balances")]
-    pub opening_balances: Box<crate::models::UserCapability>,
+    pub opening_balances: Box<crate::models::UserCapabilityJustReadUpdate>,
     #[serde(rename = "system_conversion")]
-    pub system_conversion: Box<crate::models::UserCapability>,
+    pub system_conversion: Box<crate::models::UserCapabilityJustRead>,
     #[serde(rename = "resets")]
-    pub resets: Box<crate::models::UserCapability>,
+    pub resets: Box<crate::models::UserCapabilityJustRead>,
     #[serde(rename = "partners")]
     pub partners: Box<crate::models::UserCapability>,
     #[serde(rename = "items")]
@@ -112,7 +122,9 @@ pub struct GetUsersCapabilities200Response {
     #[serde(rename = "account_items")]
     pub account_items: Box<crate::models::UserCapability>,
     #[serde(rename = "taxes")]
-    pub taxes: Box<crate::models::UserCapability>,
+    pub taxes: Box<crate::models::UserCapabilityJustReadUpdate>,
+    #[serde(rename = "payroll_item_sets")]
+    pub payroll_item_sets: Box<crate::models::UserCapability>,
     #[serde(rename = "user_matchers")]
     pub user_matchers: Box<crate::models::UserCapability>,
     #[serde(rename = "deal_templates")]
@@ -120,13 +132,21 @@ pub struct GetUsersCapabilities200Response {
     #[serde(rename = "manual_journal_templates")]
     pub manual_journal_templates: Box<crate::models::UserCapability>,
     #[serde(rename = "cost_allocations")]
-    pub cost_allocations: Box<crate::models::UserCapability>,
+    pub cost_allocations: Box<crate::models::UserCapabilityJustReadUpdate>,
     #[serde(rename = "approval_flow_routes")]
     pub approval_flow_routes: Box<crate::models::UserCapability>,
     #[serde(rename = "expense_application_templates")]
     pub expense_application_templates: Box<crate::models::UserCapability>,
+    #[serde(rename = "request_forms")]
+    pub request_forms: Box<crate::models::UserCapability>,
+    #[serde(rename = "system_messages_for_admin")]
+    pub system_messages_for_admin: Box<crate::models::UserCapabilityJustRead>,
+    #[serde(rename = "company_internal_announcements")]
+    pub company_internal_announcements: Box<crate::models::UserCapabilityJustUpdate>,
+    #[serde(rename = "doc_change_logs")]
+    pub doc_change_logs: Box<crate::models::UserCapabilityJustRead>,
     #[serde(rename = "workflows")]
-    pub workflows: Box<crate::models::UserCapability>,
+    pub workflows: Box<crate::models::UserCapabilityJustReadUpdateDestroy>,
     #[serde(rename = "oauth_applications")]
     pub oauth_applications: Box<crate::models::UserCapability>,
     #[serde(rename = "oauth_authorizations")]
@@ -136,7 +156,7 @@ pub struct GetUsersCapabilities200Response {
 }
 
 impl GetUsersCapabilities200Response {
-    pub fn new(wallet_txns: crate::models::UserCapabilityWithConfirm, deals: crate::models::UserCapabilityWithSelfOnly, transfers: crate::models::UserCapabilityWithSelfOnly, docs: crate::models::UserCapabilityWithSelfOnly, doc_postings: crate::models::UserCapability, receipts: crate::models::UserCapabilityWithSelfOnly, receipt_stream_editor: crate::models::UserCapability, expense_applications: crate::models::UserCapabilityWithSelfOnly, spreadsheets: crate::models::UserCapability, payment_requests: crate::models::UserCapabilityWithSelfOnly, request_forms: crate::models::UserCapability, approval_requests: crate::models::UserCapabilityWithSelfOnly, reports: crate::models::UserCapability, reports_income_expense: crate::models::UserCapability, reports_receivables: crate::models::UserCapability, reports_payables: crate::models::UserCapability, reports_cash_balance: crate::models::UserCapability, reports_crosstabs: crate::models::UserCapability, reports_general_ledgers: crate::models::UserCapability, reports_pl: crate::models::UserCapability, reports_bs: crate::models::UserCapability, reports_journals: crate::models::UserCapability, reports_managements_planning: crate::models::UserCapability, reports_managements_navigation: crate::models::UserCapability, manual_journals: crate::models::UserCapabilityWithSelfOnly, fixed_assets: crate::models::UserCapability, inventory_refreshes: crate::models::UserCapability, biz_allocations: crate::models::UserCapability, payment_records: crate::models::UserCapability, annual_reports: crate::models::UserCapability, tax_reports: crate::models::UserCapability, consumption_entries: crate::models::UserCapability, tax_return: crate::models::UserCapability, account_item_statements: crate::models::UserCapability, month_end: crate::models::UserCapability, year_end: crate::models::UserCapability, walletables: crate::models::UserCapabilityWithSync, companies: crate::models::UserCapability, invitations: crate::models::UserCapability, sign_in_logs: crate::models::UserCapability, backups: crate::models::UserCapability, opening_balances: crate::models::UserCapability, system_conversion: crate::models::UserCapability, resets: crate::models::UserCapability, partners: crate::models::UserCapability, items: crate::models::UserCapability, sections: crate::models::UserCapability, tags: crate::models::UserCapability, account_items: crate::models::UserCapability, taxes: crate::models::UserCapability, user_matchers: crate::models::UserCapability, deal_templates: crate::models::UserCapability, manual_journal_templates: crate::models::UserCapability, cost_allocations: crate::models::UserCapability, approval_flow_routes: crate::models::UserCapability, expense_application_templates: crate::models::UserCapability, workflows: crate::models::UserCapability, oauth_applications: crate::models::UserCapability, oauth_authorizations: crate::models::UserCapability, bank_accountant_staff_users: crate::models::UserCapability) -> GetUsersCapabilities200Response {
+    pub fn new(wallet_txns: crate::models::UserCapabilityWithConfirm, deals: crate::models::UserCapabilityWithSelfOnly, transfers: crate::models::UserCapabilityWithSelfOnly, docs: crate::models::UserCapabilityWithSelfOnly, doc_postings: crate::models::UserCapabilityJustCreate, receipts: crate::models::UserCapabilityWithSelfOnly, receipt_stream_editor: crate::models::UserCapabilityJustRead, spreadsheets: crate::models::UserCapabilityJustCreateRead, expense_applications: crate::models::UserCapabilityWithSelfOnly, expense_application_sync_payroll: crate::models::UserCapabilityJustCreate, payment_requests: crate::models::UserCapabilityWithSelfOnly, approval_requests: crate::models::UserCapabilityWithSelfOnly, reports: crate::models::UserCapabilityJustRead, reports_income_expense: crate::models::UserCapabilityJustRead, reports_receivables: crate::models::UserCapabilityJustRead, reports_payables: crate::models::UserCapabilityJustReadWrite, reports_cash_balance: crate::models::UserCapabilityJustRead, reports_managements_planning: crate::models::UserCapabilityJustReadWrite, reports_managements_navigation: crate::models::UserCapabilityJustReadWrite, reports_crosstabs: crate::models::UserCapabilityJustRead, reports_custom_reports_aggregate: crate::models::UserCapabilityJustRead, reports_pl: crate::models::UserCapabilityJustRead, reports_bs: crate::models::UserCapabilityJustRead, reports_general_ledgers: crate::models::UserCapabilityJustRead, reports_journals: crate::models::UserCapabilityJustRead, manual_journals: crate::models::UserCapabilityWithSelfOnly, fixed_assets: crate::models::UserCapability, inventory_refreshes: crate::models::UserCapability, biz_allocations: crate::models::UserCapability, payment_records: crate::models::UserCapability, annual_reports: crate::models::UserCapabilityJustRead, tax_reports: crate::models::UserCapabilityJustRead, consumption_entries: crate::models::UserCapabilityJustRead, tax_return: crate::models::UserCapabilityJustRead, account_item_statements: crate::models::UserCapabilityJustRead, month_end: crate::models::UserCapabilityJustRead, year_end: crate::models::UserCapabilityJustReadUpdate, walletables: crate::models::UserCapabilityWithSync, companies: crate::models::UserCapabilityJustReadUpdate, invitations: crate::models::UserCapability, access_controls: crate::models::UserCapabilityWithWrite, sign_in_logs: crate::models::UserCapabilityJustRead, user_attribute_logs: crate::models::UserCapabilityJustRead, app_role_logs: crate::models::UserCapabilityJustRead, txn_relationship_logs: crate::models::UserCapabilityJustRead, backups: crate::models::UserCapabilityJustRead, opening_balances: crate::models::UserCapabilityJustReadUpdate, system_conversion: crate::models::UserCapabilityJustRead, resets: crate::models::UserCapabilityJustRead, partners: crate::models::UserCapability, items: crate::models::UserCapability, sections: crate::models::UserCapability, tags: crate::models::UserCapability, account_items: crate::models::UserCapability, taxes: crate::models::UserCapabilityJustReadUpdate, payroll_item_sets: crate::models::UserCapability, user_matchers: crate::models::UserCapability, deal_templates: crate::models::UserCapability, manual_journal_templates: crate::models::UserCapability, cost_allocations: crate::models::UserCapabilityJustReadUpdate, approval_flow_routes: crate::models::UserCapability, expense_application_templates: crate::models::UserCapability, request_forms: crate::models::UserCapability, system_messages_for_admin: crate::models::UserCapabilityJustRead, company_internal_announcements: crate::models::UserCapabilityJustUpdate, doc_change_logs: crate::models::UserCapabilityJustRead, workflows: crate::models::UserCapabilityJustReadUpdateDestroy, oauth_applications: crate::models::UserCapability, oauth_authorizations: crate::models::UserCapability, bank_accountant_staff_users: crate::models::UserCapability) -> GetUsersCapabilities200Response {
         GetUsersCapabilities200Response {
             wallet_txns: Box::new(wallet_txns),
             deals: Box::new(deals),
@@ -145,23 +165,24 @@ impl GetUsersCapabilities200Response {
             doc_postings: Box::new(doc_postings),
             receipts: Box::new(receipts),
             receipt_stream_editor: Box::new(receipt_stream_editor),
-            expense_applications: Box::new(expense_applications),
             spreadsheets: Box::new(spreadsheets),
+            expense_applications: Box::new(expense_applications),
+            expense_application_sync_payroll: Box::new(expense_application_sync_payroll),
             payment_requests: Box::new(payment_requests),
-            request_forms: Box::new(request_forms),
             approval_requests: Box::new(approval_requests),
             reports: Box::new(reports),
             reports_income_expense: Box::new(reports_income_expense),
             reports_receivables: Box::new(reports_receivables),
             reports_payables: Box::new(reports_payables),
             reports_cash_balance: Box::new(reports_cash_balance),
-            reports_crosstabs: Box::new(reports_crosstabs),
-            reports_general_ledgers: Box::new(reports_general_ledgers),
-            reports_pl: Box::new(reports_pl),
-            reports_bs: Box::new(reports_bs),
-            reports_journals: Box::new(reports_journals),
             reports_managements_planning: Box::new(reports_managements_planning),
             reports_managements_navigation: Box::new(reports_managements_navigation),
+            reports_crosstabs: Box::new(reports_crosstabs),
+            reports_custom_reports_aggregate: Box::new(reports_custom_reports_aggregate),
+            reports_pl: Box::new(reports_pl),
+            reports_bs: Box::new(reports_bs),
+            reports_general_ledgers: Box::new(reports_general_ledgers),
+            reports_journals: Box::new(reports_journals),
             manual_journals: Box::new(manual_journals),
             fixed_assets: Box::new(fixed_assets),
             inventory_refreshes: Box::new(inventory_refreshes),
@@ -177,7 +198,11 @@ impl GetUsersCapabilities200Response {
             walletables: Box::new(walletables),
             companies: Box::new(companies),
             invitations: Box::new(invitations),
+            access_controls: Box::new(access_controls),
             sign_in_logs: Box::new(sign_in_logs),
+            user_attribute_logs: Box::new(user_attribute_logs),
+            app_role_logs: Box::new(app_role_logs),
+            txn_relationship_logs: Box::new(txn_relationship_logs),
             backups: Box::new(backups),
             opening_balances: Box::new(opening_balances),
             system_conversion: Box::new(system_conversion),
@@ -188,12 +213,17 @@ impl GetUsersCapabilities200Response {
             tags: Box::new(tags),
             account_items: Box::new(account_items),
             taxes: Box::new(taxes),
+            payroll_item_sets: Box::new(payroll_item_sets),
             user_matchers: Box::new(user_matchers),
             deal_templates: Box::new(deal_templates),
             manual_journal_templates: Box::new(manual_journal_templates),
             cost_allocations: Box::new(cost_allocations),
             approval_flow_routes: Box::new(approval_flow_routes),
             expense_application_templates: Box::new(expense_application_templates),
+            request_forms: Box::new(request_forms),
+            system_messages_for_admin: Box::new(system_messages_for_admin),
+            company_internal_announcements: Box::new(company_internal_announcements),
+            doc_change_logs: Box::new(doc_change_logs),
             workflows: Box::new(workflows),
             oauth_applications: Box::new(oauth_applications),
             oauth_authorizations: Box::new(oauth_authorizations),

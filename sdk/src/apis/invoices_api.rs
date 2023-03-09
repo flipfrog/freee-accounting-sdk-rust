@@ -140,7 +140,7 @@ pub async fn destroy_invoice(configuration: &configuration::Configuration, id: i
     }
 }
 
-///  <h2 id=\"\">概要</h2>  <p>指定した事業所の請求書詳細を取得する</p>
+///  <h2 id=\"\">概要</h2>  <p>指定した事業所の請求書を取得する</p>
 pub async fn get_invoice(configuration: &configuration::Configuration, company_id: i32, id: i32) -> Result<crate::models::InvoiceResponse, Error<GetInvoiceError>> {
     let local_var_configuration = configuration;
 

@@ -13,7 +13,7 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct Receipt {
-    /// 証憑ファイルID
+    /// ファイルボックス（証憑ファイル）ID
     #[serde(rename = "id")]
     pub id: i32,
     /// ステータス(confirmed:確認済み、deleted:削除済み、ignored:無視)
@@ -41,6 +41,15 @@ pub struct Receipt {
     pub user: Box<crate::models::DealCreateResponseDealReceiptsInnerUser>,
     #[serde(rename = "receipt_metadatum", skip_serializing_if = "Option::is_none")]
     pub receipt_metadatum: Option<Box<crate::models::ReceiptUpdateParamsReceiptMetadatum>>,
+    /// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 適格請求書等（qualified: 該当する、not_qualified: 該当しない） 
+    #[serde(rename = "qualified_invoice", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub qualified_invoice: Option<Option<QualifiedInvoice>>,
+    /// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 インボイス制度適格請求書発行事業者登録番号 - 先頭T数字13桁の固定14桁の文字列 <a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a> 
+    #[serde(rename = "invoice_registration_number", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub invoice_registration_number: Option<Option<String>>,
+    /// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 書類の種類（receipt: 領収書、invoice: 請求書、other: その他） 
+    #[serde(rename = "document_type", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub document_type: Option<Option<DocumentType>>,
 }
 
 impl Receipt {
@@ -56,6 +65,9 @@ impl Receipt {
             file_src,
             user: Box::new(user),
             receipt_metadatum: None,
+            qualified_invoice: None,
+            invoice_registration_number: None,
+            document_type: None,
         }
     }
 }
@@ -104,6 +116,36 @@ pub enum Origin {
 impl Default for Origin {
     fn default() -> Origin {
         Self::Unknown
+    }
+}
+/// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 適格請求書等（qualified: 該当する、not_qualified: 該当しない） 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum QualifiedInvoice {
+    #[serde(rename = "qualified")]
+    Qualified,
+    #[serde(rename = "not_qualified")]
+    NotQualified,
+}
+
+impl Default for QualifiedInvoice {
+    fn default() -> QualifiedInvoice {
+        Self::Qualified
+    }
+}
+/// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 書類の種類（receipt: 領収書、invoice: 請求書、other: その他） 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum DocumentType {
+    #[serde(rename = "receipt")]
+    Receipt,
+    #[serde(rename = "invoice")]
+    Invoice,
+    #[serde(rename = "other")]
+    Other,
+}
+
+impl Default for DocumentType {
+    fn default() -> DocumentType {
+        Self::Receipt
     }
 }
 

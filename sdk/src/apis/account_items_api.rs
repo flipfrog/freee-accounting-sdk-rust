@@ -137,7 +137,7 @@ pub async fn destroy_account_item(configuration: &configuration::Configuration, 
     }
 }
 
-///  <h2 id=\"\">概要</h2>  <p>指定した勘定科目の詳細を取得する</p>
+///  <h2 id=\"\">概要</h2>  <p>指定した勘定科目を取得する</p>
 pub async fn get_account_item(configuration: &configuration::Configuration, company_id: i32, id: i32) -> Result<crate::models::AccountItemResponse, Error<GetAccountItemError>> {
     let local_var_configuration = configuration;
 
@@ -204,7 +204,7 @@ pub async fn get_account_items(configuration: &configuration::Configuration, com
     }
 }
 
-///  <h2 id=\"\">概要</h2>  <p>勘定科目を更新する</p>  <h2 id=\"_2\">注意点</h2> <p>tax_codeは、api/1/taxes/companies/{company_id} で該当事業所の税区分の一覧を取得して、availableの値がtrue、かつ”name_ja”に”税率%”を含んでいない税区分を確認して、そのcodeを指定して勘定科目の更新をしてください</p>
+///  <h2 id=\"\">概要</h2>  <p>指定した勘定科目を更新する</p>  <h2 id=\"_2\">注意点</h2> <p>tax_codeは、api/1/taxes/companies/{company_id} で該当事業所の税区分一覧を取得して、availableの値がtrue、かつ”name_ja”に”税率%”を含んでいない税区分を確認して、そのcodeを指定して勘定科目の更新をしてください</p>
 pub async fn update_account_item(configuration: &configuration::Configuration, id: i32, account_item_update_params: crate::models::AccountItemUpdateParams) -> Result<crate::models::AccountItemResponse, Error<UpdateAccountItemError>> {
     let local_var_configuration = configuration;
 

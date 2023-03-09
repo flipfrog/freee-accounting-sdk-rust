@@ -39,7 +39,7 @@ pub struct DealCreateParams {
     /// 支払行一覧（配列）：未指定の場合、未決済の取引を作成します。
     #[serde(rename = "payments", skip_serializing_if = "Option::is_none")]
     pub payments: Option<Vec<crate::models::DealCreateParamsPaymentsInner>>,
-    /// 証憑ファイルID（ファイルボックスのファイルID）（配列）
+    /// ファイルボックス（証憑ファイル）ID（配列）
     #[serde(rename = "receipt_ids", skip_serializing_if = "Option::is_none")]
     pub receipt_ids: Option<Vec<i32>>,
 }

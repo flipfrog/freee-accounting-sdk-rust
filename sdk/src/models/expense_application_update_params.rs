@@ -42,13 +42,13 @@ pub struct ExpenseApplicationUpdateParams {
     /// 経費申請のステータス<br> falseを指定した時は申請中（in_progress）で経費申請を更新します。<br> trueを指定した時は下書き（draft）で経費申請を更新します。<br> 未指定の時は下書きとみなして経費申請を更新します。 
     #[serde(rename = "draft", skip_serializing_if = "Option::is_none")]
     pub draft: Option<bool>,
-    /// セグメント１ID(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br> セグメントタグ一覧APIを利用して取得してください。<br> <a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br> 
+    /// セグメント１ID(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br> セグメントタグ一覧の取得APIを利用して取得してください。<br> <a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br> 
     #[serde(rename = "segment_1_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_1_tag_id: Option<i64>,
-    /// セグメント２ID(法人向け エンタープライズプラン)<br> セグメントタグ一覧APIを利用して取得してください。<br> <a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br> 
+    /// セグメント２ID(法人向け エンタープライズプラン)<br> セグメントタグ一覧の取得APIを利用して取得してください。<br> <a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br> 
     #[serde(rename = "segment_2_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_2_tag_id: Option<i64>,
-    /// セグメント３ID(法人向け エンタープライズプラン)<br> セグメントタグ一覧APIを利用して取得してください。<br> <a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br> 
+    /// セグメント３ID(法人向け エンタープライズプラン)<br> セグメントタグ一覧の取得APIを利用して取得してください。<br> <a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br> 
     #[serde(rename = "segment_3_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_3_tag_id: Option<i64>,
 }

@@ -12,71 +12,148 @@
 
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
-pub struct ReceiptUpdateParams {
+pub struct FixedAsset {
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
-    /// メモ (255文字以内)
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    /// 取引日 (yyyy-mm-dd)
-    #[serde(rename = "issue_date")]
-    pub issue_date: String,
-    #[serde(rename = "receipt_metadatum", skip_serializing_if = "Option::is_none")]
-    pub receipt_metadatum: Option<Box<crate::models::ReceiptUpdateParamsReceiptMetadatum>>,
-    /// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 適格請求書等（qualified: 該当する、not_qualified: 該当しない） 
-    #[serde(rename = "qualified_invoice", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub qualified_invoice: Option<Option<QualifiedInvoice>>,
-    /// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 インボイス制度適格請求書発行事業者登録番号 - 先頭T数字13桁の固定14桁の文字列 <a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a> 
-    #[serde(rename = "invoice_registration_number", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub invoice_registration_number: Option<Option<String>>,
-    /// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 書類の種類（receipt: 領収書、invoice: 請求書、other: その他） 
-    #[serde(rename = "document_type", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub document_type: Option<Option<DocumentType>>,
+    /// 固定資産ID
+    #[serde(rename = "id")]
+    pub id: i32,
+    /// 固定資産名
+    #[serde(rename = "name")]
+    pub name: String,
+    /// 管理番号
+    #[serde(rename = "management_number", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub management_number: Option<Option<String>>,
+    /// 勘定科目ID
+    #[serde(rename = "account_item_id", skip_serializing_if = "Option::is_none")]
+    pub account_item_id: Option<i32>,
+    /// 部門ID
+    #[serde(rename = "section_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub section_id: Option<Option<i32>>,
+    /// 品目ID
+    #[serde(rename = "item_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub item_id: Option<Option<i32>>,
+    /// 償却方法:(少額償却: small_sum_method, 一括償却: lump_sum_method, 定額法: straight_line_method, 定率法: multiple_method, 旧定率法: old_multiple_method, 旧定額法: old_straight_line_method, 償却なし: non_depreciate_method, 任意償却: voluntary_method, 即時償却: immediate_method, 均等償却: equal_method)
+    #[serde(rename = "depreciation_method", skip_serializing_if = "Option::is_none")]
+    pub depreciation_method: Option<DepreciationMethod>,
+    /// 減価償却に使う勘定科目ID
+    #[serde(rename = "depreciation_account_item_id", skip_serializing_if = "Option::is_none")]
+    pub depreciation_account_item_id: Option<i32>,
+    /// 都道府県コード（-1: 設定しない、0:北海道、1:青森、2:岩手、3:宮城、4:秋田、5:山形、6:福島、7:茨城、8:栃木、9:群馬、10:埼玉、11:千葉、12:東京、13:神奈川、14:新潟、15:富山、16:石川、17:福井、18:山梨、19:長野、20:岐阜、21:静岡、22:愛知、23:三重、24:滋賀、25:京都、26:大阪、27:兵庫、28:奈良、29:和歌山、30:鳥取、31:島根、32:岡山、33:広島、34:山口、35:徳島、36:香川、37:愛媛、38:高知、39:福岡、40:佐賀、41:長崎、42:熊本、43:大分、44:宮崎、45:鹿児島、46:沖縄
+    #[serde(rename = "prefecture_code", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub prefecture_code: Option<Option<i32>>,
+    /// 申告先市区町村
+    #[serde(rename = "city_name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub city_name: Option<Option<String>>,
+    /// 減価償却費
+    #[serde(rename = "depreciation_amount", skip_serializing_if = "Option::is_none")]
+    pub depreciation_amount: Option<i32>,
+    /// 取得価額
+    #[serde(rename = "acquisition_cost", skip_serializing_if = "Option::is_none")]
+    pub acquisition_cost: Option<i32>,
+    /// 期首残高
+    #[serde(rename = "opening_balance", skip_serializing_if = "Option::is_none")]
+    pub opening_balance: Option<i32>,
+    /// 未償却残高(期末残高)
+    #[serde(rename = "closing_balance", skip_serializing_if = "Option::is_none")]
+    pub closing_balance: Option<i32>,
+    /// 期首減価償却累計額
+    #[serde(rename = "opening_accumulated_depreciation", skip_serializing_if = "Option::is_none")]
+    pub opening_accumulated_depreciation: Option<i32>,
+    /// 期末減価償却累計額
+    #[serde(rename = "closing_accumulated_depreciation", skip_serializing_if = "Option::is_none")]
+    pub closing_accumulated_depreciation: Option<i32>,
+    /// 耐用年数
+    #[serde(rename = "life_years", skip_serializing_if = "Option::is_none")]
+    pub life_years: Option<i32>,
+    /// 取得日
+    #[serde(rename = "acquisition_date", skip_serializing_if = "Option::is_none")]
+    pub acquisition_date: Option<String>,
+    /// 更新日
+    #[serde(rename = "updated_at", skip_serializing_if = "Option::is_none")]
+    pub updated_at: Option<String>,
+    /// 売却もしくは除却ステータス: (売却: sell, 除却: retire, 償却中: depreciating)
+    #[serde(rename = "retire_type", skip_serializing_if = "Option::is_none")]
+    pub retire_type: Option<RetireType>,
+    /// 除却日、もしくは売却日
+    #[serde(rename = "retire_date", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub retire_date: Option<Option<String>>,
 }
 
-impl ReceiptUpdateParams {
-    pub fn new(company_id: i32, issue_date: String) -> ReceiptUpdateParams {
-        ReceiptUpdateParams {
+impl FixedAsset {
+    pub fn new(company_id: i32, id: i32, name: String) -> FixedAsset {
+        FixedAsset {
             company_id,
-            description: None,
-            issue_date,
-            receipt_metadatum: None,
-            qualified_invoice: None,
-            invoice_registration_number: None,
-            document_type: None,
+            id,
+            name,
+            management_number: None,
+            account_item_id: None,
+            section_id: None,
+            item_id: None,
+            depreciation_method: None,
+            depreciation_account_item_id: None,
+            prefecture_code: None,
+            city_name: None,
+            depreciation_amount: None,
+            acquisition_cost: None,
+            opening_balance: None,
+            closing_balance: None,
+            opening_accumulated_depreciation: None,
+            closing_accumulated_depreciation: None,
+            life_years: None,
+            acquisition_date: None,
+            updated_at: None,
+            retire_type: None,
+            retire_date: None,
         }
     }
 }
 
-/// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 適格請求書等（qualified: 該当する、not_qualified: 該当しない） 
+/// 償却方法:(少額償却: small_sum_method, 一括償却: lump_sum_method, 定額法: straight_line_method, 定率法: multiple_method, 旧定率法: old_multiple_method, 旧定額法: old_straight_line_method, 償却なし: non_depreciate_method, 任意償却: voluntary_method, 即時償却: immediate_method, 均等償却: equal_method)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum QualifiedInvoice {
-    #[serde(rename = "qualified")]
-    Qualified,
-    #[serde(rename = "not_qualified")]
-    NotQualified,
+pub enum DepreciationMethod {
+    #[serde(rename = "small_sum_method")]
+    SmallSumMethod,
+    #[serde(rename = "lump_sum_method")]
+    LumpSumMethod,
+    #[serde(rename = "straight_line_method")]
+    StraightLineMethod,
+    #[serde(rename = "multiple_method")]
+    MultipleMethod,
+    #[serde(rename = "old_multiple_method")]
+    OldMultipleMethod,
+    #[serde(rename = "old_straight_line_method")]
+    OldStraightLineMethod,
+    #[serde(rename = "non_depreciate_method")]
+    NonDepreciateMethod,
+    #[serde(rename = "voluntary_method")]
+    VoluntaryMethod,
+    #[serde(rename = "immediate_method")]
+    ImmediateMethod,
+    #[serde(rename = "equal_method")]
+    EqualMethod,
 }
 
-impl Default for QualifiedInvoice {
-    fn default() -> QualifiedInvoice {
-        Self::Qualified
+impl Default for DepreciationMethod {
+    fn default() -> DepreciationMethod {
+        Self::SmallSumMethod
     }
 }
-/// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 書類の種類（receipt: 領収書、invoice: 請求書、other: その他） 
+/// 売却もしくは除却ステータス: (売却: sell, 除却: retire, 償却中: depreciating)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum DocumentType {
-    #[serde(rename = "receipt")]
-    Receipt,
-    #[serde(rename = "invoice")]
-    Invoice,
-    #[serde(rename = "other")]
-    Other,
+pub enum RetireType {
+    #[serde(rename = "sell")]
+    Sell,
+    #[serde(rename = "retire")]
+    Retire,
+    #[serde(rename = "depreciating")]
+    Depreciating,
 }
 
-impl Default for DocumentType {
-    fn default() -> DocumentType {
-        Self::Receipt
+impl Default for RetireType {
+    fn default() -> RetireType {
+        Self::Sell
     }
 }
 

@@ -74,7 +74,7 @@ pub enum UpdateWalletableError {
 }
 
 
-///  <h2 id=\"\">概要</h2>  <p>指定した事業所に口座を作成する</p>  <h2 id=\"\">注意点</h2> <ul><li>同期に対応した口座はこのAPIでは作成できません</li></ul>  <h2 id=\"_2\">定義</h2>  <ul> <li> <p>type</p>  <ul> <li>bank_account : 銀行口座</li>  <li>credit_card : クレジットカード</li>  <li>wallet : その他の決済口座</li> </ul> </li>  <li> <p>name : 口座名</p> </li>  <li> <p>bank_id : 連携サービスID</p> </li>  <li> <p>is_asset : type:wallet指定時に口座を資産口座とするか負債口座とするか（true: 資産口座 (デフォルト), false: 負債口座）</p> </li> </ul>
+///  <h2 id=\"\">概要</h2>  <p>指定した事業所の口座を作成する</p>  <h2 id=\"\">注意点</h2> <ul><li>同期に対応した口座はこのAPIでは作成できません</li></ul>  <h2 id=\"_2\">定義</h2>  <ul> <li> <p>type</p>  <ul> <li>bank_account : 銀行口座</li>  <li>credit_card : クレジットカード</li>  <li>wallet : その他の決済口座</li> </ul> </li>  <li> <p>name : 口座名</p> </li>  <li> <p>bank_id : 連携サービスID</p> </li>  <li> <p>is_asset : type:wallet指定時に口座を資産口座とするか負債口座とするか（true: 資産口座 (デフォルト), false: 負債口座）</p> </li> </ul>
 pub async fn create_walletable(configuration: &configuration::Configuration, walletable_create_params: Option<crate::models::WalletableCreateParams>) -> Result<crate::models::WalletableCreateResponse, Error<CreateWalletableError>> {
     let local_var_configuration = configuration;
 
@@ -138,7 +138,7 @@ pub async fn destroy_walletable(configuration: &configuration::Configuration, id
     }
 }
 
-///  <h2 id=\"\">概要</h2>  <p>指定した事業所の口座情報を取得する</p>  <h2 id=\"_2\">定義</h2>  <ul> <li>type <ul> <li>bank_account : 銀行口座</li>  <li>credit_card : クレジットカード</li>  <li>wallet : その他の決済口座</li> </ul> </li>  <li>walletable_balance : 登録残高</li>  <li>last_balance : 同期残高</li> </ul>
+///  <h2 id=\"\">概要</h2>  <p>指定した事業所の口座を取得する</p>  <h2 id=\"_2\">定義</h2>  <ul> <li>type <ul> <li>bank_account : 銀行口座</li>  <li>credit_card : クレジットカード</li>  <li>wallet : その他の決済口座</li> </ul> </li>  <li>walletable_balance : 登録残高</li>  <li>last_balance : 同期残高</li> </ul>
 pub async fn get_walletable(configuration: &configuration::Configuration, id: i32, r#type: &str, company_id: i32) -> Result<crate::models::GetWalletable200Response, Error<GetWalletableError>> {
     let local_var_configuration = configuration;
 
@@ -208,7 +208,7 @@ pub async fn get_walletables(configuration: &configuration::Configuration, compa
     }
 }
 
-///  <h2 id=\"\">概要</h2>  <p>口座を更新する</p>
+///  <h2 id=\"\">概要</h2>  <p>指定した事業所の口座を更新する</p>
 pub async fn update_walletable(configuration: &configuration::Configuration, id: i32, r#type: &str, walletable_update_params: Option<crate::models::WalletableUpdateParams>) -> Result<crate::models::GetWalletable200Response, Error<UpdateWalletableError>> {
     let local_var_configuration = configuration;
 

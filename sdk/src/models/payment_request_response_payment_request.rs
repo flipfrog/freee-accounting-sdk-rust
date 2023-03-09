@@ -70,7 +70,7 @@ pub struct PaymentRequestResponsePaymentRequest {
     /// 請求書番号
     #[serde(rename = "document_code")]
     pub document_code: String,
-    /// 証憑ファイルID（ファイルボックスのファイルID）
+    /// ファイルボックス（証憑ファイル）ID
     #[serde(rename = "receipt_ids")]
     pub receipt_ids: Vec<i32>,
     /// 発生日 (yyyy-mm-dd)

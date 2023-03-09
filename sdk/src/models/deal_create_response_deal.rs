@@ -52,7 +52,7 @@ pub struct DealCreateResponseDeal {
     /// 取引の支払行
     #[serde(rename = "payments", skip_serializing_if = "Option::is_none")]
     pub payments: Option<Vec<crate::models::DealCreateResponseDealPaymentsInner>>,
-    /// 証憑ファイル（ファイルボックスのファイル）
+    /// ファイルボックス（証憑ファイル）
     #[serde(rename = "receipts", skip_serializing_if = "Option::is_none")]
     pub receipts: Option<Vec<crate::models::DealCreateResponseDealReceiptsInner>>,
 }

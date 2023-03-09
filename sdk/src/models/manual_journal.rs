@@ -31,7 +31,7 @@ pub struct ManualJournal {
     /// 貸借行一覧（配列）: 貸借合わせて100行まで登録できます。
     #[serde(rename = "details")]
     pub details: Vec<crate::models::ManualJournalDetailsInner>,
-    /// 証憑ファイルID（ファイルボックスのファイルID）
+    /// ファイルボックス（証憑ファイル）ID
     #[serde(rename = "receipt_ids", skip_serializing_if = "Option::is_none")]
     pub receipt_ids: Option<Vec<i32>>,
 }

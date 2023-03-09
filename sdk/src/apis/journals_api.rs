@@ -51,7 +51,7 @@ pub enum GetJournalsError {
 }
 
 
-///  <h2 id=\"\">概要</h2>  <p>ダウンロードを実行する</p>  <p>＊このAPIは無料プランのアカウントではご利用になれません</p>  <h2 id=\"_2\">定義</h2>  <ul> <li>id : 受け付けID</li> </ul>
+///  <h2 id=\"\">概要</h2>  <p>仕訳帳をダウンロードする</p>  <p>＊このAPIは無料プランのアカウントではご利用になれません</p>  <h2 id=\"_2\">定義</h2>  <ul> <li>id : 受け付けID</li> </ul>
 pub async fn download_journal(configuration: &configuration::Configuration, id: i32, company_id: i32) -> Result<String, Error<DownloadJournalError>> {
     let local_var_configuration = configuration;
 
@@ -83,7 +83,7 @@ pub async fn download_journal(configuration: &configuration::Configuration, id: 
     }
 }
 
-///  <h2 id=\"\">概要</h2>  <p>ダウンロードリクエストのステータスを確認する</p>  <p>＊このAPIは無料プランのアカウントではご利用になれません</p>  <h2 id=\"_2\">定義</h2>  <ul> <li> <p>status</p>  <ul> <li>enqueued : 実行待ち</li>  <li>working : 実行中</li>  <li>uploaded : 準備完了</li> </ul> </li>  <li> <p>id : 受け付けID</p> </li> </ul>
+///  <h2 id=\"\">概要</h2>  <p>仕訳帳のダウンロードリクエストのステータスを取得する</p>  <p>＊このAPIは無料プランのアカウントではご利用になれません</p>  <h2 id=\"_2\">定義</h2>  <ul> <li> <p>status</p>  <ul> <li>enqueued : 実行待ち</li>  <li>working : 実行中</li>  <li>uploaded : 準備完了</li> </ul> </li>  <li> <p>id : 受け付けID</p> </li> </ul>
 pub async fn get_journal_status(configuration: &configuration::Configuration, company_id: i32, id: i32) -> Result<crate::models::JournalStatusResponse, Error<GetJournalStatusError>> {
     let local_var_configuration = configuration;
 
