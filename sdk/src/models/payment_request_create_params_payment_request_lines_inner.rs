@@ -13,7 +13,7 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct PaymentRequestCreateParamsPaymentRequestLinesInner {
-    /// '行の種類 (deal_line: 支払依頼の通常取引行, withholding_tax: 源泉所得税行)'<br> 'デフォルトは deal_line: 支払依頼の通常取引行 です' 
+    /// '行の種類 (deal_line: 支払依頼の通常取引行, negative_line: 支払依頼の控除・マイナス行, withholding_tax: 源泉所得税行)'<br> 'デフォルトは deal_line: 支払依頼の通常取引行 です'<br> '※ negative_line は2023年3月下旬から利用できる予定です' 
     #[serde(rename = "line_type", skip_serializing_if = "Option::is_none")]
     pub line_type: Option<LineType>,
     /// 内容
@@ -66,11 +66,13 @@ impl PaymentRequestCreateParamsPaymentRequestLinesInner {
     }
 }
 
-/// '行の種類 (deal_line: 支払依頼の通常取引行, withholding_tax: 源泉所得税行)'<br> 'デフォルトは deal_line: 支払依頼の通常取引行 です' 
+/// '行の種類 (deal_line: 支払依頼の通常取引行, negative_line: 支払依頼の控除・マイナス行, withholding_tax: 源泉所得税行)'<br> 'デフォルトは deal_line: 支払依頼の通常取引行 です'<br> '※ negative_line は2023年3月下旬から利用できる予定です' 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum LineType {
     #[serde(rename = "deal_line")]
     DealLine,
+    #[serde(rename = "negative_line")]
+    NegativeLine,
     #[serde(rename = "withholding_tax")]
     WithholdingTax,
 }
