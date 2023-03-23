@@ -40,9 +40,12 @@ pub struct ExpenseApplicationResponseExpenseApplication {
     /// メモタグID
     #[serde(rename = "tag_ids", skip_serializing_if = "Option::is_none")]
     pub tag_ids: Option<Vec<i32>>,
+    /// この項目はインボイス制度で利用する項目です。2023年4月上旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br> 経費申請の申請行一覧（配列） 
+    #[serde(rename = "purchase_lines", skip_serializing_if = "Option::is_none")]
+    pub purchase_lines: Option<Vec<crate::models::ExpenseApplicationsIndexResponseExpenseApplicationsInnerPurchaseLinesInner>>,
     /// 経費申請の項目行一覧（配列）
-    #[serde(rename = "expense_application_lines")]
-    pub expense_application_lines: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationExpenseApplicationLinesInner>,
+    #[serde(rename = "expense_application_lines", skip_serializing_if = "Option::is_none")]
+    pub expense_application_lines: Option<Vec<crate::models::ExpenseApplicationResponseExpenseApplicationExpenseApplicationLinesInner>>,
     /// 取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)
     #[serde(rename = "deal_id", deserialize_with = "Option::deserialize")]
     pub deal_id: Option<i32>,
@@ -85,7 +88,7 @@ pub struct ExpenseApplicationResponseExpenseApplication {
 }
 
 impl ExpenseApplicationResponseExpenseApplication {
-    pub fn new(id: i32, company_id: i32, title: String, issue_date: String, status: Status, expense_application_lines: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationExpenseApplicationLinesInner>, deal_id: Option<i32>, deal_status: Option<DealStatus>, applicant_id: i32, approvers: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApproversInner>, application_number: String, approval_flow_route_id: i32, comments: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationCommentsInner>, approval_flow_logs: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApprovalFlowLogsInner>, current_step_id: Option<i32>, current_round: i32) -> ExpenseApplicationResponseExpenseApplication {
+    pub fn new(id: i32, company_id: i32, title: String, issue_date: String, status: Status, deal_id: Option<i32>, deal_status: Option<DealStatus>, applicant_id: i32, approvers: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApproversInner>, application_number: String, approval_flow_route_id: i32, comments: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationCommentsInner>, approval_flow_logs: Vec<crate::models::ExpenseApplicationResponseExpenseApplicationApprovalFlowLogsInner>, current_step_id: Option<i32>, current_round: i32) -> ExpenseApplicationResponseExpenseApplication {
         ExpenseApplicationResponseExpenseApplication {
             id,
             company_id,
@@ -96,7 +99,8 @@ impl ExpenseApplicationResponseExpenseApplication {
             status,
             section_id: None,
             tag_ids: None,
-            expense_application_lines,
+            purchase_lines: None,
+            expense_application_lines: None,
             deal_id,
             deal_status,
             applicant_id,
