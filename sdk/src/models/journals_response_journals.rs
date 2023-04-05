@@ -24,6 +24,9 @@ pub struct JournalsResponseJournals {
     /// ダウンロード形式
     #[serde(rename = "download_type", skip_serializing_if = "Option::is_none")]
     pub download_type: Option<DownloadType>,
+    /// 文字コード
+    #[serde(rename = "encoding", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub encoding: Option<Option<Encoding>>,
     /// 取得開始日 (yyyy-mm-dd)
     #[serde(rename = "start_date", skip_serializing_if = "Option::is_none")]
     pub start_date: Option<String>,
@@ -52,6 +55,7 @@ impl JournalsResponseJournals {
             messages: None,
             company_id,
             download_type: None,
+            encoding: None,
             start_date: None,
             end_date: None,
             visible_tags: None,
@@ -66,17 +70,33 @@ impl JournalsResponseJournals {
 /// ダウンロード形式
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum DownloadType {
-    #[serde(rename = "csv")]
-    Csv,
     #[serde(rename = "generic")]
     Generic,
+    #[serde(rename = "generic_v2")]
+    GenericV2,
+    #[serde(rename = "csv")]
+    Csv,
     #[serde(rename = "pdf")]
     Pdf,
 }
 
 impl Default for DownloadType {
     fn default() -> DownloadType {
-        Self::Csv
+        Self::Generic
+    }
+}
+/// 文字コード
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum Encoding {
+    #[serde(rename = "sjis")]
+    Sjis,
+    #[serde(rename = "utf-8")]
+    Utf8,
+}
+
+impl Default for Encoding {
+    fn default() -> Encoding {
+        Self::Sjis
     }
 }
 /// 
