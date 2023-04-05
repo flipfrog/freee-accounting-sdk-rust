@@ -24,13 +24,13 @@ pub struct ReceiptUpdateParams {
     pub issue_date: String,
     #[serde(rename = "receipt_metadatum", skip_serializing_if = "Option::is_none")]
     pub receipt_metadatum: Option<Box<crate::models::ReceiptUpdateParamsReceiptMetadatum>>,
-    /// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択） 
+    /// 適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択）
     #[serde(rename = "qualified_invoice", skip_serializing_if = "Option::is_none")]
     pub qualified_invoice: Option<QualifiedInvoice>,
-    /// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 インボイス制度適格請求書発行事業者登録番号 - 先頭T数字13桁の固定14桁の文字列 <a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a> 
+    /// インボイス制度適格請求書発行事業者登録番号 - 先頭T数字13桁の固定14桁の文字列 <a target=\"_blank\" href=\"https://www.invoice-kohyo.nta.go.jp/index.html\">国税庁インボイス制度適格請求書発行事業者公表サイト</a> 
     #[serde(rename = "invoice_registration_number", skip_serializing_if = "Option::is_none")]
     pub invoice_registration_number: Option<String>,
-    /// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 書類の種類（receipt: 領収書、invoice: 請求書、other: その他） 
+    /// 書類の種類（receipt: 領収書、invoice: 請求書、other: その他）
     #[serde(rename = "document_type", skip_serializing_if = "Option::is_none")]
     pub document_type: Option<DocumentType>,
 }
@@ -49,7 +49,7 @@ impl ReceiptUpdateParams {
     }
 }
 
-/// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択） 
+/// 適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択）
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum QualifiedInvoice {
     #[serde(rename = "qualified")]
@@ -65,7 +65,7 @@ impl Default for QualifiedInvoice {
         Self::Qualified
     }
 }
-/// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。 書類の種類（receipt: 領収書、invoice: 請求書、other: その他） 
+/// 書類の種類（receipt: 領収書、invoice: 請求書、other: その他）
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum DocumentType {
     #[serde(rename = "receipt")]

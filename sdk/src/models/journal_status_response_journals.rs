@@ -22,6 +22,9 @@ pub struct JournalStatusResponseJournals {
     /// ダウンロード形式
     #[serde(rename = "download_type")]
     pub download_type: DownloadType,
+    /// 文字コード
+    #[serde(rename = "encoding", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub encoding: Option<Option<Encoding>>,
     /// ダウンロードリクエストのステータス
     #[serde(rename = "status")]
     pub status: Status,
@@ -46,6 +49,7 @@ impl JournalStatusResponseJournals {
             id,
             company_id,
             download_type,
+            encoding: None,
             status,
             start_date,
             end_date,
@@ -59,17 +63,33 @@ impl JournalStatusResponseJournals {
 /// ダウンロード形式
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum DownloadType {
-    #[serde(rename = "csv")]
-    Csv,
     #[serde(rename = "generic")]
     Generic,
+    #[serde(rename = "generic_v2")]
+    GenericV2,
+    #[serde(rename = "csv")]
+    Csv,
     #[serde(rename = "pdf")]
     Pdf,
 }
 
 impl Default for DownloadType {
     fn default() -> DownloadType {
-        Self::Csv
+        Self::Generic
+    }
+}
+/// 文字コード
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum Encoding {
+    #[serde(rename = "sjis")]
+    Sjis,
+    #[serde(rename = "utf-8")]
+    Utf8,
+}
+
+impl Default for Encoding {
+    fn default() -> Encoding {
+        Self::Sjis
     }
 }
 /// ダウンロードリクエストのステータス
