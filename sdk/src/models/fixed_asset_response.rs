@@ -9,47 +9,31 @@
  */
 
 
-use reqwest;
 
 
-#[derive(Debug, Clone)]
-pub struct Configuration {
-    pub base_path: String,
-    pub user_agent: Option<String>,
-    pub client: reqwest::Client,
-    pub basic_auth: Option<BasicAuth>,
-    pub oauth_access_token: Option<String>,
-    pub bearer_access_token: Option<String>,
-    pub api_key: Option<ApiKey>,
-    // TODO: take an oauth2 token source, similar to the go one
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+pub struct FixedAssetResponse {
+    #[serde(rename = "fixed_assets")]
+    pub fixed_assets: Vec<crate::models::FixedAssetResponseFixedAssetsInner>,
+    #[serde(rename = "fiscal_year")]
+    pub fiscal_year: Box<crate::models::FixedAssetResponseFiscalYear>,
+    /// 集計結果が最新かどうか
+    #[serde(rename = "up_to_date")]
+    pub up_to_date: bool,
+    /// 集計が最新でない場合の要因情報
+    #[serde(rename = "up_to_date_reasons")]
+    pub up_to_date_reasons: Vec<crate::models::FixedAssetResponseUpToDateReasonsInner>,
 }
 
-pub type BasicAuth = (String, Option<String>);
-
-#[derive(Debug, Clone)]
-pub struct ApiKey {
-    pub prefix: Option<String>,
-    pub key: String,
-}
-
-
-impl Configuration {
-    pub fn new() -> Configuration {
-        Configuration::default()
-    }
-}
-
-impl Default for Configuration {
-    fn default() -> Self {
-        Configuration {
-            base_path: "https://api.freee.co.jp".to_owned(),
-            user_agent: Some("OpenAPI-Generator/v1.0/rust".to_owned()),
-            client: reqwest::Client::new(),
-            basic_auth: None,
-            oauth_access_token: None,
-            bearer_access_token: None,
-            api_key: None,
-
+impl FixedAssetResponse {
+    pub fn new(fixed_assets: Vec<crate::models::FixedAssetResponseFixedAssetsInner>, fiscal_year: crate::models::FixedAssetResponseFiscalYear, up_to_date: bool, up_to_date_reasons: Vec<crate::models::FixedAssetResponseUpToDateReasonsInner>) -> FixedAssetResponse {
+        FixedAssetResponse {
+            fixed_assets,
+            fiscal_year: Box::new(fiscal_year),
+            up_to_date,
+            up_to_date_reasons,
         }
     }
 }
+
+
