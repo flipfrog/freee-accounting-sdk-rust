@@ -9,47 +9,25 @@
  */
 
 
-use reqwest;
 
 
-#[derive(Debug, Clone)]
-pub struct Configuration {
-    pub base_path: String,
-    pub user_agent: Option<String>,
-    pub client: reqwest::Client,
-    pub basic_auth: Option<BasicAuth>,
-    pub oauth_access_token: Option<String>,
-    pub bearer_access_token: Option<String>,
-    pub api_key: Option<ApiKey>,
-    // TODO: take an oauth2 token source, similar to the go one
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+pub struct FixedAssetResponseFiscalYear {
+    /// 会計年度開始日 (yyyy-mm-dd)
+    #[serde(rename = "start_date")]
+    pub start_date: String,
+    /// 会計年度終了日 (yyyy-mm-dd)
+    #[serde(rename = "end_date")]
+    pub end_date: String,
 }
 
-pub type BasicAuth = (String, Option<String>);
-
-#[derive(Debug, Clone)]
-pub struct ApiKey {
-    pub prefix: Option<String>,
-    pub key: String,
-}
-
-
-impl Configuration {
-    pub fn new() -> Configuration {
-        Configuration::default()
-    }
-}
-
-impl Default for Configuration {
-    fn default() -> Self {
-        Configuration {
-            base_path: "https://api.freee.co.jp".to_owned(),
-            user_agent: Some("OpenAPI-Generator/v1.0/rust".to_owned()),
-            client: reqwest::Client::new(),
-            basic_auth: None,
-            oauth_access_token: None,
-            bearer_access_token: None,
-            api_key: None,
-
+impl FixedAssetResponseFiscalYear {
+    pub fn new(start_date: String, end_date: String) -> FixedAssetResponseFiscalYear {
+        FixedAssetResponseFiscalYear {
+            start_date,
+            end_date,
         }
     }
 }
+
+

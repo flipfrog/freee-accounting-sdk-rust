@@ -178,8 +178,14 @@ pub mod expense_applications_index_response_expense_applications_inner_purchase_
 pub use self::expense_applications_index_response_expense_applications_inner_purchase_lines_inner_expense_application_lines_inner::ExpenseApplicationsIndexResponseExpenseApplicationsInnerPurchaseLinesInnerExpenseApplicationLinesInner;
 pub mod fiscal_years;
 pub use self::fiscal_years::FiscalYears;
-pub mod fixed_asset;
-pub use self::fixed_asset::FixedAsset;
+pub mod fixed_asset_response;
+pub use self::fixed_asset_response::FixedAssetResponse;
+pub mod fixed_asset_response_fiscal_year;
+pub use self::fixed_asset_response_fiscal_year::FixedAssetResponseFiscalYear;
+pub mod fixed_asset_response_fixed_assets_inner;
+pub use self::fixed_asset_response_fixed_assets_inner::FixedAssetResponseFixedAssetsInner;
+pub mod fixed_asset_response_up_to_date_reasons_inner;
+pub use self::fixed_asset_response_up_to_date_reasons_inner::FixedAssetResponseUpToDateReasonsInner;
 pub mod forbidden_error;
 pub use self::forbidden_error::ForbiddenError;
 pub mod get_banks_200_response;
