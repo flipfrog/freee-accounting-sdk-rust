@@ -10,44 +10,40 @@
 
 
 
-#[derive(Debug, Clone)]
-pub struct Configuration {
-    pub base_path: String,
-    pub user_agent: Option<String>,
-    pub client: reqwest::Client,
-    pub basic_auth: Option<BasicAuth>,
-    pub oauth_access_token: Option<String>,
-    pub bearer_access_token: Option<String>,
-    pub api_key: Option<ApiKey>,
-    // TODO: take an oauth2 token source, similar to the go one
+
+#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+pub struct GeneralLedgersResponseGeneralLedgersInner {
+    /// 勘定科目ID
+    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
+    pub id: Option<i32>,
+    /// 勘定科目名
+    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
+    /// 発生額累計
+    #[serde(rename = "total_amount", skip_serializing_if = "Option::is_none")]
+    pub total_amount: Option<i32>,
+    /// 残高
+    #[serde(rename = "final_balance", skip_serializing_if = "Option::is_none")]
+    pub final_balance: Option<i32>,
+    /// 借方発生額累計
+    #[serde(rename = "debit_amount", skip_serializing_if = "Option::is_none")]
+    pub debit_amount: Option<i32>,
+    /// 貸方発生額累計
+    #[serde(rename = "credit_amount", skip_serializing_if = "Option::is_none")]
+    pub credit_amount: Option<i32>,
 }
 
-pub type BasicAuth = (String, Option<String>);
-
-#[derive(Debug, Clone)]
-pub struct ApiKey {
-    pub prefix: Option<String>,
-    pub key: String,
-}
-
-
-impl Configuration {
-    pub fn new() -> Configuration {
-        Configuration::default()
-    }
-}
-
-impl Default for Configuration {
-    fn default() -> Self {
-        Configuration {
-            base_path: "https://api.freee.co.jp".to_owned(),
-            user_agent: Some("OpenAPI-Generator/v1.0/rust".to_owned()),
-            client: reqwest::Client::new(),
-            basic_auth: None,
-            oauth_access_token: None,
-            bearer_access_token: None,
-            api_key: None,
-
+impl GeneralLedgersResponseGeneralLedgersInner {
+    pub fn new() -> GeneralLedgersResponseGeneralLedgersInner {
+        GeneralLedgersResponseGeneralLedgersInner {
+            id: None,
+            name: None,
+            total_amount: None,
+            final_balance: None,
+            debit_amount: None,
+            credit_amount: None,
         }
     }
 }
+
+
