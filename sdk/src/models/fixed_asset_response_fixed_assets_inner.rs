@@ -52,7 +52,7 @@ pub struct FixedAssetResponseFixedAssetsInner {
     /// 取得価額
     #[serde(rename = "acquisition_cost", skip_serializing_if = "Option::is_none")]
     pub acquisition_cost: Option<i32>,
-    /// 期首残高
+    /// 期首残高（取得日が会計期間に含まれるとき期首残高は0になります。）
     #[serde(rename = "opening_balance", skip_serializing_if = "Option::is_none")]
     pub opening_balance: Option<i32>,
     /// 未償却残高
@@ -73,7 +73,7 @@ pub struct FixedAssetResponseFixedAssetsInner {
     /// 更新日時（ISO8601形式）
     #[serde(rename = "updated_at", skip_serializing_if = "Option::is_none")]
     pub updated_at: Option<String>,
-    /// 売却もしくは除却ステータス: (売却: sale, 除却: retirement, 償却済み: depreciated, 償却中: depreciating, 償却なし: non_depreciation)
+    /// 売却もしくは除却ステータス: (売却済: sold, 除却済: retired, 償却済: depreciated, 償却中: depreciation, 償却なし: non_depreciation)
     #[serde(rename = "depreciation_status", skip_serializing_if = "Option::is_none")]
     pub depreciation_status: Option<DepreciationStatus>,
     /// 除却日、もしくは売却日
@@ -140,24 +140,24 @@ impl Default for DepreciationMethod {
         Self::SmallSumMethod
     }
 }
-/// 売却もしくは除却ステータス: (売却: sale, 除却: retirement, 償却済み: depreciated, 償却中: depreciating, 償却なし: non_depreciation)
+/// 売却もしくは除却ステータス: (売却済: sold, 除却済: retired, 償却済: depreciated, 償却中: depreciation, 償却なし: non_depreciation)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum DepreciationStatus {
-    #[serde(rename = "sale")]
-    Sale,
-    #[serde(rename = "retirement")]
-    Retirement,
+    #[serde(rename = "sold")]
+    Sold,
+    #[serde(rename = "retired")]
+    Retired,
     #[serde(rename = "depreciated")]
     Depreciated,
-    #[serde(rename = "depreciating")]
-    Depreciating,
+    #[serde(rename = "depreciation")]
+    Depreciation,
     #[serde(rename = "non_depreciation")]
     NonDepreciation,
 }
 
 impl Default for DepreciationStatus {
     fn default() -> DepreciationStatus {
-        Self::Sale
+        Self::Sold
     }
 }
 
