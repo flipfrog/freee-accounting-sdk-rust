@@ -46,7 +46,7 @@ pub struct FixedAssetResponseFixedAssetsInner {
     /// 申告先市区町村
     #[serde(rename = "city_name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub city_name: Option<Option<String>>,
-    /// 減価償却費
+    /// 本年分の償却費合計
     #[serde(rename = "depreciation_amount", skip_serializing_if = "Option::is_none")]
     pub depreciation_amount: Option<i32>,
     /// 取得価額
@@ -70,9 +70,9 @@ pub struct FixedAssetResponseFixedAssetsInner {
     /// 取得日
     #[serde(rename = "acquisition_date", skip_serializing_if = "Option::is_none")]
     pub acquisition_date: Option<String>,
-    /// 更新日時（ISO8601形式）
-    #[serde(rename = "updated_at", skip_serializing_if = "Option::is_none")]
-    pub updated_at: Option<String>,
+    /// 作成日時（ISO8601形式）
+    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
+    pub created_at: Option<String>,
     /// 売却もしくは除却ステータス: (売却済: sold, 除却済: retired, 償却済: depreciated, 償却中: depreciation, 償却なし: non_depreciation)
     #[serde(rename = "depreciation_status", skip_serializing_if = "Option::is_none")]
     pub depreciation_status: Option<DepreciationStatus>,
@@ -103,7 +103,7 @@ impl FixedAssetResponseFixedAssetsInner {
             closing_accumulated_depreciation: None,
             life_years: None,
             acquisition_date: None,
-            updated_at: None,
+            created_at: None,
             depreciation_status: None,
             retire_date: None,
         }

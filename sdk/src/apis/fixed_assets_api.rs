@@ -9,105 +9,60 @@
  */
 
 
+use reqwest;
+
+use crate::apis::ResponseContent;
+use super::{Error, configuration};
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
-pub struct Deal {
-    /// 取引ID
-    #[serde(rename = "id")]
-    pub id: i32,
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
-    /// 発生日 (yyyy-mm-dd)
-    #[serde(rename = "issue_date")]
-    pub issue_date: String,
-    /// 支払期日 (yyyy-mm-dd)
-    #[serde(rename = "due_date", skip_serializing_if = "Option::is_none")]
-    pub due_date: Option<String>,
-    /// 金額
-    #[serde(rename = "amount")]
-    pub amount: i64,
-    /// 支払残額
-    #[serde(rename = "due_amount", skip_serializing_if = "Option::is_none")]
-    pub due_amount: Option<i32>,
-    /// 収支区分 (収入: income, 支出: expense)
-    #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
-    pub r#type: Option<RHashType>,
-    /// 取引先ID
-    #[serde(rename = "partner_id", deserialize_with = "Option::deserialize")]
-    pub partner_id: Option<i32>,
-    /// 取引先コード
-    #[serde(rename = "partner_code", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub partner_code: Option<Option<String>>,
-    /// 管理番号
-    #[serde(rename = "ref_number", skip_serializing_if = "Option::is_none")]
-    pub ref_number: Option<String>,
-    /// 決済状況 (未決済: unsettled, 完了: settled)
-    #[serde(rename = "status")]
-    pub status: Status,
-    /// 取引の明細行
-    #[serde(rename = "details", skip_serializing_if = "Option::is_none")]
-    pub details: Option<Vec<crate::models::DealCreateResponseDealDetailsInner>>,
-    /// 取引の+更新行
-    #[serde(rename = "renews", skip_serializing_if = "Option::is_none")]
-    pub renews: Option<Vec<crate::models::DealRenewsInner>>,
-    /// 取引の支払行
-    #[serde(rename = "payments", skip_serializing_if = "Option::is_none")]
-    pub payments: Option<Vec<crate::models::DealCreateResponseDealPaymentsInner>>,
-    /// ファイルボックス（証憑ファイル）
-    #[serde(rename = "receipts", skip_serializing_if = "Option::is_none")]
-    pub receipts: Option<Vec<crate::models::DealReceiptsInner>>,
+/// struct for typed errors of method [`get_fixed_assets`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetFixedAssetsError {
+    Status400(crate::models::BadRequestError),
+    Status401(crate::models::UnauthorizedError),
+    Status403(crate::models::ForbiddenError),
+    Status500(crate::models::InternalServerError),
+    UnknownValue(serde_json::Value),
 }
 
-impl Deal {
-    pub fn new(id: i32, company_id: i32, issue_date: String, amount: i64, partner_id: Option<i32>, status: Status) -> Deal {
-        Deal {
-            id,
-            company_id,
-            issue_date,
-            due_date: None,
-            amount,
-            due_amount: None,
-            r#type: None,
-            partner_id,
-            partner_code: None,
-            ref_number: None,
-            status,
-            details: None,
-            renews: None,
-            payments: None,
-            receipts: None,
-        }
+
+/// <h2 id=\"\">概要</h2> <p>指定した事業所の固定資産一覧を取得する</p>  <h2 id=\"\">定義</h2> <ul>   <li><p>target_date : 表示したい会計期間の開始年月日。開始年月日以外を指定した場合は、その日付が含まれる会計期間が対象となります。</p></li>   <li><p>depreciation_amount : 本年分の償却費合計</p></li>   <li><p>depreciation_method : 償却方法</p></li>   <li><p>depreciation_account_item_id : 減価償却に使う勘定科目</p></li>   <li><p>acquisition_cost : 取得価額</p></li>   <li><p>opening_balance : 期首残高</p></li>   <li><p>undepreciated_balance : 未償却残高。土地などの償却しない固定資産はnullが返ります。</p></li>   <li><p>opening_accumulated_depreciation : 期首減価償却累計額</p></li>   <li><p>closing_accumulated_depreciation : 期末減価償却累計額</p></li> </ul> <h2 id=\"\">注意点</h2> <ul>   <li><p>up_to_dateがfalseの場合、残高の集計が完了していません。最新の集計結果を確認したい場合は、時間を空けて再度取得する必要があります。</p></li> </ul>
+pub async fn get_fixed_assets(configuration: &configuration::Configuration, company_id: i32, target_date: &str, offset: Option<i32>, limit: Option<i32>) -> Result<crate::models::FixedAssetResponse, Error<GetFixedAssetsError>> {
+    let local_var_configuration = configuration;
+
+    let local_var_client = &local_var_configuration.client;
+
+    let local_var_uri_str = format!("{}/api/1/fixed_assets", local_var_configuration.base_path);
+    let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
+
+    local_var_req_builder = local_var_req_builder.query(&[("company_id", &company_id.to_string())]);
+    local_var_req_builder = local_var_req_builder.query(&[("target_date", &target_date.to_string())]);
+    if let Some(ref local_var_str) = offset {
+        local_var_req_builder = local_var_req_builder.query(&[("offset", &local_var_str.to_string())]);
     }
-}
-
-/// 収支区分 (収入: income, 支出: expense)
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum RHashType {
-    #[serde(rename = "income")]
-    Income,
-    #[serde(rename = "expense")]
-    Expense,
-}
-
-impl Default for RHashType {
-    fn default() -> RHashType {
-        Self::Income
+    if let Some(ref local_var_str) = limit {
+        local_var_req_builder = local_var_req_builder.query(&[("limit", &local_var_str.to_string())]);
     }
-}
-/// 決済状況 (未決済: unsettled, 完了: settled)
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum Status {
-    #[serde(rename = "unsettled")]
-    Unsettled,
-    #[serde(rename = "settled")]
-    Settled,
-}
+    if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+        local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+    }
+    if let Some(ref local_var_token) = local_var_configuration.oauth_access_token {
+        local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
+    };
 
-impl Default for Status {
-    fn default() -> Status {
-        Self::Unsettled
+    let local_var_req = local_var_req_builder.build()?;
+    let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+    let local_var_status = local_var_resp.status();
+    let local_var_content = local_var_resp.text().await?;
+
+    if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+        serde_json::from_str(&local_var_content).map_err(Error::from)
+    } else {
+        let local_var_entity: Option<GetFixedAssetsError> = serde_json::from_str(&local_var_content).ok();
+        let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Err(Error::ResponseError(local_var_error))
     }
 }
 

@@ -35,8 +35,8 @@ pub struct DealCreateResponseDeal {
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
     pub r#type: Option<RHashType>,
     /// 取引先ID
-    #[serde(rename = "partner_id")]
-    pub partner_id: i32,
+    #[serde(rename = "partner_id", deserialize_with = "Option::deserialize")]
+    pub partner_id: Option<i32>,
     /// 取引先コード
     #[serde(rename = "partner_code", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub partner_code: Option<Option<String>>,
@@ -58,7 +58,7 @@ pub struct DealCreateResponseDeal {
 }
 
 impl DealCreateResponseDeal {
-    pub fn new(id: i32, company_id: i32, issue_date: String, amount: i64, partner_id: i32, status: Status) -> DealCreateResponseDeal {
+    pub fn new(id: i32, company_id: i32, issue_date: String, amount: i64, partner_id: Option<i32>, status: Status) -> DealCreateResponseDeal {
         DealCreateResponseDeal {
             id,
             company_id,

@@ -38,12 +38,12 @@ pub struct Transfer {
     #[serde(rename = "to_walletable_id")]
     pub to_walletable_id: i32,
     /// 備考
-    #[serde(rename = "description")]
-    pub description: String,
+    #[serde(rename = "description", deserialize_with = "Option::deserialize")]
+    pub description: Option<String>,
 }
 
 impl Transfer {
-    pub fn new(id: i32, company_id: i32, amount: i64, date: String, from_walletable_type: Option<FromWalletableType>, from_walletable_id: i32, to_walletable_type: Option<ToWalletableType>, to_walletable_id: i32, description: String) -> Transfer {
+    pub fn new(id: i32, company_id: i32, amount: i64, date: String, from_walletable_type: Option<FromWalletableType>, from_walletable_id: i32, to_walletable_type: Option<ToWalletableType>, to_walletable_id: i32, description: Option<String>) -> Transfer {
         Transfer {
             id,
             company_id,

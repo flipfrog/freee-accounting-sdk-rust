@@ -28,9 +28,9 @@ pub struct WalletTxn {
     /// 未決済金額
     #[serde(rename = "due_amount")]
     pub due_amount: i32,
-    /// 残高(銀行口座等)
-    #[serde(rename = "balance")]
-    pub balance: i32,
+    /// 残高(銀行口座等)(Webで残高未設定で登録した場合や口座明細の作成APIでキーを指定しないで登録した場合などはnullとなります)
+    #[serde(rename = "balance", deserialize_with = "Option::deserialize")]
+    pub balance: Option<i32>,
     /// 入金／出金 (入金: income, 出金: expense)
     #[serde(rename = "entry_side")]
     pub entry_side: EntrySide,
@@ -52,7 +52,7 @@ pub struct WalletTxn {
 }
 
 impl WalletTxn {
-    pub fn new(id: i32, company_id: i32, date: String, amount: i64, due_amount: i32, balance: i32, entry_side: EntrySide, walletable_type: WalletableType, walletable_id: i32, description: String, status: i32, rule_matched: bool) -> WalletTxn {
+    pub fn new(id: i32, company_id: i32, date: String, amount: i64, due_amount: i32, balance: Option<i32>, entry_side: EntrySide, walletable_type: WalletableType, walletable_id: i32, description: String, status: i32, rule_matched: bool) -> WalletTxn {
         WalletTxn {
             id,
             company_id,
