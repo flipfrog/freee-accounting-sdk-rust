@@ -31,7 +31,7 @@ pub struct ExpenseApplicationUpdateParams {
     /// メモタグID
     #[serde(rename = "tag_ids", skip_serializing_if = "Option::is_none")]
     pub tag_ids: Option<Vec<i32>>,
-    /// この項目はインボイス制度で利用する項目です。2023年4月頃から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br> 経費申請の申請行一覧（配列） 
+    /// この項目はインボイス制度で利用する項目です。2023年5月下旬から利用できる予定です。利用可能となる前に予告なく変更がある場合があります。<br> 経費申請の申請行一覧（配列） 
     #[serde(rename = "purchase_lines", skip_serializing_if = "Option::is_none")]
     pub purchase_lines: Option<Vec<crate::models::ExpenseApplicationUpdateParamsPurchaseLinesInner>>,
     #[serde(rename = "expense_application_lines", skip_serializing_if = "Option::is_none")]
