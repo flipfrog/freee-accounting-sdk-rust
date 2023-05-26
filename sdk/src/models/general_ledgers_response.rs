@@ -13,14 +13,14 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct GeneralLedgersResponse {
-    #[serde(rename = "general_ledgers", skip_serializing_if = "Option::is_none")]
-    pub general_ledgers: Option<Vec<crate::models::GeneralLedgersResponseGeneralLedgersInner>>,
+    #[serde(rename = "general_ledgers")]
+    pub general_ledgers: Vec<crate::models::GeneralLedgersResponseGeneralLedgersInner>,
 }
 
 impl GeneralLedgersResponse {
-    pub fn new() -> GeneralLedgersResponse {
+    pub fn new(general_ledgers: Vec<crate::models::GeneralLedgersResponseGeneralLedgersInner>) -> GeneralLedgersResponse {
         GeneralLedgersResponse {
-            general_ledgers: None,
+            general_ledgers,
         }
     }
 }
