@@ -9,131 +9,95 @@
  */
 
 
+use reqwest;
+
+use crate::apis::ResponseContent;
+use super::{Error, configuration};
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
-pub struct ExpenseApplicationsIndexResponseExpenseApplicationsInner {
-    /// 経費申請ID
-    #[serde(rename = "id")]
-    pub id: i32,
-    /// 事業所ID
-    #[serde(rename = "company_id")]
-    pub company_id: i32,
-    /// 申請タイトル
-    #[serde(rename = "title")]
-    pub title: String,
-    /// 申請日 (yyyy-mm-dd)
-    #[serde(rename = "issue_date")]
-    pub issue_date: String,
-    /// 備考
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    /// 合計金額
-    #[serde(rename = "total_amount", skip_serializing_if = "Option::is_none")]
-    pub total_amount: Option<i32>,
-    /// 申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下, feedback:差戻し)
-    #[serde(rename = "status")]
-    pub status: Status,
-    /// 部門ID
-    #[serde(rename = "section_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub section_id: Option<Option<i32>>,
-    /// メモタグID
-    #[serde(rename = "tag_ids", skip_serializing_if = "Option::is_none")]
-    pub tag_ids: Option<Vec<i32>>,
-    /// 経費申請の申請行一覧（配列）
-    #[serde(rename = "purchase_lines", skip_serializing_if = "Option::is_none")]
-    pub purchase_lines: Option<Vec<crate::models::ExpenseApplicationsIndexResponseExpenseApplicationsInnerPurchaseLinesInner>>,
-    /// 経費申請の項目行一覧（配列）
-    #[serde(rename = "expense_application_lines", skip_serializing_if = "Option::is_none")]
-    pub expense_application_lines: Option<Vec<crate::models::ExpenseApplicationsIndexResponseExpenseApplicationsInnerExpenseApplicationLinesInner>>,
-    /// 取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)
-    #[serde(rename = "deal_id", deserialize_with = "Option::deserialize")]
-    pub deal_id: Option<i32>,
-    /// 取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます settled:精算済み, unsettled:清算待ち)
-    #[serde(rename = "deal_status", deserialize_with = "Option::deserialize")]
-    pub deal_status: Option<DealStatus>,
-    /// 申請者のユーザーID
-    #[serde(rename = "applicant_id")]
-    pub applicant_id: i32,
-    /// 申請No.
-    #[serde(rename = "application_number")]
-    pub application_number: String,
-    /// 現在承認ステップID
-    #[serde(rename = "current_step_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub current_step_id: Option<Option<i32>>,
-    /// 現在のround。差し戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。
-    #[serde(rename = "current_round", skip_serializing_if = "Option::is_none")]
-    pub current_round: Option<i32>,
-    /// セグメント１ID
-    #[serde(rename = "segment_1_tag_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub segment_1_tag_id: Option<Option<i64>>,
-    /// セグメント２ID
-    #[serde(rename = "segment_2_tag_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub segment_2_tag_id: Option<Option<i64>>,
-    /// セグメント３ID
-    #[serde(rename = "segment_3_tag_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub segment_3_tag_id: Option<Option<i64>>,
+/// struct for typed errors of method [`get_general_ledgers`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum GetGeneralLedgersError {
+    Status400(crate::models::BadRequestError),
+    Status401(crate::models::UnauthorizedError),
+    Status403(crate::models::ForbiddenError),
+    Status500(crate::models::InternalServerError),
+    Status503(crate::models::ServiceUnavailableError),
+    UnknownValue(serde_json::Value),
 }
 
-impl ExpenseApplicationsIndexResponseExpenseApplicationsInner {
-    pub fn new(id: i32, company_id: i32, title: String, issue_date: String, status: Status, deal_id: Option<i32>, deal_status: Option<DealStatus>, applicant_id: i32, application_number: String) -> ExpenseApplicationsIndexResponseExpenseApplicationsInner {
-        ExpenseApplicationsIndexResponseExpenseApplicationsInner {
-            id,
-            company_id,
-            title,
-            issue_date,
-            description: None,
-            total_amount: None,
-            status,
-            section_id: None,
-            tag_ids: None,
-            purchase_lines: None,
-            expense_application_lines: None,
-            deal_id,
-            deal_status,
-            applicant_id,
-            application_number,
-            current_step_id: None,
-            current_round: None,
-            segment_1_tag_id: None,
-            segment_2_tag_id: None,
-            segment_3_tag_id: None,
-        }
+
+/// <h2 id=\"\">概要</h2> <p>指定した事業所の総勘定元帳一覧を取得する</p> <br> ※このAPIはβ版として提供しています。 <ul>   <li>このAPIは法人プロフェッショナル・法人エンタープライズに加入している事業所のみが利用できます。</li>   <li>利用状況によって事前の告知なく提供プラン・コール数の上限を変更する可能性があります。</li>   <li>他エンドポイントと比べてレスポンスタイムが遅い場合があります。</li> </ul> <h2 id=\"\">注意点</h2> <ul> <li>segment_tag_2_name、segment_tag_3_nameはエンタープライズプランのみ使用できます。</li> </ul>
+pub async fn get_general_ledgers(configuration: &configuration::Configuration, company_id: i32, start_date: String, end_date: String, account_item_name: Option<&str>, tax_name: Option<&str>, tax_rate: Option<&str>, adjustment: Option<&str>, cost_allocation: Option<&str>, partner_name: Option<&str>, item_name: Option<&str>, section_name: Option<&str>, tag_name: Option<&str>, segment_tag_1_name: Option<&str>, segment_tag_2_name: Option<&str>, segment_tag_3_name: Option<&str>, approval_flow_status: Option<&str>) -> Result<crate::models::GeneralLedgersResponse, Error<GetGeneralLedgersError>> {
+    let local_var_configuration = configuration;
+
+    let local_var_client = &local_var_configuration.client;
+
+    let local_var_uri_str = format!("{}/api/1/reports/general_ledgers", local_var_configuration.base_path);
+    let mut local_var_req_builder = local_var_client.request(reqwest::Method::GET, local_var_uri_str.as_str());
+
+    local_var_req_builder = local_var_req_builder.query(&[("company_id", &company_id.to_string())]);
+    local_var_req_builder = local_var_req_builder.query(&[("start_date", &start_date.to_string())]);
+    local_var_req_builder = local_var_req_builder.query(&[("end_date", &end_date.to_string())]);
+    if let Some(ref local_var_str) = account_item_name {
+        local_var_req_builder = local_var_req_builder.query(&[("account_item_name", &local_var_str.to_string())]);
     }
-}
-
-/// 申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下, feedback:差戻し)
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum Status {
-    #[serde(rename = "draft")]
-    Draft,
-    #[serde(rename = "in_progress")]
-    InProgress,
-    #[serde(rename = "approved")]
-    Approved,
-    #[serde(rename = "rejected")]
-    Rejected,
-    #[serde(rename = "feedback")]
-    Feedback,
-}
-
-impl Default for Status {
-    fn default() -> Status {
-        Self::Draft
+    if let Some(ref local_var_str) = tax_name {
+        local_var_req_builder = local_var_req_builder.query(&[("tax_name", &local_var_str.to_string())]);
     }
-}
-/// 取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます settled:精算済み, unsettled:清算待ち)
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum DealStatus {
-    #[serde(rename = "settled")]
-    Settled,
-    #[serde(rename = "unsettled")]
-    Unsettled,
-}
+    if let Some(ref local_var_str) = tax_rate {
+        local_var_req_builder = local_var_req_builder.query(&[("tax_rate", &local_var_str.to_string())]);
+    }
+    if let Some(ref local_var_str) = adjustment {
+        local_var_req_builder = local_var_req_builder.query(&[("adjustment", &local_var_str.to_string())]);
+    }
+    if let Some(ref local_var_str) = cost_allocation {
+        local_var_req_builder = local_var_req_builder.query(&[("cost_allocation", &local_var_str.to_string())]);
+    }
+    if let Some(ref local_var_str) = partner_name {
+        local_var_req_builder = local_var_req_builder.query(&[("partner_name", &local_var_str.to_string())]);
+    }
+    if let Some(ref local_var_str) = item_name {
+        local_var_req_builder = local_var_req_builder.query(&[("item_name", &local_var_str.to_string())]);
+    }
+    if let Some(ref local_var_str) = section_name {
+        local_var_req_builder = local_var_req_builder.query(&[("section_name", &local_var_str.to_string())]);
+    }
+    if let Some(ref local_var_str) = tag_name {
+        local_var_req_builder = local_var_req_builder.query(&[("tag_name", &local_var_str.to_string())]);
+    }
+    if let Some(ref local_var_str) = segment_tag_1_name {
+        local_var_req_builder = local_var_req_builder.query(&[("segment_tag_1_name", &local_var_str.to_string())]);
+    }
+    if let Some(ref local_var_str) = segment_tag_2_name {
+        local_var_req_builder = local_var_req_builder.query(&[("segment_tag_2_name", &local_var_str.to_string())]);
+    }
+    if let Some(ref local_var_str) = segment_tag_3_name {
+        local_var_req_builder = local_var_req_builder.query(&[("segment_tag_3_name", &local_var_str.to_string())]);
+    }
+    if let Some(ref local_var_str) = approval_flow_status {
+        local_var_req_builder = local_var_req_builder.query(&[("approval_flow_status", &local_var_str.to_string())]);
+    }
+    if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+        local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+    }
+    if let Some(ref local_var_token) = local_var_configuration.oauth_access_token {
+        local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
+    };
 
-impl Default for DealStatus {
-    fn default() -> DealStatus {
-        Self::Settled
+    let local_var_req = local_var_req_builder.build()?;
+    let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+    let local_var_status = local_var_resp.status();
+    let local_var_content = local_var_resp.text().await?;
+
+    if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+        serde_json::from_str(&local_var_content).map_err(Error::from)
+    } else {
+        let local_var_entity: Option<GetGeneralLedgersError> = serde_json::from_str(&local_var_content).ok();
+        let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Err(Error::ResponseError(local_var_error))
     }
 }
 
