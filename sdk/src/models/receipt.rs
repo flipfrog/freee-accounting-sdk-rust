@@ -26,12 +26,12 @@ pub struct Receipt {
     #[serde(rename = "mime_type")]
     pub mime_type: String,
     /// 発生日
-    #[serde(rename = "issue_date", skip_serializing_if = "Option::is_none")]
-    pub issue_date: Option<String>,
+    #[serde(rename = "issue_date", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub issue_date: Option<Option<String>>,
     /// アップロード元種別
     #[serde(rename = "origin")]
     pub origin: Origin,
-    /// 作成日時（ISO8601形式）
+    /// アップロード日時（ISO8601形式）
     #[serde(rename = "created_at")]
     pub created_at: String,
     /// ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。） <br> <br> file_srcは廃止予定の属性になります。<br> file_srcに替わり、証憑ファイルのダウンロード APIをご利用ください。<br> 証憑ファイルのダウンロードAPIを利用することで、以下のようになります。 <ul>   <li>アプリケーション利用者はfreee APIアプリケーションにログインしていれば、証憑ダウンロード毎にfreeeに改めてログインすることなくファイルが参照できるようになります。</li> </ul>

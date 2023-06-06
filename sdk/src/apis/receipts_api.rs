@@ -87,7 +87,7 @@ pub enum UpdateReceiptError {
 
 
 ///  <h2 id=\"\">概要</h2>  <p>ファイルボックス（証憑ファイル）をアップロードする</p> <h2 id=\"_2\">注意点</h2> <ul>   <li>リクエストヘッダーの Content-Type は、multipart/form-dataにのみ対応しています。</li>   <li>インボイス制度適格請求書発行事業者登録番号はOCR解析結果が採用されます。OCR解析結果を確認する場合は、Web画面にてご確認ください。上書きする場合は、ファイルボックス（証憑ファイル）の更新APIをご利用ください。</li> </ul>
-pub async fn create_receipt(configuration: &configuration::Configuration, company_id: i32, receipt: std::path::PathBuf, description: Option<&str>, issue_date: Option<&str>, receipt_metadatum_partner_name: Option<&str>, receipt_metadatum_issue_date: Option<&str>, receipt_metadatum_amount: Option<i64>, qualified_invoice: Option<&str>, document_type: Option<&str>) -> Result<crate::models::ReceiptResponse, Error<CreateReceiptError>> {
+pub async fn create_receipt(configuration: &configuration::Configuration, company_id: i32, receipt: std::path::PathBuf, description: Option<&str>, receipt_metadatum_partner_name: Option<&str>, receipt_metadatum_issue_date: Option<&str>, receipt_metadatum_amount: Option<i64>, qualified_invoice: Option<&str>, document_type: Option<&str>) -> Result<crate::models::ReceiptResponse, Error<CreateReceiptError>> {
     let local_var_configuration = configuration;
 
     let local_var_client = &local_var_configuration.client;
@@ -105,9 +105,6 @@ pub async fn create_receipt(configuration: &configuration::Configuration, compan
     local_var_form = local_var_form.text("company_id", company_id.to_string());
     if let Some(local_var_param_value) = description {
         local_var_form = local_var_form.text("description", local_var_param_value.to_string());
-    }
-    if let Some(local_var_param_value) = issue_date {
-        local_var_form = local_var_form.text("issue_date", local_var_param_value.to_string());
     }
     // TODO: support file upload for 'receipt' parameter
     if let Some(local_var_param_value) = receipt_metadatum_partner_name {

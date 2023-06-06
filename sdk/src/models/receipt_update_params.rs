@@ -19,9 +19,6 @@ pub struct ReceiptUpdateParams {
     /// メモ (255文字以内)
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
-    /// 取引日 (yyyy-mm-dd)
-    #[serde(rename = "issue_date")]
-    pub issue_date: String,
     #[serde(rename = "receipt_metadatum", skip_serializing_if = "Option::is_none")]
     pub receipt_metadatum: Option<Box<crate::models::ReceiptUpdateParamsReceiptMetadatum>>,
     /// 適格請求書等（qualified: 該当する、not_qualified: 該当しない、unselected: 未選択）
@@ -36,11 +33,10 @@ pub struct ReceiptUpdateParams {
 }
 
 impl ReceiptUpdateParams {
-    pub fn new(company_id: i32, issue_date: String) -> ReceiptUpdateParams {
+    pub fn new(company_id: i32) -> ReceiptUpdateParams {
         ReceiptUpdateParams {
             company_id,
             description: None,
-            issue_date,
             receipt_metadatum: None,
             qualified_invoice: None,
             invoice_registration_number: None,
