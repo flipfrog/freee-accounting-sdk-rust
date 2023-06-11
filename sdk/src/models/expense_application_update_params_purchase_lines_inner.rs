@@ -17,8 +17,8 @@ pub struct ExpenseApplicationUpdateParamsPurchaseLinesInner {
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<i64>,
     /// 日付 (yyyy-mm-dd)
-    #[serde(rename = "transaction_date", skip_serializing_if = "Option::is_none")]
-    pub transaction_date: Option<String>,
+    #[serde(rename = "transaction_date")]
+    pub transaction_date: String,
     /// ファイルボックス（証憑ファイル）ID
     #[serde(rename = "receipt_id", skip_serializing_if = "Option::is_none")]
     pub receipt_id: Option<i32>,
@@ -28,10 +28,10 @@ pub struct ExpenseApplicationUpdateParamsPurchaseLinesInner {
 }
 
 impl ExpenseApplicationUpdateParamsPurchaseLinesInner {
-    pub fn new() -> ExpenseApplicationUpdateParamsPurchaseLinesInner {
+    pub fn new(transaction_date: String) -> ExpenseApplicationUpdateParamsPurchaseLinesInner {
         ExpenseApplicationUpdateParamsPurchaseLinesInner {
             id: None,
-            transaction_date: None,
+            transaction_date,
             receipt_id: None,
             expense_application_lines: None,
         }

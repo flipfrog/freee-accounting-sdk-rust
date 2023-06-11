@@ -17,18 +17,18 @@ pub struct ExpenseApplicationCreateParamsPurchaseLinesInner {
     #[serde(rename = "receipt_id", skip_serializing_if = "Option::is_none")]
     pub receipt_id: Option<i32>,
     /// 日付 (yyyy-mm-dd)
-    #[serde(rename = "transaction_date", skip_serializing_if = "Option::is_none")]
-    pub transaction_date: Option<String>,
+    #[serde(rename = "transaction_date")]
+    pub transaction_date: String,
     /// 明細行一覧（配列）
     #[serde(rename = "expense_application_lines", skip_serializing_if = "Option::is_none")]
     pub expense_application_lines: Option<Vec<crate::models::ExpenseApplicationCreateParamsPurchaseLinesInnerExpenseApplicationLinesInner>>,
 }
 
 impl ExpenseApplicationCreateParamsPurchaseLinesInner {
-    pub fn new() -> ExpenseApplicationCreateParamsPurchaseLinesInner {
+    pub fn new(transaction_date: String) -> ExpenseApplicationCreateParamsPurchaseLinesInner {
         ExpenseApplicationCreateParamsPurchaseLinesInner {
             receipt_id: None,
-            transaction_date: None,
+            transaction_date,
             expense_application_lines: None,
         }
     }
