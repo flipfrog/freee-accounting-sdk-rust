@@ -105,7 +105,7 @@ pub async fn create_account_item(configuration: &configuration::Configuration, a
     }
 }
 
-///  <h2 id=\"\">概要</h2>  <p>指定した勘定科目を削除する</p> <h2 id=\"\">注意点</h2> <ul> <li>削除できる勘定科目は、追加で作成したカスタム勘定項目のみです。</li> <li>デフォルトで存在する勘定科目や口座の勘定科目は削除できません。</li></ul>
+///  <h2 id=\"\">概要</h2>  <p>指定した勘定科目を削除する</p> <h2 id=\"\">注意点</h2> <ul> <li>削除できる勘定科目は、追加で作成したカスタム勘定科目のみです。</li> <li>デフォルトで存在する勘定科目や口座の勘定科目は削除できません。</li></ul>
 pub async fn destroy_account_item(configuration: &configuration::Configuration, id: i32, company_id: i32) -> Result<(), Error<DestroyAccountItemError>> {
     let local_var_configuration = configuration;
 

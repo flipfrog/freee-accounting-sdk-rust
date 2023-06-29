@@ -12,11 +12,11 @@
 
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
-pub struct ExpenseApplicationsIndexResponseExpenseApplicationsInnerPurchaseLinesInner {
+pub struct ExpenseApplicationResponseExpenseApplicationPurchaseLinesInner {
     /// 経費申請の申請行ID
     #[serde(rename = "id")]
     pub id: i64,
-    /// 発生日 (yyyy-mm-dd)
+    /// 発生日(yyyy-mm-dd)
     #[serde(rename = "transaction_date", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub transaction_date: Option<Option<String>>,
     /// ファイルボックス（証憑ファイル）ID
@@ -27,9 +27,9 @@ pub struct ExpenseApplicationsIndexResponseExpenseApplicationsInnerPurchaseLines
     pub expense_application_lines: Option<Vec<crate::models::ExpenseApplicationsIndexResponseExpenseApplicationsInnerPurchaseLinesInnerExpenseApplicationLinesInner>>,
 }
 
-impl ExpenseApplicationsIndexResponseExpenseApplicationsInnerPurchaseLinesInner {
-    pub fn new(id: i64) -> ExpenseApplicationsIndexResponseExpenseApplicationsInnerPurchaseLinesInner {
-        ExpenseApplicationsIndexResponseExpenseApplicationsInnerPurchaseLinesInner {
+impl ExpenseApplicationResponseExpenseApplicationPurchaseLinesInner {
+    pub fn new(id: i64) -> ExpenseApplicationResponseExpenseApplicationPurchaseLinesInner {
+        ExpenseApplicationResponseExpenseApplicationPurchaseLinesInner {
             id,
             transaction_date: None,
             receipt_id: None,

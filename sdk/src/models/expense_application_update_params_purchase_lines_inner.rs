@@ -16,7 +16,7 @@ pub struct ExpenseApplicationUpdateParamsPurchaseLinesInner {
     /// 経費申請の申請行ID: 既存申請行を更新する場合に指定します。IDを指定しない申請行は、新規行として扱われ追加されます。また、purchase_linesに含まれない既存の申請行は削除されます。更新後も残したい行は、必ず経費申請の申請行IDを指定してpurchase_linesに含めてください。
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<i64>,
-    /// 日付 (yyyy-mm-dd)
+    /// 発生日(yyyy-mm-dd)
     #[serde(rename = "transaction_date")]
     pub transaction_date: String,
     /// ファイルボックス（証憑ファイル）ID
