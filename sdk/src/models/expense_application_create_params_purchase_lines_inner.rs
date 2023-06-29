@@ -16,7 +16,7 @@ pub struct ExpenseApplicationCreateParamsPurchaseLinesInner {
     /// ファイルボックス（証憑ファイル）ID
     #[serde(rename = "receipt_id", skip_serializing_if = "Option::is_none")]
     pub receipt_id: Option<i32>,
-    /// 日付 (yyyy-mm-dd)
+    /// 発生日(yyyy-mm-dd)
     #[serde(rename = "transaction_date")]
     pub transaction_date: String,
     /// 明細行一覧（配列）

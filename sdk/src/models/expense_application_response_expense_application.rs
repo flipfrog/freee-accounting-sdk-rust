@@ -42,7 +42,7 @@ pub struct ExpenseApplicationResponseExpenseApplication {
     pub tag_ids: Option<Vec<i32>>,
     /// 経費申請の申請行一覧（配列）
     #[serde(rename = "purchase_lines", skip_serializing_if = "Option::is_none")]
-    pub purchase_lines: Option<Vec<crate::models::ExpenseApplicationsIndexResponseExpenseApplicationsInnerPurchaseLinesInner>>,
+    pub purchase_lines: Option<Vec<crate::models::ExpenseApplicationResponseExpenseApplicationPurchaseLinesInner>>,
     /// 経費申請の項目行一覧（配列）
     #[serde(rename = "expense_application_lines", skip_serializing_if = "Option::is_none")]
     pub expense_application_lines: Option<Vec<crate::models::ExpenseApplicationResponseExpenseApplicationExpenseApplicationLinesInner>>,
