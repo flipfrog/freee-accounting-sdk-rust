@@ -88,6 +88,9 @@ pub struct PaymentRequestCreateParams {
     /// '口座種別(ordinary: 普通、checking: 当座、earmarked: 納税準備預金、savings: 貯蓄、other: その他)'<br> '支払先指定時には無効'<br> 'デフォルトは ordinary: 普通 です' 
     #[serde(rename = "account_type", skip_serializing_if = "Option::is_none")]
     pub account_type: Option<AccountType>,
+    /// 適格請求書発行事業者（qualified: 該当する、not_qualified: 該当しない、unspecified: 未選択） - 支払依頼をインボイス要件をみたす申請として扱うかどうかを表します。 - qualified_invoice_statusキーをリクエストに含めない場合、unspecifiedが適用されます。 - issue_dateが2023年9月30日以前の場合、unspecified以外利用できません。 - インボイス経過措置の税区分の設定が使用する設定になっていない場合、unspecified以外利用できません。 
+    #[serde(rename = "qualified_invoice_status", skip_serializing_if = "Option::is_none")]
+    pub qualified_invoice_status: Option<QualifiedInvoiceStatus>,
 }
 
 impl PaymentRequestCreateParams {
@@ -118,6 +121,7 @@ impl PaymentRequestCreateParams {
             account_name: None,
             account_number: None,
             account_type: None,
+            qualified_invoice_status: None,
         }
     }
 }
@@ -160,6 +164,22 @@ pub enum AccountType {
 impl Default for AccountType {
     fn default() -> AccountType {
         Self::Ordinary
+    }
+}
+/// 適格請求書発行事業者（qualified: 該当する、not_qualified: 該当しない、unspecified: 未選択） - 支払依頼をインボイス要件をみたす申請として扱うかどうかを表します。 - qualified_invoice_statusキーをリクエストに含めない場合、unspecifiedが適用されます。 - issue_dateが2023年9月30日以前の場合、unspecified以外利用できません。 - インボイス経過措置の税区分の設定が使用する設定になっていない場合、unspecified以外利用できません。 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum QualifiedInvoiceStatus {
+    #[serde(rename = "qualified")]
+    Qualified,
+    #[serde(rename = "not_qualified")]
+    NotQualified,
+    #[serde(rename = "unspecified")]
+    Unspecified,
+}
+
+impl Default for QualifiedInvoiceStatus {
+    fn default() -> QualifiedInvoiceStatus {
+        Self::Qualified
     }
 }
 

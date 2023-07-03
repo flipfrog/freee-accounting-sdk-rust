@@ -46,6 +46,9 @@ pub struct DealCreateResponseDeal {
     /// 決済状況 (未決済: unsettled, 完了: settled)
     #[serde(rename = "status")]
     pub status: Status,
+    /// 取引の登録元
+    #[serde(rename = "deal_origin_name", skip_serializing_if = "Option::is_none")]
+    pub deal_origin_name: Option<String>,
     /// 取引の明細行
     #[serde(rename = "details", skip_serializing_if = "Option::is_none")]
     pub details: Option<Vec<crate::models::DealCreateResponseDealDetailsInner>>,
@@ -71,6 +74,7 @@ impl DealCreateResponseDeal {
             partner_code: None,
             ref_number: None,
             status,
+            deal_origin_name: None,
             details: None,
             payments: None,
             receipts: None,

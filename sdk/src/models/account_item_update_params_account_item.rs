@@ -22,7 +22,7 @@ pub struct AccountItemUpdateParamsAccountItem {
     /// ショートカット2(勘定科目コード)(20文字以内)
     #[serde(rename = "shortcut_num", skip_serializing_if = "Option::is_none")]
     pub shortcut_num: Option<String>,
-    /// 税区分コード
+    /// 税区分コード 指定できるコードは本APIの注意点をご確認ください。
     #[serde(rename = "tax_code")]
     pub tax_code: i32,
     /// 決算書表示名（小カテゴリー） Selectablesフォーム用選択項目情報エンドポイント(account_groups.name)で取得可能です
