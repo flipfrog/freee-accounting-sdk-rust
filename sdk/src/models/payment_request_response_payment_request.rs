@@ -118,6 +118,9 @@ pub struct PaymentRequestResponsePaymentRequest {
     /// 受取人名（カナ）
     #[serde(rename = "account_name")]
     pub account_name: String,
+    /// 適格請求書発行事業者（qualified: 該当する、not_qualified: 該当しない、unspecified: 未選択） - 支払依頼をインボイス要件をみたす申請として扱うかどうかを表します。 
+    #[serde(rename = "qualified_invoice_status", skip_serializing_if = "Option::is_none")]
+    pub qualified_invoice_status: Option<QualifiedInvoiceStatus>,
 }
 
 impl PaymentRequestResponsePaymentRequest {
@@ -158,6 +161,7 @@ impl PaymentRequestResponsePaymentRequest {
             account_type,
             account_number,
             account_name,
+            qualified_invoice_status: None,
         }
     }
 }
@@ -234,6 +238,22 @@ pub enum AccountType {
 impl Default for AccountType {
     fn default() -> AccountType {
         Self::Ordinary
+    }
+}
+/// 適格請求書発行事業者（qualified: 該当する、not_qualified: 該当しない、unspecified: 未選択） - 支払依頼をインボイス要件をみたす申請として扱うかどうかを表します。 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum QualifiedInvoiceStatus {
+    #[serde(rename = "qualified")]
+    Qualified,
+    #[serde(rename = "not_qualified")]
+    NotQualified,
+    #[serde(rename = "unspecified")]
+    Unspecified,
+}
+
+impl Default for QualifiedInvoiceStatus {
+    fn default() -> QualifiedInvoiceStatus {
+        Self::Qualified
     }
 }
 
