@@ -35,8 +35,8 @@ pub struct Receipt {
     #[serde(rename = "created_at")]
     pub created_at: String,
     /// ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。） <br> <br> file_srcは廃止予定の属性になります。<br> file_srcに替わり、証憑ファイルのダウンロード APIをご利用ください。<br> 証憑ファイルのダウンロードAPIを利用することで、以下のようになります。 <ul>   <li>アプリケーション利用者はfreee APIアプリケーションにログインしていれば、証憑ダウンロード毎にfreeeに改めてログインすることなくファイルが参照できるようになります。</li> </ul>
-    #[serde(rename = "file_src")]
-    pub file_src: String,
+    #[serde(rename = "file_src", skip_serializing_if = "Option::is_none")]
+    pub file_src: Option<String>,
     #[serde(rename = "user")]
     pub user: Box<crate::models::DealCreateResponseDealReceiptsInnerUser>,
     #[serde(rename = "receipt_metadatum", skip_serializing_if = "Option::is_none")]
@@ -53,7 +53,7 @@ pub struct Receipt {
 }
 
 impl Receipt {
-    pub fn new(id: i32, status: Status, mime_type: String, origin: Origin, created_at: String, file_src: String, user: crate::models::DealCreateResponseDealReceiptsInnerUser) -> Receipt {
+    pub fn new(id: i32, status: Status, mime_type: String, origin: Origin, created_at: String, user: crate::models::DealCreateResponseDealReceiptsInnerUser) -> Receipt {
         Receipt {
             id,
             status,
@@ -62,7 +62,7 @@ impl Receipt {
             issue_date: None,
             origin,
             created_at,
-            file_src,
+            file_src: None,
             user: Box::new(user),
             receipt_metadatum: None,
             qualified_invoice: None,

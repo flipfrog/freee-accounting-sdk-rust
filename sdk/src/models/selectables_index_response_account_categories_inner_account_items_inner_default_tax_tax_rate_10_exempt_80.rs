@@ -13,7 +13,7 @@
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
 pub struct SelectablesIndexResponseAccountCategoriesInnerAccountItemsInnerDefaultTaxTaxRate10Exempt80 {
-    /// 税区分コード（この項目はインボイス制度で利用する項目です。2023年7月頃から利用できる予定です。）
+    /// 税区分コード
     #[serde(rename = "code", skip_serializing_if = "Option::is_none")]
     pub code: Option<i32>,
     /// 税区分
