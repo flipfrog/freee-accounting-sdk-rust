@@ -34,9 +34,6 @@ pub struct ExpenseApplicationCreateParams {
     /// 経費申請の申請行一覧（配列）
     #[serde(rename = "purchase_lines", skip_serializing_if = "Option::is_none")]
     pub purchase_lines: Option<Vec<crate::models::ExpenseApplicationCreateParamsPurchaseLinesInner>>,
-    /// 経費申請の項目行一覧（配列）
-    #[serde(rename = "expense_application_lines", skip_serializing_if = "Option::is_none")]
-    pub expense_application_lines: Option<Vec<crate::models::ExpenseApplicationCreateParamsExpenseApplicationLinesInner>>,
     /// 申請経路ID<br> <ul>     <li>経費申請のステータスを申請中として作成する場合は、必ず指定してください。</li>     <li>指定する申請経路IDは、申請経路APIを利用して取得してください。</li>     <li>         未指定の場合は、基本経路を設定している事業所では基本経路が、基本経路を設定していない事業所では利用可能な申請経路の中から最初の申請経路が自動的に使用されます。         <ul>            <li>意図しない申請経路を持った経費申請の作成を防ぐために、使用する申請経路IDを指定することを推奨します。</li>         </ul>     </li>     <li>         ベーシックプランの事業所では以下のデフォルトで用意された申請経路のみ指定できます         <ul>         <li>指定なし</li>         <li>承認者を指定</li>         </ul>     </li> </ul> 
     #[serde(rename = "approval_flow_route_id", skip_serializing_if = "Option::is_none")]
     pub approval_flow_route_id: Option<i32>,
@@ -70,7 +67,6 @@ impl ExpenseApplicationCreateParams {
             section_id: None,
             tag_ids: None,
             purchase_lines: None,
-            expense_application_lines: None,
             approval_flow_route_id: None,
             approver_id: None,
             draft: None,

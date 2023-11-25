@@ -76,6 +76,9 @@ pub struct PaymentRequestsIndexResponsePaymentRequestsInner {
     /// 適格請求書発行事業者（qualified: 該当する、not_qualified: 該当しない、unspecified: 未選択） - 支払依頼をインボイス要件をみたす申請として扱うかどうかを表します。 
     #[serde(rename = "qualified_invoice_status", skip_serializing_if = "Option::is_none")]
     pub qualified_invoice_status: Option<QualifiedInvoiceStatus>,
+    /// 内税/外税（inclusive: 内税、exclusive: 外税） 外税の支払依頼は他のエンドポイントで利用できないため、Web 画面からご確認ください。
+    #[serde(rename = "input_mode", skip_serializing_if = "Option::is_none")]
+    pub input_mode: Option<InputMode>,
 }
 
 impl PaymentRequestsIndexResponsePaymentRequestsInner {
@@ -102,6 +105,7 @@ impl PaymentRequestsIndexResponsePaymentRequestsInner {
             partner_code,
             partner_name,
             qualified_invoice_status: None,
+            input_mode: None,
         }
     }
 }
@@ -174,6 +178,20 @@ pub enum QualifiedInvoiceStatus {
 impl Default for QualifiedInvoiceStatus {
     fn default() -> QualifiedInvoiceStatus {
         Self::Qualified
+    }
+}
+/// 内税/外税（inclusive: 内税、exclusive: 外税） 外税の支払依頼は他のエンドポイントで利用できないため、Web 画面からご確認ください。
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum InputMode {
+    #[serde(rename = "inclusive")]
+    Inclusive,
+    #[serde(rename = "exclusive")]
+    Exclusive,
+}
+
+impl Default for InputMode {
+    fn default() -> InputMode {
+        Self::Inclusive
     }
 }
 

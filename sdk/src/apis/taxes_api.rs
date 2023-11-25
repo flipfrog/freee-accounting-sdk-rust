@@ -81,7 +81,7 @@ pub async fn get_tax_code(configuration: &configuration::Configuration, code: i3
     }
 }
 
-///  <h2 id=\"\">概要</h2>  <p>税区分一覧を取得する</p>
+///  <h2 id=\"\">概要</h2>  <p>税区分一覧を取得する</p>  <h2 id=\"\">注意点</h2>  <p>このAPIは廃止予定のため非推奨です。api/1/taxes/companies/{company_id}（指定した事業所の税区分一覧の取得）をご利用ください。</p>
 pub async fn get_tax_codes(configuration: &configuration::Configuration, ) -> Result<crate::models::GetTaxCodes200Response, Error<GetTaxCodesError>> {
     let local_var_configuration = configuration;
 

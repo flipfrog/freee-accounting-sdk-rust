@@ -43,9 +43,6 @@ pub struct ExpenseApplicationResponseExpenseApplication {
     /// 経費申請の申請行一覧（配列）
     #[serde(rename = "purchase_lines", skip_serializing_if = "Option::is_none")]
     pub purchase_lines: Option<Vec<crate::models::ExpenseApplicationResponseExpenseApplicationPurchaseLinesInner>>,
-    /// 経費申請の項目行一覧（配列）
-    #[serde(rename = "expense_application_lines", skip_serializing_if = "Option::is_none")]
-    pub expense_application_lines: Option<Vec<crate::models::ExpenseApplicationResponseExpenseApplicationExpenseApplicationLinesInner>>,
     /// 取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)
     #[serde(rename = "deal_id", deserialize_with = "Option::deserialize")]
     pub deal_id: Option<i32>,
@@ -76,6 +73,9 @@ pub struct ExpenseApplicationResponseExpenseApplication {
     /// 現在のround。差し戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。
     #[serde(rename = "current_round")]
     pub current_round: i32,
+    /// 親申請ID。各種申請が使用可能なプランの時のみレスポンスに含まれます。
+    #[serde(rename = "parent_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub parent_id: Option<Option<i32>>,
     /// セグメント１ID。セグメント１が使用可能なプランの時のみレスポンスに含まれます。
     #[serde(rename = "segment_1_tag_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub segment_1_tag_id: Option<Option<i64>>,
@@ -100,7 +100,6 @@ impl ExpenseApplicationResponseExpenseApplication {
             section_id: None,
             tag_ids: None,
             purchase_lines: None,
-            expense_application_lines: None,
             deal_id,
             deal_status,
             applicant_id,
@@ -111,6 +110,7 @@ impl ExpenseApplicationResponseExpenseApplication {
             approval_flow_logs,
             current_step_id,
             current_round,
+            parent_id: None,
             segment_1_tag_id: None,
             segment_2_tag_id: None,
             segment_3_tag_id: None,

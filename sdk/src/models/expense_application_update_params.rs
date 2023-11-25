@@ -34,8 +34,6 @@ pub struct ExpenseApplicationUpdateParams {
     /// 経費申請の申請行一覧（配列）
     #[serde(rename = "purchase_lines", skip_serializing_if = "Option::is_none")]
     pub purchase_lines: Option<Vec<crate::models::ExpenseApplicationUpdateParamsPurchaseLinesInner>>,
-    #[serde(rename = "expense_application_lines", skip_serializing_if = "Option::is_none")]
-    pub expense_application_lines: Option<Vec<crate::models::ExpenseApplicationUpdateParamsExpenseApplicationLinesInner>>,
     /// 申請経路ID<br> <ul>     <li>経費申請のステータスを申請中として作成する場合は、必ず指定してください。</li>     <li>指定する申請経路IDは、申請経路APIを利用して取得してください。</li>     <li>         未指定の場合は、基本経路を設定している事業所では基本経路が、基本経路を設定していない事業所では利用可能な申請経路の中から最初の申請経路が自動的に使用されます。         <ul>           <li>意図しない申請経路を持った経費申請の作成を防ぐために、使用する申請経路IDを指定することを推奨します。</li>         </ul>     </li>     <li>         ベーシックプランの事業所では以下のデフォルトで用意された申請経路のみ指定できます         <ul>         <li>指定なし</li>         <li>承認者を指定</li>         </ul>     </li> </ul> 
     #[serde(rename = "approval_flow_route_id", skip_serializing_if = "Option::is_none")]
     pub approval_flow_route_id: Option<i32>,
@@ -45,6 +43,9 @@ pub struct ExpenseApplicationUpdateParams {
     /// 経費申請のステータス<br> falseを指定した時は申請中（in_progress）で経費申請を更新します。<br> trueを指定した時は下書き（draft）で経費申請を更新します。<br> 未指定の時は下書きとみなして経費申請を更新します。 
     #[serde(rename = "draft", skip_serializing_if = "Option::is_none")]
     pub draft: Option<bool>,
+    /// 親申請ID(法人向け プロフェッショナルプラン, 法人向け エンタープライズプラン)<br> <ul>   <li>承認済みの既存各種申請IDのみ指定可能です。</li>   <li>各種申請一覧APIを利用して取得してください。</li> </ul> 
+    #[serde(rename = "parent_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub parent_id: Option<Option<i32>>,
     /// セグメント１ID(法人向けプロフェッショナル, 法人向けエンタープライズプラン)<br> セグメントタグ一覧の取得APIを利用して取得してください。<br> <a href=\"https://support.freee.co.jp/hc/ja/articles/360020679611\" target=\"_blank\">セグメント（分析用タグ）の設定</a><br> 
     #[serde(rename = "segment_1_tag_id", skip_serializing_if = "Option::is_none")]
     pub segment_1_tag_id: Option<i64>,
@@ -66,10 +67,10 @@ impl ExpenseApplicationUpdateParams {
             section_id: None,
             tag_ids: None,
             purchase_lines: None,
-            expense_application_lines: None,
             approval_flow_route_id: None,
             approver_id: None,
             draft: None,
+            parent_id: None,
             segment_1_tag_id: None,
             segment_2_tag_id: None,
             segment_3_tag_id: None,

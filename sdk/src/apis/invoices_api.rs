@@ -76,7 +76,7 @@ pub enum UpdateInvoiceError {
 }
 
 
-///  <h2 id=\"\">概要</h2>  <p>指定した事業所の請求書を作成する</p>  <h2 id=\"_1\">注意点</h2> <b>インボイス制度に伴い、freee会計の帳票機能がfreee請求書に移行します。これに伴い、2023年10月にfreee会計の「請求書の作成」エンドポイントは廃止、freee請求書APIに移行する予定です。詳細は<a href=\"https://developer.freee.co.jp/news/6369\" target=\"_blank\"> freee会計 APIの仕様変更（インボイス制度対応）について</a>をご確認ください。</b> <ul> <li> <p>partner_code, partner_idはどちらかの指定が必須です。ただし両方同時に指定することはできません。</p> </li> <li> <p>請求書ステータス(invoice_status)を下書き(draft)以外で作成する場合、請求内容の合計金額が0円以上になる必要があります。</p> </li> <li> <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</p> </li> <li> <p>本APIでは請求内容(invoice_contents)は、最大100行までになります。</p> </li> </ul>
+///  <h2 id=\"\">概要</h2>  <p>指定した事業所の請求書を作成する</p>  <h2 id=\"_1\">注意点</h2> <b>インボイス制度に伴い、freee会計の帳票機能がfreee請求書に移行しました。これに伴い、2023年10月からfreee会計の「請求書の作成」エンドポイントは廃止され、freee請求書APIに移行しました。詳細は<a href=\"https://developer.freee.co.jp/news/6369\" target=\"_blank\"> freee会計 APIの仕様変更（インボイス制度対応）について</a>をご確認ください。</b> <ul> <li> <p>partner_code, partner_idはどちらかの指定が必須です。ただし両方同時に指定することはできません。</p> </li> <li> <p>請求書ステータス(invoice_status)を下書き(draft)以外で作成する場合、請求内容の合計金額が0円以上になる必要があります。</p> </li> <li> <p>partner_codeを利用するには、事業所の設定から取引先コードの利用を有効にする必要があります。</p> </li> <li> <p>本APIでは請求内容(invoice_contents)は、最大100行までになります。</p> </li> </ul>
 pub async fn create_invoice(configuration: &configuration::Configuration, invoice_create_params: Option<crate::models::InvoiceCreateParams>) -> Result<crate::models::InvoiceResponse, Error<CreateInvoiceError>> {
     let local_var_configuration = configuration;
 

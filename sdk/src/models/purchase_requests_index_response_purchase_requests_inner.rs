@@ -12,88 +12,48 @@
 
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
-pub struct ExpenseApplicationsIndexResponseExpenseApplicationsInner {
-    /// 経費申請ID
+pub struct PurchaseRequestsIndexResponsePurchaseRequestsInner {
+    /// 購買申請ID
     #[serde(rename = "id")]
     pub id: i32,
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
+    /// 申請日 (yyyy-mm-dd)
+    #[serde(rename = "application_date")]
+    pub application_date: String,
     /// 申請タイトル
     #[serde(rename = "title")]
     pub title: String,
-    /// 申請日 (yyyy-mm-dd)
-    #[serde(rename = "issue_date")]
-    pub issue_date: String,
-    /// 備考
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    /// 合計金額
-    #[serde(rename = "total_amount", skip_serializing_if = "Option::is_none")]
-    pub total_amount: Option<i32>,
-    /// 申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下, feedback:差戻し)
-    #[serde(rename = "status")]
-    pub status: Status,
-    /// 部門ID
-    #[serde(rename = "section_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub section_id: Option<Option<i32>>,
-    /// メモタグID
-    #[serde(rename = "tag_ids", skip_serializing_if = "Option::is_none")]
-    pub tag_ids: Option<Vec<i32>>,
-    /// 経費申請の申請行一覧（配列）
-    #[serde(rename = "purchase_lines", skip_serializing_if = "Option::is_none")]
-    pub purchase_lines: Option<Vec<crate::models::ExpenseApplicationsIndexResponseExpenseApplicationsInnerPurchaseLinesInner>>,
-    /// 取引ID (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_idが表示されます)
-    #[serde(rename = "deal_id", deserialize_with = "Option::deserialize")]
-    pub deal_id: Option<i32>,
-    /// 取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます settled:精算済み, unsettled:清算待ち)
-    #[serde(rename = "deal_status", deserialize_with = "Option::deserialize")]
-    pub deal_status: Option<DealStatus>,
     /// 申請者のユーザーID
     #[serde(rename = "applicant_id")]
     pub applicant_id: i32,
     /// 申請No.
     #[serde(rename = "application_number")]
     pub application_number: String,
-    /// 現在承認ステップID
-    #[serde(rename = "current_step_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub current_step_id: Option<Option<i32>>,
-    /// 現在のround。差し戻し等により申請がstepの最初からやり直しになるとroundの値が増えます。
-    #[serde(rename = "current_round", skip_serializing_if = "Option::is_none")]
-    pub current_round: Option<i32>,
-    /// セグメント１ID
-    #[serde(rename = "segment_1_tag_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub segment_1_tag_id: Option<Option<i64>>,
-    /// セグメント２ID
-    #[serde(rename = "segment_2_tag_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub segment_2_tag_id: Option<Option<i64>>,
-    /// セグメント３ID
-    #[serde(rename = "segment_3_tag_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub segment_3_tag_id: Option<Option<i64>>,
+    /// 申請ステータス(draft:下書き, in_progress:申請中, approved:承認済, rejected:却下, feedback:差戻し)
+    #[serde(rename = "status")]
+    pub status: Status,
+    /// 申請フォームID
+    #[serde(rename = "form_id")]
+    pub form_id: i32,
+    /// 金額
+    #[serde(rename = "amount")]
+    pub amount: i32,
 }
 
-impl ExpenseApplicationsIndexResponseExpenseApplicationsInner {
-    pub fn new(id: i32, company_id: i32, title: String, issue_date: String, status: Status, deal_id: Option<i32>, deal_status: Option<DealStatus>, applicant_id: i32, application_number: String) -> ExpenseApplicationsIndexResponseExpenseApplicationsInner {
-        ExpenseApplicationsIndexResponseExpenseApplicationsInner {
+impl PurchaseRequestsIndexResponsePurchaseRequestsInner {
+    pub fn new(id: i32, company_id: i32, application_date: String, title: String, applicant_id: i32, application_number: String, status: Status, form_id: i32, amount: i32) -> PurchaseRequestsIndexResponsePurchaseRequestsInner {
+        PurchaseRequestsIndexResponsePurchaseRequestsInner {
             id,
             company_id,
+            application_date,
             title,
-            issue_date,
-            description: None,
-            total_amount: None,
-            status,
-            section_id: None,
-            tag_ids: None,
-            purchase_lines: None,
-            deal_id,
-            deal_status,
             applicant_id,
             application_number,
-            current_step_id: None,
-            current_round: None,
-            segment_1_tag_id: None,
-            segment_2_tag_id: None,
-            segment_3_tag_id: None,
+            status,
+            form_id,
+            amount,
         }
     }
 }
@@ -116,20 +76,6 @@ pub enum Status {
 impl Default for Status {
     fn default() -> Status {
         Self::Draft
-    }
-}
-/// 取引ステータス (申請ステータス:statusがapprovedで、取引が存在する時のみdeal_statusが表示されます settled:精算済み, unsettled:清算待ち)
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum DealStatus {
-    #[serde(rename = "settled")]
-    Settled,
-    #[serde(rename = "unsettled")]
-    Unsettled,
-}
-
-impl Default for DealStatus {
-    fn default() -> DealStatus {
-        Self::Settled
     }
 }
 
