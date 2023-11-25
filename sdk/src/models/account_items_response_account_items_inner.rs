@@ -48,6 +48,9 @@ pub struct AccountItemsResponseAccountItemsInner {
     /// 決算書表示名（小カテゴリー）
     #[serde(rename = "group_name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub group_name: Option<Option<String>>,
+    /// 決算書表示名ID（小カテゴリー）
+    #[serde(rename = "group_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub group_id: Option<Option<i32>>,
     /// 収入取引相手勘定科目名
     #[serde(rename = "corresponding_income_name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub corresponding_income_name: Option<Option<String>>,
@@ -77,6 +80,7 @@ impl AccountItemsResponseAccountItemsInner {
             available,
             walletable_id,
             group_name: None,
+            group_id: None,
             corresponding_income_name: None,
             corresponding_income_id: None,
             corresponding_expense_name: None,

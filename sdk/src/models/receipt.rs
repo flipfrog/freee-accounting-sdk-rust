@@ -25,18 +25,12 @@ pub struct Receipt {
     /// MIMEタイプ
     #[serde(rename = "mime_type")]
     pub mime_type: String,
-    /// 発生日
-    #[serde(rename = "issue_date", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub issue_date: Option<Option<String>>,
     /// アップロード元種別
     #[serde(rename = "origin")]
     pub origin: Origin,
     /// アップロード日時（ISO8601形式）
     #[serde(rename = "created_at")]
     pub created_at: String,
-    /// ファイルのダウンロードURL（freeeにログインした状態でのみ閲覧可能です。） <br> <br> file_srcは廃止予定の属性になります。<br> file_srcに替わり、証憑ファイルのダウンロード APIをご利用ください。<br> 証憑ファイルのダウンロードAPIを利用することで、以下のようになります。 <ul>   <li>アプリケーション利用者はfreee APIアプリケーションにログインしていれば、証憑ダウンロード毎にfreeeに改めてログインすることなくファイルが参照できるようになります。</li> </ul>
-    #[serde(rename = "file_src", skip_serializing_if = "Option::is_none")]
-    pub file_src: Option<String>,
     #[serde(rename = "user")]
     pub user: Box<crate::models::DealCreateResponseDealReceiptsInnerUser>,
     #[serde(rename = "receipt_metadatum", skip_serializing_if = "Option::is_none")]
@@ -59,10 +53,8 @@ impl Receipt {
             status,
             description: None,
             mime_type,
-            issue_date: None,
             origin,
             created_at,
-            file_src: None,
             user: Box::new(user),
             receipt_metadatum: None,
             qualified_invoice: None,
