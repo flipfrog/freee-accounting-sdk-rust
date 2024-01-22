@@ -11,14 +11,14 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct DealCreateParams {
     /// 発生日 (yyyy-mm-dd)
     #[serde(rename = "issue_date")]
     pub issue_date: String,
     /// 収支区分 (収入: income, 支出: expense)
     #[serde(rename = "type")]
-    pub r#type: RHashType,
+    pub r#type: Type,
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
@@ -45,7 +45,7 @@ pub struct DealCreateParams {
 }
 
 impl DealCreateParams {
-    pub fn new(issue_date: String, r#type: RHashType, company_id: i32, details: Vec<crate::models::DealCreateParamsDetailsInner>) -> DealCreateParams {
+    pub fn new(issue_date: String, r#type: Type, company_id: i32, details: Vec<crate::models::DealCreateParamsDetailsInner>) -> DealCreateParams {
         DealCreateParams {
             issue_date,
             r#type,
@@ -63,15 +63,15 @@ impl DealCreateParams {
 
 /// 収支区分 (収入: income, 支出: expense)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum RHashType {
+pub enum Type {
     #[serde(rename = "income")]
     Income,
     #[serde(rename = "expense")]
     Expense,
 }
 
-impl Default for RHashType {
-    fn default() -> RHashType {
+impl Default for Type {
+    fn default() -> Type {
         Self::Income
     }
 }

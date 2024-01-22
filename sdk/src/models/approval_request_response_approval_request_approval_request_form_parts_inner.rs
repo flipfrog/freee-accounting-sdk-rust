@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ApprovalRequestResponseApprovalRequestApprovalRequestFormPartsInner {
     /// 項目ID
     #[serde(rename = "id")]
@@ -21,7 +21,7 @@ pub struct ApprovalRequestResponseApprovalRequestApprovalRequestFormPartsInner {
     pub order: Option<i32>,
     /// 項目種別 (title: 申請タイトル, single_line: 自由記述形式 1行, multi_line: 自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt: 添付ファイル, section: 部門ID, partner: 取引先ID, ninja_sign_document: 契約書（freeeサイン連携）)
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
-    pub r#type: Option<RHashType>,
+    pub r#type: Option<Type>,
     /// 項目名
     #[serde(rename = "label", skip_serializing_if = "Option::is_none")]
     pub label: Option<String>,
@@ -60,7 +60,7 @@ impl ApprovalRequestResponseApprovalRequestApprovalRequestFormPartsInner {
 
 /// 項目種別 (title: 申請タイトル, single_line: 自由記述形式 1行, multi_line: 自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt: 添付ファイル, section: 部門ID, partner: 取引先ID, ninja_sign_document: 契約書（freeeサイン連携）)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum RHashType {
+pub enum Type {
     #[serde(rename = "title")]
     Title,
     #[serde(rename = "single_line")]
@@ -83,8 +83,8 @@ pub enum RHashType {
     NinjaSignDocument,
 }
 
-impl Default for RHashType {
-    fn default() -> RHashType {
+impl Default for Type {
+    fn default() -> Type {
         Self::Title
     }
 }

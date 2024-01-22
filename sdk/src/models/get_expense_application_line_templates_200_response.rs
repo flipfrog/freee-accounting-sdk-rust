@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GetExpenseApplicationLineTemplates200Response {
     #[serde(rename = "expense_application_line_templates")]
     pub expense_application_line_templates: Vec<crate::models::ExpenseApplicationLineTemplate>,

@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct TrialPlSegment2TagsResponseTrialPlSegment2TagsBalancesInnerSegment2TagsInner {
     /// セグメント2タグID
     #[serde(rename = "id")]

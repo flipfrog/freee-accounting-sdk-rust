@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct FixedAssetResponseFixedAssetsInner {
     /// 事業所ID
     #[serde(rename = "company_id", skip_serializing_if = "Option::is_none")]

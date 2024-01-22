@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct WalletTxnParams {
     /// 入金／出金 (入金: income, 出金: expense)
     #[serde(rename = "entry_side")]

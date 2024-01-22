@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GetWalletTxns200Response {
     #[serde(rename = "wallet_txns")]
     pub wallet_txns: Vec<crate::models::WalletTxn>,

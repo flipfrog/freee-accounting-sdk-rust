@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PartnerCreateParamsAddressAttributes {
     /// 郵便番号（8文字以内）
     #[serde(rename = "zipcode", skip_serializing_if = "Option::is_none")]

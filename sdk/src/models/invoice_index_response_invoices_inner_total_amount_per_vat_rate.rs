@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct InvoiceIndexResponseInvoicesInnerTotalAmountPerVatRate {
     /// 税率5%の税込み金額合計
     #[serde(rename = "vat_5")]

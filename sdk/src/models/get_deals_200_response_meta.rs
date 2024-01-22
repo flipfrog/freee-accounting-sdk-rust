@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GetDeals200ResponseMeta {
     /// 検索条件に合致する取引の総数
     #[serde(rename = "total_count")]

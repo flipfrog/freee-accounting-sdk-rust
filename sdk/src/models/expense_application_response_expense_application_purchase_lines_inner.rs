@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ExpenseApplicationResponseExpenseApplicationPurchaseLinesInner {
     /// 経費申請の申請行ID
     #[serde(rename = "id")]

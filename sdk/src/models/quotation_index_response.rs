@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct QuotationIndexResponse {
     #[serde(rename = "quotations")]
     pub quotations: Vec<crate::models::QuotationIndexResponseQuotationsInner>,

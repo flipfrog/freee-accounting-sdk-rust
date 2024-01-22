@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ApprovalRequestFormIndexResponse {
     #[serde(rename = "approval_request_forms")]
     pub approval_request_forms: Vec<crate::models::ApprovalRequestFormIndexResponseApprovalRequestFormsInner>,

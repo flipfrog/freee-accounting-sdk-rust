@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AccountItemsResponse {
     #[serde(rename = "account_items")]
     pub account_items: Vec<crate::models::AccountItemsResponseAccountItemsInner>,
