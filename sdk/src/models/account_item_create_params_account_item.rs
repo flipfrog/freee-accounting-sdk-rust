@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AccountItemCreateParamsAccountItem {
     /// 勘定科目名 (30文字以内)
     #[serde(rename = "name")]

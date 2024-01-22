@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CompanyIndexResponseCompaniesInner {
     /// 事業所ID
     #[serde(rename = "id")]

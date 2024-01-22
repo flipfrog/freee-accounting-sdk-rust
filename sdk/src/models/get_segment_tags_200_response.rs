@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GetSegmentTags200Response {
     #[serde(rename = "segment_tags")]
     pub segment_tags: Vec<crate::models::SegmentTag>,

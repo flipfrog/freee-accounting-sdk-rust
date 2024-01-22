@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct FixedAssetResponseFiscalYear {
     /// 会計年度開始日 (yyyy-mm-dd)
     #[serde(rename = "start_date")]

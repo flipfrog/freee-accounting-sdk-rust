@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PartnerCreateParamsPartnerDocSettingAttributes {
     /// 請求書送付方法(email:メール、posting:郵送、email_and_posting:メールと郵送、null:設定しない)
     #[serde(rename = "sending_method", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]

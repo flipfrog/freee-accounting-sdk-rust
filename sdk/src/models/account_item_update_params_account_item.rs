@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AccountItemUpdateParamsAccountItem {
     /// 勘定科目名 (30文字以内) 口座に紐付かない勘定科目の更新時は必須です。 口座に紐付く勘定科目の更新時は指定することができません。 
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]

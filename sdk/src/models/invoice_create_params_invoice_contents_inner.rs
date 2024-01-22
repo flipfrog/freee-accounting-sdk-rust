@@ -11,14 +11,14 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct InvoiceCreateParamsInvoiceContentsInner {
     /// 順序
     #[serde(rename = "order")]
     pub order: i32,
     /// 行の種類 <ul> <li>normal、discountを指定する場合、account_item_id,tax_codeとunit_priceが必須となります。</li> <li>normalを指定した場合、qtyが必須となります。</li> </ul>
     #[serde(rename = "type")]
-    pub r#type: RHashType,
+    pub r#type: Type,
     /// 数量
     #[serde(rename = "qty", skip_serializing_if = "Option::is_none")]
     pub qty: Option<f32>,
@@ -60,7 +60,7 @@ pub struct InvoiceCreateParamsInvoiceContentsInner {
 }
 
 impl InvoiceCreateParamsInvoiceContentsInner {
-    pub fn new(order: i32, r#type: RHashType) -> InvoiceCreateParamsInvoiceContentsInner {
+    pub fn new(order: i32, r#type: Type) -> InvoiceCreateParamsInvoiceContentsInner {
         InvoiceCreateParamsInvoiceContentsInner {
             order,
             r#type,
@@ -83,7 +83,7 @@ impl InvoiceCreateParamsInvoiceContentsInner {
 
 /// 行の種類 <ul> <li>normal、discountを指定する場合、account_item_id,tax_codeとunit_priceが必須となります。</li> <li>normalを指定した場合、qtyが必須となります。</li> </ul>
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum RHashType {
+pub enum Type {
     #[serde(rename = "normal")]
     Normal,
     #[serde(rename = "discount")]
@@ -92,8 +92,8 @@ pub enum RHashType {
     Text,
 }
 
-impl Default for RHashType {
-    fn default() -> RHashType {
+impl Default for Type {
+    fn default() -> Type {
         Self::Normal
     }
 }

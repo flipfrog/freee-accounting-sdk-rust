@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct InvoiceIndexResponse {
     #[serde(rename = "invoices")]
     pub invoices: Vec<crate::models::InvoiceIndexResponseInvoicesInner>,

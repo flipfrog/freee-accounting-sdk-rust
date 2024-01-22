@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct TrialCrSectionsResponse {
     #[serde(rename = "trial_cr_sections")]
     pub trial_cr_sections: Box<crate::models::TrialPlSectionsResponseTrialPlSections>,

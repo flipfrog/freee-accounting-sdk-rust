@@ -85,6 +85,18 @@ pub enum UpdateExpenseApplicationActionError {
     UnknownValue(serde_json::Value),
 }
 
+/// struct for typed errors of method [`update_expense_application_parent_approvable_requests`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum UpdateExpenseApplicationParentApprovableRequestsError {
+    Status400(crate::models::BadRequestError),
+    Status401(crate::models::UnauthorizedError),
+    Status403(crate::models::ForbiddenError),
+    Status404(crate::models::BadRequestNotFoundError),
+    Status500(crate::models::InternalServerError),
+    UnknownValue(serde_json::Value),
+}
+
 
 ///  <h2 id=\"_1\">概要</h2>  <p>指定した事業所の経費申請を作成する</p>  <p>経費精算APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計経費精算APIの使い方</a>をご参照ください</p>  <h2 id=\"_2\">注意点</h2> <ul>   <li>     申請ステータス(下書き、申請中)の指定と変更、及び承認操作（承認する、却下する、申請者へ差し戻す、代理承認する、承認済み・却下済みを取り消す）は以下を参考にして行ってください。     <ul>       <li>         承認操作は申請ステータスが申請中、承認済み、却下のものだけが対象です。         <ul>           <li>             初回申請の場合             <ul><li>申請の作成（POST）</li></ul>           </li>           <li>             作成済みの申請の申請ステータス変更・更新する場合             <ul><li>申請の更新（PUT）</li></ul>           </li>           <li>             申請中、承認済み、却下の申請の承認操作を行う場合             <ul><li>承認操作の実行（POST）</li></ul>           </li>         </ul>       </li>       <li>申請の削除（DELETE）が可能なのは申請ステータスが下書き、差戻しの場合のみです</li>     </ul>   </li>   <li>     申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している経費申請は本API経由で作成ができません。     <ul>       <li>役職指定（申請者の所属部門）</li>       <li>役職指定（申請時に部門指定）</li>       <li>部門および役職指定</li>     </ul>   </li>   <li>申請時には、申請タイトル(title)に加え、項目行については金額(amount)、日付(transaction_date)、内容(description)が必須項目となります。申請時の業務効率化のため、API入力をお勧めします。</li>   <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は作成できません。</li>   <li>本APIは外貨には非対応です。外貨を利用する経費申請は作成できません。</li>   <li>個人アカウントの場合は、プレミアムプランでご利用できます。</li>   <li>法人アカウントの場合は、ベーシックプラン、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li> </ul>
 pub async fn create_expense_application(configuration: &configuration::Configuration, expense_application_create_params: Option<crate::models::ExpenseApplicationCreateParams>) -> Result<crate::models::ExpenseApplicationResponse, Error<CreateExpenseApplicationError>> {
@@ -315,6 +327,38 @@ pub async fn update_expense_application_action(configuration: &configuration::Co
         serde_json::from_str(&local_var_content).map_err(Error::from)
     } else {
         let local_var_entity: Option<UpdateExpenseApplicationActionError> = serde_json::from_str(&local_var_content).ok();
+        let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+        Err(Error::ResponseError(local_var_error))
+    }
+}
+
+///  <h2 id=\"_1\">概要</h2>  <p>指定した事業所の経費申請に関連付ける各種申請の更新を行う</p>  <p>経費精算APIの使い方については、<a href=\"https://developer.freee.co.jp/tips/accounting-expense-applications\" target=\"_blank\">freee会計経費精算APIの使い方</a>をご参照ください</p>  <h2 id=\"_2\">注意点</h2> <ul>   <li>本APIでは、経費申請に関連付ける各種申請を更新することができます。</li>   <li>本APIでは、status(申請ステータス): in_progress:申請中, approved:承認済みのみ更新可能です。</li>   <li>parent_idにnullを指定すると、現在設定されている各種申請との関連付けを解除できます。</li>   <li>     申請ステータスが申請中の経費申請に対して関連付ける各種申請を更新するためには、以下の全てに当てはまる必要があります。     <ul>       <li>現在の承認ステップで承認者として指定されている、または代理承認ができる</li>       <li>申請フォームの設定で、承認者による経費申請に関連付ける各種申請の更新が許可されている</li>     </ul>   </li>   <li>     申請ステータスが承認済みの経費申請に対して関連付ける各種申請を更新するためには、以下の全てに当てはまる必要があります。     <ul>       <li>経費精算に対する閲覧および編集の権限を持ち、自分の経費申請のみに限定する制限がかかっていない</li>       <li>申請フォームの設定で、管理者による経費申請に関連付ける各種申請の更新が許可されている</li>     </ul>   </li>   <li>     申請経路、承認者の指定として部門役職データ連携を活用し、以下のいずれかを利用している経費申請は本API経由で更新ができません。     <ul>       <li>役職指定（申請者の所属部門）</li>       <li>役職指定（申請時に部門指定）</li>       <li>部門および役職指定</li>     </ul>   </li>   <li>本APIは駅すぱあと連携 (出発駅と到着駅から金額を自動入力する機能)には非対応です。駅すぱあと連携を使用した経費申請は関連付ける各種申請を更新できません。</li>   <li>申請フォームの設定はWeb画面よりご利用ください。</li>   <li>個人アカウントの場合は、ご利用になれません。</li>   <li>法人アカウントの場合は、プロフェッショナルプラン、エンタープライズプランでご利用できます。</li> </ul>
+pub async fn update_expense_application_parent_approvable_requests(configuration: &configuration::Configuration, id: i32, expense_application_parent_approvable_request_update_params: crate::models::ExpenseApplicationParentApprovableRequestUpdateParams) -> Result<crate::models::ExpenseApplicationResponse, Error<UpdateExpenseApplicationParentApprovableRequestsError>> {
+    let local_var_configuration = configuration;
+
+    let local_var_client = &local_var_configuration.client;
+
+    let local_var_uri_str = format!("{}/api/1/expense_applications/{id}/parent_approvable_requests", local_var_configuration.base_path, id=id);
+    let mut local_var_req_builder = local_var_client.request(reqwest::Method::PUT, local_var_uri_str.as_str());
+
+    if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+        local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+    }
+    if let Some(ref local_var_token) = local_var_configuration.oauth_access_token {
+        local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
+    };
+    local_var_req_builder = local_var_req_builder.json(&expense_application_parent_approvable_request_update_params);
+
+    let local_var_req = local_var_req_builder.build()?;
+    let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+    let local_var_status = local_var_resp.status();
+    let local_var_content = local_var_resp.text().await?;
+
+    if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+        serde_json::from_str(&local_var_content).map_err(Error::from)
+    } else {
+        let local_var_entity: Option<UpdateExpenseApplicationParentApprovableRequestsError> = serde_json::from_str(&local_var_content).ok();
         let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
         Err(Error::ResponseError(local_var_error))
     }

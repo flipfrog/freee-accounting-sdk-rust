@@ -11,16 +11,16 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct BadRequestNotFoundErrorErrorsInner {
     #[serde(rename = "messages")]
     pub messages: Vec<String>,
     #[serde(rename = "type")]
-    pub r#type: RHashType,
+    pub r#type: Type,
 }
 
 impl BadRequestNotFoundErrorErrorsInner {
-    pub fn new(messages: Vec<String>, r#type: RHashType) -> BadRequestNotFoundErrorErrorsInner {
+    pub fn new(messages: Vec<String>, r#type: Type) -> BadRequestNotFoundErrorErrorsInner {
         BadRequestNotFoundErrorErrorsInner {
             messages,
             r#type,
@@ -30,7 +30,7 @@ impl BadRequestNotFoundErrorErrorsInner {
 
 /// 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum RHashType {
+pub enum Type {
     #[serde(rename = "status")]
     Status,
     #[serde(rename = "validation")]
@@ -39,8 +39,8 @@ pub enum RHashType {
     Error,
 }
 
-impl Default for RHashType {
-    fn default() -> RHashType {
+impl Default for Type {
+    fn default() -> Type {
         Self::Status
     }
 }

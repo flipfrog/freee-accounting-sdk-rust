@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CompanyResponseCompany {
     /// 事業所ID
     #[serde(rename = "id")]
@@ -31,7 +31,7 @@ pub struct CompanyResponseCompany {
     /// 担当者名 (50文字以内)
     #[serde(rename = "contact_name", deserialize_with = "Option::deserialize")]
     pub contact_name: Option<String>,
-    /// 従業員数（0: 経営者のみ、1: 2~5人、2: 6~10人、3: 11~20人、4: 21~30人、5: 31~40人、6: 41~100人、7: 100人以上
+    /// 従業員数（0: 経営者のみ、1: 2〜5人、2: 6〜10人、3: 11〜20人、4: 21〜30人、5: 31〜40人、6: 41〜100人、7: 100人以上、13: 21〜50人、14: 51〜100人、15: 101〜300人、16: 501〜1000人、17: 1001人以上、18: 301〜500人
     #[serde(rename = "head_count", deserialize_with = "Option::deserialize")]
     pub head_count: Option<i32>,
     /// 法人番号 (半角数字13桁、法人のみ)

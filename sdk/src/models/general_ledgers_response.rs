@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GeneralLedgersResponse {
     #[serde(rename = "general_ledgers")]
     pub general_ledgers: Vec<crate::models::GeneralLedgersResponseGeneralLedgersInner>,

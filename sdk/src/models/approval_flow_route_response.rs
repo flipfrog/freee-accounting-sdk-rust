@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ApprovalFlowRouteResponse {
     #[serde(rename = "approval_flow_route")]
     pub approval_flow_route: Box<crate::models::ApprovalFlowRouteResponseApprovalFlowRoute>,

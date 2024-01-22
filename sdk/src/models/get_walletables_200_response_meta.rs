@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GetWalletables200ResponseMeta {
     /// 集計結果が最新かどうか
     #[serde(rename = "up_to_date", skip_serializing_if = "Option::is_none")]

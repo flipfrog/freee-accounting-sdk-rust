@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PartnerResponsePartnerPaymentTermAttributes {
     /// 締め日（29, 30, 31日の末日を指定する場合は、32。）
     #[serde(rename = "cutoff_day", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]

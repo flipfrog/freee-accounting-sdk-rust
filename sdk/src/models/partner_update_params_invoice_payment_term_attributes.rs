@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PartnerUpdateParamsInvoicePaymentTermAttributes {
     /// 締め日（29, 30, 31日の末日を指定する場合は、32を指定してください。）
     #[serde(rename = "cutoff_day", skip_serializing_if = "Option::is_none")]

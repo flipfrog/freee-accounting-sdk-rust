@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SelectablesIndexResponseAccountGroupsInner {
     /// 決算書表示名（小カテゴリー）ID
     #[serde(rename = "id")]

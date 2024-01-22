@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Deal {
     /// 取引ID
     #[serde(rename = "id")]
@@ -33,7 +33,7 @@ pub struct Deal {
     pub due_amount: Option<i32>,
     /// 収支区分 (収入: income, 支出: expense)
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
-    pub r#type: Option<RHashType>,
+    pub r#type: Option<Type>,
     /// 取引先ID
     #[serde(rename = "partner_id", deserialize_with = "Option::deserialize")]
     pub partner_id: Option<i32>,
@@ -88,15 +88,15 @@ impl Deal {
 
 /// 収支区分 (収入: income, 支出: expense)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum RHashType {
+pub enum Type {
     #[serde(rename = "income")]
     Income,
     #[serde(rename = "expense")]
     Expense,
 }
 
-impl Default for RHashType {
-    fn default() -> RHashType {
+impl Default for Type {
+    fn default() -> Type {
         Self::Income
     }
 }

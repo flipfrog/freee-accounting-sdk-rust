@@ -11,21 +11,21 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ApprovalRequestsIndexResponseApprovalRequestsInnerRequestItemsInner {
     /// 項目ID
     #[serde(rename = "id")]
     pub id: i32,
     /// 項目タイプ(title: 申請タイトル, single_line: 自由記述形式 1行, multi_line: 自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt: 添付ファイル, section: 部門ID, partner: 取引先ID, ninja_sign_document: 契約書（freeeサイン連携）)
     #[serde(rename = "type")]
-    pub r#type: RHashType,
+    pub r#type: Type,
     /// 項目の値
     #[serde(rename = "value")]
     pub value: String,
 }
 
 impl ApprovalRequestsIndexResponseApprovalRequestsInnerRequestItemsInner {
-    pub fn new(id: i32, r#type: RHashType, value: String) -> ApprovalRequestsIndexResponseApprovalRequestsInnerRequestItemsInner {
+    pub fn new(id: i32, r#type: Type, value: String) -> ApprovalRequestsIndexResponseApprovalRequestsInnerRequestItemsInner {
         ApprovalRequestsIndexResponseApprovalRequestsInnerRequestItemsInner {
             id,
             r#type,
@@ -36,7 +36,7 @@ impl ApprovalRequestsIndexResponseApprovalRequestsInnerRequestItemsInner {
 
 /// 項目タイプ(title: 申請タイトル, single_line: 自由記述形式 1行, multi_line: 自由記述形式 複数行, select: プルダウン, date: 日付, amount: 金額, receipt: 添付ファイル, section: 部門ID, partner: 取引先ID, ninja_sign_document: 契約書（freeeサイン連携）)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum RHashType {
+pub enum Type {
     #[serde(rename = "title")]
     Title,
     #[serde(rename = "single_line")]
@@ -59,8 +59,8 @@ pub enum RHashType {
     NinjaSignDocument,
 }
 
-impl Default for RHashType {
-    fn default() -> RHashType {
+impl Default for Type {
+    fn default() -> Type {
         Self::Title
     }
 }

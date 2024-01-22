@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct InvoiceIndexResponseInvoicesInnerInvoiceContentsInner {
     /// 請求内容ID
     #[serde(rename = "id")]
@@ -21,7 +21,7 @@ pub struct InvoiceIndexResponseInvoicesInnerInvoiceContentsInner {
     pub order: Option<i32>,
     /// 行の種類
     #[serde(rename = "type")]
-    pub r#type: RHashType,
+    pub r#type: Type,
     /// 数量
     #[serde(rename = "qty")]
     pub qty: f32,
@@ -89,7 +89,7 @@ pub struct InvoiceIndexResponseInvoicesInnerInvoiceContentsInner {
 }
 
 impl InvoiceIndexResponseInvoicesInnerInvoiceContentsInner {
-    pub fn new(id: i32, order: Option<i32>, r#type: RHashType, qty: f32, unit: Option<String>, unit_price: f32, amount: i64, vat: i32, reduced_vat: bool, description: Option<String>, account_item_id: Option<i32>, account_item_name: Option<String>, tax_code: Option<i32>, item_id: Option<i32>, item_name: Option<String>, section_id: Option<i32>, section_name: Option<String>, tag_ids: Vec<i32>, tag_names: Vec<String>) -> InvoiceIndexResponseInvoicesInnerInvoiceContentsInner {
+    pub fn new(id: i32, order: Option<i32>, r#type: Type, qty: f32, unit: Option<String>, unit_price: f32, amount: i64, vat: i32, reduced_vat: bool, description: Option<String>, account_item_id: Option<i32>, account_item_name: Option<String>, tax_code: Option<i32>, item_id: Option<i32>, item_name: Option<String>, section_id: Option<i32>, section_name: Option<String>, tag_ids: Vec<i32>, tag_names: Vec<String>) -> InvoiceIndexResponseInvoicesInnerInvoiceContentsInner {
         InvoiceIndexResponseInvoicesInnerInvoiceContentsInner {
             id,
             order,
@@ -122,7 +122,7 @@ impl InvoiceIndexResponseInvoicesInnerInvoiceContentsInner {
 
 /// 行の種類
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum RHashType {
+pub enum Type {
     #[serde(rename = "normal")]
     Normal,
     #[serde(rename = "discount")]
@@ -131,8 +131,8 @@ pub enum RHashType {
     Text,
 }
 
-impl Default for RHashType {
-    fn default() -> RHashType {
+impl Default for Type {
+    fn default() -> Type {
         Self::Normal
     }
 }

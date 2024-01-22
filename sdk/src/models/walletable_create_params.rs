@@ -11,14 +11,14 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct WalletableCreateParams {
     /// 口座名 (255文字以内)
     #[serde(rename = "name")]
     pub name: String,
     /// 口座種別（bank_account : 銀行口座, credit_card : クレジットカード, wallet : その他の決済口座）
     #[serde(rename = "type")]
-    pub r#type: RHashType,
+    pub r#type: Type,
     /// 事業所ID
     #[serde(rename = "company_id")]
     pub company_id: i32,
@@ -31,7 +31,7 @@ pub struct WalletableCreateParams {
 }
 
 impl WalletableCreateParams {
-    pub fn new(name: String, r#type: RHashType, company_id: i32) -> WalletableCreateParams {
+    pub fn new(name: String, r#type: Type, company_id: i32) -> WalletableCreateParams {
         WalletableCreateParams {
             name,
             r#type,
@@ -44,7 +44,7 @@ impl WalletableCreateParams {
 
 /// 口座種別（bank_account : 銀行口座, credit_card : クレジットカード, wallet : その他の決済口座）
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum RHashType {
+pub enum Type {
     #[serde(rename = "bank_account")]
     BankAccount,
     #[serde(rename = "credit_card")]
@@ -53,8 +53,8 @@ pub enum RHashType {
     Wallet,
 }
 
-impl Default for RHashType {
-    fn default() -> RHashType {
+impl Default for Type {
+    fn default() -> Type {
         Self::BankAccount
     }
 }

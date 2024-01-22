@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ExpenseApplicationLineTemplateResponse {
     #[serde(rename = "expense_application_line_template")]
     pub expense_application_line_template: Box<crate::models::ExpenseApplicationLineTemplate>,

@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GetTags200Response {
     #[serde(rename = "tags")]
     pub tags: Vec<crate::models::Tag>,

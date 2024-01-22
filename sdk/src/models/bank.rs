@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Bank {
     /// 連携サービスID
     #[serde(rename = "id")]
@@ -21,7 +21,7 @@ pub struct Bank {
     pub name: Option<String>,
     /// 連携サービス種別: (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
-    pub r#type: Option<RHashType>,
+    pub r#type: Option<Type>,
     /// 連携サービス名(カナ)
     #[serde(rename = "name_kana", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub name_kana: Option<Option<String>>,
@@ -40,7 +40,7 @@ impl Bank {
 
 /// 連携サービス種別: (銀行口座: bank_account, クレジットカード: credit_card, 現金: wallet)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum RHashType {
+pub enum Type {
     #[serde(rename = "bank_account")]
     BankAccount,
     #[serde(rename = "credit_card")]
@@ -49,8 +49,8 @@ pub enum RHashType {
     Wallet,
 }
 
-impl Default for RHashType {
-    fn default() -> RHashType {
+impl Default for Type {
+    fn default() -> Type {
         Self::BankAccount
     }
 }

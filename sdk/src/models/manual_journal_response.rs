@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ManualJournalResponse {
     #[serde(rename = "manual_journal")]
     pub manual_journal: Box<crate::models::ManualJournal>,

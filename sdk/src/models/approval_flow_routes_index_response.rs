@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ApprovalFlowRoutesIndexResponse {
     #[serde(rename = "approval_flow_routes")]
     pub approval_flow_routes: Vec<crate::models::ApprovalFlowRoutesIndexResponseApprovalFlowRoutesInner>,

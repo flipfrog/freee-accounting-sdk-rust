@@ -11,7 +11,7 @@
 
 
 
-#[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ExpenseApplicationCreateParamsPurchaseLinesInner {
     /// ファイルボックス（証憑ファイル）ID
     #[serde(rename = "receipt_id", skip_serializing_if = "Option::is_none")]
